@@ -1,0 +1,6 @@
+# 仅构建与验收使用，系统运行不需要。
+reportlab>=4
+pypdf>=5
+pillow>=11
+playwright>=1.50
+imageio-ffmpeg>=0.6

@@ -1,0 +1,8 @@
+.local/
+.tools/
+__pycache__/
+*.pyc
+tmp/
+delivery/*.zip
+node_modules/
+token.txt

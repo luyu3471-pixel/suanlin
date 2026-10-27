@@ -1,0 +1,6 @@
+{
+  "fresh_copy_http_smoke_passed": true,
+  "access_token_absent": true,
+  "runtime_dependencies": "Python standard library only",
+  "scope": "Clean extracted copy: static web files and real HTTP worker classification; artifact layout revisions do not affect runtime."
+}

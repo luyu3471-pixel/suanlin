@@ -1,0 +1,13 @@
+{
+  "checks": [
+    "overview loads with live API",
+    "create, execute, search and inspect two real classifier outputs",
+    "node drain and resume persisted through API",
+    "simulation results and condition switch",
+    "deployment instructions load",
+    "CSV downloaded through UI",
+    "390px mobile layout without body overflow"
+  ],
+  "errors": [],
+  "passed": true
+}

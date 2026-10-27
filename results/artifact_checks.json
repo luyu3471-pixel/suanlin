@@ -1,0 +1,30 @@
+{
+  "slide_layout_issues": [],
+  "pdfs": [
+    {
+      "file": "01-场景设计方案.pdf",
+      "pages": 5,
+      "bytes": 144644,
+      "characters": 6615
+    },
+    {
+      "file": "02-答辩展示.pdf",
+      "pages": 12,
+      "bytes": 329195,
+      "characters": 2638
+    },
+    {
+      "file": "03-佐证材料.pdf",
+      "pages": 6,
+      "bytes": 654647,
+      "characters": 2047
+    },
+    {
+      "file": "05-操作与提交手册.pdf",
+      "pages": 8,
+      "bytes": 152720,
+      "characters": 7643
+    }
+  ],
+  "note": "Text and bounds checks complement visual PNG review."
+}

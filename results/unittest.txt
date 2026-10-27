@@ -1,0 +1,19 @@
+test_http_workers_execute_with_auth_and_reject_cross_origin (test_system.IntegrationTests.test_http_workers_execute_with_auth_and_reject_cross_origin) ... ok
+test_simulation_is_reproducible_and_privacy_constrained (test_system.IntegrationTests.test_simulation_is_reproducible_and_privacy_constrained) ... ok
+test_cancellation_cannot_be_overwritten (test_system.StoreTests.test_cancellation_cannot_be_overwritten) ... ok
+test_completion_persists_and_does_not_expose_lease (test_system.StoreTests.test_completion_persists_and_does_not_expose_lease) ... ok
+test_duplicate_live_id_rejected (test_system.StoreTests.test_duplicate_live_id_rejected) ... ok
+test_expired_lease_rejects_late_result (test_system.StoreTests.test_expired_lease_rejects_late_result) ... ok
+test_idle_heartbeat_does_not_renew_undelivered_result (test_system.StoreTests.test_idle_heartbeat_does_not_renew_undelivered_result) ... ok
+test_invalid_result_preserves_running_slot (test_system.StoreTests.test_invalid_result_preserves_running_slot) ... ok
+test_local_only_does_not_use_untrusted_remote (test_system.StoreTests.test_local_only_does_not_use_untrusted_remote) ... ok
+test_max_attempts_and_heartbeat_renewal (test_system.StoreTests.test_max_attempts_and_heartbeat_renewal) ... ok
+test_real_inference (test_system.StoreTests.test_real_inference) ... ok
+test_restart_recovers_running_task (test_system.StoreTests.test_restart_recovers_running_task) ... ok
+test_seeded_random_choice_not_changed_by_polls (test_system.StoreTests.test_seeded_random_choice_not_changed_by_polls) ... ok
+test_validation_and_csv_formula_escape (test_system.StoreTests.test_validation_and_csv_formula_escape) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.151s
+
+OK

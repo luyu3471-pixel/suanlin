@@ -1,0 +1,611 @@
+{
+  "available": true,
+  "evidence_type": "discrete_event_simulation",
+  "description": "离散事件仿真；所有网络与计算配置均为假设，不是实测或 6G 性能",
+  "base_seed": 2030,
+  "seeds": 30,
+  "tasks_per_seed": 240,
+  "python": "3.13.7",
+  "groups": [
+    {
+      "scenario": "normal",
+      "policy": "smart",
+      "label": "算邻联合调度",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.952639,
+        "ci95": [
+          0.947263,
+          0.958015
+        ]
+      },
+      "mean_ms": {
+        "mean": 160.951561,
+        "ci95": [
+          157.560774,
+          164.342349
+        ]
+      },
+      "p95_ms": {
+        "mean": 330.930218,
+        "ci95": [
+          320.980017,
+          340.880419
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "normal",
+      "policy": "fixed",
+      "label": "固定单节点",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.379722,
+        "ci95": [
+          0.307813,
+          0.451632
+        ]
+      },
+      "mean_ms": {
+        "mean": 1586.197222,
+        "ci95": [
+          1191.869936,
+          1980.524508
+        ]
+      },
+      "p95_ms": {
+        "mean": 2875.295162,
+        "ci95": [
+          2314.775149,
+          3435.815175
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "normal",
+      "policy": "round_robin",
+      "label": "轮询分配",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.809028,
+        "ci95": [
+          0.792563,
+          0.825492
+        ]
+      },
+      "mean_ms": {
+        "mean": 379.623716,
+        "ci95": [
+          338.93378,
+          420.313653
+        ]
+      },
+      "p95_ms": {
+        "mean": 1292.551379,
+        "ci95": [
+          1110.311479,
+          1474.791278
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "normal",
+      "policy": "random",
+      "label": "随机分配",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.780139,
+        "ci95": [
+          0.759737,
+          0.80054
+        ]
+      },
+      "mean_ms": {
+        "mean": 441.276109,
+        "ci95": [
+          393.027675,
+          489.524543
+        ]
+      },
+      "p95_ms": {
+        "mean": 1535.890183,
+        "ci95": [
+          1291.052661,
+          1780.727704
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "congested",
+      "policy": "smart",
+      "label": "算邻联合调度",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.503472,
+        "ci95": [
+          0.446719,
+          0.560226
+        ]
+      },
+      "mean_ms": {
+        "mean": 943.223231,
+        "ci95": [
+          738.478474,
+          1147.967988
+        ]
+      },
+      "p95_ms": {
+        "mean": 1863.570469,
+        "ci95": [
+          1572.016852,
+          2155.124086
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "congested",
+      "policy": "fixed",
+      "label": "固定单节点",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.035139,
+        "ci95": [
+          0.028614,
+          0.041664
+        ]
+      },
+      "mean_ms": {
+        "mean": 12621.698858,
+        "ci95": [
+          11791.043565,
+          13452.354152
+        ]
+      },
+      "p95_ms": {
+        "mean": 22993.988972,
+        "ci95": [
+          21759.110998,
+          24228.866945
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "congested",
+      "policy": "round_robin",
+      "label": "轮询分配",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.305972,
+        "ci95": [
+          0.295258,
+          0.316686
+        ]
+      },
+      "mean_ms": {
+        "mean": 6388.64138,
+        "ci95": [
+          5790.307809,
+          6986.974951
+        ]
+      },
+      "p95_ms": {
+        "mean": 22487.434571,
+        "ci95": [
+          19696.988969,
+          25277.880173
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "congested",
+      "policy": "random",
+      "label": "随机分配",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.299722,
+        "ci95": [
+          0.280094,
+          0.319351
+        ]
+      },
+      "mean_ms": {
+        "mean": 6395.138949,
+        "ci95": [
+          5676.299371,
+          7113.978528
+        ]
+      },
+      "p95_ms": {
+        "mean": 23249.773267,
+        "ci95": [
+          19986.235717,
+          26513.310818
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "burst",
+      "policy": "smart",
+      "label": "算邻联合调度",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.710556,
+        "ci95": [
+          0.650201,
+          0.77091
+        ]
+      },
+      "mean_ms": {
+        "mean": 487.694565,
+        "ci95": [
+          371.289506,
+          604.099624
+        ]
+      },
+      "p95_ms": {
+        "mean": 914.050136,
+        "ci95": [
+          739.267726,
+          1088.832545
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "burst",
+      "policy": "fixed",
+      "label": "固定单节点",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.049583,
+        "ci95": [
+          0.04273,
+          0.056437
+        ]
+      },
+      "mean_ms": {
+        "mean": 9767.128164,
+        "ci95": [
+          9378.855024,
+          10155.401305
+        ]
+      },
+      "p95_ms": {
+        "mean": 18157.417418,
+        "ci95": [
+          17571.700997,
+          18743.13384
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "burst",
+      "policy": "round_robin",
+      "label": "轮询分配",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.523611,
+        "ci95": [
+          0.500933,
+          0.546289
+        ]
+      },
+      "mean_ms": {
+        "mean": 2613.524628,
+        "ci95": [
+          2426.601206,
+          2800.448051
+        ]
+      },
+      "p95_ms": {
+        "mean": 10503.634665,
+        "ci95": [
+          9887.957728,
+          11119.311603
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    },
+    {
+      "scenario": "burst",
+      "policy": "random",
+      "label": "随机分配",
+      "seeds": 30,
+      "tasks_per_seed": 240,
+      "deadline_rate": {
+        "mean": 0.476806,
+        "ci95": [
+          0.449619,
+          0.503992
+        ]
+      },
+      "mean_ms": {
+        "mean": 2526.401234,
+        "ci95": [
+          2236.175319,
+          2816.627149
+        ]
+      },
+      "p95_ms": {
+        "mean": 9760.867278,
+        "ci95": [
+          8736.163772,
+          10785.570784
+        ]
+      },
+      "payload_bytes": {
+        "mean": 23604292.266667,
+        "ci95": [
+          22991772.499655,
+          24216812.033679
+        ]
+      }
+    }
+  ],
+  "profiles": {
+    "normal": [
+      [
+        "a-edge",
+        32,
+        3,
+        80,
+        true
+      ],
+      [
+        "b-laptop",
+        65,
+        9,
+        40,
+        true
+      ],
+      [
+        "c-cloud",
+        12,
+        80,
+        25,
+        false
+      ]
+    ],
+    "congested": [
+      [
+        "a-edge",
+        32,
+        15,
+        8,
+        true
+      ],
+      [
+        "b-laptop",
+        65,
+        25,
+        4,
+        true
+      ],
+      [
+        "c-cloud",
+        12,
+        180,
+        1,
+        false
+      ]
+    ],
+    "burst": [
+      [
+        "a-edge",
+        32,
+        3,
+        80,
+        true
+      ],
+      [
+        "b-laptop",
+        65,
+        9,
+        40,
+        true
+      ],
+      [
+        "c-cloud",
+        12,
+        80,
+        25,
+        false
+      ]
+    ]
+  },
+  "workload_hashes": {
+    "normal": [
+      "af18737dff4c274be0c0f4fc4cfe91db0b77634e415a474c1f31de30f4ba4b94",
+      "1e9fdef5db45919196bef0a7e7824011e4ba7d9934c299d5f87b5b86021171a7",
+      "7c39ec60c497b42e304e898eafead2aca12ca5aa5e6461aff7a41bacd652ff35",
+      "e3334247b2535386695d1b145f08882aa7140a7bd53433504c17e1acd4518e64",
+      "aacd7e530529c6acf048e0540b6ff45a297f4b92acd9d4cd8d27f38ab73142dd",
+      "08cc1ecefd73922639d8aac3e8c46f96b9ec8c52ebbf45661fe19cbc3192574e",
+      "c1450917defe8e62ae86c249bcd444fa9ac237385dce70359a3f594d1b3fb4e3",
+      "f3ea18835d4bdedab461e9ee1cb454bf8aba4576520888f194de0c0990a418ec",
+      "c472f12a423137360538889d523a23722ac79ff52cbfd047afa4cb3e0b6aea3d",
+      "58ab0eda68ded7a4a05a9be3bace868dedd62b112015dd012315c58e47e869f9",
+      "07397b24687f779f6903cc240261460ab59691a5f24123b02472ba692f5deb9b",
+      "3efa767ce398ae7449a5ace2fbf723a492983ba0d916a6b18f299d0971e369c8",
+      "bda6e974890ced0f5a3ef579aaae527c89ee3f2f1b1ad32cf79fc76de1bfd0a6",
+      "8d5c2a8d74342ccb6d8e6f83f565fd71aea386c3d66f0434a842aa10568a82ab",
+      "cee0b167101f9f7952e124eeac08b67b0fa7dce76e55004b573cf121e1c6d2cf",
+      "5ea1d0c78d3670f7648d6d336e4a3d01416c76b524f21c3ab941ad14e4f0886a",
+      "6842b769687e28d04f5ccc74064a69e541817cfe6365aab18d82fd7b486fb9b2",
+      "9f59c9accc9d7e756d027386bb954504289d780b3e8b9d2901213849e199ce8c",
+      "52c4b07081e1f49dde479e5748c6affa6d9dd859d2517cb0f94ace7339a99e7e",
+      "1cdbedb9cfc1217b97f9641e2cd8a1aeaac4b136651695c74d0ab7b846078439",
+      "e5d027c30b9b3ceb4914f4fca22f99eae646c6296bb35037c628629a0991820e",
+      "8105073a26a1ac79e35fa53bda4f8eab5698842b055dcce422cd79f9dce39b3d",
+      "a034e45310e8d9b9644e1884c6a4ba99b39cabe29a3ce1b567b1663a6c55bb58",
+      "52eb97d391d0a0784263212fccc74676200de55e19559d79c58595f7c4ce3afe",
+      "a445f60fecd053bc8518050930b5df6964965bc49303650658f074650ebddcaa",
+      "f69dce4cd9e0431d795af80bc93218bb1c7c0664acc4839c9df7ecfe3f405a8f",
+      "1c952140a41585e9e434df06a66f2899100e896d16b980233fca7be1fe0c3e75",
+      "31aefee3e5cceea0d9cb5aa5d7ea2aa3a2b238a9d1c7a061c5697cd745ba47ce",
+      "11481a6d1019eb5f96ea7d479cc7d3e1f66f168e65a5b59f3412c80260bbc009",
+      "2a25dd63a380f55351e93960a927353affda28e64713dcca0e2d5cfc621ba16b"
+    ],
+    "congested": [
+      "af18737dff4c274be0c0f4fc4cfe91db0b77634e415a474c1f31de30f4ba4b94",
+      "1e9fdef5db45919196bef0a7e7824011e4ba7d9934c299d5f87b5b86021171a7",
+      "7c39ec60c497b42e304e898eafead2aca12ca5aa5e6461aff7a41bacd652ff35",
+      "e3334247b2535386695d1b145f08882aa7140a7bd53433504c17e1acd4518e64",
+      "aacd7e530529c6acf048e0540b6ff45a297f4b92acd9d4cd8d27f38ab73142dd",
+      "08cc1ecefd73922639d8aac3e8c46f96b9ec8c52ebbf45661fe19cbc3192574e",
+      "c1450917defe8e62ae86c249bcd444fa9ac237385dce70359a3f594d1b3fb4e3",
+      "f3ea18835d4bdedab461e9ee1cb454bf8aba4576520888f194de0c0990a418ec",
+      "c472f12a423137360538889d523a23722ac79ff52cbfd047afa4cb3e0b6aea3d",
+      "58ab0eda68ded7a4a05a9be3bace868dedd62b112015dd012315c58e47e869f9",
+      "07397b24687f779f6903cc240261460ab59691a5f24123b02472ba692f5deb9b",
+      "3efa767ce398ae7449a5ace2fbf723a492983ba0d916a6b18f299d0971e369c8",
+      "bda6e974890ced0f5a3ef579aaae527c89ee3f2f1b1ad32cf79fc76de1bfd0a6",
+      "8d5c2a8d74342ccb6d8e6f83f565fd71aea386c3d66f0434a842aa10568a82ab",
+      "cee0b167101f9f7952e124eeac08b67b0fa7dce76e55004b573cf121e1c6d2cf",
+      "5ea1d0c78d3670f7648d6d336e4a3d01416c76b524f21c3ab941ad14e4f0886a",
+      "6842b769687e28d04f5ccc74064a69e541817cfe6365aab18d82fd7b486fb9b2",
+      "9f59c9accc9d7e756d027386bb954504289d780b3e8b9d2901213849e199ce8c",
+      "52c4b07081e1f49dde479e5748c6affa6d9dd859d2517cb0f94ace7339a99e7e",
+      "1cdbedb9cfc1217b97f9641e2cd8a1aeaac4b136651695c74d0ab7b846078439",
+      "e5d027c30b9b3ceb4914f4fca22f99eae646c6296bb35037c628629a0991820e",
+      "8105073a26a1ac79e35fa53bda4f8eab5698842b055dcce422cd79f9dce39b3d",
+      "a034e45310e8d9b9644e1884c6a4ba99b39cabe29a3ce1b567b1663a6c55bb58",
+      "52eb97d391d0a0784263212fccc74676200de55e19559d79c58595f7c4ce3afe",
+      "a445f60fecd053bc8518050930b5df6964965bc49303650658f074650ebddcaa",
+      "f69dce4cd9e0431d795af80bc93218bb1c7c0664acc4839c9df7ecfe3f405a8f",
+      "1c952140a41585e9e434df06a66f2899100e896d16b980233fca7be1fe0c3e75",
+      "31aefee3e5cceea0d9cb5aa5d7ea2aa3a2b238a9d1c7a061c5697cd745ba47ce",
+      "11481a6d1019eb5f96ea7d479cc7d3e1f66f168e65a5b59f3412c80260bbc009",
+      "2a25dd63a380f55351e93960a927353affda28e64713dcca0e2d5cfc621ba16b"
+    ],
+    "burst": [
+      "c64b80f319cd2170048066b9028d97111285045dde234130d7e9e172a19455a2",
+      "cdfc9d56d08ae748eb690af125ea7598b990be1a2e9e4e3c79ac898ecbcef9da",
+      "6f132f835e1ea18b6f20c7369cbac175db8dedd69a65e5f0272d61b395fa1f3c",
+      "31ce21c1ad1dce2d883b51dd6b912fb6bfc5ef45943c272fb6db2522bb47d0ea",
+      "b516346ea8b7f317a8d4d13aaf9c7fa4481e8e98676869cd10cd9d862359a9de",
+      "c12df23b84841ffe9c98566fb3049e0df40fa0e912e905222219c29fb923a8de",
+      "1b1bb8b360c504fbaf55f48690546c964fc249775747d2594e3a51abe2d5b51b",
+      "bfe01b822172deffe0f7415e5906982758853bd59dc6b11f97951acb9d0402a1",
+      "d7d2443cc20784ab664526be0efe61aeb143c7f1110207f4bebb30c1d2d3e17f",
+      "639ec1d7195f122253fdc796c9784b2bc38815d6b12145d328454268d3a0bed1",
+      "2d627c6c01ecadcf85c7b53d8fa6d6403cdaeca24e0b24a260203dfed89b3e22",
+      "dfc42b4f6872c6f30a8771efce5e818aa4a4eecd211dd030968a989761c454f0",
+      "f551f04fc41b8b66278cd5731e342c8e578f25ec51f1eb417091f607179dbfb1",
+      "722def6c40a5dbf2c7a3056138e1360c732459e01c14021639d2365033b7a3e8",
+      "ca4854e571706eddcdc1779f006acab613d480d3bca8683c7b61cdc4c8532c03",
+      "e82842930b7887a2e693d49731d7d6de9473802ab6ed2293c1930f86f23d3e0c",
+      "114c8213b064e0c64a50f2529dd8782262821a19cbcc2ee310c8de530f86fbe7",
+      "0a597f167539a26247400dae18debeda29d648ec90c9ded29fc3cbc8f7843630",
+      "f2c2555211707caf93e441d2ef350131c6e398f32145f38950964d00a2cb6e9d",
+      "0e628f21e8f91fd206753117d4bd62c70ab5dd84e2c7383bf1e24c8b7f268a73",
+      "3a290186d748a2b5da22248e987d5457c06b5112238d6134b5074767c1e97fdc",
+      "b39dff8fb24f4a67d7d7d73d194fb97823708e694c0990b90ff86052c6eb46b6",
+      "392eea7104da39219b0548c0b1afba98459854b5d36682e80032ed0156356a76",
+      "c384b9683c49be110d25a5337391f942e7add5bd181e543bbf8130815d3311a1",
+      "47a39f1f04947a180249d1f846b85ce64bafdf3c6d50c36963dcf81ddd7219ba",
+      "ed008f67282562b749869b53c7761f7e6e4f45706618a45d3f0755e50e6a86e5",
+      "9acaaccd63624da665b523fb8a068d813520f361b5e494f68db6500aca02d5b9",
+      "969df5a4f8841049533a3eaf5f609670c7bda9bb61f9c71525c1482e11a0fd0d",
+      "45aa6083cd1bedae71a5b2914e698fd5a7b98184c31e88da0a6a18a1ebf3f415",
+      "56b391440452781fd194c515fd0ac51920b45cd6a4947cef9b3ca5c3af6829f4"
+    ]
+  },
+  "ci_method": "seed-level mean +/- 1.96*sample_std/sqrt(n), approximate",
+  "p95_method": "nearest-rank per seed, then mean over seeds",
+  "assumptions": [
+    "独立单任务，节点串行 FIFO，不拆分模型",
+    "可信范围是管理员配置，未提供远程可信执行证明",
+    "三个假设节点，无故障丢包与实测无线信道",
+    "所有策略使用相同任务、隐私约束和作业级噪声",
+    "仿真调度时准确获知队列与名义服务时间，收益可能高于实际",
+    "原型仅发送文本，仿真大载荷用于敏感性分析"
+  ],
+  "total_simulated_tasks": 86400
+}

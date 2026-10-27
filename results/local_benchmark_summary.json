@@ -1,0 +1,243 @@
+{
+  "evidence_type": "actual_application_requests",
+  "topology": "same_host_processes",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.13.7",
+  "started_at": 1793022717.0268548,
+  "ended_at": 1793022752.8756592,
+  "rounds": 5,
+  "tasks_per_trial": 16,
+  "total": 320,
+  "nodes": [
+    {
+      "id": "local-1",
+      "mode": "same_host",
+      "bandwidth_mbps": 100
+    },
+    {
+      "id": "local-2",
+      "mode": "same_host",
+      "bandwidth_mbps": 100
+    }
+  ],
+  "extra_load": "100k/200k/300k SHA256 loops, reported separately from classifier",
+  "trials": [
+    {
+      "seed": 3000,
+      "policy": "fixed",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 1473.3025,
+      "p95_ms": 2597.419
+    },
+    {
+      "seed": 3000,
+      "policy": "round_robin",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 867.5570625,
+      "p95_ms": 1626.531
+    },
+    {
+      "seed": 3000,
+      "policy": "random",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 1064.1200625,
+      "p95_ms": 2076.554
+    },
+    {
+      "seed": 3000,
+      "policy": "smart",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 840.2455,
+      "p95_ms": 1451.464
+    },
+    {
+      "seed": 3001,
+      "policy": "round_robin",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 891.087,
+      "p95_ms": 1600.55
+    },
+    {
+      "seed": 3001,
+      "policy": "random",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 893.792125,
+      "p95_ms": 1639.882
+    },
+    {
+      "seed": 3001,
+      "policy": "smart",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 821.978125,
+      "p95_ms": 1527.021
+    },
+    {
+      "seed": 3001,
+      "policy": "fixed",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 1362.796125,
+      "p95_ms": 2593.362
+    },
+    {
+      "seed": 3002,
+      "policy": "random",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 809.5083125,
+      "p95_ms": 1238.194
+    },
+    {
+      "seed": 3002,
+      "policy": "smart",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 748.7508125,
+      "p95_ms": 1497.453
+    },
+    {
+      "seed": 3002,
+      "policy": "fixed",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 1394.2443125,
+      "p95_ms": 2435.019
+    },
+    {
+      "seed": 3002,
+      "policy": "round_robin",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 869.0934374999999,
+      "p95_ms": 1501.195
+    },
+    {
+      "seed": 3003,
+      "policy": "smart",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 945.451625,
+      "p95_ms": 1612.397
+    },
+    {
+      "seed": 3003,
+      "policy": "fixed",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 1322.1711875,
+      "p95_ms": 2278.502
+    },
+    {
+      "seed": 3003,
+      "policy": "round_robin",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 827.234375,
+      "p95_ms": 1568.215
+    },
+    {
+      "seed": 3003,
+      "policy": "random",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 816.7585625,
+      "p95_ms": 1569.228
+    },
+    {
+      "seed": 3004,
+      "policy": "fixed",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 1212.1429375,
+      "p95_ms": 1989.692
+    },
+    {
+      "seed": 3004,
+      "policy": "round_robin",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 439.6225,
+      "p95_ms": 771.452
+    },
+    {
+      "seed": 3004,
+      "policy": "random",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 419.5684375,
+      "p95_ms": 708.582
+    },
+    {
+      "seed": 3004,
+      "policy": "smart",
+      "count": 16,
+      "completed": 16,
+      "deadline_rate": 1.0,
+      "mean_ms": 748.751875,
+      "p95_ms": 1095.61
+    }
+  ],
+  "groups": [
+    {
+      "policy": "fixed",
+      "deadline_rate": 1.0,
+      "mean_ms": 1352.9314125,
+      "p95_ms": 2378.7988,
+      "completed": 80
+    },
+    {
+      "policy": "round_robin",
+      "deadline_rate": 1.0,
+      "mean_ms": 778.918875,
+      "p95_ms": 1413.5886,
+      "completed": 80
+    },
+    {
+      "policy": "random",
+      "deadline_rate": 1.0,
+      "mean_ms": 800.7495,
+      "p95_ms": 1446.488,
+      "completed": 80
+    },
+    {
+      "policy": "smart",
+      "deadline_rate": 1.0,
+      "mean_ms": 821.0355875,
+      "p95_ms": 1436.789,
+      "completed": 80
+    }
+  ],
+  "limitations": [
+    "同机工作进程，不是多物理终端实验",
+    "无链路损伤注入，不是6G网络测试",
+    "人为CPU负载与文本推理混合，单独记录负载时间",
+    "均值和P95仅针对成功任务，失败数另行保留",
+    "轮询频率与本机后台负载影响实际结果"
+  ]
+}

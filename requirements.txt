@@ -1,0 +1,2 @@
+# 算邻系统仅使用 Python 3.10+ 标准库，无需 pip install。
+# 参赛 PDF/视频的构建依赖单独列于 tools/requirements-artifacts.txt。
