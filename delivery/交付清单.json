@@ -13,6 +13,11 @@
   ],
   "files": [
     {
+      "path": ".gitattributes",
+      "bytes": 128,
+      "sha256": "b24b16521032e7d31e97ff0837927081a56f62ca5494023d7e4352be9aee44eb"
+    },
+    {
       "path": ".gitignore",
       "bytes": 79,
       "sha256": "daa9123d4d12c0e1fe35d72715b6127852bc02e385c9f5d48fce7fd14602de07"
@@ -48,9 +53,69 @@
       "sha256": "72bcae8805a3efd4d4b59efb9988b55a78c2abfed75a811e483e136be6f9ac71"
     },
     {
+      "path": "delivery/06-零基础图文使用教程.pdf",
+      "bytes": 533876,
+      "sha256": "c153c31bfc48a71d020ce3282aa539406256a1279961fd0e1ed15f5165b09b92"
+    },
+    {
       "path": "docs/AI使用与第三方声明.md",
       "bytes": 2618,
       "sha256": "c3cba73b9a5bfcd9905a6ef176bf50a3483781c4a985f4171ad7b6f7bd5ea9ef"
+    },
+    {
+      "path": "docs/tutorial-assets/01-home.png",
+      "bytes": 74946,
+      "sha256": "94756e8eeb8618473cd28b7edd625097d3cffa2972cbf11e7aba2efaaf08fec5"
+    },
+    {
+      "path": "docs/tutorial-assets/02-demo-button.png",
+      "bytes": 35428,
+      "sha256": "67b536f366530081d8f95f6d230a254e4908bdb16cb30988a23de99f9ea50ca2"
+    },
+    {
+      "path": "docs/tutorial-assets/03-task-list.png",
+      "bytes": 64187,
+      "sha256": "b55176623403b06ff51a2ad0c53f9a93aa9fff6e2af5bc9d5c925763b0aaec41"
+    },
+    {
+      "path": "docs/tutorial-assets/04-filled-form.png",
+      "bytes": 60431,
+      "sha256": "d506b38bcbec2ecf75b9bd249550b819d4156eac84338a8e00c832c18f9aa796"
+    },
+    {
+      "path": "docs/tutorial-assets/05-find-task.png",
+      "bytes": 40610,
+      "sha256": "0887432c52110b9d959a5e152e3bc0c0c03a1694d6481acb2609667eb80335b7"
+    },
+    {
+      "path": "docs/tutorial-assets/06-task-detail.png",
+      "bytes": 44387,
+      "sha256": "8f47c9daa38a851069899a19caf37944c858496ffcbe6c849dce2142ec1852a6"
+    },
+    {
+      "path": "docs/tutorial-assets/07-node-buttons.png",
+      "bytes": 36307,
+      "sha256": "54abe4ed99b1dc7892880d599f7b0e8536356d61928a8c984ca2139fefc5c0be"
+    },
+    {
+      "path": "docs/tutorial-assets/08-paused-node.png",
+      "bytes": 37422,
+      "sha256": "87950eebea3de8534c1121f9ccf5803b86147fff20570a565e63d4e45d3748b0"
+    },
+    {
+      "path": "docs/tutorial-assets/09-rerouted-task.png",
+      "bytes": 38404,
+      "sha256": "559971c31acc0b0453f3f9bcfb9c99ff98c1783ec90ded11b1bf087587f6feed"
+    },
+    {
+      "path": "docs/tutorial-assets/10-export.png",
+      "bytes": 31383,
+      "sha256": "8f1315415e6b3ddcbe40424ea09781cea48e207cd3056600f38bf87665629c7a"
+    },
+    {
+      "path": "docs/tutorial-assets/11-simulation.png",
+      "bytes": 34555,
+      "sha256": "73cf370645e14a2d0ac3faa9824eb11ca901e3d1d5bce37ada7ed6b0ebf50af3"
     },
     {
       "path": "docs/交付与提交指南.md",
@@ -93,6 +158,11 @@
       "sha256": "77d18b815008ab3ffd4c792c32829a50630cbcf1206b8e59e9c8509f4ae5fbea"
     },
     {
+      "path": "docs/算邻零基础使用教程.md",
+      "bytes": 13707,
+      "sha256": "3717fb131ef5a9d0b961dd0d9d3e266217d70f20cbb9451cd0473bc1286c7851"
+    },
+    {
       "path": "docs/证据模板/事件标注.csv",
       "bytes": 67,
       "sha256": "cfadd688c941a3fcf8e466fc5e9f33cf460620fc3fdb832b8f64866bb493527c"
@@ -119,8 +189,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6403,
-      "sha256": "451aa16ffce535b3f1c776386ba71c238e1e98db5fad7788a9206796e5f0f7f1"
+      "bytes": 6731,
+      "sha256": "657695cfcdfeaa28235abd18b0c5579e0ed61895ff552313b667c92e02d6f118"
     },
     {
       "path": "requirements.txt",
@@ -213,6 +283,16 @@
       "sha256": "a7ad745644bcc87af94742d571311cced55866168defda641a6634dfc706df8b"
     },
     {
+      "path": "results/tutorial_artifact_checks.json",
+      "bytes": 530,
+      "sha256": "1ca13589543216b07beb332bf60137d2bee8009ffea6f712594b16d2256f450c"
+    },
+    {
+      "path": "results/tutorial_capture_checks.json",
+      "bytes": 3510,
+      "sha256": "f0ffc64896e7221d16fb54558fd834182fa023a98215e89c9e4f2ca589a5933b"
+    },
+    {
       "path": "results/ui_export.csv",
       "bytes": 25326,
       "sha256": "51ac2f5f4169822ca56ba8b3e08634a049ffdd0323d2141fc51c0a81cc913ead"
@@ -234,8 +314,8 @@
     },
     {
       "path": "START_HERE.txt",
-      "bytes": 713,
-      "sha256": "1605c6413e1bd5a4a5dd83bb845150c2b7860dca570b5b3982859539ebeff47c"
+      "bytes": 950,
+      "sha256": "079755b5d75c40c861f17b7d0fc5d15733d1dc93af22c79099ec7dd24acd961f"
     },
     {
       "path": "start_lan.bat",
@@ -293,6 +373,11 @@
       "sha256": "bc9e6ab69d1a93bce70cdd3e4295271e0709da1d0405ef38a83032dc6a07dc92"
     },
     {
+      "path": "tools/build_beginner_tutorial.py",
+      "bytes": 45521,
+      "sha256": "4c251d240e2a1ce1745df357fd5af8cec023a689bbde3dd5cff9278b23ecf46f"
+    },
+    {
       "path": "tools/build_materials.py",
       "bytes": 22589,
       "sha256": "a1c21be32a83866c5f6153535f069fcd040d17c74d1cbaa12edd6614aaa30dc2"
@@ -319,8 +404,8 @@
     },
     {
       "path": "tools/package_submission.py",
-      "bytes": 3652,
-      "sha256": "ae894f4839f8faa24b11c9d314ce81af5ba14fa29c9780e7198bafc9e057b0d3"
+      "bytes": 3689,
+      "sha256": "22b491d5814c961355180768936a6f545661c921b9648d5b69821f4bcc74e631"
     },
     {
       "path": "tools/requirements-artifacts.txt",
@@ -351,6 +436,11 @@
       "path": "web/style.css",
       "bytes": 21353,
       "sha256": "62ea65feb0060f58c907a077f7c01eb8211a864102f9f5f00f465517718beadf"
+    },
+    {
+      "path": "先看我-算邻使用教程.html",
+      "bytes": 642653,
+      "sha256": "afeaa89c6b444fa534093c7982e5f5edb1354b240e94b1b43d20907f5b03d4aa"
     }
   ]
 }

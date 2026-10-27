@@ -1,0 +1,147 @@
+{
+  "passed": true,
+  "date": "2026-10-27",
+  "scope": "isolated same-host tutorial UI capture; synthetic example texts; no physical multi-device or 6G evidence",
+  "checks": [
+    "isolated coordinator and two real subprocesses online",
+    "12 distinct demo tasks actually completed",
+    "one named task contains three texts and returns three actual predictions",
+    "paused local-1; next task actually routed to local-2; local-1 restored",
+    "CSV export contains exactly the 14 tutorial tasks",
+    "simulation page explicitly identifies simulation evidence"
+  ],
+  "browser_errors": [],
+  "screenshots": {
+    "01-home.png": [
+      {
+        "selector": ".metric:first-child",
+        "number": 1
+      },
+      {
+        "selector": "a[data-page=\"tasks\"]",
+        "number": 2
+      }
+    ],
+    "02-demo-button.png": [
+      {
+        "selector": ".filters [data-action=\"demo\"]",
+        "number": 1
+      }
+    ],
+    "03-task-list.png": [
+      {
+        "selector": "tbody tr:first-child td:nth-child(3)",
+        "number": 1
+      },
+      {
+        "selector": "tbody tr:first-child td:nth-child(4)",
+        "number": 2
+      },
+      {
+        "selector": "tbody tr:first-child [data-detail]",
+        "number": 3
+      }
+    ],
+    "04-filled-form.png": [
+      {
+        "selector": "[name=\"name\"]",
+        "number": 1
+      },
+      {
+        "selector": "[name=\"events\"]",
+        "number": 2
+      },
+      {
+        "selector": "[name=\"policy\"]",
+        "number": 3
+      },
+      {
+        "selector": "[name=\"privacy\"]",
+        "number": 4
+      },
+      {
+        "selector": "[name=\"deadline_ms\"]",
+        "number": 5
+      },
+      {
+        "selector": "[name=\"compute_loops\"]",
+        "number": 6
+      },
+      {
+        "selector": "#task-form button[type=\"submit\"]",
+        "number": 7
+      }
+    ],
+    "05-find-task.png": [
+      {
+        "selector": "#task-search",
+        "number": 1
+      },
+      {
+        "selector": "tbody tr:first-child td:nth-child(4)",
+        "number": 2
+      },
+      {
+        "selector": "tbody tr:first-child [data-detail]",
+        "number": 3
+      }
+    ],
+    "06-task-detail.png": [
+      {
+        "selector": ".detail-meta span:first-child",
+        "number": 1
+      },
+      {
+        "selector": ".detail-meta span:nth-child(2)",
+        "number": 2
+      },
+      {
+        "selector": ".prediction",
+        "number": 3
+      }
+    ],
+    "07-node-buttons.png": [
+      {
+        "selector": "button[data-node=\"local-1\"]",
+        "number": 1
+      },
+      {
+        "selector": "button[data-trust=\"local-1\"]",
+        "number": 2
+      }
+    ],
+    "08-paused-node.png": [
+      {
+        "selector": ".node-card:first-child .badge",
+        "number": 1
+      },
+      {
+        "selector": "button[data-node=\"local-1\"]",
+        "number": 2
+      }
+    ],
+    "09-rerouted-task.png": [
+      {
+        "selector": "tbody tr:first-child td:nth-child(3)",
+        "number": 1
+      }
+    ],
+    "10-export.png": [
+      {
+        "selector": "button[data-action=\"export\"]",
+        "number": 1
+      }
+    ],
+    "11-simulation.png": [
+      {
+        "selector": ".experiment-intro .badge",
+        "number": 1
+      },
+      {
+        "selector": ".scenario-tabs",
+        "number": 2
+      }
+    ]
+  },
+  "existing_user_state_modified": false
+}

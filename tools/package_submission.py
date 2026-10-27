@@ -15,7 +15,7 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('--team',help='实际团队编号，确认后再传入');args=p.parse_args()
     if args.team and not re.fullmatch(r'[A-Za-z0-9_-]{1,40}',args.team):p.error('团队编号仅支持字母数字下划线和短横线')
     delivery=ROOT/'delivery';delivery.mkdir(exist_ok=True)
-    expected=['01-场景设计方案.pdf','02-答辩展示.pdf','02-答辩展示.html','03-佐证材料.pdf','04-演示视频.mp4','05-操作与提交手册.pdf']
+    expected=['01-场景设计方案.pdf','02-答辩展示.pdf','02-答辩展示.html','03-佐证材料.pdf','04-演示视频.mp4','05-操作与提交手册.pdf','06-零基础图文使用教程.pdf']
     missing=[x for x in expected if not (delivery/x).exists()]
     if missing:raise RuntimeError('缺少最终材料：'+', '.join(missing))
     if (delivery/expected[0]).stat().st_size>15*1024*1024:raise RuntimeError('方案超过15MB')

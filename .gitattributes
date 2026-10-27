@@ -1,0 +1,5 @@
+# Keep generated documents and media byte-for-byte intact across platforms.
+*.pdf binary
+*.png binary
+*.mp4 binary
+*.zip binary

@@ -1,0 +1,20 @@
+{
+  "pages": 12,
+  "pdf_bytes": 533876,
+  "html_bytes": 642653,
+  "checks": {
+    "chapter_navigation": true,
+    "screenshots_loaded": true,
+    "image_zoom": true,
+    "copy_button": true,
+    "mobile_navigation": true,
+    "mobile_body_overflow": false,
+    "browser_errors": []
+  },
+  "pdf_visual_review": {
+    "passed": true,
+    "render_tool": "pdftoppm",
+    "pages_reviewed": 12,
+    "review_scope": "all pages inspected; revised first page rerendered and reviewed; no clipped text or split step"
+  }
+}
