@@ -189,8 +189,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6731,
-      "sha256": "657695cfcdfeaa28235abd18b0c5579e0ed61895ff552313b667c92e02d6f118"
+      "bytes": 6718,
+      "sha256": "a63d33f9182e536d03c06af4f4bddded4ce349a39fa3e38d63d2d3e845d24868"
     },
     {
       "path": "requirements.txt",
@@ -284,8 +284,8 @@
     },
     {
       "path": "results/tutorial_artifact_checks.json",
-      "bytes": 530,
-      "sha256": "1ca13589543216b07beb332bf60137d2bee8009ffea6f712594b16d2256f450c"
+      "bytes": 612,
+      "sha256": "cf19792cc8828681d66755209c7371650cb1344c8624763d989aa1f1b4436d25"
     },
     {
       "path": "results/tutorial_capture_checks.json",
@@ -314,8 +314,8 @@
     },
     {
       "path": "START_HERE.txt",
-      "bytes": 950,
-      "sha256": "079755b5d75c40c861f17b7d0fc5d15733d1dc93af22c79099ec7dd24acd961f"
+      "bytes": 947,
+      "sha256": "ce55a4f8a16fcf3f3d43de3925586bcb4c51d2dfa7f2fdaef2028692d902eaae"
     },
     {
       "path": "start_lan.bat",
@@ -374,8 +374,8 @@
     },
     {
       "path": "tools/build_beginner_tutorial.py",
-      "bytes": 45521,
-      "sha256": "4c251d240e2a1ce1745df357fd5af8cec023a689bbde3dd5cff9278b23ecf46f"
+      "bytes": 45481,
+      "sha256": "b66dd247e5392772f83f4db8fb93ae68b30d7a18e70f7c908bdd2988c5a203a2"
     },
     {
       "path": "tools/build_materials.py",
@@ -438,9 +438,9 @@
       "sha256": "62ea65feb0060f58c907a077f7c01eb8211a864102f9f5f00f465517718beadf"
     },
     {
-      "path": "先看我-算邻使用教程.html",
-      "bytes": 642653,
-      "sha256": "afeaa89c6b444fa534093c7982e5f5edb1354b240e94b1b43d20907f5b03d4aa"
+      "path": "算邻操作手册.html",
+      "bytes": 642623,
+      "sha256": "332600fab6e7cf058d48326c72f5229c99531821fcb3a1ee65586b3c45fbe03e"
     }
   ]
 }

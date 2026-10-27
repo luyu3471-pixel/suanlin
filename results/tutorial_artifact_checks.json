@@ -1,7 +1,7 @@
 {
   "pages": 12,
   "pdf_bytes": 533876,
-  "html_bytes": 642653,
+  "html_bytes": 642623,
   "checks": {
     "chapter_navigation": true,
     "screenshots_loaded": true,
@@ -16,5 +16,7 @@
     "render_tool": "pdftoppm",
     "pages_reviewed": 12,
     "review_scope": "all pages inspected; revised first page rerendered and reviewed; no clipped text or split step"
-  }
+  },
+  "html_file": "算邻操作手册.html",
+  "page_title": "算邻操作手册"
 }
