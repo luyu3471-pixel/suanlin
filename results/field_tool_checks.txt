@@ -1,0 +1,44 @@
+test_blank_and_unknown_labels_are_not_fabricated (test_field_evidence.EvidenceTests.test_blank_and_unknown_labels_are_not_fabricated) ... ok
+评测完成：2条，准确率 100.0%；数据来源、重复与缺失类别请查看 metrics.json。保存至 D:\6G\tmp\field-tool-tests\tmpcny7zv_r\20261027-214249-model-evaluation-8b9c6d
+test_evaluation_discloses_training_overlap_and_missing_classes (test_field_evidence.EvidenceTests.test_evaluation_discloses_training_overlap_and_missing_classes) ... ok
+test_failed_and_unfinished_tasks_remain_in_denominator (test_field_evidence.EvidenceTests.test_failed_and_unfinished_tasks_remain_in_denominator) ... ok
+test_malformed_csv_is_rejected_with_a_useful_error (test_field_evidence.EvidenceTests.test_malformed_csv_is_rejected_with_a_useful_error) ... ok
+test_run_paths_and_csv_export_do_not_overwrite_or_execute_formulas (test_field_evidence.EvidenceTests.test_run_paths_and_csv_export_do_not_overwrite_or_execute_formulas) ... ok
+test_same_host_requires_explicit_test_flag (test_field_evidence.EvidenceTests.test_same_host_requires_explicit_test_flag) ... ok
+本次数据保存至：D:\6G\tmp\field-tool-tests\tmpxnnxj7sr\20261027-214250-comparison-52158a
+第 1/2 轮 固定单节点：完成 2/2，按时率 100.0%
+第 1/2 轮 轮询分配：完成 2/2，按时率 100.0%
+第 1/2 轮 随机分配：完成 2/2，按时率 100.0%
+第 1/2 轮 算邻联合调度：完成 2/2，按时率 100.0%
+第 2/2 轮 轮询分配：完成 2/2，按时率 100.0%
+第 2/2 轮 随机分配：完成 2/2，按时率 100.0%
+第 2/2 轮 算邻联合调度：完成 2/2，按时率 100.0%
+第 2/2 轮 固定单节点：完成 2/2，按时率 100.0%
+测试完成。请人工核实设备与数据来源后再使用报告。
+test_comparison_records_real_results_and_synthetic_provenance (test_field_evidence.HTTPFieldTests.test_comparison_records_real_results_and_synthetic_provenance) ... ok
+本次数据保存至：D:\6G\tmp\field-tool-tests\tmpwzvvr6u3\20261027-214252-comparison-e57d6d
+第 1/2 轮 固定单节点：完成 1/1，按时率 100.0%
+第 1/2 轮 轮询分配：完成 1/1，按时率 100.0%
+第 1/2 轮 随机分配：完成 1/1，按时率 100.0%
+第 1/2 轮 算邻联合调度：完成 1/1，按时率 100.0%
+第 2/2 轮 轮询分配：完成 1/1，按时率 100.0%
+第 2/2 轮 随机分配：完成 1/1，按时率 100.0%
+第 2/2 轮 算邻联合调度：完成 1/1，按时率 100.0%
+第 2/2 轮 固定单节点：完成 1/1，按时率 100.0%
+测试完成。请人工核实设备与数据来源后再使用报告。
+test_labeled_simulated_input_is_not_called_real_field_data (test_field_evidence.HTTPFieldTests.test_labeled_simulated_input_is_not_called_real_field_data) ... ok
+受控故障测试记录：D:\6G\tmp\field-tool-tests\tmpluhsyh6h\20261027-214254-process-failure-23d4fb
+目标端必须使用 tools/fault_worker.py 启动；它收到任务后会按预设退出。
+已观察到目标端领取任务。正在等待租约到期和接替，通常约25秒。
+观察结果：本次未形成指定恢复证据，请查 result.json
+test_normal_completion_is_not_mislabeled_as_fault_recovery (test_field_evidence.HTTPFieldTests.test_normal_completion_is_not_mislabeled_as_fault_recovery) ... ok
+受控故障测试记录：D:\6G\tmp\field-tool-tests\tmpeyjfn_oy\20261027-214256-process-failure-6cc06f
+目标端必须使用 tools/fault_worker.py 启动；它收到任务后会按预设退出。
+已观察到目标端领取任务。正在等待租约到期和接替，通常约25秒。
+观察结果：进程中断后任务由指定接替端完成
+test_process_exit_is_recovered_by_another_worker_and_settings_restored (test_field_evidence.HTTPFieldTests.test_process_exit_is_recovered_by_another_worker_and_settings_restored) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 32.157s
+
+OK

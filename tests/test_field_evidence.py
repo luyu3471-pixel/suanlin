@@ -38,6 +38,13 @@ class EvidenceTests(unittest.TestCase):
         for rows in ([], [{'id': '1', 'text': '示例', 'label': '未知类别', 'source': '自编合成'}]):
             with self.assertRaises(ValueError): evidence.load_rows(self.dataset(rows))
 
+    def test_malformed_csv_is_rejected_with_a_useful_error(self):
+        p = self.root / 'malformed.csv'
+        for content in ('text,label,source\n示例,正常状态\n', 'text,label,source\n示例,英文逗号,正常状态,自编合成\n'):
+            p.write_text(content, encoding='utf-8-sig')
+            with self.assertRaisesRegex(ValueError, '列数与表头不符'):
+                evidence.load_rows(p)
+
     def test_evaluation_discloses_training_overlap_and_missing_classes(self):
         text = TRAINING['烟雾风险'][0]
         source = self.dataset([{'id': str(i), 'text': text, 'label': '烟雾风险', 'source': '自编合成'} for i in range(2)])
@@ -124,6 +131,18 @@ class HTTPFieldTests(unittest.TestCase):
         report = json.loads((output / 'result.json').read_text(encoding='utf-8'))
         self.assertEqual(report['task']['attempts'], 1)
         self.assertTrue(all(not n['draining'] for n in self.server.store.snapshot()['nodes']))
+
+    def test_labeled_simulated_input_is_not_called_real_field_data(self):
+        p = self.root / 'simulated.csv'
+        p.write_text('id,text,label,source\n1,消防通道被纸箱堵塞,通道占用,受控模拟\n', encoding='utf-8-sig')
+        args = argparse.Namespace(url=self.url, token_file=self.token_file, fixed_worker='local-1', allow_same_host_test=True,
+                                  use_demo=False, events_csv=p, output_root=self.root, rounds=2, tasks=1,
+                                  deadline_ms=5000, interval_ms=0, compute_loops=0, note='模拟输入的工具测试')
+        output = evidence.run_comparison(args)
+        report = json.loads((output / 'summary.json').read_text(encoding='utf-8'))
+        self.assertEqual(report['metadata']['data_sources_user_recorded'], {'受控模拟': 1})
+        self.assertEqual(report['metadata']['unique_input_texts'], 1)
+        self.assertTrue((output / 'input-original.csv').exists())
 
     def test_process_exit_is_recovered_by_another_worker_and_settings_restored(self):
         child = subprocess.Popen([sys.executable, str(ROOT / 'tools/fault_worker.py'), '--coordinator', self.url, '--token-file', str(self.token_file), '--id', 'fault-case'],
