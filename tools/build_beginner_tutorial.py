@@ -177,7 +177,7 @@ def content():
         ('steps',['同时按键盘上的 Win 和 E，打开文件资源管理器。Win键通常带有Windows图标。','点击文件资源管理器最上方的地址栏，输入下面的文件夹路径，然后按回车。']),
         ('code','D:\\6G'),
         ('p','在这个文件夹里找到 start.bat，双击它。如果没有显示文件后缀，可能只看到名为 start 的 Windows 批处理文件。不要双击 launch.py，也不要打开 web/index.html。'),
-        ('table',[['看到什么','怎么判断'],['弹出一个命令窗口','这是后台服务，请保持开着。'],['浏览器自动打开算邻','启动成功，进入第2步。'],['浏览器没有自动打开','保持命令窗口开着，按第2步手动打开网址。']]),
+        ('table',[['看到什么','怎么判断'],['弹出一个命令窗口','这是后台服务，请保持开着。'],['浏览器自动打开多终端任务调度系统','启动成功，进入第2步。'],['浏览器没有自动打开','保持命令窗口开着，按第2步手动打开网址。']]),
         ('note','本机已经安装Python，可以直接练习。教程按项目放在D:\\6G编写；如果你另存了位置，就打开实际存放start.bat的那个文件夹。'),
         ('success','命令窗口保持运行，没有显示“启动失败”。') ]},
       {'title':'打开网页，找到任务中心','part':'先完成这6步','blocks':[
@@ -197,7 +197,7 @@ def content():
       {'title':'填写自己的第一项任务','part':'先完成这6步','blocks':[
         ('p','点击页面右上角“创建任务”。弹出表单后，按下面的数字填写。'),
         ('form',('04-filled-form.png',[
-          ['编号','填写内容'],['1 任务名称','我的第一次测试'],['2 事件文本','复制本页下方三行文字'],['3 调度策略','算邻联合调度'],['4 数据范围','保持“仅管理员设为可信的节点”'],['5 完成时限','5000，意思是5秒'],['6 额外CPU负载','0，先不增加额外计算'],['7 提交按钮','填好后点击“提交任务”']
+          ['编号','填写内容'],['1 任务名称','我的第一次测试'],['2 事件文本','复制本页下方三行文字'],['3 调度策略','联合调度'],['4 数据范围','保持“仅管理员设为可信的节点”'],['5 完成时限','5000，意思是5秒'],['6 额外CPU负载','0，先不增加额外计算'],['7 提交按钮','填好后点击“提交任务”']
         ])),
         ('p','把下面三行完整复制到“事件文本”框，每条占一行：'),
         ('code','消防通道被纸箱堵塞\n机房门锁损坏无法关闭\n办公室设备运行正常'),
@@ -227,7 +227,7 @@ def content():
       {'title':'导出记录，正确关闭平台','part':'会基本操作后再学','blocks':[
         ('p','在任务中心或工作台右上角，点击“导出记录”。浏览器会下载一个CSV文件。'),
         ('image',('10-export.png','红框1是“导出记录”。文件会进入浏览器的下载目录。',210)),
-        ('steps',['在浏览器下载列表找到“算邻-任务原始记录.csv”。也可以按Ctrl+J打开下载列表。','用Excel、WPS或文本编辑器打开。主要查看id、name、worker_id、status、latency_ms等列。']),
+        ('steps',['在浏览器下载列表找到“任务调度记录.csv”。也可以按Ctrl+J打开下载列表。','用Excel、WPS或文本编辑器打开。主要查看id、name、worker_id、status、latency_ms等列。']),
         ('table',[['CSV字段','通俗解释'],['name','你填写的任务名称'],['worker_id','执行任务的节点编号'],['status','completed为已完成，queued为待调度'],['latency_ms','任务完成时延，单位毫秒'],['deadline_met','是否在设置时限内完成']]),
         ('p','结束使用时，切回启动start.bat时弹出的命令窗口，按住Ctrl再按C，停止后台服务。关闭浏览器只是关闭页面。下次使用重新双击start.bat。'),
         ('note','导出包含历史任务，不只包含刚才的一项。不要为了获得干净截图而删除原始数据库。'),
@@ -239,14 +239,14 @@ def content():
         ('note','切换此页不会给真实电脑限速，也不会改变任务中心的已完成结果。仿真里的网络和计算参数是假设，不是实际6G性能。'),
         ('success','能区分自己实际提交的记录与预先生成的仿真结果。') ]},
       {'title':'卡住时，按现象排查','part':'遇到问题直接看这页','blocks':[
-        ('table',[['你看到的现象','先这样处理'],['找不到start.bat','确认进入D:\\6G。若文件后缀被隐藏，找名为start的Windows批处理文件。'],['网页无法访问','先确认start.bat的命令窗口还在运行，再输入完整网址http://127.0.0.1:8765。'],['提示端口已占用','先打开8765网址。如果已经是算邻，就使用现有页面；不要连续重复启动。'],['在线节点为0','等待几秒刷新。若仍为0，检查启动窗口是否报错，再正常停止并重启。'],['任务一直待调度','至少一个节点必须在线、未暂停接收、且设为可信。单独检查这些设置。'],['找不到刚提交的任务','清空搜索条件，将状态切回“全部状态”，再搜索你自己填写的任务名称。'],['同一任务出现3条结果','因为你在一个表单中输入了3行，它们属于同一项任务。这是正常行为。'],['看见接入令牌登录框','本机练习请用127.0.0.1网址。远程浏览器访问需使用当前协调端的接入令牌。'],['命令窗口提示找不到python','当前开发机已安装Python；若换到其他电脑，需要先安装Python 3.10或更高版本。']]),
+        ('table',[['你看到的现象','先这样处理'],['找不到start.bat','确认进入D:\\6G。若文件后缀被隐藏，找名为start的Windows批处理文件。'],['网页无法访问','先确认start.bat的命令窗口还在运行，再输入完整网址http://127.0.0.1:8765。'],['提示端口已占用','先打开8765网址。如果已经是多终端任务调度系统，就使用现有页面；不要连续重复启动。'],['在线节点为0','等待几秒刷新。若仍为0，检查启动窗口是否报错，再正常停止并重启。'],['任务一直待调度','至少一个节点必须在线、未暂停接收、且设为可信。单独检查这些设置。'],['找不到刚提交的任务','清空搜索条件，将状态切回“全部状态”，再搜索你自己填写的任务名称。'],['同一任务出现3条结果','因为你在一个表单中输入了3行，它们属于同一项任务。这是正常行为。'],['看见接入令牌登录框','本机练习请用127.0.0.1网址。远程浏览器访问需使用当前协调端的接入令牌。'],['命令窗口提示找不到python','当前开发机已安装Python；若换到其他电脑，需要先安装Python 3.10或更高版本。']]),
         ('p','如果8765确实被其他程序使用，可以在项目文件夹地址栏输入powershell并按回车，再粘贴下面命令并按回车：'),
         ('code','python launch.py --port 8766'),
         ('p','随后浏览器改用 http://127.0.0.1:8766。仍卡住时，保留启动窗口的完整报错，并记录你停在教程哪一步。'),
         ('success','能根据现象找到下一项检查，不需要修改代码或删除数据。') ]},
       {'title':'可选，准备第二台真实电脑','part':'前面熟练后再做双机','blocks':[
         ('p','前面的截图使用1台电脑上的2个处理程序。下面才是两台物理电脑的连接方法。第一次练习可以暂时跳过。'),
-        ('steps',['把当前电脑称为A，另一台称为B。两台连接同一个可信局域网。','A先用Ctrl+C关闭之前的算邻后台。','在A的D:\\6G文件夹地址栏输入powershell，按回车，打开当前目录的终端。','粘贴下面命令并按回车，保持窗口开着。']),
+        ('steps',['把当前电脑称为A，另一台称为B。两台连接同一个可信局域网。','A先用Ctrl+C关闭之前的多终端任务调度系统后台。','在A的D:\\6G文件夹地址栏输入powershell，按回车，打开当前目录的终端。','粘贴下面命令并按回车，保持窗口开着。']),
         ('code','python launch.py --host 0.0.0.0 --workers 1'),
         ('p','这会在A启动协调服务和1个本机执行程序。A仍通过http://127.0.0.1:8765使用网页。'),
         ('p','另开终端，运行以下命令，找到当前连接网卡的IPv4地址并记下来：'),
@@ -293,7 +293,7 @@ def build_pdf(pages):
     story=[]
     for index,page in enumerate(pages):
         if index:story.append(PageBreak())
-        story += [p('算邻零基础图文使用教程','TutorialNote'),p(f'{index+1:02d}  {page["title"]}','TutorialTitle')]
+        story += [p('多终端任务调度系统零基础图文使用教程','TutorialNote'),p(f'{index+1:02d}  {page["title"]}','TutorialTitle')]
         for kind,value in page['blocks']:
             if kind=='p':story.append(p(value))
             elif kind=='steps':story += [p(f'{i+1}. {text}') for i,text in enumerate(value)]
@@ -313,13 +313,13 @@ def build_pdf(pages):
             elif kind=='success':story += [Spacer(1,4),p('完成标志：'+value)]
     def header(canvas,doc):
         canvas.saveState();canvas.setFont('TutorialCN',8);canvas.setFillColor(colors.HexColor('#7e8b7b'))
-        canvas.drawString(48,819,'算邻  平台操作教程');canvas.drawRightString(547,27,f'{doc.page} / {len(pages)}')
+        canvas.drawString(48,819,'多终端任务调度系统  平台操作教程');canvas.drawRightString(547,27,f'{doc.page} / {len(pages)}')
         canvas.bookmarkPage(f'step-{doc.page}')
         if doc.page<=len(pages):canvas.addOutlineEntry(pages[doc.page-1]['title'],f'step-{doc.page}',0,False)
         canvas.restoreState()
     OUT.mkdir(exist_ok=True)
     path=OUT/'06-零基础图文使用教程.pdf'
-    SimpleDocTemplate(str(path),pagesize=(595.28,841.89),leftMargin=48,rightMargin=48,topMargin=51,bottomMargin=42,title='算邻零基础图文使用教程',author='算邻项目').build(story,onFirstPage=header,onLaterPages=header)
+    SimpleDocTemplate(str(path),pagesize=(595.28,841.89),leftMargin=48,rightMargin=48,topMargin=51,bottomMargin=42,title='多终端任务调度系统零基础图文使用教程',author='多终端任务调度系统项目').build(story,onFirstPage=header,onLaterPages=header)
     from pypdf import PdfReader
     actual=len(PdfReader(path).pages)
     if actual!=len(pages):raise RuntimeError(f'教程出现溢出分页：预期{len(pages)}页，实际{actual}页，请调整版面')
@@ -329,7 +329,7 @@ def build_html(pages):
     esc=html.escape
     def embedded(filename):return 'data:image/png;base64,'+base64.b64encode((ASSETS/filename).read_bytes()).decode()
     def picture(filename,caption):return f'<figure><button class="zoom-image" title="点击放大截图"><img src="{embedded(filename)}" alt="{esc(caption)}"></button><figcaption>{esc(caption)} 点击图片可放大。</figcaption></figure>'
-    sections=[];markdown=['# 算邻零基础图文使用教程','','先做第1至6步。截图来自独立同机教学会话；图中数字和任务记录可以与你的不同。','']
+    sections=[];markdown=['# 多终端任务调度系统零基础图文使用教程','','先做第1至6步。截图来自独立同机教学会话；图中数字和任务记录可以与你的不同。','']
     for index,page in enumerate(pages):
         blocks=[];markdown += [f'## {index+1} {page["title"]}','']
         for kind,value in page['blocks']:
@@ -353,9 +353,9 @@ def build_html(pages):
     nav=''.join(f'<a href="#step-{i+1}" data-step="{i+1}">{i+1:02d}　{esc(x["title"])}</a>' for i,x in enumerate(pages))
     options=''.join(f'<option value="{i+1}">{i+1:02d} {esc(x["title"])}</option>' for i,x in enumerate(pages))
     script=r'''const pages=[...document.querySelectorAll('.step')];let current=1;function show(n){current=Math.max(1,Math.min(pages.length,Number(n)||1));pages.forEach((p,i)=>p.classList.toggle('active',i===current-1));document.querySelectorAll('[data-step]').forEach(a=>a.classList.toggle('active',Number(a.dataset.step)===current));document.querySelector('.progress').textContent=`第 ${current} / ${pages.length} 步`;document.querySelector('#prev').disabled=current===1;document.querySelector('#next').disabled=current===pages.length;document.querySelector('.mobile-nav').value=String(current);history.replaceState(null,'','#step-'+current);window.scrollTo(0,0)}document.querySelectorAll('[data-step]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();show(a.dataset.step)}));document.querySelector('#prev').onclick=()=>show(current-1);document.querySelector('#next').onclick=()=>show(current+1);document.querySelector('.mobile-nav').onchange=e=>show(e.target.value);document.querySelectorAll('.zoom-image').forEach(b=>b.onclick=()=>{document.querySelector('#zoom img').src=b.querySelector('img').src;document.querySelector('#zoom').showModal()});document.querySelector('#zoom .close').onclick=()=>document.querySelector('#zoom').close();document.querySelectorAll('.copy').forEach(b=>b.onclick=async()=>{const text=b.dataset.copy;try{await navigator.clipboard.writeText(text)}catch(e){const t=document.createElement('textarea');t.value=text;document.body.append(t);t.select();const ok=document.execCommand('copy');t.remove();if(!ok){b.textContent='请手动复制';return}}b.textContent='已复制';setTimeout(()=>b.textContent='复制',1500)});document.addEventListener('keydown',e=>{if(document.querySelector('dialog').open)return;if(e.key==='ArrowRight'){e.preventDefault();show(current+1)}if(e.key==='ArrowLeft'){e.preventDefault();show(current-1)}});show((location.hash.match(/step-(\d+)/)||[])[1]||1);'''
-    document='<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>算邻操作手册</title><style>'+css+'</style></head><body><aside><div class="brand">算邻<br>操作手册</div><p class="aside-note">先做前6步，完成一次提交与查看。<br>红框数字告诉你点哪里。</p><nav>'+nav+'</nav><a class="open-platform" href="http://127.0.0.1:8765" target="_blank" rel="noopener">打开实际平台 ↗</a><p class="side-small">先运行start.bat，再点上方链接。<br>本文件可以离线阅读。</p></aside><main><div class="top-note">这里是教程，截图里的按钮只能放大查看。请在另一个浏览器标签打开实际平台操作。图中数字不必与你的任务记录完全一致。</div><select class="mobile-nav" aria-label="跳转到步骤">'+options+'</select>'+''.join(sections)+'</main><div class="pager"><button id="prev">← 上一步</button><span class="progress"></span><button id="next">下一步 →</button></div><dialog id="zoom"><button class="close">关闭大图 ×</button><img alt="放大的操作截图"></dialog><noscript><style>.step{display:block}</style></noscript><script>'+script+'</script></body></html>'
-    path=ROOT/'算邻操作手册.html';path.write_text(document,encoding='utf-8')
-    (ROOT/'docs/算邻零基础使用教程.md').write_text('\n'.join(markdown),encoding='utf-8')
+    document='<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>多终端任务调度系统操作手册</title><style>'+css+'</style></head><body><aside><div class="brand">多终端任务调度系统<br>操作手册</div><p class="aside-note">先做前6步，完成一次提交与查看。<br>红框数字告诉你点哪里。</p><nav>'+nav+'</nav><a class="open-platform" href="http://127.0.0.1:8765" target="_blank" rel="noopener">打开实际平台 ↗</a><p class="side-small">先运行start.bat，再点上方链接。<br>本文件可以离线阅读。</p></aside><main><div class="top-note">这里是教程，截图里的按钮只能放大查看。请在另一个浏览器标签打开实际平台操作。图中数字不必与你的任务记录完全一致。</div><select class="mobile-nav" aria-label="跳转到步骤">'+options+'</select>'+''.join(sections)+'</main><div class="pager"><button id="prev">← 上一步</button><span class="progress"></span><button id="next">下一步 →</button></div><dialog id="zoom"><button class="close">关闭大图 ×</button><img alt="放大的操作截图"></dialog><noscript><style>.step{display:block}</style></noscript><script>'+script+'</script></body></html>'
+    path=ROOT/'操作手册.html';path.write_text(document,encoding='utf-8')
+    (ROOT/'docs/平台操作手册.md').write_text('\n'.join(markdown),encoding='utf-8')
     return path
 
 def verify_html(path,pages):

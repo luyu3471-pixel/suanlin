@@ -28,17 +28,17 @@ def main():
         if path.suffix in ('.zip','.pyc') or path.name in ('交付清单.json','token.txt','access_token'):continue
         files.append(path)
     files.sort()
-    manifest={'project':'算邻多终端AI算力协同','date':datetime.now(timezone(timedelta(hours=8))).date().isoformat(),'evidence':['actual same-host process execution','parameterized discrete-event simulation'],'not_completed':['real user demand interviews','multiple physical-device measurement','6G radio verification','competition registration and upload'],
+    manifest={'project':'多终端任务调度系统','date':datetime.now(timezone(timedelta(hours=8))).date().isoformat(),'evidence':['actual same-host process execution','parameterized discrete-event simulation'],'not_completed':['real user demand interviews','multiple physical-device measurement','6G radio verification','competition registration and upload'],
               'files':[{'path':x.relative_to(ROOT).as_posix(),'bytes':x.stat().st_size,'sha256':hashlib.sha256(x.read_bytes()).hexdigest()} for x in files]}
     manifest_path=delivery/'交付清单.json';manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
-    archive=delivery/'算邻完整交付.zip'
+    archive=delivery/'多终端任务调度系统-交付包.zip'
     with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=7) as z:
-        for path in files+[manifest_path]:z.write(path,'算邻/'+path.relative_to(ROOT).as_posix())
+        for path in files+[manifest_path]:z.write(path,'多终端任务调度系统/'+path.relative_to(ROOT).as_posix())
     with zipfile.ZipFile(archive) as z:
         if z.testzip():raise RuntimeError('ZIP校验失败')
         if any(any(part in excluded for part in Path(n).parts) or n.endswith(('/access_token','/token.txt')) for n in z.namelist()):raise RuntimeError('压缩包含不应交付的内容')
     if args.team:
-        prefix=f'{args.team}-场景设计-算邻多终端AI算力协同'
+        prefix=f'{args.team}-场景设计-多终端任务调度系统'
         target=ROOT/'submission'/prefix
         if target.exists():raise RuntimeError('同编号提交目录已存在，请人工核查后使用新目录')
         target.mkdir(parents=True)

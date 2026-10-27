@@ -92,7 +92,7 @@ def run(output, seeds=30, count=240):
     return summary
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="算邻调度对比仿真")
+    parser = argparse.ArgumentParser(description="多终端任务调度系统调度对比仿真")
     parser.add_argument("--output", default="results")
     parser.add_argument("--seeds", type=int, default=30)
     parser.add_argument("--tasks", type=int, default=240)

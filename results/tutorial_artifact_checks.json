@@ -1,7 +1,7 @@
 {
   "pages": 12,
-  "pdf_bytes": 533876,
-  "html_bytes": 642623,
+  "pdf_bytes": 525335,
+  "html_bytes": 632139,
   "checks": {
     "chapter_navigation": true,
     "screenshots_loaded": true,
@@ -11,12 +11,7 @@
     "mobile_body_overflow": false,
     "browser_errors": []
   },
-  "pdf_visual_review": {
-    "passed": true,
-    "render_tool": "pdftoppm",
-    "pages_reviewed": 12,
-    "review_scope": "all pages inspected; revised first page rerendered and reviewed; no clipped text or split step"
-  },
-  "html_file": "算邻操作手册.html",
-  "page_title": "算邻操作手册"
+  "pdf_visual_review": "passed: all 12 pages rendered and inspected; no clipped content",
+  "html_file": "操作手册.html",
+  "page_title": "多终端任务调度系统操作手册"
 }

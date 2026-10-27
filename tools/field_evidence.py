@@ -324,7 +324,7 @@ def failure_test(args):
             print('部分节点未能恢复接收设置，请在节点页人工检查。', flush=True)
 
 def main(argv=None):
-    parser = argparse.ArgumentParser(description='算邻现场取证工具；所有原始数据保存在 .local，不自动进入参赛压缩包')
+    parser = argparse.ArgumentParser(description='多终端任务调度系统现场取证工具；所有原始数据保存在 .local，不自动进入参赛压缩包')
     sub = parser.add_subparsers(dest='command', required=True)
     sub.add_parser('init', help='准备空白访谈、设备和标注记录表，不覆盖已有内容')
     run = sub.add_parser('run', help='四种策略的真实HTTP任务对比')

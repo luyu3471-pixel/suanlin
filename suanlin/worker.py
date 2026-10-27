@@ -83,7 +83,7 @@ class Worker:
 OFFLINE_REJOIN_SECONDS = 11
 
 def main():
-    parser = argparse.ArgumentParser(description="算邻执行节点")
+    parser = argparse.ArgumentParser(description="任务执行节点")
     parser.add_argument("--coordinator", required=True)
     parser.add_argument("--name")
     parser.add_argument("--id")

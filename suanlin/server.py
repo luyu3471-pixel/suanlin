@@ -189,13 +189,13 @@ def create_server(host="127.0.0.1", port=8765, directory=None):
     return server
 
 def main():
-    parser = argparse.ArgumentParser(description="算邻协调服务")
+    parser = argparse.ArgumentParser(description="协调服务")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--data-dir")
     args = parser.parse_args()
     server = create_server(args.host, args.port, args.data_dir)
-    print(f"算邻协调服务 http://{'127.0.0.1' if args.host == '0.0.0.0' else args.host}:{args.port}", flush=True)
+    print(f"协调服务 http://{'127.0.0.1' if args.host == '0.0.0.0' else args.host}:{args.port}", flush=True)
     try:
         server.serve_forever()
     except KeyboardInterrupt:

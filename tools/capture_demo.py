@@ -13,7 +13,7 @@ os.environ.setdefault('PLAYWRIGHT_BROWSERS_PATH',str(ROOT/'.tools/browsers'))
 from playwright.sync_api import sync_playwright
 import imageio_ffmpeg
 
-def main():
+def main(url='http://127.0.0.1:8765'):
     directory=ROOT/'tmp'/'video';directory.mkdir(parents=True,exist_ok=True)
     scenes=[]
     started=time.monotonic()
@@ -30,9 +30,9 @@ def main():
             page.add_style_tag(content='@media screen{.slide{margin:0;box-shadow:none}}html{scroll-behavior:auto}')
             page.evaluate('(i)=>window.scrollTo(0,i*720)',index)
         def live(hash='overview'):
-            page.goto('http://127.0.0.1:8765/#'+hash,wait_until='networkidle')
+            page.goto(url+'/#'+hash,wait_until='networkidle')
             page.locator('h1').wait_for()
-        slide(0);caption('算邻：多终端AI算力协同。应用层研究原型，本视频为真实本机界面操作，无旁白。',14)
+        slide(0);caption('多终端任务调度系统。应用层研究原型，本视频为真实本机界面操作，无旁白。',14)
         slide(1);caption('设计假设：办公事件集中到达时，固定设备可能排队。实际用户需求仍需访谈验证。',15)
         live();caption('两个真实执行进程都运行在本机。当前不是两台物理终端，也没有接入6G无线网络。',17)
         live('nodes');caption('节点展示实际连接、心跳往返和执行状态。带宽为配置值，可信是管理员设置。',13)

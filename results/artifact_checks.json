@@ -4,27 +4,38 @@
     {
       "file": "01-场景设计方案.pdf",
       "pages": 5,
-      "bytes": 144644,
-      "characters": 6615
+      "bytes": 144443,
+      "characters": 6598
     },
     {
       "file": "02-答辩展示.pdf",
       "pages": 12,
-      "bytes": 329195,
-      "characters": 2638
+      "bytes": 327464,
+      "characters": 2560
     },
     {
       "file": "03-佐证材料.pdf",
       "pages": 6,
-      "bytes": 654647,
-      "characters": 2047
+      "bytes": 637314,
+      "characters": 2022
     },
     {
       "file": "05-操作与提交手册.pdf",
       "pages": 8,
-      "bytes": 152720,
-      "characters": 7643
+      "bytes": 152978,
+      "characters": 7736
+    },
+    {
+      "file": "06-零基础图文使用教程.pdf",
+      "pages": 12,
+      "bytes": 525335,
+      "characters": 5465
     }
   ],
-  "note": "Text and bounds checks complement visual PNG review."
+  "note": "Text and bounds checks complement visual PNG review.",
+  "pdf_visual_review": {
+    "passed": true,
+    "rendered_pages": 43,
+    "method": "Poppler PNG rendering; all page contact sheets inspected"
+  }
 }

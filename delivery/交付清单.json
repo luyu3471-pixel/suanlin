@@ -1,5 +1,5 @@
 {
-  "project": "算邻多终端AI算力协同",
+  "project": "多终端任务调度系统",
   "date": "2026-10-27",
   "evidence": [
     "actual same-host process execution",
@@ -24,48 +24,48 @@
     },
     {
       "path": "delivery/01-场景设计方案.pdf",
-      "bytes": 144644,
-      "sha256": "183297614e3668316f979aaf797587ed09d16911e3180a554e8b07b6b148f856"
+      "bytes": 144443,
+      "sha256": "4f6f4302682a43ac4831d61252e3f6dfbcb2bf0a0789efb767657cbc95f0e502"
     },
     {
       "path": "delivery/02-答辩展示.html",
-      "bytes": 13023,
-      "sha256": "ed67c97a45c1d7d602debc32f67aa05756f4846b74f09aa2fe9fc8f8cb6d51f8"
+      "bytes": 12949,
+      "sha256": "8d996e8872c781aea88d5f56c4a24869cb6d738d6ce3aabe347387f4025711e3"
     },
     {
       "path": "delivery/02-答辩展示.pdf",
-      "bytes": 329195,
-      "sha256": "ee1b81e7845a87a6ffbd7b6cd91d4f73be379996cda6ee7da39625c4bf37809c"
+      "bytes": 327464,
+      "sha256": "4f11e3ab82edc78c227847e3f79fad9736ce0aafd5537ffff35f13b9fb6277eb"
     },
     {
       "path": "delivery/03-佐证材料.pdf",
-      "bytes": 654647,
-      "sha256": "cd08924493529938cb4eabbda92db293ee408a4a62a6d64c61deb4264f9929ce"
+      "bytes": 637314,
+      "sha256": "a18471d8f0883aec134e4a04c5779586028af36afb86d272454eee97de2603e4"
     },
     {
       "path": "delivery/04-演示视频.mp4",
-      "bytes": 1808265,
-      "sha256": "bdaf55b87bdef6c082ac386d86f5f423dfc1ac1c571a51f82580ce407b021587"
+      "bytes": 1888051,
+      "sha256": "f44a2489482ebdb74db0fc19ceeae0d8791e77a2b02ea3356b8b93792823574e"
     },
     {
       "path": "delivery/05-操作与提交手册.pdf",
-      "bytes": 152720,
-      "sha256": "72bcae8805a3efd4d4b59efb9988b55a78c2abfed75a811e483e136be6f9ac71"
+      "bytes": 152978,
+      "sha256": "726a82a79a622985e233f9d49a1d82c881a1085c8ec78512dd7fdc32cdb18fd8"
     },
     {
       "path": "delivery/06-零基础图文使用教程.pdf",
-      "bytes": 533876,
-      "sha256": "c153c31bfc48a71d020ce3282aa539406256a1279961fd0e1ed15f5165b09b92"
+      "bytes": 525335,
+      "sha256": "a29e15798941b41e46c5dcf0b01695f64d28a329adc3eac1b753dad8a93e3cd0"
     },
     {
       "path": "docs/AI使用与第三方声明.md",
-      "bytes": 2618,
-      "sha256": "c3cba73b9a5bfcd9905a6ef176bf50a3483781c4a985f4171ad7b6f7bd5ea9ef"
+      "bytes": 2889,
+      "sha256": "e97694ad3738da42c6f83ad1006e229383b17b468727ae9f3983830e8ffed28e"
     },
     {
       "path": "docs/tutorial-assets/01-home.png",
-      "bytes": 74946,
-      "sha256": "94756e8eeb8618473cd28b7edd625097d3cffa2972cbf11e7aba2efaaf08fec5"
+      "bytes": 73972,
+      "sha256": "2d4467e08eb4e136d2a461fa300276f5a3c95296d185cf56c1502e1b411be693"
     },
     {
       "path": "docs/tutorial-assets/02-demo-button.png",
@@ -74,93 +74,93 @@
     },
     {
       "path": "docs/tutorial-assets/03-task-list.png",
-      "bytes": 64187,
-      "sha256": "b55176623403b06ff51a2ad0c53f9a93aa9fff6e2af5bc9d5c925763b0aaec41"
+      "bytes": 62489,
+      "sha256": "2a93f6bf2d3e875b8d7e6bbc7a83c5d41148589ef8ec98d77df496ec92e3bb29"
     },
     {
       "path": "docs/tutorial-assets/04-filled-form.png",
-      "bytes": 60431,
-      "sha256": "d506b38bcbec2ecf75b9bd249550b819d4156eac84338a8e00c832c18f9aa796"
+      "bytes": 56366,
+      "sha256": "b8df2e54c827d10bcc27c5378c0e87b5f842358371fd3e86018e43dba04ac14a"
     },
     {
       "path": "docs/tutorial-assets/05-find-task.png",
-      "bytes": 40610,
-      "sha256": "0887432c52110b9d959a5e152e3bc0c0c03a1694d6481acb2609667eb80335b7"
+      "bytes": 40546,
+      "sha256": "3b62409922b4a3a780d2c1cbaea8cbaa6707551ead39c1b27266c23c66582699"
     },
     {
       "path": "docs/tutorial-assets/06-task-detail.png",
-      "bytes": 44387,
-      "sha256": "8f47c9daa38a851069899a19caf37944c858496ffcbe6c849dce2142ec1852a6"
+      "bytes": 43918,
+      "sha256": "c1aed9b7ee4f5e0cb8500dd5a3eedf85ae78e3fcbcf7a4c9b2662f8d69b69113"
     },
     {
       "path": "docs/tutorial-assets/07-node-buttons.png",
-      "bytes": 36307,
-      "sha256": "54abe4ed99b1dc7892880d599f7b0e8536356d61928a8c984ca2139fefc5c0be"
+      "bytes": 36385,
+      "sha256": "b812ea4d3ac5b9c0ab631e9ce38f65d1e3f2e66223cdd7c47e7a07efc44b6bd7"
     },
     {
       "path": "docs/tutorial-assets/08-paused-node.png",
-      "bytes": 37422,
-      "sha256": "87950eebea3de8534c1121f9ccf5803b86147fff20570a565e63d4e45d3748b0"
+      "bytes": 37495,
+      "sha256": "206c8eb5df2993735cceb273f9e3ee9c50c043932ff6d9ec1a0619475321d0f8"
     },
     {
       "path": "docs/tutorial-assets/09-rerouted-task.png",
-      "bytes": 38404,
-      "sha256": "559971c31acc0b0453f3f9bcfb9c99ff98c1783ec90ded11b1bf087587f6feed"
+      "bytes": 38217,
+      "sha256": "f41598dc0bfc3ee43bddb86a980db3e15e1c7f0510c0e1e917409c07af18d62f"
     },
     {
       "path": "docs/tutorial-assets/10-export.png",
-      "bytes": 31383,
-      "sha256": "8f1315415e6b3ddcbe40424ea09781cea48e207cd3056600f38bf87665629c7a"
+      "bytes": 31196,
+      "sha256": "faf2357583d70e059c4692a63e487f2039505e0c7dffbb94efaab0f828e76b54"
     },
     {
       "path": "docs/tutorial-assets/11-simulation.png",
-      "bytes": 34555,
-      "sha256": "73cf370645e14a2d0ac3faa9824eb11ca901e3d1d5bce37ada7ed6b0ebf50af3"
+      "bytes": 34187,
+      "sha256": "c39db604a7fe35bfd510bc2f33544b483c49a24a17b5dff03e39c1e2361ba05b"
     },
     {
       "path": "docs/交付与提交指南.md",
-      "bytes": 4175,
-      "sha256": "c8ff374b54bfd4bf9087d9733187ff32167f017e552e301b47f99952e7fa2e9c"
+      "bytes": 4254,
+      "sha256": "5d687774f9a4da5bade2a38e5cb6df2d2f71aba6c17eba54c6b77a66bb365e2e"
     },
     {
       "path": "docs/作品简介.txt",
-      "bytes": 1187,
-      "sha256": "686d8153410673cb4e027996e0935399fd9f35b13d0178b7d7dcd2e7b7a3ffb0"
+      "bytes": 1209,
+      "sha256": "c4c27fe7b7bc4a2b7e1a894877afb9029f67b4471cc0afc474ea69474ad6eacc"
     },
     {
       "path": "docs/分工与18天计划.md",
-      "bytes": 2923,
-      "sha256": "88a38f7d9d6c4fe970082d550de1009e159e56cd317ceced401d7b710ff18870"
+      "bytes": 2981,
+      "sha256": "fd633d9b95558b98e851932421f22c691abf8ba1355d9d64c06b895639229ee8"
     },
     {
       "path": "docs/场景设计方案.md",
-      "bytes": 17704,
-      "sha256": "d3523feeb28c515ad47105368f3d6d483d31fb3f6db8bc4982c106d779482cb5"
+      "bytes": 17871,
+      "sha256": "74f16ec6bce2d9369a07f560ee6ba054be289b2d5a2787eb960c23485fb287c1"
+    },
+    {
+      "path": "docs/平台操作手册.md",
+      "bytes": 13778,
+      "sha256": "4239c7c60166113e33949689c717709c28bb312e457dacc2531d846c73897606"
     },
     {
       "path": "docs/测试与验证报告.md",
-      "bytes": 4402,
-      "sha256": "c6e6008fcaa274208e819ebe5b31c96f92ab779b44db4a7dd7fbeee294922bb9"
+      "bytes": 4399,
+      "sha256": "28ddd617bdd60c4b51a37fd05f2813a55c6bd9e44cea9bca02f227eaa7e6e511"
     },
     {
       "path": "docs/现场取证操作手册.md",
-      "bytes": 11279,
-      "sha256": "c137ff8e1ee6641726733739c8b505474eb550faad2cebe853fb17cc0ecdf700"
+      "bytes": 11484,
+      "sha256": "fa1b49e7fc8e78580c6c55587c532dcf4c0ed8a40d7248fee5006827dc1d8f86"
     },
     {
       "path": "docs/现场验证计划.md",
-      "bytes": 4661,
-      "sha256": "537d2a07f2d8f85f23a86914e917101170ee251c2ece5bd2c79dc5264d6aef67"
+      "bytes": 4729,
+      "sha256": "965fd0bd9c0cfdb4be2766f81637ae576c67fa5c92b924601d983fb1cfc35f58"
     },
     {
       "path": "docs/答辩讲稿与问答.md",
-      "bytes": 6104,
-      "sha256": "77d18b815008ab3ffd4c792c32829a50630cbcf1206b8e59e9c8509f4ae5fbea"
-    },
-    {
-      "path": "docs/算邻零基础使用教程.md",
-      "bytes": 13707,
-      "sha256": "3717fb131ef5a9d0b961dd0d9d3e266217d70f20cbb9451cd0473bc1286c7851"
+      "bytes": 6217,
+      "sha256": "790d601a06f6ad3f3356f8ab8a9f4ec69acd19ba765ea7c67c9b661c33452940"
     },
     {
       "path": "docs/证据模板/事件标注.csv",
@@ -179,28 +179,28 @@
     },
     {
       "path": "experiments.py",
-      "bytes": 6711,
-      "sha256": "674678d3bc40f51201f83c57ef8c5077a72def87ac47947577bad128d462727b"
+      "bytes": 6834,
+      "sha256": "8bcaa10535d1c4f01f2527d5a0bf70fb624323ab418f842a2e8e425a1dfb2f1e"
     },
     {
       "path": "launch.py",
-      "bytes": 2077,
-      "sha256": "68b5f457925c7226807f748ac213fb410b8edd0ca9d241e1fb9c5313180cc647"
+      "bytes": 2170,
+      "sha256": "2cfffa6d9325c2afe6b7197b917d4131df74d654b5d8056eaab8fa628399c2fc"
     },
     {
       "path": "README.md",
-      "bytes": 6718,
-      "sha256": "a63d33f9182e536d03c06af4f4bddded4ce349a39fa3e38d63d2d3e845d24868"
+      "bytes": 6728,
+      "sha256": "4b9fbb684441668d61ad9003469244dc6b15555fe0b5884718f7b19f0849a390"
     },
     {
       "path": "requirements.txt",
-      "bytes": 154,
-      "sha256": "05369f90875a6efd0a6813bc9d5c4e72ae0d3a4d4fef281e16c0760856e34bff"
+      "bytes": 177,
+      "sha256": "7750cc25ebe02ce1418576d4dafe7df5367a818b9b49d09a5b2901aa19d9041b"
     },
     {
       "path": "results/artifact_checks.json",
-      "bytes": 622,
-      "sha256": "e264669a54e6c6cc545843e293c18dbf60e4513a392b1301c2c281b703d11948"
+      "bytes": 916,
+      "sha256": "352bc0f8cfb7e7137456a89b83005172c6f8cd48210dff8413d8d6f60c2723ac"
     },
     {
       "path": "results/browser_qa.json",
@@ -238,34 +238,39 @@
       "sha256": "c7920cc7653a15239e2e0107bcd7d9054d9fd10ccab983a7d5a3c1471bf2827c"
     },
     {
+      "path": "results/project_name_checks.json",
+      "bytes": 776,
+      "sha256": "c4591f75a9c2c87f9625eebb1e2495722443b96d24d38b8dffad7f69bf5ae4f0"
+    },
+    {
       "path": "results/screenshots/experiments.png",
-      "bytes": 97456,
-      "sha256": "22a69ba9619ab72f573fbf65f05483a819c2398e541ae09e7f2d5ecbfe8c8921"
+      "bytes": 99283,
+      "sha256": "ddea5668d84bba5051ab3fb71d2c514f7094fec5ddbc86a124944a607a9b816b"
     },
     {
       "path": "results/screenshots/mobile.png",
-      "bytes": 139059,
-      "sha256": "2b0f50ca14437202bc99490471bddf576d27251cae07a56743eaf2e58f8e682a"
+      "bytes": 119697,
+      "sha256": "df16b81836b3bf287a42bc3428d857a170ba0a53afc712fdfaa23154de3fa446"
     },
     {
       "path": "results/screenshots/nodes.png",
-      "bytes": 103750,
-      "sha256": "31f28f892ec0521b634a8ff882fcf7fe400cac7149a84c492cf2923058c7d60b"
+      "bytes": 104703,
+      "sha256": "8d02ce7513cfb8ea171b7945c7b49fa8191d2fcd640da6a5da0e7c58da4c6ea1"
     },
     {
       "path": "results/screenshots/overview.png",
-      "bytes": 180155,
-      "sha256": "b2b5308f28e689b12d3b3141cf31e57da19e0ac907c191bf5e7ef7423b124c19"
+      "bytes": 151678,
+      "sha256": "bb9fcaf3ae4d12c7fa3991443ddaf4c7ac2c1a65cd2b09a808cc17421a39e922"
     },
     {
       "path": "results/screenshots/task-detail.png",
-      "bytes": 160932,
-      "sha256": "101f052aab8564beee72f7c00e4feb5750c7a1fc743fc2cfa204c2f7b29d04c5"
+      "bytes": 162080,
+      "sha256": "b8b27c5e52c2e336d1b02ec21add34a406c821e04ffa25345c5f8d27db7dca74"
     },
     {
       "path": "results/screenshots/workbench-wide.png",
-      "bytes": 77364,
-      "sha256": "4cd53c08751c14464366ca4bca9f152c6e176c6f6d39842a3655affc90e32986"
+      "bytes": 74110,
+      "sha256": "dae643859c3ebbd65ad3d056630999de2c92cad54036718c0d55271b716ea0c8"
     },
     {
       "path": "results/simulation_raw.csv",
@@ -284,8 +289,8 @@
     },
     {
       "path": "results/tutorial_artifact_checks.json",
-      "bytes": 612,
-      "sha256": "cf19792cc8828681d66755209c7371650cb1344c8624763d989aa1f1b4436d25"
+      "bytes": 490,
+      "sha256": "47fbc288627ccec4b667d40e14504bf9bdefff9fa04c279ab204f21172a7f081"
     },
     {
       "path": "results/tutorial_capture_checks.json",
@@ -294,8 +299,8 @@
     },
     {
       "path": "results/ui_export.csv",
-      "bytes": 25326,
-      "sha256": "51ac2f5f4169822ca56ba8b3e08634a049ffdd0323d2141fc51c0a81cc913ead"
+      "bytes": 319,
+      "sha256": "e122817d80d5a443a97261687db32d7a41f5842d5a78df86aea055ea5f472b92"
     },
     {
       "path": "results/unittest.txt",
@@ -304,8 +309,8 @@
     },
     {
       "path": "results/video_record.json",
-      "bytes": 3187,
-      "sha256": "6907add601b7f8d92a57927779b8f50467eb57e5f9db181fc1b09c2ec03da54f"
+      "bytes": 3214,
+      "sha256": "4a561f97b332c69bb949fce734e8281e2e12240784a74036eb4521ce90502638"
     },
     {
       "path": "start.bat",
@@ -314,18 +319,18 @@
     },
     {
       "path": "START_HERE.txt",
-      "bytes": 947,
-      "sha256": "ce55a4f8a16fcf3f3d43de3925586bcb4c51d2dfa7f2fdaef2028692d902eaae"
+      "bytes": 938,
+      "sha256": "617122453636d9184e4b42ef5769991bba6eac31755d2df26a15d3e2a5791461"
     },
     {
       "path": "start_lan.bat",
-      "bytes": 246,
-      "sha256": "23d606802db1440f73a9067c4298b8bc2376f0f61f8c6c500986debbb53cf945"
+      "bytes": 274,
+      "sha256": "2e481273df9dec6df3cb6b4f462b96fd4f46291eb5666440dd0d15b10d13f8b1"
     },
     {
       "path": "suanlin/__init__.py",
-      "bytes": 99,
-      "sha256": "7034b88140e7f2fe2b906f8016c28234f5cfb7558a86056fccd7f3fef3911216"
+      "bytes": 122,
+      "sha256": "10f3e1e869147f07150cb21d18dafb79a9c9d32ee0d0225dfcfc4a0b9c786249"
     },
     {
       "path": "suanlin/inference.py",
@@ -334,13 +339,13 @@
     },
     {
       "path": "suanlin/scheduler.py",
-      "bytes": 1541,
-      "sha256": "ec6dbe2f91da521727f7911af33423b21719fbad84c4d3806d4fcfffa16cf099"
+      "bytes": 1565,
+      "sha256": "554922dceb6578b34754e7e5c140bf41671fde2a160b5222af2071ddfd41ab1d"
     },
     {
       "path": "suanlin/server.py",
-      "bytes": 10015,
-      "sha256": "ae258bcc624a226c2f09bbcec803f715b2503610bb208e1d5e0d6ff3eae2ce34"
+      "bytes": 10211,
+      "sha256": "77df5e0b2094722be7031a92d83dd43b0290920b395442daac40189f4f327144"
     },
     {
       "path": "suanlin/store.py",
@@ -349,8 +354,8 @@
     },
     {
       "path": "suanlin/worker.py",
-      "bytes": 4427,
-      "sha256": "c578e57ac80f166b83c2e98ec0811a3699e14b94915063dd837d4fcd2f53334d"
+      "bytes": 4536,
+      "sha256": "cb177343acac14b2eda28733d3325ffea36cb77ce371eda2caacf904f43e7a3d"
     },
     {
       "path": "tests/test_field_evidence.py",
@@ -369,23 +374,23 @@
     },
     {
       "path": "tools/browser_qa.py",
-      "bytes": 4464,
-      "sha256": "bc9e6ab69d1a93bce70cdd3e4295271e0709da1d0405ef38a83032dc6a07dc92"
+      "bytes": 4592,
+      "sha256": "6090b7c66ad79a8c519438df761b69d56b8915eca48e27c0b422b73698e89db1"
     },
     {
       "path": "tools/build_beginner_tutorial.py",
-      "bytes": 45481,
-      "sha256": "b66dd247e5392772f83f4db8fb93ae68b30d7a18e70f7c908bdd2988c5a203a2"
+      "bytes": 45663,
+      "sha256": "1dcb05745fb17207a3cb6b438de5c3b5abbcec7d22d04981e389b2e5f4b32dc8"
     },
     {
       "path": "tools/build_materials.py",
-      "bytes": 22589,
-      "sha256": "a1c21be32a83866c5f6153535f069fcd040d17c74d1cbaa12edd6614aaa30dc2"
+      "bytes": 22830,
+      "sha256": "986d1bcb4ffe1a44f7e38beb01de9cd3013c887a8544ec0d1ba8c77e7f80ed7f"
     },
     {
       "path": "tools/capture_demo.py",
-      "bytes": 6546,
-      "sha256": "a39e86b7e3a00ca45dbd6a0f791edde9b21bbf2a3cbf993bff4dd8e619a2007a"
+      "bytes": 6629,
+      "sha256": "14d6ed490d7a261e7ae252f09026eaa29d231aba2be08a291a349e39a5af1299"
     },
     {
       "path": "tools/fault_worker.py",
@@ -394,8 +399,8 @@
     },
     {
       "path": "tools/field_evidence.py",
-      "bytes": 24581,
-      "sha256": "80cce9236380719b85fcc9aee8c829cbdc200bf51a0bfd333970080680eed62a"
+      "bytes": 24969,
+      "sha256": "533f120f1d0bc138f577bac4378a660f39f6a7b1fae03287d62e6007daed0df1"
     },
     {
       "path": "tools/finalize_materials.py",
@@ -404,8 +409,8 @@
     },
     {
       "path": "tools/package_submission.py",
-      "bytes": 3689,
-      "sha256": "22b491d5814c961355180768936a6f545661c921b9648d5b69821f4bcc74e631"
+      "bytes": 3776,
+      "sha256": "4caee30583c06fa5e4a9b2c564d31a782834b280997a54d14908dfc7026c2b25"
     },
     {
       "path": "tools/requirements-artifacts.txt",
@@ -414,8 +419,8 @@
     },
     {
       "path": "web/app.js",
-      "bytes": 23626,
-      "sha256": "03d8694eb822e03c133c696a7b2c6a3c96d5649a6dfdac9d9f48d4bf926f5d7f"
+      "bytes": 23756,
+      "sha256": "9ed08ae7ba0b66770f05f1b21e5078da17d8b57f220e861f0c9a61646a811f3d"
     },
     {
       "path": "web/favicon.svg",
@@ -424,13 +429,13 @@
     },
     {
       "path": "web/guide.html",
-      "bytes": 1743,
-      "sha256": "8009800b5ebcc27aa36ecb8c7b1c48b652f097ab63d5462e8dfd33ac21b2164d"
+      "bytes": 1807,
+      "sha256": "5ed248f8de777af5c770b91980d79b7d3c877451580ef4c2361107347e5483f2"
     },
     {
       "path": "web/index.html",
-      "bytes": 5026,
-      "sha256": "199568f3dee0326a5f275c8b5100a5bd6699fb05e880593297f0c460acc7d613"
+      "bytes": 5060,
+      "sha256": "a93f5fd6626ef4e36a3ae5bcd29b4bf79b1ceb296f566bc1fbe3c4f3b91b07e6"
     },
     {
       "path": "web/style.css",
@@ -438,9 +443,9 @@
       "sha256": "62ea65feb0060f58c907a077f7c01eb8211a864102f9f5f00f465517718beadf"
     },
     {
-      "path": "算邻操作手册.html",
-      "bytes": 642623,
-      "sha256": "332600fab6e7cf058d48326c72f5229c99531821fcb3a1ee65586b3c45fbe03e"
+      "path": "操作手册.html",
+      "bytes": 632139,
+      "sha256": "fb39cc8f7b70028d332c1a2a139d09a65e30432c129ab2df709739f5db873e8a"
     }
   ]
 }

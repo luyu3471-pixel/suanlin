@@ -1,7 +1,7 @@
 """Shared policy selection. Deadlines are server-clock absolute timestamps."""
 import random
 
-POLICIES = {"smart": "算邻联合调度", "fixed": "固定单节点", "round_robin": "轮询分配", "random": "随机分配"}
+POLICIES = {"smart": "联合调度", "fixed": "固定单节点", "round_robin": "轮询分配", "random": "随机分配"}
 
 def estimate_ms(task, node, now):
     payload = task["payload"]

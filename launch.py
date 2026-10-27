@@ -9,7 +9,7 @@ import webbrowser
 from suanlin.server import create_server
 
 def main():
-    parser = argparse.ArgumentParser(description="算邻一键启动")
+    parser = argparse.ArgumentParser(description="多终端任务调度系统一键启动")
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--workers", type=int, choices=range(0, 9), default=2)
@@ -25,7 +25,7 @@ def main():
     token_file = server.store.directory.resolve() / "access_token"
     url = f"http://127.0.0.1:{server.server_address[1]}"
     children = []
-    print(f"算邻已启动：{url}\n演示模式：{args.workers} 个同机工作进程，非多终端实测。\n按 Ctrl+C 停止服务。", flush=True)
+    print(f"多终端任务调度系统已启动：{url}\n演示模式：{args.workers} 个同机工作进程，非多终端实测。\n按 Ctrl+C 停止服务。", flush=True)
     for i in range(args.workers):
         command = [sys.executable, "-m", "suanlin.worker", "--coordinator", url, "--token-file", str(token_file), "--name", f"本机执行节点 {i + 1}", "--id", f"local-{i + 1}"]
         children.append(subprocess.Popen(command, cwd=root, creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0)))
