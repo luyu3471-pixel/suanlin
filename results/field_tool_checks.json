@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-27",
+  "new_tests_passed": 10,
+  "execution_scope": "same-host tool validation only; NOT interviews, physical multi-device evidence or 6G measurement",
+  "cases": [
+    "blank data is not fabricated",
+    "CSV structure errors are explained",
+    "training overlap and absent classes are disclosed",
+    "failures remain in deadline denominator",
+    "same-host runs require an explicit test flag",
+    "run directories do not overwrite and CSV formulas are escaped",
+    "actual HTTP execution preserves synthetic provenance",
+    "simulated input is not labelled real observations",
+    "ordinary completion does not pass as recovery",
+    "controlled worker exit is recovered by fallback and node settings restored"
+  ],
+  "record_templates": "blank, user must fill from actual observations",
+  "new_private_data_root": ".local/field-evidence",
+  "field_evidence_collected_for_user": false
+}

@@ -1,6 +1,6 @@
 {
   "project": "算邻多终端AI算力协同",
-  "date": "2026-10-26",
+  "date": "2026-10-27",
   "evidence": [
     "actual same-host process execution",
     "parameterized discrete-event simulation"
@@ -14,8 +14,8 @@
   "files": [
     {
       "path": ".gitignore",
-      "bytes": 69,
-      "sha256": "e5e0c9844fd0dc30132f053ff8bec1caa8f17704df15c7e212fc793605ec1a02"
+      "bytes": 79,
+      "sha256": "daa9123d4d12c0e1fe35d72715b6127852bc02e385c9f5d48fce7fd14602de07"
     },
     {
       "path": "delivery/01-场景设计方案.pdf",
@@ -78,6 +78,11 @@
       "sha256": "c6e6008fcaa274208e819ebe5b31c96f92ab779b44db4a7dd7fbeee294922bb9"
     },
     {
+      "path": "docs/现场取证操作手册.md",
+      "bytes": 11279,
+      "sha256": "c137ff8e1ee6641726733739c8b505474eb550faad2cebe853fb17cc0ecdf700"
+    },
+    {
       "path": "docs/现场验证计划.md",
       "bytes": 4661,
       "sha256": "537d2a07f2d8f85f23a86914e917101170ee251c2ece5bd2c79dc5264d6aef67"
@@ -86,6 +91,21 @@
       "path": "docs/答辩讲稿与问答.md",
       "bytes": 6104,
       "sha256": "77d18b815008ab3ffd4c792c32829a50630cbcf1206b8e59e9c8509f4ae5fbea"
+    },
+    {
+      "path": "docs/证据模板/事件标注.csv",
+      "bytes": 67,
+      "sha256": "cfadd688c941a3fcf8e466fc5e9f33cf460620fc3fdb832b8f64866bb493527c"
+    },
+    {
+      "path": "docs/证据模板/设备记录.csv",
+      "bytes": 143,
+      "sha256": "1567fb862f57c4f43ff49ee2e5e6e383b686da5e075f0338aba661bdd326a8c0"
+    },
+    {
+      "path": "docs/证据模板/访谈记录.md",
+      "bytes": 1387,
+      "sha256": "ea7da5ec3b24afba0899aaf426fca1a7f2207465581685c66dab0cdbe75d6a5d"
     },
     {
       "path": "experiments.py",
@@ -99,8 +119,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6109,
-      "sha256": "81b6cf80a490c9698b393818998bff70ce7a36c7c34994f6b3a90386f7a664a9"
+      "bytes": 6403,
+      "sha256": "451aa16ffce535b3f1c776386ba71c238e1e98db5fad7788a9206796e5f0f7f1"
     },
     {
       "path": "requirements.txt",
@@ -121,6 +141,16 @@
       "path": "results/build_environment.json",
       "bytes": 306,
       "sha256": "95ff2f9ced89b470b99e938b2cedd9ac8c46cdd9f8262b24ef206b6e584b8bce"
+    },
+    {
+      "path": "results/field_tool_checks.json",
+      "bytes": 934,
+      "sha256": "a155d24dc9f1910f36cf3f366103bc8d134337448b77debc4b4292c8a19f816f"
+    },
+    {
+      "path": "results/field_tool_checks.txt",
+      "bytes": 3922,
+      "sha256": "05d10c6c20d26d7dc3a4cec86bc410309bcc485b83f366bd497a0733ae7e4b3b"
     },
     {
       "path": "results/local_benchmark_raw.csv",
@@ -243,6 +273,11 @@
       "sha256": "c578e57ac80f166b83c2e98ec0811a3699e14b94915063dd837d4fcd2f53334d"
     },
     {
+      "path": "tests/test_field_evidence.py",
+      "bytes": 9436,
+      "sha256": "5606ea7bb35ac7fc6af7ce44026f8a7eb904dbd189b2669dba3a8a28b376fa4f"
+    },
+    {
       "path": "tests/test_system.py",
       "bytes": 8976,
       "sha256": "e619d45dc05e7bf36f8db7bc7e1bee3d101eb18f118a1dee67e4cb9a0b7fce21"
@@ -268,14 +303,24 @@
       "sha256": "a39e86b7e3a00ca45dbd6a0f791edde9b21bbf2a3cbf993bff4dd8e619a2007a"
     },
     {
+      "path": "tools/fault_worker.py",
+      "bytes": 1555,
+      "sha256": "f657bfa70bc817d105e9ba42aa478a56dbdaf6677c86feb6879315e7221d482d"
+    },
+    {
+      "path": "tools/field_evidence.py",
+      "bytes": 24581,
+      "sha256": "80cce9236380719b85fcc9aee8c829cbdc200bf51a0bfd333970080680eed62a"
+    },
+    {
       "path": "tools/finalize_materials.py",
       "bytes": 2047,
       "sha256": "b674eea24e9a854f484ec1e812cc4af238aab8bd66f2c1cd2d779142d9d7ffc0"
     },
     {
       "path": "tools/package_submission.py",
-      "bytes": 3552,
-      "sha256": "d9de0db9551b3010102ff5a64bb63e07784ac01967beb4e25f9c06ffaf54c222"
+      "bytes": 3652,
+      "sha256": "ae894f4839f8faa24b11c9d314ce81af5ba14fa29c9780e7198bafc9e057b0d3"
     },
     {
       "path": "tools/requirements-artifacts.txt",
