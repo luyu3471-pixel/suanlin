@@ -1,6 +1,6 @@
 {
   "project": "多终端任务调度系统",
-  "date": "2026-10-27",
+  "date": "2026-10-28",
   "evidence": [
     "actual same-host process execution",
     "parameterized discrete-event simulation"
@@ -223,6 +223,11 @@
       "sha256": "05d10c6c20d26d7dc3a4cec86bc410309bcc485b83f366bd497a0733ae7e4b3b"
     },
     {
+      "path": "results/interface_review.json",
+      "bytes": 4500,
+      "sha256": "c7e646eb055627c171ba6e0f2336cca18abd11fe922200bb1e7f77f46eba556c"
+    },
+    {
       "path": "results/local_benchmark_raw.csv",
       "bytes": 28971,
       "sha256": "b0762b49151f6d051329b864c3e381a2bbcd30bead80a087078ee9dd671add25"
@@ -244,33 +249,38 @@
     },
     {
       "path": "results/screenshots/experiments.png",
-      "bytes": 99283,
-      "sha256": "ddea5668d84bba5051ab3fb71d2c514f7094fec5ddbc86a124944a607a9b816b"
+      "bytes": 126184,
+      "sha256": "e03fcc7001537b3616e5da29d0cadbf6898014ecef9c6f78a59de55ad4b43d7f"
+    },
+    {
+      "path": "results/screenshots/interface-preview.png",
+      "bytes": 205367,
+      "sha256": "6a4230f678b22c4f49d67176db05b02aad5de5d425f77f04458743588b3cca1b"
     },
     {
       "path": "results/screenshots/mobile.png",
-      "bytes": 119697,
-      "sha256": "df16b81836b3bf287a42bc3428d857a170ba0a53afc712fdfaa23154de3fa446"
+      "bytes": 165865,
+      "sha256": "23269c9cc96d98985f5541375bbbe245ba4fdf76b5465bed74b076f5528befc1"
     },
     {
       "path": "results/screenshots/nodes.png",
-      "bytes": 104703,
-      "sha256": "8d02ce7513cfb8ea171b7945c7b49fa8191d2fcd640da6a5da0e7c58da4c6ea1"
+      "bytes": 122509,
+      "sha256": "1df7e1aeeff23754d88949afd44946a555a3a882decab564e48d5e4240cacd9d"
     },
     {
       "path": "results/screenshots/overview.png",
-      "bytes": 151678,
-      "sha256": "bb9fcaf3ae4d12c7fa3991443ddaf4c7ac2c1a65cd2b09a808cc17421a39e922"
+      "bytes": 232579,
+      "sha256": "1c13dcdf4b65c859bb007893ac40514521fe29e8a53d02f82fa2ea1abd1ddd10"
     },
     {
       "path": "results/screenshots/task-detail.png",
-      "bytes": 162080,
-      "sha256": "b8b27c5e52c2e336d1b02ec21add34a406c821e04ffa25345c5f8d27db7dca74"
+      "bytes": 174976,
+      "sha256": "94fedd3695fe135dcb9260c4e27734f0b80afdf3615b8467c3f661d483e7c11e"
     },
     {
       "path": "results/screenshots/workbench-wide.png",
-      "bytes": 74110,
-      "sha256": "dae643859c3ebbd65ad3d056630999de2c92cad54036718c0d55271b716ea0c8"
+      "bytes": 128594,
+      "sha256": "4409a0217d98cf90bbcfb1851e845f35f12bfb3a8a7a4e0b5c8bc14c6e9eeba7"
     },
     {
       "path": "results/simulation_raw.csv",
@@ -299,8 +309,8 @@
     },
     {
       "path": "results/ui_export.csv",
-      "bytes": 319,
-      "sha256": "e122817d80d5a443a97261687db32d7a41f5842d5a78df86aea055ea5f472b92"
+      "bytes": 316,
+      "sha256": "83bb1de1c3c6d4ae1999e857177dea2887c908025b740a250b9a02ba3b8eb445"
     },
     {
       "path": "results/unittest.txt",
@@ -419,28 +429,28 @@
     },
     {
       "path": "web/app.js",
-      "bytes": 23756,
-      "sha256": "9ed08ae7ba0b66770f05f1b21e5078da17d8b57f220e861f0c9a61646a811f3d"
+      "bytes": 24964,
+      "sha256": "c6a8ad07958260e2b5be2e13f2db03d1bdf161a75346cf4d976b56c434a1539d"
     },
     {
       "path": "web/favicon.svg",
-      "bytes": 259,
-      "sha256": "b6d672660e9460758421032bb32617797f3c40297d041eab585449b4a74217cd"
+      "bytes": 274,
+      "sha256": "475c9ff1b636a529edfda3d086fe50ec35e7f5d14abae3ed5dcef66d55ea4d0f"
     },
     {
       "path": "web/guide.html",
-      "bytes": 1807,
-      "sha256": "5ed248f8de777af5c770b91980d79b7d3c877451580ef4c2361107347e5483f2"
+      "bytes": 2244,
+      "sha256": "41d7d59f4748e547c59c6c3e1f8c306e128276a0681e3e071943c4438ba9405e"
     },
     {
       "path": "web/index.html",
-      "bytes": 5060,
-      "sha256": "a93f5fd6626ef4e36a3ae5bcd29b4bf79b1ceb296f566bc1fbe3c4f3b91b07e6"
+      "bytes": 5222,
+      "sha256": "fac6a2ebcc1b2b54ef51366c64ffe079c378ffb37647ed336fcfb653393e46ce"
     },
     {
       "path": "web/style.css",
-      "bytes": 21353,
-      "sha256": "62ea65feb0060f58c907a077f7c01eb8211a864102f9f5f00f465517718beadf"
+      "bytes": 36878,
+      "sha256": "f880e3521f41f1dcdbe637702c9e921d72844425d74e22a6159e76f6403121de"
     },
     {
       "path": "操作手册.html",

@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-28",
+  "palette": "graphite, cool white, electric blue",
+  "functional_checks": "results/browser_qa.json",
+  "viewport_checks": [
+    {
+      "width": 1440,
+      "route": "overview",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1440,
+      "route": "nodes",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1440,
+      "route": "tasks",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1440,
+      "route": "experiments",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1440,
+      "route": "guide",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1440,
+      "route": "documentation",
+      "no_body_overflow": true
+    },
+    {
+      "width": 1280,
+      "route": "overview",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1280,
+      "route": "nodes",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1280,
+      "route": "tasks",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1280,
+      "route": "experiments",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1280,
+      "route": "guide",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 1280,
+      "route": "documentation",
+      "no_body_overflow": true
+    },
+    {
+      "width": 768,
+      "route": "overview",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 768,
+      "route": "nodes",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 768,
+      "route": "tasks",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 768,
+      "route": "experiments",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 768,
+      "route": "guide",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 768,
+      "route": "documentation",
+      "no_body_overflow": true
+    },
+    {
+      "width": 390,
+      "route": "overview",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 390,
+      "route": "nodes",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 390,
+      "route": "tasks",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 390,
+      "route": "experiments",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 390,
+      "route": "guide",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 390,
+      "route": "documentation",
+      "no_body_overflow": true
+    },
+    {
+      "width": 360,
+      "route": "overview",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 360,
+      "route": "nodes",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 360,
+      "route": "tasks",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 360,
+      "route": "experiments",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 360,
+      "route": "guide",
+      "no_body_overflow": true,
+      "navigation_state": true
+    },
+    {
+      "width": 360,
+      "route": "documentation",
+      "no_body_overflow": true
+    },
+    {
+      "width": 1440,
+      "route": "dialogs",
+      "no_horizontal_overflow": true,
+      "submit_reachable": true,
+      "export_downloaded": true
+    },
+    {
+      "width": 390,
+      "route": "dialogs",
+      "no_horizontal_overflow": true,
+      "submit_reachable": true,
+      "export_downloaded": true
+    },
+    {
+      "width": 360,
+      "route": "dialogs",
+      "no_horizontal_overflow": true,
+      "submit_reachable": true,
+      "export_downloaded": true
+    }
+  ],
+  "javascript_errors": [],
+  "isolated_test_data": true,
+  "existing_user_state_modified": false,
+  "passed": true
+}
