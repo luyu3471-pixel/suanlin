@@ -244,7 +244,11 @@ const InterfaceMotion = (() => {
     else ripple.remove();
   });
 
-  return {render};
+  return {render, update(container, html) {
+    const template = document.createElement('template');
+    template.innerHTML = html;
+    patchChildren(container, template.content);
+  }};
 })();
 
 const $ = (s, root = document) => root.querySelector(s);
@@ -257,13 +261,32 @@ const labels = {completed:'已完成',running:'执行中',queued:'待调度',fai
 const policies = {smart:'联合调度',fixed:'固定单节点',round_robin:'轮询分配',random:'随机分配'};
 let state = null, current = 'overview', simulation = null, scenario = 'normal', taskFilter = 'all', taskSearch = '', lastError = false, fetching = false;
 let toastTimer;
+let taskSort = 'newest', lastSyncAt = null, connectionError = '', authRequired = false, experimentsError = '', experimentsLoading = false;
+let activeTask = null, detailVersion = 0, detailLoading = false, detailError = '';
+const pending = new Set();
 function toast(text) { $('#toast').textContent = text; $('#toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('#toast').classList.remove('visible'), 3500); }
-async function api(path, data) {
-  const response = await fetch(path, data === undefined ? {} : {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+async function request(path, data, raw = false) {
+ const controller = new AbortController(), timer = setTimeout(() => controller.abort(), 12000);
+ try {
+  const response = await fetch(path, {signal:controller.signal, ...(data === undefined ? {} : {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)})});
+  if (response.status === 401) {
+   if (!$('#login-dialog').open) $('#login-dialog').showModal();
+   const body = await response.json().catch(()=>({}));
+   const error = new Error(path==='/api/login'?(body.error||'接入令牌不正确。'):'登录已失效，请重新输入接入令牌。'); error.status = 401; throw error;
+  }
+  if (raw && response.ok) return await response.blob();
   const result = await response.json();
-  if (!response.ok) { if(response.status===401 && !$('#login-dialog').open) $('#login-dialog').showModal(); throw new Error(result.error || '请求失败'); }
+  if (!response.ok) throw new Error(result.error || '请求失败，请稍后重试。');
   return result;
+ } catch (error) {
+  if (error.name === 'AbortError' || error instanceof TypeError) {
+   throw new Error(data === undefined ? '暂时无法连接协调服务，请检查服务是否运行。' : '未能确认操作结果，请恢复连接后先查看记录，再决定是否重试。');
+  }
+  throw error;
+ } finally { clearTimeout(timer); }
 }
+const api = (path, data) => request(path, data);
+
 const fmt = (x, digits=0) => x == null ? '—' : Number(x).toLocaleString('zh-CN', {maximumFractionDigits:digits});
 const ms = x => x == null ? '—' : `${fmt(x,1)} ms`;
 const percent = x => x == null ? '—' : `${(x*100).toFixed(1)}%`;
@@ -280,14 +303,14 @@ function heroArt() {
  return `<div class="hero-art" aria-hidden="true"><svg viewBox="0 0 340 180" fill="none"><defs><pattern id="hero-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" stroke="#7b9bce" stroke-opacity=".1" stroke-width=".6"/></pattern><linearGradient id="chip-fill" x1="143" y1="46" x2="204" y2="112" gradientUnits="userSpaceOnUse"><stop stop-color="#365d9c"/><stop offset="1" stop-color="#1d355a"/></linearGradient></defs><rect x="10" y="4" width="320" height="166" fill="url(#hero-grid)"/><path d="M60 54H111L156 87M279 47H241L193 87M278 136H239L192 103M61 134H110L156 103" stroke="#759bdb" stroke-opacity=".5" stroke-width="1.2"/><path class="hero-flow" d="M60 54H111L156 87M279 47H241L193 87M278 136H239L192 103" stroke="#8eb8ff" stroke-opacity=".7" stroke-width="1.2" stroke-dasharray="3 18"/><path d="m143 63 31-18 32 18v45l-32 19-31-19z" fill="#6f9fe0" fill-opacity=".08" stroke="#6494dd" stroke-opacity=".3"/><circle class="hero-chip-ring" cx="174" cy="87" r="39" stroke="#8eb5fa" stroke-width=".7"/><rect class="hero-chip" x="148" y="61" width="52" height="52" rx="12" fill="url(#chip-fill)" stroke="#91b7f1" stroke-opacity=".7"/><path d="M165 77h18v19h-18zM160 82h5m18 0h5m-28 9h5m18 0h5m-18-19v5m8-5v5m-8 19v5m8-5v5" stroke="#b5d2ff" stroke-width="1.6"/><g fill="#1a2a44" stroke="#5b79a8" stroke-opacity=".7"><rect x="38" y="34" width="42" height="36" rx="8"/><rect x="258" y="27" width="42" height="36" rx="8"/><rect x="258" y="118" width="42" height="36" rx="8"/><rect x="38" y="117" width="42" height="36" rx="8"/></g><g stroke="#a2c0ef" stroke-width="1.2"><path d="M49 44h20v13H49zm10 13v4m-5 0h10M269 37h20v5h-20zm0 9h20v5h-20zM269 128h20v13h-20zm10 13v4m-5 0h10M49 127h20v5H49zm0 9h20v5H49z"/></g><g class="hero-sparks" fill="#8fb5f7"><circle cx="110" cy="54" r="2.5"/><circle cx="240" cy="136" r="2.5"/><circle cx="300" cy="45" r="2"/></g><g fill="#849fc7" font-family="Consolas,monospace" font-size="7" letter-spacing="1.2"><text x="136" y="145">COORDINATOR</text><text x="36" y="21">EXECUTION NODES</text></g></svg></div>`;
 }
 function topology() {
- const online=state.nodes.filter(n=>n.online).slice(0,4),positions=[[18,25],[82,25],[18,77],[82,77]];
- return `<section class="panel"><div class="panel-head"><div><h2>算力协同网络 <small>COMPUTE NETWORK</small></h2><div class="panel-sub">节点能力、网络状态与任务时限协同决策</div></div><span class="badge"><i></i>${online.length} 个节点在线</span></div><div class="topology"><div class="network"><svg class="network-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${positions.slice(0,online.length).map(([x,y])=>`<path d="M50 50 C50 ${y},${x} 50,${x} ${y}"/>`).join('')}</svg><div class="network-node center"><div class="node-orb">${icon('nodes')}</div>协调服务<small>联合调度 · 租约恢复</small></div>${online.map((n,i)=>`<div data-key="network-${esc(n.id)}" class="network-node ${n.busy_task?'busy':''}" style="left:${positions[i][0]}%;top:${positions[i][1]}%"><div class="node-orb">${icon(n.mode==='same_host'?'monitor':'server')}<span class="node-pulse"></span></div>${esc(n.name)}<small>${n.mode==='same_host'?'同机进程':'远程终端'} · ${ms(n.rtt_ms)}</small></div>`).join('')}</div></div><div class="topology-legend"><span>在线节点</span><span>任务执行中</span><span>HTTP 应用层连接</span></div></section>`;
+ const allOnline=state.nodes.filter(n=>n.online),online=allOnline.slice(0,4),positions=[[18,25],[82,25],[18,77],[82,77]];
+ return `<section class="panel"><div class="panel-head"><div><h2>算力协同网络 <small>COMPUTE NETWORK</small></h2><div class="panel-sub">节点能力、网络状态与任务时限协同决策</div></div><span class="badge"><i></i>${allOnline.length} 个节点在线</span></div>${allOnline.length>4?`<div class="topology-more">图中展示 4 个节点，<a href="#nodes">查看全部 ${allOnline.length} 个 ↗</a></div>`:''}<div class="topology"><div class="network"><svg class="network-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${positions.slice(0,online.length).map(([x,y])=>`<path d="M50 50 C50 ${y},${x} 50,${x} ${y}"/>`).join('')}</svg><div class="network-node center"><div class="node-orb">${icon('nodes')}</div>协调服务<small>联合调度 · 租约恢复</small></div>${online.map((n,i)=>`<div data-key="network-${esc(n.id)}" class="network-node ${n.busy_task?'busy':''}" style="left:${positions[i][0]}%;top:${positions[i][1]}%"><div class="node-orb">${icon(n.mode==='same_host'?'monitor':'server')}<span class="node-pulse"></span></div>${esc(n.name)}<small>${n.mode==='same_host'?'同机进程':'远程终端'} · ${ms(n.rtt_ms)}</small></div>`).join('')}</div></div><div class="topology-legend"><span>在线节点</span><span>任务执行中</span><span>HTTP 应用层连接</span></div></section>`;
 }
 function taskRows(tasks) {
- return tasks.map(t=>`<tr data-key="task-${esc(t.id)}"><td><div class="task-name"><span class="task-glyph">${icon('layers')}</span><div>${esc(t.name)}<div class="mono">${esc(t.id)}</div></div></div></td><td>${esc(policies[t.policy])}</td><td>${esc(state.nodes.find(n=>n.id===t.worker_id)?.name||'等待分配')}</td><td><span class="status ${t.status}">${labels[t.status]}</span></td><td>${ms(t.latency_ms)}</td><td><button class="row-button" data-detail="${esc(t.id)}">查看 ↗</button>${['queued','running'].includes(t.status)?` <button class="row-button inline-gap" data-cancel="${esc(t.id)}">取消</button>`:''}</td></tr>`).join('');
+ return tasks.map(t=>`<tr data-key="task-${esc(t.id)}"><td><div class="task-name"><span class="task-glyph">${icon('layers')}</span><div>${esc(t.name)}<div class="mono">${esc(t.id)}</div></div></div></td><td>${esc(policies[t.policy])}</td><td>${esc(state.nodes.find(n=>n.id===t.worker_id)?.name||t.worker_id||(['queued','running'].includes(t.status)?'等待分配':'未分配'))}</td><td><span class="status ${t.status}">${labels[t.status]}</span></td><td>${ms(t.latency_ms)}</td><td><button class="row-button" data-detail="${esc(t.id)}">查看 ↗</button>${['queued','running'].includes(t.status)?` <button class="row-button inline-gap" data-cancel="${esc(t.id)}">取消</button>`:''}</td></tr>`).join('');
 }
 function taskTable(tasks, title='最近任务', all=false) {
- return `<section class="panel table-panel"><div class="panel-head"><h2>${title} <small>RECENT TASKS</small></h2><div class="table-head-actions"><span class="badge">${all?`显示 ${tasks.length} 项`:'实时更新'}</span>${!all?'<a class="text-link" href="#tasks">全部任务 ↗</a>':''}</div></div><div class="table-wrapper"><table><thead><tr><th>任务名称 / ID</th><th>调度策略</th><th>执行节点</th><th>状态</th><th>完成时延</th><th>操作</th></tr></thead><tbody>${taskRows(tasks)}</tbody></table>${tasks.length?'':`<div class="empty">还没有任务记录<br>创建任务或运行一组真实执行的合成事件。</div>`}</div></section>`;
+ return `<section class="panel table-panel"><div class="panel-head"><h2>${title} <small>RECENT TASKS</small></h2><div class="table-head-actions"><span class="badge">${all?`显示 ${tasks.length} 项`:'实时更新'}</span>${!all?'<a class="text-link" href="#tasks">全部任务 ↗</a>':''}</div></div><div class="table-wrapper"><table><thead><tr><th>任务名称 / ID</th><th>调度策略</th><th>执行节点</th><th>状态</th><th>完成时延</th><th>操作</th></tr></thead><tbody>${taskRows(tasks)}</tbody></table>${tasks.length?'':emptyTasks(all)}</div></section>`;
 }
 function overview() {
  const online=state.nodes.filter(n=>n.online),busy=online.filter(n=>n.busy_task).length;
@@ -297,12 +320,21 @@ function notice() { return `<div class="notice">${icon('info')}<span>${state.mea
 function nodesPage() {
  return heading('算力节点','连接身边的设备，观察每个执行节点的可用状态。','CONNECTED EXECUTION NODES')+metrics()+`<section class="node-grid">${state.nodes.map(n=>`<article class="panel node-card" data-key="node-${esc(n.id)}"><div class="node-header"><span class="metric-icon">${icon(n.mode==='same_host'?'monitor':'server')}</span><div><h3>${esc(n.name)}</h3><p>${esc(n.id)} · ${n.mode==='same_host'?'同机进程':'远程接入'}</p></div></div><div class="node-details"><div><span>当前状态</span>${badge(n)}</div><div><span>主机 / 来源</span><b>${esc(n.host)} / ${esc(n.peer)}</b></div><div><span>HTTP 往返耗时</span><b>${ms(n.rtt_ms)}</b></div><div><span>单位耗时估计</span><b>${ms(n.ms_per_unit)}</b></div><div><span>配置带宽（非测量）</span><b>${fmt(n.bandwidth_mbps)} Mbps</b></div><div><span>累计完成</span><b>${fmt(n.completed)} 项</b></div><div><span>管理员可信设置</span><b>${n.trusted?'可信':'未设为可信'}</b></div></div><div class="node-buttons"><button class="button secondary mini" data-node="${esc(n.id)}" data-drain="${!n.draining}">${n.draining?'恢复接收任务':'暂停接收任务'}</button><button class="button secondary mini" data-trust="${esc(n.id)}" data-value="${!n.trusted}">${n.trusted?'撤销可信设置':'设为可信'}</button></div></article>`).join('')||'<div class="panel empty">暂无节点。使用一键启动脚本，或按部署说明连接执行端。</div>'}</section>`+notice()+`<div class="notice">${icon('shield')}<span>“可信”是管理员对节点的部署设置，不代表硬件证明、加密存储或可信执行环境。远程节点默认不可信。</span></div>`;
 }
+function emptyTasks(all) {
+ const filtered = all && (taskSearch.trim() || taskFilter !== 'all');
+ return `<div class="empty task-empty"><span class="empty-symbol">${icon(filtered?'layers':'plus')}</span><h3>${filtered?'没有符合条件的任务':'从第一个任务开始'}</h3><p>${filtered?'试试其他名称、ID 或任务状态。':'输入几行巡检文本，系统会分配节点并返回分类结果。'}</p><button class="button secondary" data-action="${filtered?'reset-filters':'create'}">${filtered?'清除筛选':'创建第一个任务'}</button></div>`;
+}
 function tasksPage() {
- const tasks=state.tasks.filter(t=>(taskFilter==='all'||t.status===taskFilter)&&(!taskSearch||`${t.name} ${t.id}`.toLowerCase().includes(taskSearch.toLowerCase())));
- return heading('任务中心','每一次提交、调度与完成，都有可以回溯的执行记录。','TASK ORCHESTRATION')+`<div class="filters"><input id="task-search" aria-label="搜索任务" placeholder="搜索任务名称或 ID" value="${esc(taskSearch)}"><select id="task-filter" aria-label="筛选任务状态"><option value="all">全部状态</option>${Object.entries(labels).map(([s,l])=>`<option value="${s}" ${s===taskFilter?'selected':''}>${l}</option>`).join('')}</select><button class="button secondary" data-action="demo">运行演示任务</button></div>`+taskTable(tasks,'任务记录',true)+`<p class="fine-label">页面显示最近 200 条任务；导出记录包含全部任务。时延使用协调端时钟，避免跨机时钟偏差。</p>`+notice();
+ const query=taskSearch.trim().toLowerCase();
+ const tasks=state.tasks.filter(t=>(taskFilter==='all'||t.status===taskFilter)&&(!query||`${t.name} ${t.id}`.toLowerCase().includes(query)));
+ tasks.sort((a,b)=>taskSort==='oldest'?a.created_at-b.created_at:taskSort==='latency'?(b.latency_ms??-1)-(a.latency_ms??-1)||b.created_at-a.created_at:b.created_at-a.created_at);
+ const chips=[['all','全部'],['running','执行中'],['queued','待调度'],['completed','已完成'],['failed','执行失败'],['cancelled','已取消']];
+ return heading('任务中心','每一次提交、调度与完成，都有可以回溯的执行记录。','TASK ORCHESTRATION')+
+ `<section class="task-tools" aria-label="任务筛选"><div class="filter-chips" aria-label="按状态快速筛选">${chips.map(([value,label])=>`<button type="button" class="filter-chip ${taskFilter===value?'active':''}" data-filter="${value}" aria-pressed="${taskFilter===value}">${label}<b>${value==='all'?state.tasks.length:state.tasks.filter(t=>t.status===value).length}</b></button>`).join('')}</div><div class="filters"><input id="task-search" type="search" aria-label="搜索任务" placeholder="搜索任务名称或 ID" value="${esc(taskSearch)}"><select id="task-filter" aria-label="筛选任务状态"><option value="all">全部状态</option>${Object.entries(labels).map(([s,l])=>`<option value="${s}" ${s===taskFilter?'selected':''}>${l}</option>`).join('')}</select><select id="task-sort" aria-label="任务排序">${[['newest','最新提交优先'],['oldest','最早提交优先'],['latency','完成时延从高到低']].map(([v,l])=>`<option value="${v}" ${taskSort===v?'selected':''}>${l}</option>`).join('')}</select><button class="button secondary" data-action="demo">运行演示任务</button></div><div class="filter-summary"><span>最近 ${state.tasks.length} 条记录中，符合条件 ${tasks.length} 条</span>${taskSearch.trim()||taskFilter!=='all'?'<button class="text-button" data-action="reset-filters">清除筛选</button>':''}</div></section>`+
+ taskTable(tasks,'任务记录',true)+`<p class="fine-label">筛选与排序仅针对最近 200 条任务；“导出记录”包含全部任务。时延使用协调端时钟，避免跨机时钟偏差。</p>`+notice();
 }
 function experimentPage() {
- if(!simulation?.available) return heading('对比实验','在相同输入与约束下，对比调度策略的适用范围。','REPRODUCIBLE EXPERIMENTS',false)+`<section class="panel empty">尚未加载实验结果。<br>在项目目录运行 <code>python experiments.py</code><br><button class="button secondary" data-action="experiments">加载结果</button></section>`;
+ if(!simulation?.available) return heading('对比实验','在相同输入与约束下，对比调度策略的适用范围。','REPRODUCIBLE EXPERIMENTS',false)+`<section class="panel empty">${experimentsLoading?'正在加载实验结果…':experimentsError?esc(experimentsError):'尚未生成实验结果。<br>在项目目录运行 <code>python experiments.py</code>'}<br><button class="button secondary" data-action="experiments" ${experimentsLoading?'disabled':''}>${experimentsError?'重新加载':'加载结果'}</button></section>`;
  const groups=simulation.groups.filter(g=>g.scenario===scenario), names={normal:'正常网络',congested:'受限带宽',burst:'任务突发'};
  return heading('对比实验','复现输入，保留原始记录，清楚呈现调度策略的适用范围。','REPRODUCIBLE EXPERIMENTS',false)+`<section class="panel experiment-intro"><div><h2>四种策略，同一份任务序列</h2><p>${simulation.seeds} 个随机种子 × ${simulation.tasks_per_seed} 项任务 × 4 种策略 × 3 类条件</p></div><span class="badge warn">离散事件仿真 · 非实测</span></section><div class="scenario-tabs">${Object.entries(names).map(([k,v])=>`<button class="${k===scenario?'active':''}" data-scenario="${k}">${v}</button>`).join('')}</div><section class="panel chart-panel"><h2>按时完成率</h2><p class="muted">当前条件：${names[scenario]}。各随机种子完成率的平均值，全部任务计入分母。</p>${groups.map(g=>`<div class="bar-row ${g.policy==='smart'?'smart':''}"><span>${esc(policies[g.policy] || g.label)}</span><div class="bar-track"><div class="bar-fill" style="--bar:${g.deadline_rate.mean*100}%"></div></div><span class="bar-value">${percent(g.deadline_rate.mean)}</span></div>`).join('')}</section><section class="panel"><div class="panel-head"><h2>指标与不确定性</h2><span class="badge">${simulation.seeds} 次独立任务序列</span></div><div class="table-wrapper"><table><thead><tr><th>策略</th><th>按时率</th><th>约 95% 区间</th><th>平均时延</th><th>各次 P95 均值</th></tr></thead><tbody>${groups.map(g=>`<tr><td>${esc(policies[g.policy] || g.label)}</td><td>${percent(g.deadline_rate.mean)}</td><td>${g.deadline_rate.ci95.map(percent).join(' ～ ')}</td><td>${ms(g.mean_ms.mean)}</td><td>${ms(g.p95_ms.mean)}</td></tr>`).join('')}</tbody></table></div></section><div class="notice">${icon('info')}<span>网络 RTT、带宽和计算时间为假设参数。调度器获知名义服务时间与队列，结果可能优于实际部署。原始 CSV、随机种子与输入哈希保存在 results 目录；不据此推断实际 6G 性能。</span></div>`;
 }
@@ -312,6 +344,8 @@ function guidePage() {
 function render() {
  if (!state) return;
  InterfaceMotion.render($('#content'),({overview,nodes:nodesPage,tasks:tasksPage,experiments:experimentPage,guide:guidePage})[current](),current);
+ syncPending();
+ if ($('#create-dialog').open) updateFormHelp();
  $('#breadcrumb').textContent=titles[current];
  $('#node-count').textContent=state.nodes.filter(n=>n.online).length;
  document.querySelectorAll('[data-page]').forEach(a=>{ const active=a.dataset.page===current; a.classList.toggle('active',active); if(active) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
@@ -320,46 +354,182 @@ function setConnection(online) {
  const el=$('#connection'),label=online?'协调服务在线':'连接中断';
  if(el.textContent.trim()!==label) el.innerHTML='<i></i>'+label;
  el.classList.toggle('error',!online);
+ const banner=$('#connection-notice');
+ banner.hidden=online;
+ if (!online) {
+  const message=`${connectionError}${lastSyncAt?' 当前显示 '+new Date(lastSyncAt).toLocaleTimeString('zh-CN',{hour12:false})+' 更新的数据。':authRequired?' 请完成登录后继续。':' 请先启动项目中的 start.bat。'}`;
+  $('#connection-message').textContent=message;
+ }
+}
+async function loadExperiments() {
+ if(experimentsLoading) return;
+ experimentsLoading=true;experimentsError='';render();
+ try {simulation=await api('/api/experiments');}
+ catch(error){experimentsError=error.message;}
+ finally{experimentsLoading=false;render();}
 }
 async function refresh(force=false) {
  if(fetching||document.hidden&&!force) return;
  fetching=true;
- try { state=await api('/api/status'); setConnection(true); lastError=false; if(!simulation) simulation=await api('/api/experiments'); render(); }
- catch(error) { setConnection(false); if(!lastError&&state) toast(error.message); lastError=true; }
- finally { fetching=false; }
+ try {
+  state=await api('/api/status');lastSyncAt=Date.now();connectionError='';authRequired=false;setConnection(true);lastError=false;render();
+  if(current==='experiments'&&!simulation&&!experimentsError&&!experimentsLoading) void loadExperiments();
+  if($('#detail-dialog').open&&!detailLoading) void refreshDetail();
+ } catch(error) {
+  connectionError=error.message;authRequired=error.status===401;setConnection(false);
+  if(!state) $('#content').innerHTML=`<section class="panel connection-empty"><span class="empty-symbol">${icon('server')}</span><h1>${authRequired?'请登录工作空间':'暂时无法加载工作空间'}</h1><p>${authRequired?'输入协调端生成的接入令牌，登录后继续操作。':'确认协调服务已经启动，连接恢复后页面会自动更新。'}</p><button class="button primary" data-action="refresh">重新连接</button><a class="text-link" href="/guide" target="_blank" rel="noopener">查看启动说明 ↗</a></section>`;
+  lastError=true;
+ } finally {fetching=false;syncPending();}
+}
+function pendingKey(button) {
+ if(button.dataset.node) return 'node:'+button.dataset.node;
+ if(button.dataset.trust) return 'trust:'+button.dataset.trust;
+ if(button.dataset.cancel) return 'cancel:'+button.dataset.cancel;
+ if(button.dataset.detail) return 'detail:'+button.dataset.detail;
+ return ['demo','export','experiments','refresh','detail-refresh'].includes(button.dataset.action)?button.dataset.action:null;
+}
+function syncPending() {
+ document.querySelectorAll('button').forEach(button=>{
+  const key=pendingKey(button);
+  if(!key) return;
+  const busy=pending.has(key)||(key==='experiments'&&experimentsLoading);
+  button.disabled=busy;
+  if(busy) button.setAttribute('aria-busy','true'); else button.removeAttribute('aria-busy');
+ });
+}
+function queueAdvice(task) {
+ const online=state?.nodes.filter(n=>n.online)||[];
+ if(!online.length) return '还没有在线节点。请先启动执行端，任务会在可用节点接入后调度。';
+ if(!online.some(n=>!n.draining)) return '在线节点均已暂停接收任务。可在“算力节点”中恢复接收。';
+ if(task.privacy==='local_only'&&!online.some(n=>!n.draining&&n.trusted)) return '当前没有可接收任务的可信节点。请核实设备后，在“算力节点”中设置可信范围。';
+ return '正在等待符合任务条件的空闲节点。分配后，这里的执行状态会自动更新。';
+}
+const fullTime=value=>value?new Date(value*1000).toLocaleString('zh-CN',{hour12:false}):'—';
+function taskDetailHTML(t) {
+ const steps=[['已提交',t.created_at],['最近一次开始',t.started_at],[labels[t.status]||'执行结束',['completed','failed','cancelled'].includes(t.status)?t.finished_at:null]];
+ const statusMessage=t.status==='queued'?queueAdvice(t):t.status==='running'?'节点正在处理，完成后会自动显示分类结果。':t.status==='cancelled'?'任务已取消。运行中的计算可能仍在结束，后续结果不会记为完成。':t.status==='failed'?(t.error||'任务执行失败，请检查节点状态后重新创建任务。'):'已收到执行结果，可逐条查看下方分类。';
+ const terminal=['completed','failed','cancelled'].includes(t.status);
+ return `<div class="detail-title"><div><h3>${esc(t.name)}</h3><span class="mono">${esc(t.id)}</span></div><span class="status ${t.status}" aria-live="polite">${labels[t.status]}</span></div>
+ <ol class="task-timeline">${steps.map(([label,at],i)=>`<li class="${at?'done':''}"><span>${i===2&&!terminal?'等待结束':label}</span><time>${at?fullTime(at):'—'}</time></li>`).join('')}</ol>
+ <div class="task-guidance ${t.status==='failed'?'is-error':''}"><span>${esc(statusMessage)}</span>${t.status==='queued'?'<a href="#nodes" data-detail-nodes>查看节点 ↗</a>':''}</div>
+ ${detailError?`<p class="inline-error" role="status">详情更新中断：${esc(detailError)}</p>`:''}
+ <div class="detail-meta"><span>执行节点<b>${esc(state?.nodes.find(n=>n.id===t.worker_id)?.name||t.worker_id||'尚未分配')}</b></span><span>完成时延<b>${ms(t.latency_ms)}</b></span><span>调度策略<b>${esc(policies[t.policy])}</b></span><span>派发尝试<b>${t.attempts} 次</b></span><span>完成时限<b>${ms(t.deadline_ms)}${t.status==='completed'?(t.deadline_met?' · 按时完成':' · 已超时'):''}</b></span><span>计算耗时 / 附加负载<b>${ms(t.result?.compute_ms)} / ${ms(t.result?.load_ms)}</b></span></div>
+ ${t.result?.predictions?.map((p,i)=>`<div class="prediction" data-key="prediction-${i}"><div class="prediction-title"><b>${esc(p.label)}</b><span>模型分数 ${percent(p.confidence)}</span></div><p>${esc(p.text)}</p></div>`).join('')||`<div class="submitted-events"><h3>已提交的文本</h3><ol>${(t.payload?.events||[]).map(text=>`<li>${esc(text)}</li>`).join('')}</ol></div>`}
+ <div class="detail-toolbar"><span>${terminal?'执行已结束':'状态每 1.5 秒自动更新'}</span><button class="button secondary mini" data-action="detail-refresh">刷新详情</button></div><p class="form-note">合成文本训练的轻量模型。分数未经概率校准，所有结果均需人工复核。完整结果保存在本地 SQLite 数据库。</p>`;
+}
+async function refreshDetail(force=false) {
+ if(!activeTask||detailLoading||!$('#detail-dialog').open) return;
+ if(!force&&!detailError&&['completed','failed','cancelled'].includes(activeTask.status)) return;
+ const version=detailVersion,id=activeTask.id;
+ detailLoading=true;
+ try {
+  const task=await api('/api/tasks/'+encodeURIComponent(id));
+  if(version!==detailVersion||!$('#detail-dialog').open) return;
+  activeTask=task;detailError='';
+  InterfaceMotion.update($('#detail-content'),taskDetailHTML(task));syncPending();
+ } catch(error) {
+  if(version!==detailVersion||!$('#detail-dialog').open) return;
+  detailError=error.message;
+  if(activeTask.status) InterfaceMotion.update($('#detail-content'),taskDetailHTML(activeTask));
+  else $('#detail-content').innerHTML=`<div class="empty"><p>${esc(detailError)}</p><button class="button secondary" data-action="detail-refresh">重试加载详情</button></div>`;
+ } finally {if(version===detailVersion) detailLoading=false;}
 }
 async function detail(id) {
- const t=await api('/api/tasks/'+id);
- $('#detail-content').innerHTML=`<p class="muted">${esc(t.name)} <span class="mono">${esc(t.id)}</span></p><div class="detail-meta"><span>执行状态<b>${labels[t.status]}</b></span><span>完成时延<b>${ms(t.latency_ms)}</b></span><span>调度策略<b>${esc(policies[t.policy])}</b></span><span>派发尝试<b>${t.attempts} 次</b></span><span>计算耗时<b>${ms(t.result?.compute_ms)}</b></span><span>其中附加负载<b>${ms(t.result?.load_ms)}</b></span></div>${t.result?.predictions?.map(p=>`<div class="prediction"><div class="prediction-title"><b>${esc(p.label)}</b><span>模型分数 ${percent(p.confidence)}</span></div><p>${esc(p.text)}</p></div>`).join('')||`<p class="muted">${esc(t.error||'等待执行结果。')}</p>`}<p class="form-note">合成文本训练的轻量模型。分数未经概率校准，所有结果均需人工复核。完整结果保存在本地 SQLite 数据库。</p>`;
- $('#detail-dialog').showModal();
+ detailVersion++;detailLoading=false;detailError='';activeTask={id};
+ $('#detail-content').innerHTML='<div class="loading">正在读取任务详情…</div>';
+ if(!$('#detail-dialog').open) $('#detail-dialog').showModal();
+ await refreshDetail(true);
+}
+function updateFormHelp() {
+ const form=$('#task-form'),field=form.elements.events;
+ const lines=field.value.split('\n').map(x=>x.trim()).filter(Boolean);
+ const tooLong=lines.some(x=>Array.from(x).length>2000);
+ const error=lines.length>128?'最多支持 128 条，请减少后提交。':tooLong?'有一条文本超过 2000 字，请缩短后提交。':!lines.length?'请输入至少一条非空文本。':'';
+ field.setCustomValidity(error);
+ $('#event-count').textContent=`已输入 ${lines.length} / 128 条 · 每条最多 2000 字`;
+ $('#event-count').classList.toggle('is-error',lines.length>128||tooLong);
+ $('#fill-example').disabled=Boolean(field.value.trim());
+ form.elements.name.setCustomValidity(form.elements.name.value.trim()?'':'请填写任务名称。');
+ const hint=$('#task-node-hint');
+ const eligible=state?.nodes.filter(n=>n.online&&!n.draining&&(form.elements.privacy.value==='any'||n.trusted))||[];
+ hint.textContent=eligible.length?`${eligible.length} 个节点可接收该范围的任务；提交后将排队分配。`:queueAdvice({privacy:form.elements.privacy.value});
+ hint.classList.toggle('is-warning',!eligible.length);
+ return lines;
+}
+function openCreate() {
+ $('#form-error').hidden=true;
+ updateFormHelp();$('#create-dialog').showModal();
 }
 document.addEventListener('click',async event=>{
+ const nodeLink=event.target.closest('[data-detail-nodes]');
+ if(nodeLink) $('#detail-dialog').close();
  const button=event.target.closest('button');
- if(!button) return;
+ if(!button||button.disabled) return;
+ const key=pendingKey(button);
+ if(key&&pending.has(key)) return;
+ if(key) {pending.add(key);syncPending();}
  try {
   const action=button.dataset.action;
-  if(action==='create') $('#create-dialog').showModal();
+  if(action==='create') openCreate();
   if(action==='close-dialog') $('#create-dialog').close();
   if(action==='close-detail') $('#detail-dialog').close();
-  if(action==='export') { const response=await fetch('/api/tasks/export.csv'); if(!response.ok) throw new Error('记录导出失败，请检查登录状态'); const url=URL.createObjectURL(await response.blob()); const a=document.createElement('a');a.href=url;a.download='任务调度记录.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);toast('任务记录已导出'); }
-  if(action==='demo') { button.disabled=true; await api('/api/demo',{count:12,policy:'smart'});toast('12 项合成事件已提交，正在真实执行');await refresh(true); }
-  if(action==='experiments') {simulation=await api('/api/experiments');render();}
+  if(action==='refresh') await refresh(true);
+  if(action==='detail-refresh') await refreshDetail(true);
+  if(action==='reset-filters') {taskSearch='';taskFilter='all';render();$('#task-search')?.focus();}
+  if(action==='example') {
+   const field=$('#task-form').elements.events;
+   if(!field.value.trim()) field.value='消防出口被纸箱堵塞\n配电箱发现浓烟和明火\n办公室设备运行正常';
+   updateFormHelp();field.focus();
+  }
+  if(action==='export') {
+   const blob=await request('/api/tasks/export.csv',undefined,true),url=URL.createObjectURL(blob),a=document.createElement('a');
+   a.href=url;a.download='任务调度记录.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);toast('全部任务记录已导出');
+  }
+  if(action==='demo') {await api('/api/demo',{count:12,policy:'smart'});toast('12 项合成事件已提交，正在真实执行');await refresh(true);}
+  if(action==='experiments') await loadExperiments();
   if(button.dataset.detail) await detail(button.dataset.detail);
   if(button.dataset.cancel) {await api('/api/tasks/'+button.dataset.cancel+'/cancel',{});toast('任务已取消');await refresh(true);}
   if(button.dataset.node) {await api('/api/nodes/'+button.dataset.node,{draining:button.dataset.drain==='true'});await refresh(true);toast('节点接收状态已更新');}
   if(button.dataset.trust) {await api('/api/nodes/'+button.dataset.trust,{trusted:button.dataset.value==='true'});await refresh(true);toast('节点可信范围已更新');}
   if(button.dataset.scenario) {scenario=button.dataset.scenario;render();}
- } catch(error) {toast(error.message);} finally {button.disabled=false;}
+  if(button.dataset.filter) {taskFilter=button.dataset.filter;render();}
+ } catch(error) {toast(error.message);}
+ finally {if(key) {pending.delete(key);syncPending();}}
 });
+$('#detail-dialog').addEventListener('close',()=>{detailVersion++;activeTask=null;detailLoading=false;});
+$('#task-form').addEventListener('input',updateFormHelp);
+$('#task-form').addEventListener('change',updateFormHelp);
 $('#task-form').addEventListener('submit',async event=>{
- event.preventDefault(); const f=new FormData(event.target), button=$('button[type="submit"]',event.target);button.disabled=true;
- try { await api('/api/tasks',{name:f.get('name'),events:f.get('events').split('\n').map(x=>x.trim()).filter(Boolean),policy:f.get('policy'),privacy:f.get('privacy'),deadline_ms:Number(f.get('deadline_ms')),compute_loops:Number(f.get('compute_loops'))});$('#create-dialog').close();toast('任务已提交');await refresh(true); }
- catch(error) {toast(error.message);}finally{button.disabled=false;}
+ event.preventDefault();
+ if(pending.has('submit')) return;
+ const events=updateFormHelp();if(!event.target.reportValidity()) return;
+ const f=new FormData(event.target),button=$('button[type="submit"]',event.target);
+ pending.add('submit');button.disabled=true;button.setAttribute('aria-busy','true');button.textContent='正在提交…';$('#form-error').hidden=true;
+ try {
+  await api('/api/tasks',{name:f.get('name').trim(),events,policy:f.get('policy'),privacy:f.get('privacy'),deadline_ms:Number(f.get('deadline_ms')),compute_loops:Number(f.get('compute_loops'))});
+  $('#create-dialog').close();event.target.reset();updateFormHelp();toast('任务已提交，可在任务中心查看执行结果');await refresh(true);
+ } catch(error) {$('#form-error').textContent=error.message;$('#form-error').hidden=false;}
+ finally {pending.delete('submit');button.disabled=false;button.removeAttribute('aria-busy');button.textContent='提交任务 ↗';}
 });
-$('#login-form').addEventListener('submit',async event=>{event.preventDefault();try{await api('/api/login',{token:new FormData(event.target).get('token')});$('#login-dialog').close();event.target.reset();await refresh(true);}catch(error){toast(error.message);}});
-document.addEventListener('input',event=>{if(event.target.id==='task-search'){taskSearch=event.target.value;render();}});
-document.addEventListener('change',event=>{if(event.target.id==='task-filter'){taskFilter=event.target.value;render();}});
-function navigate() { current=location.hash.slice(1) in titles?location.hash.slice(1):'overview';render();window.scrollTo({top:0}); }
+$('#login-form').addEventListener('submit',async event=>{
+ event.preventDefault();if(pending.has('login')) return;
+ const button=$('button[type="submit"]',event.target);pending.add('login');button.disabled=true;
+ try {await api('/api/login',{token:new FormData(event.target).get('token')});$('#login-dialog').close();event.target.reset();await refresh(true);}
+ catch(error){toast(error.message);}
+ finally{pending.delete('login');button.disabled=false;}
+});
+document.addEventListener('input',event=>{if(event.target.id==='task-search'&&!event.isComposing){taskSearch=event.target.value;render();}});
+document.addEventListener('compositionend',event=>{if(event.target.id==='task-search'){taskSearch=event.target.value;render();}});
+document.addEventListener('change',event=>{
+ if(event.target.id==='task-filter'){taskFilter=event.target.value;render();}
+ if(event.target.id==='task-sort'){taskSort=event.target.value;render();}
+});
+function navigate() {
+ current=location.hash.slice(1) in titles?location.hash.slice(1):'overview';render();window.scrollTo({top:0});
+ if(current==='experiments'&&state&&!simulation&&!experimentsLoading) void loadExperiments();
+}
 window.addEventListener('hashchange',navigate);
+window.addEventListener('online',()=>void refresh(true));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden) void refresh(true);});
 setInterval(()=>$('#clock').textContent=new Date().toLocaleDateString('zh-CN',{month:'2-digit',day:'2-digit'})+' · '+new Date().toLocaleTimeString('zh-CN',{hour:'2-digit',minute:'2-digit',hour12:false}),1000);
 navigate();refresh(true);setInterval(refresh,1500);

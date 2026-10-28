@@ -240,7 +240,7 @@
     {
       "path": "results/motion_review.json",
       "bytes": 1414,
-      "sha256": "a329ddccd6925db8936ae225599410cf5d658918372dd13aa15a7d5e93d4677d"
+      "sha256": "db88971624bbab05b7bacf9d53081288c9a30315ae18bdd059ae59f842ba1962"
     },
     {
       "path": "results/package_checks.json",
@@ -254,38 +254,43 @@
     },
     {
       "path": "results/screenshots/experiments.png",
-      "bytes": 140376,
-      "sha256": "76e1063dacc4b603478c823ebeb22ac360727e0c0d01ec8780516a4867fcbfff"
+      "bytes": 140295,
+      "sha256": "82be56bcd61377a17a5f7d834dc8489b069af6204d61985245c013017f3f8660"
     },
     {
       "path": "results/screenshots/interface-preview.png",
-      "bytes": 231141,
-      "sha256": "69c321d52571350eb5d0ab87d6127d70535b1e5dd49ea219933ab1fdcc76c357"
+      "bytes": 230995,
+      "sha256": "7e293ad20fc07c85d911a05e65917ea628e41b25f72c1c792372047780145ece"
     },
     {
       "path": "results/screenshots/mobile.png",
-      "bytes": 193300,
-      "sha256": "e71a3a2e5116c322ba2815c39c8cb6bb01b9b42cfeb59fed3ac0af640b653d81"
+      "bytes": 193422,
+      "sha256": "d3b98f881db1aed1fd8cfa5d4b0ee83e5db2f1dac6858e2ba9461fd80e4dc2b2"
     },
     {
       "path": "results/screenshots/nodes.png",
-      "bytes": 160582,
-      "sha256": "caf96e1add6077a3d3aa19b3d1e73df2c1b464fca642e56e94fba1a40bfa1fdf"
+      "bytes": 160921,
+      "sha256": "832b7fbbdd776acccbe58296d061307db2f023ed4ef448a57e8db553affcaa65"
     },
     {
       "path": "results/screenshots/overview.png",
-      "bytes": 271971,
-      "sha256": "11db992245ee0083590d973a4386750a41a836c1dfbeffb4796c37ed096ef32e"
+      "bytes": 277988,
+      "sha256": "75f489840e8ccee7c3c20bb3b7fe94f6382de1608d0d702e6a65b501f7993f07"
     },
     {
       "path": "results/screenshots/task-detail.png",
-      "bytes": 186360,
-      "sha256": "72f8c7ce1d5c346fc4b8f60bfe803ae0250a326bb97a6b17db5d3857c92ef3d8"
+      "bytes": 219317,
+      "sha256": "c30bae58551e822b40fa397b1df25aa039d3bb21f395db5c7b0d7c8e5e99ae8f"
+    },
+    {
+      "path": "results/screenshots/tasks.png",
+      "bytes": 190532,
+      "sha256": "919d46d7c23a176a7c0ca0edfe8242c4283f32ba8fca021401c2bb4061a81c36"
     },
     {
       "path": "results/screenshots/workbench-wide.png",
-      "bytes": 140952,
-      "sha256": "5afea78db8c782228141e96b0a4f6d590d924f70956fcf5b155988374e3471e0"
+      "bytes": 145370,
+      "sha256": "ba4a1bd3bebcc7d5e13840231928b01714107a5d047e8c751e66ac73efc2ce0f"
     },
     {
       "path": "results/simulation_raw.csv",
@@ -314,8 +319,8 @@
     },
     {
       "path": "results/ui_export.csv",
-      "bytes": 318,
-      "sha256": "fef216888a0eb850d016b9f3ad591000f876945f30715a33fe32dad61c051eef"
+      "bytes": 319,
+      "sha256": "7faabd52488d8b8ff01766a2010f12ecb7cb682c5921291933626b7ce06c3e06"
     },
     {
       "path": "results/unittest.txt",
@@ -326,6 +331,11 @@
       "path": "results/video_record.json",
       "bytes": 3214,
       "sha256": "4a561f97b332c69bb949fce734e8281e2e12240784a74036eb4521ce90502638"
+    },
+    {
+      "path": "results/workflow_review.json",
+      "bytes": 1437,
+      "sha256": "6c079b4191b597b93de684b1118b09c5a30ccd52791b1490b53b6e53d667afe4"
     },
     {
       "path": "start.bat",
@@ -438,9 +448,14 @@
       "sha256": "ab3c25850c4ce9d2688810eaa27d03d36c889ca880d9747c73f8645cf4354e0e"
     },
     {
+      "path": "tools/workflow_qa.py",
+      "bytes": 14984,
+      "sha256": "b46bf4bf82ee027ceecf349a31a6c6393fc7b488231c9c687810e5d7c58fba8e"
+    },
+    {
       "path": "web/app.js",
-      "bytes": 36904,
-      "sha256": "f872cfb98959ebbb44757f3617825460b4b2c38e7d05c34568fc7abd06cda3c1"
+      "bytes": 49095,
+      "sha256": "5a9370e13495fc8650db00102833ae8888d6820e91e773a769ac32e32a618ae4"
     },
     {
       "path": "web/favicon.svg",
@@ -449,18 +464,18 @@
     },
     {
       "path": "web/guide.html",
-      "bytes": 2246,
-      "sha256": "fd53055e224c19ccb575a783a38d4d2d84d358e10814868f8539c22c4c18318c"
+      "bytes": 2247,
+      "sha256": "413b6d92d4cf4dbc90419f69e330f2e51ba3388bfbb6e5964717dd5d26e1f311"
     },
     {
       "path": "web/index.html",
-      "bytes": 5461,
-      "sha256": "626025548abe81040416e4aab6d001b8081e18ea0b2c2e0cff6892748ef0a556"
+      "bytes": 6170,
+      "sha256": "566fc06baa166881b9524883b0c0a1be4836a6fd03b0028efabd6d2f0cd3bfb8"
     },
     {
       "path": "web/style.css",
-      "bytes": 52664,
-      "sha256": "c2bb123cd803435466ca9f3b24154c5c9462d9f19b7b000ddfeb6b74cec29728"
+      "bytes": 58959,
+      "sha256": "e981fbcbe0b8c38f3be6dfb75d25ac4816124fb5191a288852d0641695057602"
     },
     {
       "path": "操作手册.html",

@@ -2389,3 +2389,80 @@ html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="
 @media (prefers-reduced-motion:reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Clear task flows, recoverable connection states and readable detail views. */
+[hidden] { display: none !important; }
+.connection-notice { margin: 20px 36px 0; padding: 15px 18px; display: flex; gap: 18px; align-items: center; justify-content: space-between; border: 1px solid #e9d7b7; background: #fffbf3; border-radius: 10px; color: #725321; font-size: 14px; line-height: 1.8; }
+.connection-notice .button { flex-shrink: 0; }
+.connection-empty { display: flex; align-items: center; flex-direction: column; gap: 16px; text-align: center; padding: 55px 24px; }
+.connection-empty h1 { margin: 0; font-size: 25px; }
+.connection-empty p { font-size: 15px; line-height: 1.9; color: #64748c; }
+.connection-empty .text-link { margin-top: 5px; }
+.task-tools { margin: 26px 0 20px; }
+.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-chip { display: inline-flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid #e0e7f2; border-radius: 9px; background: #fff; color: #5d6d84; font-size: 14px; min-height: 43px; transition: background .2s,border-color .2s,color .2s; }
+.filter-chip b { background: #f0f3f8; border-radius: 5px; padding: 1px 7px; font-size: 12px; min-width: 24px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.filter-chip:hover { border-color: #b1c4eb; color: #305fc8; }
+.filter-chip.active { color: #2856c4; border-color: #9fb9f9; background: #edf3ff; }
+.filter-chip.active b { background: #dce7ff; }
+.filters { margin: 16px 0 10px; flex-wrap: wrap; }
+.filters input { flex: 1 1 240px; min-width: 180px; width: auto; }
+.filters select { min-width: 145px; max-width: 100%; }
+.filters .button { min-height: 44px; }
+.filter-summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 32px; font-size: 13px; color: #6b7a91; }
+.text-button { padding: 4px 0; border: 0; background: transparent; font-size: 14px; color: #3568d8; }
+.text-button:hover { color: #234ba6; text-decoration: underline; text-underline-offset: 4px; }
+.text-button:disabled { color: #8b98ae; cursor: default; text-decoration: none; }
+.task-empty { padding: 40px 22px; text-align: center; }
+.empty-symbol { display: inline-grid; place-items: center; background: #eff4ff; color: #5c82c9; width: 46px; height: 46px; border-radius: 13px; }
+.empty-symbol svg { width: 23px; height: 23px; }
+.task-empty h3 { color: #394e6b; font-size: 17px; margin: 16px 0 8px; }
+.task-empty p { font-size: 14px; line-height: 1.8; margin: 0 0 20px; }
+.task-empty .button { margin: auto; }
+.topology-more { padding: 0 23px 12px; color: #667a99; font-size: 13px; }
+.topology-more a { color: #3568d8; }
+.event-helper { margin-top: -9px; display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 13px; line-height: 1.7; color: #64748c; }
+.event-helper button { flex-shrink: 0; }
+.example-note { margin: 5px 0 20px; color: #76849a; font-size: 12px; line-height: 1.8; }
+.task-node-hint, .task-guidance { padding: 12px 15px; color: #456896; background: #f2f6fd; border: 1px solid #e1e9f5; border-radius: 8px; font-size: 13px; line-height: 1.9; }
+.task-node-hint.is-warning { color: #806136; background: #fffbf4; border-color: #eee2cd; }
+.inline-error, .is-error { color: #a84245; }
+.inline-error { background: #fff5f5; border: 1px solid #f2d8d9; padding: 12px 15px; border-radius: 8px; font-size: 14px; line-height: 1.9; overflow-wrap: anywhere; }
+button[aria-busy="true"] { cursor: progress; opacity: .65; }
+.detail-title { display: flex; gap: 18px; justify-content: space-between; align-items: flex-start; margin: 22px 0; }
+.detail-title > div { min-width: 0; }
+.detail-title h3 { margin: 0 0 8px; font-size: 17px; overflow-wrap: anywhere; }
+.detail-title .status { white-space: nowrap; margin-top: 1px; flex-shrink: 0; }
+.task-timeline { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); list-style: none; padding: 0; margin: 22px 0; }
+.task-timeline li { position: relative; border-top: 2px solid #e6ebf3; padding: 16px 10px 0 0; font-size: 13px; color: #8a97aa; }
+.task-timeline li::before { content: ''; position: absolute; width: 8px; height: 8px; border: 3px solid white; border-radius: 50%; background: #d7dfec; top: -8px; left: 0; }
+.task-timeline li.done { border-top-color: #b8cef8; color: #3c629f; }
+.task-timeline li.done::before { background: #628cf1; box-shadow: 0 0 0 1px #c0d2f5; }
+.task-timeline time { display: block; margin-top: 8px; font-size: 12px; line-height: 1.7; color: #73839a; overflow-wrap: anywhere; }
+.task-guidance a { display: inline-block; margin-left: 12px; color: #3568d8; white-space: nowrap; }
+.detail-meta b, .prediction p { overflow-wrap: anywhere; }
+.submitted-events { border-top: 1px solid #e5ebf4; padding-top: 15px; }
+.submitted-events h3 { font-size: 15px; }
+.submitted-events ol { padding-left: 22px; color: #65748b; font-size: 14px; line-height: 1.9; }
+.submitted-events li { margin: 6px 0; overflow-wrap: anywhere; }
+.detail-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid #e5ebf4; padding-top: 18px; margin-top: 15px; color: #73839a; font-size: 13px; }
+@media(max-width:700px) {
+ .connection-notice { margin: 14px 16px 0; padding: 14px; align-items: flex-start; flex-direction: column; gap: 10px; font-size: 13px; }
+ .connection-empty h1 { font-size: 21px; }
+ .filter-chips { gap: 7px; }
+ .filter-chip { padding: 8px 10px; gap: 8px; font-size: 13px; flex: 1 1 calc(33% - 7px); justify-content: space-between; }
+ .filters { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 10px; }
+ .filters input { grid-column: 1/-1; }
+ .filters input, .filters select { min-width: 0; width: 100%; font-size: 16px; padding-left: 10px; padding-right: 10px; }
+ .filters .button { grid-column: 1/-1; justify-content: center; }
+ .filter-summary { font-size: 12px; flex-wrap: wrap; }
+ .event-helper { align-items: flex-start; font-size: 12px; gap: 10px; }
+ .event-helper .text-button { font-size: 13px; }
+ .task-timeline { gap: 0; }
+ .task-timeline li { font-size: 12px; padding-right: 8px; }
+ .task-timeline time { font-size: 12px; }
+ .detail-title { gap: 12px; }
+ .detail-title h3 { font-size: 16px; }
+ .detail-toolbar { font-size: 12px; }
+ .task-guidance a { margin-left: 0; display: block; }
+}
