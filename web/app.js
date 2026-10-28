@@ -1,4 +1,252 @@
 'use strict';
+
+/* Keep live UI elements stable, so polling does not restart motion or interrupt input. */
+const InterfaceMotion = (() => {
+  const root = document.documentElement;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
+  const toggle = document.getElementById('motion-toggle');
+  const finite = new Set();
+  const numbers = new Map();
+  const seen = new WeakSet();
+  const statuses = new WeakMap();
+  let preference = 'on', enabled = true, route = null, pointerFrame = 0, pointer = null;
+  try { preference = localStorage.getItem('task-scheduler-motion') || 'on'; } catch (_) {}
+
+  function animate(element, frames, options) {
+    if (!enabled || document.hidden || !element.animate) return null;
+    const animation = element.animate(frames, options);
+    finite.add(animation);
+    animation.finished.then(() => finite.delete(animation), () => finite.delete(animation));
+    return animation;
+  }
+
+  function numberText(value, kind) {
+    if (!Number.isFinite(value)) return '—';
+    if (kind === 'percent') return value.toFixed(1) + '%';
+    return value.toLocaleString('zh-CN', {maximumFractionDigits: kind === 'integer' ? 0 : 1});
+  }
+
+  function finishNumbers() {
+    for (const [element, item] of numbers) {
+      cancelAnimationFrame(item.frame);
+      element.textContent = numberText(item.target, item.kind);
+      item.value = item.target;
+      item.frame = 0;
+      if (!element.isConnected) numbers.delete(element);
+    }
+  }
+
+  function syncPreference() {
+    enabled = preference !== 'off' && !reduced.matches;
+    root.dataset.motion = enabled ? 'on' : 'off';
+    root.dataset.motionPaused = document.hidden ? 'true' : 'false';
+    if (toggle) {
+      toggle.setAttribute('aria-pressed', String(enabled));
+      toggle.setAttribute('aria-label', enabled ? '关闭页面动效' : '开启页面动效');
+      toggle.title = reduced.matches ? '已跟随系统减少动态效果设置' : (enabled ? '关闭页面动效' : '开启页面动效');
+      toggle.disabled = reduced.matches;
+      toggle.querySelector('.motion-label').textContent = enabled ? '动效开' : '动效关';
+    }
+    if (!enabled || document.hidden) {
+      for (const animation of finite) animation.cancel();
+      finite.clear();
+      finishNumbers();
+      document.querySelectorAll('.fx-ripple').forEach(element => element.remove());
+    }
+  }
+
+  if (toggle) toggle.addEventListener('click', event => {
+    event.stopPropagation();
+    preference = enabled ? 'off' : 'on';
+    try { localStorage.setItem('task-scheduler-motion', preference); } catch (_) {}
+    syncPreference();
+  });
+  reduced.addEventListener('change', syncPreference);
+  document.addEventListener('visibilitychange', syncPreference);
+  syncPreference();
+
+  const key = node => node.nodeType === 1 ? (node.getAttribute('data-key') || node.id || '') : '';
+  const sameType = (a, b) => a.nodeType === b.nodeType && (a.nodeType !== 1 || a.tagName === b.tagName);
+
+  function patchAttributes(element, template) {
+    for (const attr of [...element.attributes]) {
+      if (attr.name !== 'style' && !template.hasAttribute(attr.name)) element.removeAttribute(attr.name);
+    }
+    for (const attr of template.attributes) {
+      if (attr.name !== 'style' && element.getAttribute(attr.name) !== attr.value) element.setAttribute(attr.name, attr.value);
+    }
+    // Pointer lighting uses local properties; preserve them during a data refresh.
+    for (const name of [...element.style]) {
+      if (!name.startsWith('--fx-') && !template.style.getPropertyValue(name)) element.style.removeProperty(name);
+    }
+    for (const name of [...template.style]) {
+      const value = template.style.getPropertyValue(name);
+      if (element.style.getPropertyValue(name) !== value) element.style.setProperty(name, value, template.style.getPropertyPriority(name));
+    }
+  }
+
+  function patchNode(element, template) {
+    if (element.nodeType === 3 || element.nodeType === 8) {
+      if (element.nodeValue !== template.nodeValue) element.nodeValue = template.nodeValue;
+      return;
+    }
+    patchAttributes(element, template);
+    // Animated numbers own their text; their exact target remains in the accessible label.
+    if (!element.classList.contains('metric-number')) patchChildren(element, template);
+    if (element !== document.activeElement && (element.tagName === 'INPUT' || element.tagName === 'SELECT')) {
+      if (element.value !== template.value) element.value = template.value;
+    }
+  }
+
+  function patchChildren(parent, template) {
+    const keyed = new Map([...parent.childNodes].filter(node => key(node)).map(node => [key(node), node]));
+    let cursor = parent.firstChild;
+    for (const next of [...template.childNodes]) {
+      const id = key(next);
+      let element = id ? keyed.get(id) : (cursor && !key(cursor) && sameType(cursor, next) ? cursor : null);
+      if (element && !sameType(element, next)) element = null;
+      if (!element) {
+        element = next.cloneNode(true);
+        parent.insertBefore(element, cursor);
+      } else {
+        if (element !== cursor) parent.insertBefore(element, cursor);
+        patchNode(element, next);
+      }
+      cursor = element.nextSibling;
+    }
+    while (cursor) {
+      const extra = cursor;
+      cursor = cursor.nextSibling;
+      extra.remove();
+    }
+  }
+
+  function updateNumbers(container) {
+    for (const [element, item] of numbers) {
+      if (!element.isConnected) { cancelAnimationFrame(item.frame); numbers.delete(element); }
+    }
+    container.querySelectorAll('.metric-number').forEach(element => {
+      const target = element.dataset.value === '' ? NaN : Number(element.dataset.value);
+      const kind = element.dataset.format;
+      const previous = numbers.get(element);
+      if (previous && Object.is(previous.target, target) && previous.kind === kind) return;
+      if (previous) cancelAnimationFrame(previous.frame);
+      const start = previous && Number.isFinite(previous.value) ? previous.value : 0;
+      const item = {target, kind, value: start, frame: 0};
+      numbers.set(element, item);
+      if (!enabled || document.hidden || !Number.isFinite(target) || start === target) {
+        item.value = target;
+        element.textContent = numberText(target, kind);
+        return;
+      }
+      const began = performance.now();
+      const step = now => {
+        if (!element.isConnected) { numbers.delete(element); return; }
+        const progress = Math.min(1, (now - began) / 680);
+        item.value = start + (target - start) * (1 - Math.pow(1 - progress, 3));
+        element.textContent = numberText(item.value, kind);
+        item.frame = progress < 1 ? requestAnimationFrame(step) : 0;
+        if (progress === 1) { item.value = target; element.textContent = numberText(target, kind); }
+      };
+      element.textContent = numberText(start, kind);
+      item.frame = requestAnimationFrame(step);
+    });
+  }
+
+  function reveal(element, delay = 0) {
+    seen.add(element);
+    if (element.classList.contains('bar-fill')) {
+      animate(element, [{transform:'scaleX(0)'}, {transform:'scaleX(1)'}], {duration:850,delay,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
+    } else {
+      animate(element, [{opacity:0,transform:'translateY(18px)'}, {opacity:1,transform:'translateY(0)'}], {duration:560,delay,easing:'cubic-bezier(.2,.7,.2,1)',fill:'backwards'});
+    }
+  }
+
+  const observer = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    let index = 0;
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        if (!seen.has(entry.target)) reveal(entry.target, Math.min(index++ * 65, 195));
+      }
+    }
+  }, {threshold:.06}) : null;
+
+  function decorate(container) {
+    observer?.disconnect();
+    let index = 0;
+    container.querySelectorAll('.page-heading,.hero,.metric,.panel,.notice,.bar-fill').forEach(element => {
+      if (seen.has(element)) return;
+      const rect = element.getBoundingClientRect();
+      if (rect.top < innerHeight && rect.bottom > 0 || !observer || !enabled) {
+        reveal(element, Math.min(index++ * 55, 220));
+      } else {
+        observer.observe(element);
+      }
+    });
+    container.querySelectorAll('.status').forEach(element => {
+      const value = element.textContent;
+      const previous = statuses.get(element);
+      if (previous && previous !== value) animate(element, [{boxShadow:'0 0 0 5px #7ba5ff44'}, {boxShadow:'0 0 0 0 #7ba5ff00'}], {duration:700,easing:'ease-out'});
+      statuses.set(element, value);
+    });
+  }
+
+  function render(container, html, page) {
+    const template = document.createElement('template');
+    template.innerHTML = html;
+    if (route !== page) {
+      observer?.disconnect();
+      for (const animation of finite) animation.cancel();
+      finite.clear();
+      container.replaceChildren(template.content);
+      route = page;
+    } else {
+      patchChildren(container, template.content);
+    }
+    updateNumbers(container);
+    decorate(container);
+  }
+
+  document.addEventListener('pointermove', event => {
+    if (!enabled || !finePointer.matches || document.hidden) return;
+    const card = event.target.closest('.hero,.metric,.node-card,.strategy');
+    if (!card) return;
+    pointer = {card, x:event.clientX, y:event.clientY};
+    if (pointerFrame) return;
+    pointerFrame = requestAnimationFrame(() => {
+      pointerFrame = 0;
+      if (!enabled || !pointer.card.isConnected) return;
+      const {card,x,y} = pointer, box = card.getBoundingClientRect();
+      card.style.setProperty('--fx-x', (x - box.left) + 'px');
+      card.style.setProperty('--fx-y', (y - box.top) + 'px');
+      if (card.classList.contains('hero')) {
+        card.style.setProperty('--fx-shift-x', ((x - box.left) / box.width - .5) * 10 + 'px');
+        card.style.setProperty('--fx-shift-y', ((y - box.top) / box.height - .5) * 8 + 'px');
+      }
+    });
+  }, {passive:true});
+
+  document.addEventListener('click', event => {
+    const button = event.target.closest('.button,.hero-action,.scenario-tabs button');
+    if (!enabled || !button || button.disabled) return;
+    const box = button.getBoundingClientRect(), size = Math.max(box.width, box.height) * 2;
+    const ripple = document.createElement('span');
+    ripple.className = 'fx-ripple';
+    ripple.setAttribute('aria-hidden','true');
+    const x = event.detail ? event.clientX - box.left : box.width / 2;
+    const y = event.detail ? event.clientY - box.top : box.height / 2;
+    ripple.style.cssText = 'width:'+size+'px;height:'+size+'px;left:'+(x-size/2)+'px;top:'+(y-size/2)+'px';
+    button.append(ripple);
+    const animation = animate(ripple, [{transform:'scale(0)',opacity:.22}, {transform:'scale(1)',opacity:0}], {duration:620,easing:'ease-out'});
+    if (animation) animation.finished.then(() => ripple.remove(), () => ripple.remove());
+    else ripple.remove();
+  });
+
+  return {render};
+})();
+
 const $ = (s, root = document) => root.querySelector(s);
 const esc = x => String(x ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const paths = {grid:'M3 3h7v7H3z M14 3h7v7h-7z M3 14h7v7H3z M14 14h7v7h-7z',nodes:'M8 3h8v6H8z M2 15h8v6H2z M14 15h8v6h-8z M12 9v3 M6 15v-3h12v3',layers:'m12 3 10 5-10 5L2 8z M2 12l10 5 10-5 M2 16l10 5 10-5',chart:'M4 3v18h18 M8 16v-4 M13 16V8 M18 16V5',book:'M3 4h7l2 2 2-2h7v16h-7l-2 2-2-2H3z M12 6v16',code:'m8 7-5 5 5 5 M16 7l5 5-5 5 M14 3l-4 18',plus:'M12 5v14 M5 12h14',arrow:'M5 19 19 5 M6 5h13v13',clock:'M12 8v5l4 2 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',check:'m5 12 4 4L19 6',activity:'M2 12h5l3-8 4 16 3-8h5',server:'M4 3h16v7H4z M4 14h16v7H4z M7 7h1 M7 18h1 M12 7h5 M12 18h5',monitor:'M3 3h18v13H3z M12 16v5 M8 21h8',shield:'m12 2 9 4v6c0 5-9 10-9 10S3 17 3 12V6z m-4 10 3 3 5-6',download:'M12 3v12 m-5-5 5 5 5-5 M4 17v4h16v-4',info:'M12 10v7 M12 7h.01 M22 12a10 10 0 1 1-20 0 10 10 0 0 1 20 0',play:'m8 4 12 8-12 8z'};
@@ -24,29 +272,30 @@ function badge(node) { return `<span class="badge ${!node.online?'offline':node.
 function heading(title,desc,eyebrow='COMPUTING, TOGETHER',actions=true) { return `<section class="page-heading"><div><span class="eyebrow">${eyebrow}</span><h1>${title}</h1><p>${desc}</p></div>${actions?`<div class="heading-actions"><button class="button secondary" data-action="export">${icon('download')} 导出记录</button><button class="button primary" data-action="create">${icon('plus')} 创建任务</button></div>`:''}</section>`; }
 function metrics() {
  const active=state.nodes.filter(n=>n.online),m=state.metrics;
+ const values=[active.length,m.completed,m.mean_ms,m.deadline_rate==null?null:m.deadline_rate*100],formats=['integer','integer','decimal','percent'];
  const cards=[['nodes','在线算力节点',active.length,'个',`${state.nodes.filter(n=>n.online&&n.mode==='remote_host').length} 个远程终端`,'实时节点心跳'],['layers','累计完成任务',m.completed,'项',`${state.counts.running} 项正在执行`,`${state.counts.queued} 项等待调度`],['clock','平均完成时延',m.mean_ms==null?'—':fmt(m.mean_ms,1),'ms','服务端提交至结果接收','含人工附加 CPU 负载'],['shield','全量任务按时完成率',percent(m.deadline_rate),'',`${m.total} 项已提交任务`,'待完成与失败均计入分母']];
- return `<section class="metrics" aria-label="实时指标">${cards.map((c,i)=>`<article class="metric ${i===3?'highlight':''}"><div class="metric-top">${c[1]}<span class="metric-icon">${icon(c[0])}</span></div><div class="metric-value">${c[2]}<small>${c[3]}</small></div><div class="metric-foot"><b>${c[4]}</b><span>${c[5]}</span></div></article>`).join('')}</section>`;
+ return `<section class="metrics" aria-label="实时指标">${cards.map((c,i)=>`<article data-key="metric-${i}" class="metric ${i===3?'highlight':''}"><div class="metric-top">${c[1]}<span class="metric-icon">${icon(c[0])}</span></div><div class="metric-value" aria-label="${esc(c[2]+' '+c[3])}"><span class="metric-number" aria-hidden="true" data-value="${values[i]??''}" data-format="${formats[i]}">${c[2]}</span><small aria-hidden="true">${c[3]}</small></div><div class="metric-foot"><b>${c[4]}</b><span>${c[5]}</span></div></article>`).join('')}</section>`;
 }
 function heroArt() {
- return `<div class="hero-art" aria-hidden="true"><svg viewBox="0 0 340 180" fill="none"><defs><pattern id="hero-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" stroke="#7b9bce" stroke-opacity=".1" stroke-width=".6"/></pattern><linearGradient id="chip-fill" x1="143" y1="46" x2="204" y2="112" gradientUnits="userSpaceOnUse"><stop stop-color="#365d9c"/><stop offset="1" stop-color="#1d355a"/></linearGradient></defs><rect x="10" y="4" width="320" height="166" fill="url(#hero-grid)"/><path d="M60 54H111L156 87M279 47H241L193 87M278 136H239L192 103M61 134H110L156 103" stroke="#759bdb" stroke-opacity=".5" stroke-width="1.2"/><path d="M60 54H111L156 87M279 47H241L193 87M278 136H239L192 103" stroke="#8eb8ff" stroke-opacity=".7" stroke-width="1.2" stroke-dasharray="3 18"/><path d="m143 63 31-18 32 18v45l-32 19-31-19z" fill="#6f9fe0" fill-opacity=".08" stroke="#6494dd" stroke-opacity=".3"/><rect x="148" y="61" width="52" height="52" rx="12" fill="url(#chip-fill)" stroke="#91b7f1" stroke-opacity=".7"/><path d="M165 77h18v19h-18zM160 82h5m18 0h5m-28 9h5m18 0h5m-18-19v5m8-5v5m-8 19v5m8-5v5" stroke="#b5d2ff" stroke-width="1.6"/><g fill="#1a2a44" stroke="#5b79a8" stroke-opacity=".7"><rect x="38" y="34" width="42" height="36" rx="8"/><rect x="258" y="27" width="42" height="36" rx="8"/><rect x="258" y="118" width="42" height="36" rx="8"/><rect x="38" y="117" width="42" height="36" rx="8"/></g><g stroke="#a2c0ef" stroke-width="1.2"><path d="M49 44h20v13H49zm10 13v4m-5 0h10M269 37h20v5h-20zm0 9h20v5h-20zM269 128h20v13h-20zm10 13v4m-5 0h10M49 127h20v5H49zm0 9h20v5H49z"/></g><g fill="#8fb5f7"><circle cx="110" cy="54" r="2.5"/><circle cx="240" cy="136" r="2.5"/><circle cx="300" cy="45" r="2"/></g><g fill="#849fc7" font-family="Consolas,monospace" font-size="7" letter-spacing="1.2"><text x="136" y="145">COORDINATOR</text><text x="36" y="21">EXECUTION NODES</text></g></svg></div>`;
+ return `<div class="hero-art" aria-hidden="true"><svg viewBox="0 0 340 180" fill="none"><defs><pattern id="hero-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" stroke="#7b9bce" stroke-opacity=".1" stroke-width=".6"/></pattern><linearGradient id="chip-fill" x1="143" y1="46" x2="204" y2="112" gradientUnits="userSpaceOnUse"><stop stop-color="#365d9c"/><stop offset="1" stop-color="#1d355a"/></linearGradient></defs><rect x="10" y="4" width="320" height="166" fill="url(#hero-grid)"/><path d="M60 54H111L156 87M279 47H241L193 87M278 136H239L192 103M61 134H110L156 103" stroke="#759bdb" stroke-opacity=".5" stroke-width="1.2"/><path class="hero-flow" d="M60 54H111L156 87M279 47H241L193 87M278 136H239L192 103" stroke="#8eb8ff" stroke-opacity=".7" stroke-width="1.2" stroke-dasharray="3 18"/><path d="m143 63 31-18 32 18v45l-32 19-31-19z" fill="#6f9fe0" fill-opacity=".08" stroke="#6494dd" stroke-opacity=".3"/><circle class="hero-chip-ring" cx="174" cy="87" r="39" stroke="#8eb5fa" stroke-width=".7"/><rect class="hero-chip" x="148" y="61" width="52" height="52" rx="12" fill="url(#chip-fill)" stroke="#91b7f1" stroke-opacity=".7"/><path d="M165 77h18v19h-18zM160 82h5m18 0h5m-28 9h5m18 0h5m-18-19v5m8-5v5m-8 19v5m8-5v5" stroke="#b5d2ff" stroke-width="1.6"/><g fill="#1a2a44" stroke="#5b79a8" stroke-opacity=".7"><rect x="38" y="34" width="42" height="36" rx="8"/><rect x="258" y="27" width="42" height="36" rx="8"/><rect x="258" y="118" width="42" height="36" rx="8"/><rect x="38" y="117" width="42" height="36" rx="8"/></g><g stroke="#a2c0ef" stroke-width="1.2"><path d="M49 44h20v13H49zm10 13v4m-5 0h10M269 37h20v5h-20zm0 9h20v5h-20zM269 128h20v13h-20zm10 13v4m-5 0h10M49 127h20v5H49zm0 9h20v5H49z"/></g><g class="hero-sparks" fill="#8fb5f7"><circle cx="110" cy="54" r="2.5"/><circle cx="240" cy="136" r="2.5"/><circle cx="300" cy="45" r="2"/></g><g fill="#849fc7" font-family="Consolas,monospace" font-size="7" letter-spacing="1.2"><text x="136" y="145">COORDINATOR</text><text x="36" y="21">EXECUTION NODES</text></g></svg></div>`;
 }
 function topology() {
  const online=state.nodes.filter(n=>n.online).slice(0,4),positions=[[18,25],[82,25],[18,77],[82,77]];
- return `<section class="panel"><div class="panel-head"><div><h2>算力协同网络 <small>COMPUTE NETWORK</small></h2><div class="panel-sub">节点能力、网络状态与任务时限协同决策</div></div><span class="badge"><i></i>${online.length} 个节点在线</span></div><div class="topology"><div class="network"><svg class="network-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${positions.slice(0,online.length).map(([x,y])=>`<path d="M50 50 C50 ${y},${x} 50,${x} ${y}"/>`).join('')}</svg><div class="network-node center"><div class="node-orb">${icon('nodes')}</div>协调服务<small>联合调度 · 租约恢复</small></div>${online.map((n,i)=>`<div class="network-node ${n.busy_task?'busy':''}" style="left:${positions[i][0]}%;top:${positions[i][1]}%"><div class="node-orb">${icon(n.mode==='same_host'?'monitor':'server')}<span class="node-pulse"></span></div>${esc(n.name)}<small>${n.mode==='same_host'?'同机进程':'远程终端'} · ${ms(n.rtt_ms)}</small></div>`).join('')}</div></div><div class="topology-legend"><span>在线节点</span><span>任务执行中</span><span>HTTP 应用层连接</span></div></section>`;
+ return `<section class="panel"><div class="panel-head"><div><h2>算力协同网络 <small>COMPUTE NETWORK</small></h2><div class="panel-sub">节点能力、网络状态与任务时限协同决策</div></div><span class="badge"><i></i>${online.length} 个节点在线</span></div><div class="topology"><div class="network"><svg class="network-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${positions.slice(0,online.length).map(([x,y])=>`<path d="M50 50 C50 ${y},${x} 50,${x} ${y}"/>`).join('')}</svg><div class="network-node center"><div class="node-orb">${icon('nodes')}</div>协调服务<small>联合调度 · 租约恢复</small></div>${online.map((n,i)=>`<div data-key="network-${esc(n.id)}" class="network-node ${n.busy_task?'busy':''}" style="left:${positions[i][0]}%;top:${positions[i][1]}%"><div class="node-orb">${icon(n.mode==='same_host'?'monitor':'server')}<span class="node-pulse"></span></div>${esc(n.name)}<small>${n.mode==='same_host'?'同机进程':'远程终端'} · ${ms(n.rtt_ms)}</small></div>`).join('')}</div></div><div class="topology-legend"><span>在线节点</span><span>任务执行中</span><span>HTTP 应用层连接</span></div></section>`;
 }
 function taskRows(tasks) {
- return tasks.map(t=>`<tr><td><div class="task-name"><span class="task-glyph">${icon('layers')}</span><div>${esc(t.name)}<div class="mono">${esc(t.id)}</div></div></div></td><td>${esc(policies[t.policy])}</td><td>${esc(state.nodes.find(n=>n.id===t.worker_id)?.name||'等待分配')}</td><td><span class="status ${t.status}">${labels[t.status]}</span></td><td>${ms(t.latency_ms)}</td><td><button class="row-button" data-detail="${esc(t.id)}">查看 ↗</button>${['queued','running'].includes(t.status)?` <button class="row-button inline-gap" data-cancel="${esc(t.id)}">取消</button>`:''}</td></tr>`).join('');
+ return tasks.map(t=>`<tr data-key="task-${esc(t.id)}"><td><div class="task-name"><span class="task-glyph">${icon('layers')}</span><div>${esc(t.name)}<div class="mono">${esc(t.id)}</div></div></div></td><td>${esc(policies[t.policy])}</td><td>${esc(state.nodes.find(n=>n.id===t.worker_id)?.name||'等待分配')}</td><td><span class="status ${t.status}">${labels[t.status]}</span></td><td>${ms(t.latency_ms)}</td><td><button class="row-button" data-detail="${esc(t.id)}">查看 ↗</button>${['queued','running'].includes(t.status)?` <button class="row-button inline-gap" data-cancel="${esc(t.id)}">取消</button>`:''}</td></tr>`).join('');
 }
 function taskTable(tasks, title='最近任务', all=false) {
  return `<section class="panel table-panel"><div class="panel-head"><h2>${title} <small>RECENT TASKS</small></h2><div class="table-head-actions"><span class="badge">${all?`显示 ${tasks.length} 项`:'实时更新'}</span>${!all?'<a class="text-link" href="#tasks">全部任务 ↗</a>':''}</div></div><div class="table-wrapper"><table><thead><tr><th>任务名称 / ID</th><th>调度策略</th><th>执行节点</th><th>状态</th><th>完成时延</th><th>操作</th></tr></thead><tbody>${taskRows(tasks)}</tbody></table>${tasks.length?'':`<div class="empty">还没有任务记录<br>创建任务或运行一组真实执行的合成事件。</div>`}</div></section>`;
 }
 function overview() {
  const online=state.nodes.filter(n=>n.online),busy=online.filter(n=>n.busy_task).length;
- return heading('协同工作台','把任务交给合适的设备，让每一份算力有序协作。')+`<section class="hero"><div class="hero-copy"><span class="eyebrow">MULTI-DEVICE TASK SCHEDULER</span><h2>让任务流转，<span>让设备协作。</span></h2><p>连接执行节点，分配任务，在一个工作台掌握处理进度。</p><div class="hero-bottom"><div class="hero-tags"><span>${icon("check")} 时限感知</span><span>${icon("check")} 多端执行</span><span>${icon("check")} 过程可追溯</span></div><button class="hero-action" data-action="demo">运行演示任务 ${icon("arrow")}</button></div></div>${heroArt()}</section>`+metrics()+`<div class="dashboard-grid"><div>${topology()}${taskTable(state.tasks.slice(0,5))}</div><div class="dashboard-right"><section class="panel strategy"><span class="eyebrow">SCHEDULING POLICY</span><h3>联合调度</h3><p>综合预测等待、通信和计算耗时，优先处理临近截止的任务。</p><div class="strategy-list"><div class="strategy-row"><span>执行时间预测</span><b>在线 EWMA 更新</b></div><div class="strategy-row"><span>数据范围</span><b>按任务约束筛选</b></div><div class="strategy-row"><span>故障处理</span><b>租约到期重新调度</b></div></div><div class="strategy-footer"><span>另有 3 种基线策略</span><a href="#experiments">查看对比 ↗</a></div></section><section class="panel secondary-panel"><h3>工作空间动态</h3><div class="progress-row"><span>节点执行槽占用</span><span>${busy} / ${online.length}</span></div><div class="progress-track"><div class="progress-fill" style="--progress:${online.length?busy/online.length*100:0}%"></div></div><div class="event-list">${state.events.slice(0,4).map(e=>`<div class="event-item"><span>${esc(e.message)}</span><time>${time(e.at)}</time></div>`).join('')||'<p class="fine-label">等待节点接入与任务提交。</p>'}</div><button class="button secondary mini" data-action="demo">${icon('play')} 运行 12 项演示任务</button><p class="fine-label">合成事件，真实进程执行；含附加 CPU 负载。</p></section></div></div>`+notice();
+ return heading('协同工作台','把任务交给合适的设备，让每一份算力有序协作。')+`<section class="hero"><div class="hero-grid-motion" aria-hidden="true"></div><div class="hero-scan" aria-hidden="true"></div><div class="hero-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="hero-copy"><span class="eyebrow">MULTI-DEVICE TASK SCHEDULER</span><h2>让任务流转，<span>让设备协作。</span></h2><p>连接执行节点，分配任务，在一个工作台掌握处理进度。</p><div class="hero-bottom"><div class="hero-tags"><span>${icon("check")} 时限感知</span><span>${icon("check")} 多端执行</span><span>${icon("check")} 过程可追溯</span></div><button class="hero-action" data-action="demo">运行演示任务 ${icon("arrow")}</button></div></div>${heroArt()}</section>`+metrics()+`<div class="dashboard-grid"><div>${topology()}${taskTable(state.tasks.slice(0,5))}</div><div class="dashboard-right"><section class="panel strategy"><span class="eyebrow">SCHEDULING POLICY</span><h3>联合调度</h3><p>综合预测等待、通信和计算耗时，优先处理临近截止的任务。</p><div class="strategy-list"><div class="strategy-row"><span>执行时间预测</span><b>在线 EWMA 更新</b></div><div class="strategy-row"><span>数据范围</span><b>按任务约束筛选</b></div><div class="strategy-row"><span>故障处理</span><b>租约到期重新调度</b></div></div><div class="strategy-footer"><span>另有 3 种基线策略</span><a href="#experiments">查看对比 ↗</a></div></section><section class="panel secondary-panel"><h3>工作空间动态</h3><div class="progress-row"><span>节点执行槽占用</span><span>${busy} / ${online.length}</span></div><div class="progress-track"><div class="progress-fill" style="--progress:${online.length?busy/online.length*100:0}%"></div></div><div class="event-list">${state.events.slice(0,4).map(e=>`<div class="event-item" data-key="event-${esc(e.at+'-'+e.message)}"><span>${esc(e.message)}</span><time>${time(e.at)}</time></div>`).join('')||'<p class="fine-label">等待节点接入与任务提交。</p>'}</div><button class="button secondary mini" data-action="demo">${icon('play')} 运行 12 项演示任务</button><p class="fine-label">合成事件，真实进程执行；含附加 CPU 负载。</p></section></div></div>`+notice();
 }
 function notice() { return `<div class="notice">${icon('info')}<span>${state.measurement==='application_loopback'?'当前为同机多进程演示。':'当前含远程连接，请核实物理终端与网络配置。'}系统使用合成巡检文本与轻量分类模型，尚未验证图像识别、真实用户收益或 6G 无线性能。</span></div>`; }
 function nodesPage() {
- return heading('算力节点','连接身边的设备，观察每个执行节点的可用状态。','CONNECTED EXECUTION NODES')+metrics()+`<section class="node-grid">${state.nodes.map(n=>`<article class="panel node-card"><div class="node-header"><span class="metric-icon">${icon(n.mode==='same_host'?'monitor':'server')}</span><div><h3>${esc(n.name)}</h3><p>${esc(n.id)} · ${n.mode==='same_host'?'同机进程':'远程接入'}</p></div></div><div class="node-details"><div><span>当前状态</span>${badge(n)}</div><div><span>主机 / 来源</span><b>${esc(n.host)} / ${esc(n.peer)}</b></div><div><span>HTTP 往返耗时</span><b>${ms(n.rtt_ms)}</b></div><div><span>单位耗时估计</span><b>${ms(n.ms_per_unit)}</b></div><div><span>配置带宽（非测量）</span><b>${fmt(n.bandwidth_mbps)} Mbps</b></div><div><span>累计完成</span><b>${fmt(n.completed)} 项</b></div><div><span>管理员可信设置</span><b>${n.trusted?'可信':'未设为可信'}</b></div></div><div class="node-buttons"><button class="button secondary mini" data-node="${esc(n.id)}" data-drain="${!n.draining}">${n.draining?'恢复接收任务':'暂停接收任务'}</button><button class="button secondary mini" data-trust="${esc(n.id)}" data-value="${!n.trusted}">${n.trusted?'撤销可信设置':'设为可信'}</button></div></article>`).join('')||'<div class="panel empty">暂无节点。使用一键启动脚本，或按部署说明连接执行端。</div>'}</section>`+notice()+`<div class="notice">${icon('shield')}<span>“可信”是管理员对节点的部署设置，不代表硬件证明、加密存储或可信执行环境。远程节点默认不可信。</span></div>`;
+ return heading('算力节点','连接身边的设备，观察每个执行节点的可用状态。','CONNECTED EXECUTION NODES')+metrics()+`<section class="node-grid">${state.nodes.map(n=>`<article class="panel node-card" data-key="node-${esc(n.id)}"><div class="node-header"><span class="metric-icon">${icon(n.mode==='same_host'?'monitor':'server')}</span><div><h3>${esc(n.name)}</h3><p>${esc(n.id)} · ${n.mode==='same_host'?'同机进程':'远程接入'}</p></div></div><div class="node-details"><div><span>当前状态</span>${badge(n)}</div><div><span>主机 / 来源</span><b>${esc(n.host)} / ${esc(n.peer)}</b></div><div><span>HTTP 往返耗时</span><b>${ms(n.rtt_ms)}</b></div><div><span>单位耗时估计</span><b>${ms(n.ms_per_unit)}</b></div><div><span>配置带宽（非测量）</span><b>${fmt(n.bandwidth_mbps)} Mbps</b></div><div><span>累计完成</span><b>${fmt(n.completed)} 项</b></div><div><span>管理员可信设置</span><b>${n.trusted?'可信':'未设为可信'}</b></div></div><div class="node-buttons"><button class="button secondary mini" data-node="${esc(n.id)}" data-drain="${!n.draining}">${n.draining?'恢复接收任务':'暂停接收任务'}</button><button class="button secondary mini" data-trust="${esc(n.id)}" data-value="${!n.trusted}">${n.trusted?'撤销可信设置':'设为可信'}</button></div></article>`).join('')||'<div class="panel empty">暂无节点。使用一键启动脚本，或按部署说明连接执行端。</div>'}</section>`+notice()+`<div class="notice">${icon('shield')}<span>“可信”是管理员对节点的部署设置，不代表硬件证明、加密存储或可信执行环境。远程节点默认不可信。</span></div>`;
 }
 function tasksPage() {
  const tasks=state.tasks.filter(t=>(taskFilter==='all'||t.status===taskFilter)&&(!taskSearch||`${t.name} ${t.id}`.toLowerCase().includes(taskSearch.toLowerCase())));
@@ -62,18 +311,21 @@ function guidePage() {
 }
 function render() {
  if (!state) return;
- const focused=document.activeElement?.id, cursor=document.activeElement?.selectionStart;
- $('#content').innerHTML=({overview,nodes:nodesPage,tasks:tasksPage,experiments:experimentPage,guide:guidePage})[current]();
- if(focused==='task-search') { $('#task-search')?.focus(); $('#task-search')?.setSelectionRange(cursor,cursor); }
+ InterfaceMotion.render($('#content'),({overview,nodes:nodesPage,tasks:tasksPage,experiments:experimentPage,guide:guidePage})[current](),current);
  $('#breadcrumb').textContent=titles[current];
  $('#node-count').textContent=state.nodes.filter(n=>n.online).length;
  document.querySelectorAll('[data-page]').forEach(a=>{ const active=a.dataset.page===current; a.classList.toggle('active',active); if(active) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
 }
+function setConnection(online) {
+ const el=$('#connection'),label=online?'协调服务在线':'连接中断';
+ if(el.textContent.trim()!==label) el.innerHTML='<i></i>'+label;
+ el.classList.toggle('error',!online);
+}
 async function refresh(force=false) {
  if(fetching||document.hidden&&!force) return;
  fetching=true;
- try { state=await api('/api/status'); $('#connection').innerHTML='<i></i>协调服务在线'; $('#connection').classList.remove('error'); lastError=false; if(!simulation) simulation=await api('/api/experiments'); render(); }
- catch(error) { $('#connection').innerHTML='<i></i>连接中断'; $('#connection').classList.add('error'); if(!lastError&&state) toast(error.message); lastError=true; }
+ try { state=await api('/api/status'); setConnection(true); lastError=false; if(!simulation) simulation=await api('/api/experiments'); render(); }
+ catch(error) { setConnection(false); if(!lastError&&state) toast(error.message); lastError=true; }
  finally { fetching=false; }
 }
 async function detail(id) {

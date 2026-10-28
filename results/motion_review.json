@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-28",
+  "checks": [
+    "multiple continuous effects are playing",
+    "polling preserves elements and continuous animation timelines",
+    "hover lift and pointer light survive a live refresh",
+    "counters settle to exact API values after real task execution",
+    "button ripples clean up and dialog fields remain intact during polling",
+    "search focus and selected text survive multiple live refreshes",
+    "task filter retains its selection and focus",
+    "new task insertion preserves existing keyed rows",
+    "CSV export remains available with motion enabled",
+    "horizontal table scroll survives polling",
+    "mobile task text is at least 13px and body stays within the viewport",
+    "scenario changes animate the real chart width to its correct result",
+    "motion switch stops effects and persists after reload",
+    "motion can be enabled again",
+    "system reduced-motion preference disables effects and presents exact numbers"
+  ],
+  "javascript_errors": [],
+  "passed": true,
+  "isolated_test_data": true,
+  "existing_user_state_modified": false,
+  "source_sha256": {
+    "web/app.js": "f872cfb98959ebbb44757f3617825460b4b2c38e7d05c34568fc7abd06cda3c1",
+    "web/style.css": "c2bb123cd803435466ca9f3b24154c5c9462d9f19b7b000ddfeb6b74cec29728",
+    "web/index.html": "626025548abe81040416e4aab6d001b8081e18ea0b2c2e0cff6892748ef0a556"
+  }
+}

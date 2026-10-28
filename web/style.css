@@ -23,7 +23,7 @@
 body{
   margin:0;
   background:var(--bg);
-  font-size:14px
+  font-size:15px
 }
 button,input,textarea,select{
   font:inherit
@@ -57,7 +57,7 @@ svg{
   vertical-align:middle
 }
 small{
-  font-size:11px
+  font-size:13px
 }
 .sidebar{
   position:fixed;
@@ -102,7 +102,7 @@ small{
 .brand small{
   display:block;
   color:#8b97ac;
-  font-size:9px;
+  font-size:12px;
   font-weight:400;
   letter-spacing:2.5px;
   margin-top:4px
@@ -116,7 +116,7 @@ small{
   border:1px solid #2a303d;
   border-radius:9px;
   background:#191e29;
-  font-size:12px;
+  font-size:14px;
   color:#dce2ed
 }
 .workspace-symbol{
@@ -135,7 +135,7 @@ small{
 .workspace small{
   display:block;
   color:#8290a7;
-  font-size:10px;
+  font-size:13px;
   margin-top:4px
 }
 .dot,.status-led{
@@ -150,14 +150,14 @@ small{
 .nav-label{
   margin:0 15px 13px;
   color:#78859b;
-  font-size:10px;
+  font-size:13px;
   font-weight:500;
   letter-spacing:1px
 }
 .nav-label span{
   margin-left:5px;
   color:#556174;
-  font:8px Consolas,monospace;
+  font:11px Consolas,monospace;
   letter-spacing:1px
 }
 .nav-label.second{
@@ -176,7 +176,7 @@ small{
   padding:12px 15px;
   border-radius:8px;
   color:#929db0;
-  font-size:13px;
+  font-size:15px;
   transition:color .18s,background .18s
 }
 .sidebar nav a:hover{
@@ -209,7 +209,7 @@ small{
   border-radius:5px;
   background:#334563;
   color:#bcd3ff;
-  font:11px Consolas,monospace;
+  font:13px Consolas,monospace;
   text-align:center
 }
 .external{
@@ -231,7 +231,7 @@ small{
   gap:7px;
   align-items:center;
   color:#96b3f5;
-  font:9px Consolas,monospace;
+  font:12px Consolas,monospace;
   letter-spacing:1px;
   margin-bottom:10px
 }
@@ -244,13 +244,13 @@ small{
 }
 .side-note strong{
   color:#d8e2f3;
-  font-size:12px;
+  font-size:14px;
   font-weight:500;
   line-height:1.9
 }
 .side-note p{
   color:#8492a9;
-  font-size:10px;
+  font-size:13px;
   line-height:1.8;
   margin:7px 0 0
 }
@@ -261,12 +261,12 @@ small{
   padding:19px 0 20px;
   margin-top:19px;
   border-top:1px solid #272e3b;
-  font-size:11px;
+  font-size:13px;
   color:#c1cadb
 }
 .side-profile small{
   display:block;
-  font-size:9px;
+  font-size:12px;
   color:#7e8ba0;
   margin-top:4px
 }
@@ -278,7 +278,7 @@ small{
   border-radius:9px;
   background:#273247;
   color:#b5c8ed;
-  font:12px Consolas,monospace
+  font:14px Consolas,monospace
 }
 .shell{
   margin-left:238px;
@@ -301,7 +301,7 @@ small{
   display:flex;
   align-items:center;
   gap:14px;
-  font-size:12px;
+  font-size:14px;
   color:var(--subtle)
 }
 .breadcrumb svg{
@@ -320,7 +320,7 @@ small{
   display:flex;
   align-items:center;
   gap:18px;
-  font-size:11px;
+  font-size:13px;
   color:var(--muted)
 }
 .connection{
@@ -370,7 +370,7 @@ small{
 .eyebrow{
   display:inline-block;
   color:#64748b;
-  font:9px/1.5 Consolas,monospace;
+  font:12px/1.5 Consolas,monospace;
   letter-spacing:2px
 }
 h1{
@@ -381,7 +381,7 @@ h1{
   margin:7px 0 8px
 }
 .page-heading p{
-  font-size:12px;
+  font-size:14px;
   color:var(--muted);
   line-height:1.8;
   margin:0
@@ -400,7 +400,7 @@ h1{
   min-height:39px;
   border:1px solid transparent;
   border-radius:7px;
-  font-size:12px;
+  font-size:14px;
   font-weight:500;
   white-space:nowrap;
   transition:background .18s,border-color .18s,box-shadow .18s,transform .18s
@@ -431,7 +431,7 @@ h1{
   transform:translateY(1px)
 }
 .mini{
-  font-size:11px;
+  font-size:13px;
   padding:8px 11px;
   min-height:32px
 }
@@ -463,7 +463,7 @@ h1{
 }
 .hero .eyebrow{
   color:#90a9d9;
-  font-size:9px;
+  font-size:12px;
   letter-spacing:1.8px
 }
 .hero h2{
@@ -478,7 +478,7 @@ h1{
 }
 .hero p{
   color:#a0b0ca;
-  font-size:12px;
+  font-size:14px;
   line-height:1.9;
   margin:0
 }
@@ -492,7 +492,7 @@ h1{
   display:flex;
   gap:15px;
   color:#a1b4d5;
-  font-size:10px
+  font-size:13px
 }
 .hero-tags span{
   display:flex;
@@ -512,7 +512,7 @@ h1{
   padding:0;
   background:transparent;
   color:#cfddff;
-  font-size:11px
+  font-size:13px
 }
 .hero-action svg{
   width:13px;
@@ -556,7 +556,7 @@ h1{
   justify-content:space-between;
   align-items:center;
   gap:7px;
-  font-size:11px;
+  font-size:13px;
   color:var(--muted)
 }
 .metric-icon{
@@ -581,13 +581,13 @@ h1{
   color:#1a263a
 }
 .metric-value small{
-  font:11px "Segoe UI",sans-serif;
+  font:13px "Segoe UI",sans-serif;
   color:var(--subtle);
   letter-spacing:0;
   margin-left:6px
 }
 .metric-foot{
-  font-size:10px;
+  font-size:13px;
   color:var(--subtle);
   line-height:1.65
 }
@@ -646,19 +646,19 @@ h1{
   padding:22px 23px 0
 }
 .panel-head h2{
-  font-size:14px;
+  font-size:15px;
   font-weight:600;
   margin:0
 }
 .panel-head h2 small{
-  font:9px Consolas,monospace;
+  font:12px Consolas,monospace;
   color:#6a7890;
   letter-spacing:1px;
   margin-left:10px
 }
 .panel-sub{
   color:var(--subtle);
-  font-size:11px;
+  font-size:13px;
   line-height:1.8;
   margin-top:6px
 }
@@ -666,7 +666,7 @@ h1{
   display:inline-flex;
   align-items:center;
   gap:5px;
-  font-size:10px;
+  font-size:13px;
   line-height:1.4;
   padding:5px 8px;
   background:#eef3ff;
@@ -725,7 +725,7 @@ h1{
   text-align:center;
   min-width:90px;
   color:#526780;
-  font-size:11px
+  font-size:13px
 }
 .node-orb{
   position:relative;
@@ -746,7 +746,7 @@ h1{
 }
 .network-node small{
   display:block;
-  font-size:9px;
+  font-size:12px;
   color:#647896;
   margin-top:4px
 }
@@ -795,7 +795,7 @@ h1{
   gap:22px;
   border-top:1px solid var(--line);
   padding:13px;
-  font-size:10px;
+  font-size:13px;
   color:#64748b
 }
 .topology-legend span::before{
@@ -818,7 +818,7 @@ h1{
 }
 .strategy .eyebrow{
   color:#65748b;
-  font-size:9px
+  font-size:12px
 }
 .strategy h3{
   margin:9px 0 11px;
@@ -826,7 +826,7 @@ h1{
   font-weight:600
 }
 .strategy p{
-  font-size:12px;
+  font-size:14px;
   line-height:1.9;
   color:var(--muted);
   margin:0 0 19px
@@ -839,7 +839,7 @@ h1{
   display:flex;
   justify-content:space-between;
   gap:8px;
-  font-size:11px;
+  font-size:13px;
   color:#66758d
 }
 .strategy-row b{
@@ -851,7 +851,7 @@ h1{
   justify-content:space-between;
   gap:7px;
   align-items:center;
-  font-size:10px;
+  font-size:13px;
   color:#66758d;
   border-top:1px solid var(--line);
   padding-top:16px;
@@ -865,14 +865,14 @@ h1{
   padding:21px 23px
 }
 .secondary-panel h3{
-  font-size:13px;
+  font-size:15px;
   font-weight:600;
   margin:0 0 16px
 }
 .progress-row{
   display:flex;
   justify-content:space-between;
-  font-size:10px;
+  font-size:13px;
   color:var(--muted);
   margin:12px 0 9px
 }
@@ -899,7 +899,7 @@ h1{
   padding:6px 0 6px 13px;
   margin-left:2px;
   border-left:1px solid #e2e8f2;
-  font-size:10px;
+  font-size:13px;
   color:#7e8da3;
   line-height:1.8
 }
@@ -917,7 +917,7 @@ h1{
 .event-item time{
   margin-left:auto;
   white-space:nowrap;
-  font:9px Consolas,monospace;
+  font:12px Consolas,monospace;
   color:#9aa7bb
 }
 .table-panel{
@@ -929,7 +929,7 @@ h1{
   gap:13px
 }
 .text-link{
-  font-size:11px;
+  font-size:13px;
   background:transparent;
   border:0;
   padding:0
@@ -948,13 +948,13 @@ table{
 }
 th{
   color:#8895a8;
-  font-size:10px;
+  font-size:13px;
   font-weight:500;
   border-bottom:1px solid var(--line);
   padding:14px 9px
 }
 td{
-  font-size:12px;
+  font-size:14px;
   color:#66758d;
   border-bottom:1px solid #f0f2f7;
   padding:15px 9px
@@ -992,14 +992,14 @@ tbody tr:hover{
 }
 .mono{
   color:#65748b;
-  font:10px/1.8 Consolas,monospace;
+  font:12px/1.8 Consolas,monospace;
   font-variant-numeric:tabular-nums
 }
 .status{
   display:inline-flex;
   align-items:center;
   gap:5px;
-  font-size:10px;
+  font-size:13px;
   padding:4px 7px;
   border-radius:4px;
   background:#edf3ff;
@@ -1029,7 +1029,7 @@ tbody tr:hover{
   color:#647083
 }
 .row-button{
-  font-size:11px;
+  font-size:13px;
   background:transparent;
   border:0;
   color:#5279ca;
@@ -1040,7 +1040,7 @@ tbody tr:hover{
 }
 .empty{
   padding:44px 24px;
-  font-size:12px;
+  font-size:14px;
   line-height:2;
   text-align:center;
   color:#8390a5
@@ -1049,7 +1049,7 @@ tbody tr:hover{
   display:flex;
   align-items:flex-start;
   gap:10px;
-  font-size:11px;
+  font-size:13px;
   line-height:1.9;
   background:#f0f3f9;
   color:#5f6f87;
@@ -1090,12 +1090,12 @@ tbody tr:hover{
 }
 .node-header h3{
   margin:0 0 6px;
-  font-size:14px;
+  font-size:15px;
   font-weight:600
 }
 .node-header p{
   margin:0;
-  font:10px Consolas,"Microsoft YaHei",monospace;
+  font:12px Consolas,"Microsoft YaHei",monospace;
   color:#65748b
 }
 .node-details{
@@ -1108,7 +1108,7 @@ tbody tr:hover{
   align-items:flex-start;
   justify-content:space-between;
   gap:14px;
-  font-size:11px;
+  font-size:13px;
   color:#66758d
 }
 .node-details b{
@@ -1134,7 +1134,7 @@ tbody tr:hover{
   width:auto;
   min-width:175px;
   margin:0;
-  font-size:12px;
+  font-size:14px;
   padding:11px 13px;
   background:#fff
 }
@@ -1158,7 +1158,7 @@ tbody tr:hover{
 }
 .experiment-intro p{
   margin:0;
-  font-size:12px;
+  font-size:14px;
   color:#65748b;
   line-height:1.9
 }
@@ -1176,7 +1176,7 @@ tbody tr:hover{
   border-radius:6px;
   background:transparent;
   padding:9px 18px;
-  font-size:12px;
+  font-size:14px;
   color:#65748b
 }
 .scenario-tabs button:hover{
@@ -1198,14 +1198,14 @@ tbody tr:hover{
   margin:0 0 7px
 }
 .chart-panel .muted{
-  font-size:11px
+  font-size:13px
 }
 .bar-row{
   display:grid;
   grid-template-columns:110px 1fr 80px;
   gap:20px;
   align-items:center;
-  font-size:12px;
+  font-size:14px;
   color:#61728d;
   margin:26px 0
 }
@@ -1230,7 +1230,7 @@ tbody tr:hover{
   background:#4d7ced
 }
 .bar-value{
-  font:12px Consolas,monospace;
+  font:14px Consolas,monospace;
   text-align:right
 }
 .guides-grid{
@@ -1257,30 +1257,30 @@ tbody tr:hover{
   flex-shrink:0;
   display:grid;
   place-items:center;
-  font:10px Consolas,monospace;
+  font:12px Consolas,monospace;
   border-radius:7px;
   background:#edf3ff;
   color:#6b8acf;
   border:1px solid #e2eafa
 }
 .step h3{
-  font-size:13px;
+  font-size:15px;
   font-weight:550;
   margin:3px 0 9px
 }
 .step p,.prose p{
-  font-size:12px;
+  font-size:14px;
   line-height:2;
   color:#62738c;
   margin:8px 0
 }
 .prose h3{
-  font-size:14px;
+  font-size:15px;
   font-weight:550;
   margin:23px 0 9px
 }
 code,pre{
-  font:11px/1.9 Consolas,monospace;
+  font:13px/1.9 Consolas,monospace;
   color:#607ba7;
   background:#f1f4fa;
   padding:4px 7px;
@@ -1296,7 +1296,7 @@ pre{
   padding:85px 20px;
   color:#7b8da9;
   text-align:center;
-  font-size:13px
+  font-size:15px
 }
 footer{
   max-width:1640px;
@@ -1306,7 +1306,7 @@ footer{
   justify-content:space-between;
   gap:14px;
   padding:15px 36px 25px;
-  font-size:10px;
+  font-size:13px;
   color:#627089
 }
 footer b{
@@ -1366,18 +1366,18 @@ dialog::backdrop{
   color:#4b6fab
 }
 .muted{
-  font-size:12px;
+  font-size:14px;
   line-height:1.9;
   color:#65748b
 }
 label{
   display:block;
-  font-size:12px;
+  font-size:14px;
   color:#56677f;
   margin:17px 0
 }
 label small{
-  font-size:10px;
+  font-size:13px;
   color:#6a7890;
   margin-left:7px
 }
@@ -1414,7 +1414,7 @@ textarea{
   margin:0 0 12px
 }
 .form-note{
-  font-size:11px;
+  font-size:13px;
   line-height:1.9;
   color:#65748b
 }
@@ -1430,7 +1430,7 @@ textarea{
   padding:16px 0
 }
 .prediction p{
-  font-size:12px;
+  font-size:14px;
   color:#73839b;
   line-height:1.9
 }
@@ -1438,7 +1438,7 @@ textarea{
   display:flex;
   justify-content:space-between;
   gap:12px;
-  font-size:11px;
+  font-size:13px;
   color:#6c87b8
 }
 .prediction-title b{
@@ -1450,13 +1450,13 @@ textarea{
   grid-template-columns:1fr 1fr;
   gap:16px;
   margin:22px 0;
-  font-size:11px;
+  font-size:13px;
   color:#65748b
 }
 .detail-meta span b{
   display:block;
   font-weight:500;
-  font-size:13px;
+  font-size:15px;
   color:#506888;
   margin-top:6px
 }
@@ -1467,7 +1467,7 @@ textarea{
   z-index:99;
   transform:translateX(-50%) translateY(16px);
   padding:13px 22px;
-  font-size:12px;
+  font-size:14px;
   line-height:1.7;
   color:#eaf1ff;
   background:#1e2c44;
@@ -1495,7 +1495,7 @@ textarea{
   text-align:center
 }
 .fine-label{
-  font-size:10px;
+  font-size:13px;
   color:#65748b;
   line-height:1.9;
   margin-top:12px
@@ -1521,7 +1521,7 @@ textarea{
   display:flex;
   align-items:center;
   gap:11px;
-  font-size:14px;
+  font-size:15px;
   font-weight:600
 }
 .doc-brand .brand-icon{
@@ -1598,10 +1598,10 @@ textarea{
     font-size:29px
   }
   .metric-top{
-    font-size:10px
+    font-size:13px
   }
   .metric-foot{
-    font-size:9px
+    font-size:12px
   }
   .metric-icon{
     width:26px;
@@ -1614,7 +1614,7 @@ textarea{
     padding:21px
   }
   .strategy-row{
-    font-size:10px
+    font-size:13px
   }
   .panel-head h2 small{
     display:none
@@ -1635,7 +1635,7 @@ textarea{
     margin-left:5px
   }
   .brand small{
-    font-size:8px
+    font-size:11px
   }
   .shell{
     margin-left:210px
@@ -1660,7 +1660,7 @@ textarea{
   }
   .hero-tags{
     gap:10px;
-    font-size:9px
+    font-size:12px
   }
   .metrics{
     grid-template-columns:repeat(2,minmax(0,1fr))
@@ -1679,7 +1679,7 @@ textarea{
   }
   .heading-actions .button{
     padding:10px 12px;
-    font-size:11px
+    font-size:13px
   }
   .page-heading{
     align-items:flex-start
@@ -1688,7 +1688,7 @@ textarea{
     font-size:25px
   }
   .page-heading p{
-    font-size:11px
+    font-size:13px
   }
 }
 @media(max-height:830px) and (min-width:701px){
@@ -1725,7 +1725,7 @@ textarea{
     height:19px
   }
   .brand small{
-    font-size:7px;
+    font-size:11px;
     margin-top:3px;
     letter-spacing:2px
   }
@@ -1749,7 +1749,7 @@ textarea{
     gap:7px;
     min-height:59px;
     min-width:64px;
-    font-size:10px;
+    font-size:13px;
     padding:11px 7px 12px;
     border-radius:7px 7px 0 0
   }
@@ -1778,7 +1778,7 @@ textarea{
     padding:0 18px
   }
   .breadcrumb{
-    font-size:10px;
+    font-size:13px;
     gap:9px
   }
   .breadcrumb svg{
@@ -1786,7 +1786,7 @@ textarea{
     height:13px
   }
   .top-actions{
-    font-size:9px;
+    font-size:12px;
     gap:0
   }
   .top-actions .avatar,.top-divider{
@@ -1804,11 +1804,11 @@ textarea{
     margin:6px 0 7px
   }
   .page-heading p{
-    font-size:10px;
+    font-size:13px;
     max-width:215px
   }
   .eyebrow{
-    font-size:8px;
+    font-size:11px;
     letter-spacing:1.5px
   }
   .heading-actions{
@@ -1821,7 +1821,7 @@ textarea{
     display:inline-flex;
   }
   .heading-actions .button{
-    font-size:10px;
+    font-size:13px;
     padding:9px 10px;
     min-height:35px;
     gap:5px
@@ -1837,7 +1837,7 @@ textarea{
     border-radius:12px
   }
   .hero .eyebrow{
-    font-size:8px;
+    font-size:11px;
     letter-spacing:1.1px
   }
   .hero h2{
@@ -1848,7 +1848,7 @@ textarea{
     display:block
   }
   .hero p{
-    font-size:10px;
+    font-size:13px;
     max-width:235px
   }
   .hero-art{
@@ -1866,7 +1866,7 @@ textarea{
     margin-top:18px
   }
   .hero-tags{
-    font-size:9px;
+    font-size:12px;
     gap:13px;
     flex-wrap:wrap
   }
@@ -1875,7 +1875,7 @@ textarea{
     height:10px
   }
   .hero-action{
-    font-size:10px;
+    font-size:13px;
     width:fit-content
   }
   .metrics{
@@ -1891,7 +1891,7 @@ textarea{
     margin:12px 0 10px
   }
   .metric-top{
-    font-size:10px;
+    font-size:13px;
     align-items:flex-start;
     line-height:1.7;
     gap:4px
@@ -1906,14 +1906,14 @@ textarea{
     height:13px
   }
   .metric-foot{
-    font-size:9px;
+    font-size:12px;
     line-height:1.9
   }
   .metric-foot b{
     display:block
   }
   .metric-value small{
-    font-size:10px;
+    font-size:13px;
     margin-left:4px
   }
   .dashboard-grid,.dashboard-right{
@@ -1925,14 +1925,14 @@ textarea{
     gap:8px
   }
   .panel-head h2{
-    font-size:13px
+    font-size:15px
   }
   .panel-sub{
-    font-size:9px;
+    font-size:12px;
     max-width:215px
   }
   .badge{
-    font-size:9px;
+    font-size:12px;
     padding:4px 6px
   }
   .topology{
@@ -1942,10 +1942,10 @@ textarea{
   }
   .network-node{
     min-width:75px;
-    font-size:9px
+    font-size:12px
   }
   .network-node small{
-    font-size:8px
+    font-size:11px
   }
   .node-orb{
     width:39px;
@@ -1958,13 +1958,13 @@ textarea{
   .topology-legend{
     gap:12px;
     padding:12px 7px;
-    font-size:8px
+    font-size:11px
   }
   .strategy,.secondary-panel{
     padding:22px
   }
   .strategy-row{
-    font-size:11px
+    font-size:13px
   }
   .table-panel{
     margin-top:16px
@@ -1979,13 +1979,13 @@ textarea{
     content:"左右滑动可查看完整表格";
     display:block;
     padding:9px 7px 4px;
-    font-size:10px;
+    font-size:13px;
     color:#65748b;
     position:sticky;
     left:0;
   }
   .text-link{
-    font-size:10px
+    font-size:13px
   }
   .task-glyph{
     display:none
@@ -1993,13 +1993,13 @@ textarea{
   th,td{
     padding-left:7px;
     padding-right:7px;
-    font-size:10px
+    font-size:13px
   }
   .mono{
-    font-size:9px
+    font-size:12px
   }
   .notice{
-    font-size:10px;
+    font-size:13px;
     padding:12px;
     margin-top:16px
   }
@@ -2039,14 +2039,14 @@ textarea{
     font-size:16px
   }
   .experiment-intro p{
-    font-size:11px
+    font-size:13px
   }
   .scenario-tabs{
     display:flex
   }
   .scenario-tabs button{
     flex:1;
-    font-size:11px;
+    font-size:13px;
     padding:9px 12px;
     white-space:nowrap
   }
@@ -2054,19 +2054,19 @@ textarea{
     padding:23px 18px
   }
   .chart-panel .muted{
-    font-size:10px
+    font-size:13px
   }
   .bar-row{
     grid-template-columns:82px 1fr 56px;
     gap:10px;
-    font-size:10px;
+    font-size:13px;
     margin:24px 0
   }
   .bar-track{
     height:20px
   }
   .bar-value{
-    font-size:11px
+    font-size:13px
   }
   .guide-section{
     padding:23px 20px
@@ -2075,15 +2075,15 @@ textarea{
     gap:12px
   }
   .step p,.prose p{
-    font-size:11px
+    font-size:13px
   }
   pre{
-    font-size:10px;
+    font-size:13px;
     padding:12px
   }
   footer{
     padding:12px 17px 23px;
-    font-size:8px;
+    font-size:11px;
     align-items:flex-start;
     line-height:1.9
   }
@@ -2097,7 +2097,7 @@ textarea{
     left:50%;
     width:max-content;
     max-width:calc(100vw - 32px);
-    font-size:11px;
+    font-size:13px;
     text-align:center
   }
   dialog{
@@ -2108,32 +2108,32 @@ textarea{
     font-size:21px
   }
   label{
-    font-size:11px
+    font-size:13px
   }
   .form-row{
     gap:10px
   }
   .form-row label{
     min-width:0;
-    font-size:10px
+    font-size:13px
   }
   input,textarea,select{
-    font-size:12px
+    font-size:14px
   }
   .form-row input,.form-row select{
     padding:10px 8px
   }
   .form-note{
-    font-size:10px
+    font-size:13px
   }
   .standalone-guide{
     padding:23px 16px 40px
   }
   .doc-brand{
-    font-size:12px
+    font-size:14px
   }
   .doc-top .button{
-    font-size:10px;
+    font-size:13px;
     padding:9px 10px
   }
   .doc-body{
@@ -2146,4 +2146,246 @@ textarea{
     transition:none!important;
     scroll-behavior:auto!important
   }
+}
+
+/* Readable type and a motion layer that does not replay during data polling. */
+body { font-size: 16px; }
+.brand small { font-size: 12px; letter-spacing: 1.5px; }
+.workspace > div, .step > div { min-width: 0; }
+.workspace { font-size: 14px; }
+.workspace small { font-size: 12px; line-height: 1.7; }
+.nav-label { font-size: 12px; }
+.nav-label span { display: none; }
+.sidebar nav a { font-size: 15px; min-height: 49px; }
+.side-note-tag { font-size: 10px; letter-spacing: .7px; }
+.side-profile small { font-size: 12px; line-height: 1.6; }
+.breadcrumb { font-size: 13px; }
+.top-actions { gap: 14px; font-size: 13px; }
+.eyebrow { font-size: 11px; letter-spacing: 1.5px; }
+.page-heading p { font-size: 15px; }
+.button { min-height: 43px; font-size: 14px; }
+.mini { font-size: 13px; min-height: 37px; }
+.hero { min-height: 228px; }
+.hero .eyebrow { font-size: 11px; }
+.hero h2 { font-size: 32px; }
+.hero p { font-size: 14px; }
+.hero-bottom { flex-wrap: wrap; gap: 18px; }
+.hero-tags, .hero-action { font-size: 13px; }
+.hero .hero-tags svg { width: 14px; height: 14px; }
+.hero-copy { z-index: 2; }
+.hero-art { z-index: 1; transition: transform .5s ease; }
+.metric-top { font-size: 14px; line-height: 1.5; }
+.metric-value { font-size: 38px; min-height: 46px; }
+.metric-number { display: inline-block; font-variant-numeric: tabular-nums; }
+.metric-value small { font-size: 14px; }
+.metric-foot { font-size: 13px; line-height: 1.8; }
+.metric-foot b { display: block; }
+.panel-head h2, .guide-section h2 { font-size: 17px; }
+.panel-head h2 small { display: none; }
+.panel-sub, .badge { font-size: 13px; }
+.panel-head { align-items: flex-start; }
+.dashboard-grid { grid-template-columns: minmax(0,1fr) 320px; }
+.strategy p, .strategy-row, .strategy-footer, .event-item { font-size: 13px; }
+.strategy-row { flex-wrap: wrap; line-height: 1.7; }
+.strategy-footer { flex-wrap: wrap; }
+.strategy .eyebrow { font-size: 11px; }
+.progress-row { font-size: 13px; }
+.event-item time { font-size: 11px; }
+.event-item > span { min-width: 0; overflow-wrap: anywhere; }
+.topology { height: 285px; }
+.network-node { font-size: 13px; max-width: 32%; min-width: 85px; overflow-wrap: anywhere; }
+.network-node small { font-size: 12px; line-height: 1.6; }
+.topology-legend { font-size: 12px; gap: 16px; flex-wrap: wrap; }
+th { font-size: 13px; }
+td { font-size: 14px; padding-top: 17px; padding-bottom: 17px; }
+.mono { font-size: 12px; }
+.status, .row-button, .text-link { font-size: 13px; }
+.notice, .fine-label, .form-note { font-size: 13px; }
+.node-header h3 { font-size: 17px; }
+.node-header p, .node-details div, .node-details b { font-size: 13px; line-height: 1.7; }
+.node-details span { flex-shrink: 0; }
+.filters input, .filters select { font-size: 15px; }
+.bar-row { grid-template-columns: 125px 1fr 85px; font-size: 14px; }
+.bar-value { font-size: 14px; }
+.bar-fill { transform-origin: left center; transition: width .85s cubic-bezier(.2,.7,.2,1); }
+.progress-fill { transition: width .7s cubic-bezier(.2,.7,.2,1); }
+.step h3, .prose h3 { font-size: 16px; }
+.step p, .prose p, .experiment-intro p, .muted { font-size: 14px; }
+.step-number { font-size: 13px; width: 30px; height: 30px; }
+code, pre { font-size: 13px; }
+footer { font-size: 12px; flex-wrap: wrap; }
+dialog { width: 640px; }
+label, .detail-meta, .prediction-title { font-size: 14px; }
+input, textarea, select { font-size: 15px; }
+label small { font-size: 12px; }
+.prediction p, .detail-meta span b { font-size: 14px; }
+.motion-toggle {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 34px; padding: 6px 9px; border: 1px solid #dce5f4; border-radius: 7px;
+  background: #f4f7ff; color: #526b96; font-size: 12px; white-space: nowrap;
+}
+.motion-toggle:hover { border-color: #a7bfee; background: #edf3ff; }
+.motion-toggle:disabled { opacity: .75; cursor: default; }
+.motion-switch { position: relative; width: 24px; height: 14px; background: #ccd5e5; border-radius: 10px; transition: background .2s; }
+.motion-switch::before { content: ''; position: absolute; width: 8px; height: 8px; left: 3px; top: 3px; border-radius: 50%; background: #fff; transition: transform .25s ease; }
+.motion-toggle[aria-pressed="true"] .motion-switch { background: #5484f3; }
+.motion-toggle[aria-pressed="true"] .motion-switch::before { transform: translateX(10px); }
+.hero-grid-motion {
+  position: absolute; inset: -30px; z-index: 0; pointer-events: none; opacity: .4;
+  background-image: linear-gradient(#719ce41a 1px,transparent 1px),linear-gradient(90deg,#719ce41a 1px,transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(90deg,transparent 35%,#000);
+}
+.hero-scan { position: absolute; z-index: 0; top: -10%; bottom: -10%; left: 0; width: 22%; pointer-events: none; opacity: 0; background: linear-gradient(100deg,transparent,#8bb3ff12,transparent); transform: translateX(-110%); }
+.hero-particles { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.hero-particles i { position: absolute; display: block; width: 3px; height: 3px; border-radius: 50%; background: #8cb5ff; opacity: .3; box-shadow: 0 0 9px #75a4ff77; bottom: 15%; }
+.hero-particles i:nth-child(1) { left: 49%; --drift: 8px; --delay: -2s; }
+.hero-particles i:nth-child(2) { left: 58%; bottom: 8%; --drift: -15px; --delay: -6s; }
+.hero-particles i:nth-child(3) { left: 70%; bottom: 30%; --drift: 18px; --delay: -4s; }
+.hero-particles i:nth-child(4) { left: 80%; bottom: 10%; --drift: -12px; --delay: -8s; }
+.hero-particles i:nth-child(5) { left: 91%; bottom: 35%; --drift: 20px; --delay: -1s; }
+.hero-particles i:nth-child(6) { left: 96%; bottom: 15%; --drift: -10px; --delay: -5s; }
+.hero-chip-ring { transform-box: fill-box; transform-origin: center; opacity: .4; }
+.hero-flow { stroke-dasharray: 5 18; }
+.hero-art svg { overflow: visible; }
+.metric, .node-card, .strategy { position: relative; transition: transform .3s ease,box-shadow .3s ease,border-color .3s ease; }
+.metric::before, .node-card::before, .strategy::before {
+  content: ''; pointer-events: none; position: absolute; inset: 0; border-radius: inherit; opacity: 0;
+  background: radial-gradient(240px circle at var(--fx-x,50%) var(--fx-y,0),#5586ff12,transparent 70%); transition: opacity .3s;
+}
+.button, .hero-action, .scenario-tabs button { position: relative; overflow: hidden; isolation: isolate; }
+.fx-ripple { position: absolute; display: block; pointer-events: none; border-radius: 50%; background: currentColor; z-index: 0; }
+.button svg, .sidebar nav svg, .step-number, .metric-icon { transition: transform .3s ease,color .3s ease,background .3s ease; }
+.status { transition: background .3s,color .3s; }
+.sidebar nav a { transition: background .3s,color .3s,box-shadow .3s; }
+.sidebar nav a.active::before { box-shadow: 0 0 11px #80a9ff88; }
+html[data-motion="on"] .hero-grid-motion { animation: gridDrift 12s linear infinite; }
+html[data-motion="on"] .hero-scan { animation: heroScan 12s ease-in-out infinite; }
+html[data-motion="on"] .hero::before { animation: ambientGlow 9s ease-in-out infinite alternate; }
+html[data-motion="on"] .hero-particles i { animation: particleRise 9s ease-in-out var(--delay) infinite; }
+html[data-motion="on"] .hero-art svg { animation: diagramFloat 6s ease-in-out infinite; }
+html[data-motion="on"] .hero-flow { animation: signalFlow 3s linear infinite; }
+html[data-motion="on"] .hero-chip-ring { animation: chipRing 3.8s ease-out infinite; }
+html[data-motion="on"] .hero-chip { animation: chipLight 4s ease-in-out infinite alternate; }
+html[data-motion="on"] .hero-sparks { animation: sparkGlow 4.5s ease-in-out infinite alternate; }
+html[data-motion="on"] .network-lines path { animation: networkFlow 4.8s linear infinite; stroke-width: 1.6; }
+html[data-motion="on"] .network-lines path:nth-child(even) { animation-delay: -2.4s; }
+html[data-motion="on"] .network-node.center .node-orb::after { content: ''; position: absolute; inset: -8px; pointer-events: none; border: 1px solid #5d8cf65c; border-radius: 20px; animation: coordinatorPulse 3.5s ease-out infinite; }
+html[data-motion="on"] .connection:not(.error) i { animation: connectedPulse 4s ease-in-out infinite; }
+html[data-motion="on"] .loading::before { content: ''; display: block; margin: 0 auto 18px; width: 26px; height: 26px; border: 2px solid #d8e4ff; border-top-color: #3568f6; border-radius: 50%; animation: loadingTurn 1s linear infinite; }
+html[data-motion="on"] dialog[open] { animation: dialogArrive .3s cubic-bezier(.2,.7,.2,1); }
+html[data-motion="on"] dialog[open]::backdrop { animation: backdropArrive .3s ease-out; }
+html[data-motion="on"] .prediction { animation: detailArrive .45s ease-out both; }
+html[data-motion="on"] .prediction:nth-child(3) { animation-delay: .06s; }
+html[data-motion="on"] .prediction:nth-child(4) { animation-delay: .12s; }
+@media (hover:hover) and (pointer:fine) {
+  html[data-motion="on"] .metric:hover, html[data-motion="on"] .node-card:hover { transform: translateY(-4px); border-color: #bfd0f3; box-shadow: 0 12px 26px #1e3c7510; }
+  html[data-motion="on"] .strategy:hover { border-color: #bfd0f3; box-shadow: 0 8px 24px #1e3c750d; }
+  html[data-motion="on"] .metric:hover::before, html[data-motion="on"] .node-card:hover::before, html[data-motion="on"] .strategy:hover::before { opacity: 1; }
+  html[data-motion="on"] .metric:hover .metric-icon { transform: translateY(-2px) rotate(-7deg); background: #e3ecff; color: #4575d5; }
+  html[data-motion="on"] .hero:hover .hero-art { transform: translate(var(--fx-shift-x,0px),var(--fx-shift-y,0px)); }
+  html[data-motion="on"] .sidebar nav a:hover svg { transform: translateY(-2px); }
+  html[data-motion="on"] .button:hover svg { transform: translateY(-1px) scale(1.1); }
+  html[data-motion="on"] .step:hover .step-number { transform: translateY(-3px); background: #dfeaff; color: #3765bb; }
+}
+@keyframes gridDrift { to { transform: translate3d(32px,32px,0); } }
+@keyframes heroScan { 0%,8% { opacity: 0; transform: translateX(-110%) skewX(-8deg); } 22% { opacity: .8; } 75% { opacity: .8; } 90%,100% { opacity: 0; transform: translateX(570%) skewX(-8deg); } }
+@keyframes ambientGlow { from { opacity: .6; transform: translate3d(-3%,0,0); } to { opacity: 1; transform: translate3d(3%,0,0); } }
+@keyframes particleRise { 0%,100% { transform: translate3d(0,10px,0); opacity: 0; } 25% { opacity: .5; } 70% { opacity: .35; } 95% { transform: translate3d(var(--drift),-130px,0); opacity: 0; } }
+@keyframes diagramFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+@keyframes signalFlow { to { stroke-dashoffset: -92; } }
+@keyframes networkFlow { to { stroke-dashoffset: -56; } }
+@keyframes chipRing { 0% { transform: scale(.87); opacity: .5; } 100% { transform: scale(1.4); opacity: 0; } }
+@keyframes chipLight { from { filter: drop-shadow(0 0 2px #72a4fb10); } to { filter: drop-shadow(0 0 8px #72a4fb77); } }
+@keyframes sparkGlow { from { opacity: .35; } to { opacity: .9; } }
+@keyframes coordinatorPulse { from { transform: scale(.97); opacity: .7; } to { transform: scale(1.3); opacity: 0; } }
+@keyframes connectedPulse { 0%,100% { box-shadow: 0 0 0 3px #3568f612; } 50% { box-shadow: 0 0 0 6px #3568f606; } }
+@keyframes loadingTurn { to { transform: rotate(360deg); } }
+@keyframes dialogArrive { from { opacity: 0; transform: translateY(12px) scale(.985); } to { opacity: 1; transform: none; } }
+@keyframes backdropArrive { from { opacity: 0; } to { opacity: 1; } }
+@keyframes detailArrive { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+@media (max-width:1250px) {
+  .dashboard-grid { grid-template-columns: minmax(0,1fr) 290px; }
+  .metrics { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .hero h2 { font-size: 29px; }
+  .top-actions { gap: 10px; }
+  .metric-top { font-size: 14px; }
+}
+@media (max-width:1050px) {
+  .dashboard-grid { grid-template-columns: minmax(0,1fr); }
+  .hero-art { width: 180px; }
+  .hero h2 { font-size: 27px; }
+  .breadcrumb { font-size: 12px; gap: 9px; }
+  .hero-tags { gap: 10px; }
+}
+@media (max-width:700px) {
+  .sidebar nav { gap: 2px; }
+  .sidebar nav a { font-size: 12px; padding-left: 4px; padding-right: 4px; min-width: 0; min-height: 61px; }
+  .brand small { font-size: 11px; letter-spacing: 1px; }
+  .topbar { padding: 0 14px; height: 55px; }
+  .breadcrumb { font-size: 12px; gap: 7px; }
+  .breadcrumb > span[data-icon] { display: none; }
+  .top-actions { gap: 8px; font-size: 11px; }
+  .connection { gap: 5px; }
+  .connection i { width: 5px; height: 5px; }
+  .motion-toggle { padding: 5px 6px; gap: 5px; font-size: 11px; min-height: 32px; }
+  .motion-switch { width: 20px; height: 12px; }
+  .motion-switch::before { width: 6px; height: 6px; }
+  .motion-toggle[aria-pressed="true"] .motion-switch::before { transform: translateX(8px); }
+  .eyebrow { font-size: 10px; }
+  .page-heading p { font-size: 13px; line-height: 1.9; max-width: none; }
+  .page-heading { align-items: flex-start; }
+  .page-heading > div:first-child { min-width: 0; }
+  .heading-actions .button { font-size: 12px; min-height: 39px; }
+  .hero { padding: 25px 23px; min-height: 267px; }
+  .hero h2 { font-size: 28px; line-height: 1.55; }
+  .hero p { font-size: 13px; max-width: 255px; }
+  .hero .eyebrow { font-size: 10px; letter-spacing: 1px; }
+  .hero-tags { gap: 10px; font-size: 12px; }
+  .hero-action { font-size: 13px; }
+  .hero-art { width: 185px; right: -55px; opacity: .27; }
+  .hero-grid-motion { opacity: .25; }
+  .hero-particles i:nth-child(n+4) { display: none; }
+  .metric { padding: 16px 13px; }
+  .metric-top { font-size: 13px; }
+  .metric-value { font-size: 31px; min-height: 38px; }
+  .metric-value small { font-size: 12px; }
+  .metric-foot { font-size: 12px; }
+  .panel-head { flex-wrap: wrap; gap: 10px; }
+  .panel-head h2 { font-size: 16px; }
+  .panel-sub { font-size: 12px; max-width: none; }
+  .badge { font-size: 12px; }
+  .topology { height: 280px; }
+  .network-node { font-size: 12px; }
+  .network-node small { font-size: 11px; }
+  .topology-legend { font-size: 11px; gap: 12px; }
+  .strategy-row, .strategy-footer, .event-item, .progress-row { font-size: 13px; }
+  .node-details div, .node-details b { font-size: 13px; }
+  .node-details div { gap: 10px; }
+  th, td { font-size: 13px; padding-top: 14px; padding-bottom: 14px; }
+  .mono { font-size: 12px; }
+  .table-wrapper::after, .fine-label, .form-note { font-size: 12px; }
+  .notice { font-size: 13px; line-height: 1.9; }
+  .bar-row { grid-template-columns: 88px 1fr 62px; gap: 9px; font-size: 12px; }
+  .bar-value { font-size: 13px; }
+  .chart-panel .muted, .experiment-intro p { font-size: 13px; }
+  .scenario-tabs button { font-size: 13px; padding: 10px 9px; }
+  .step p, .prose p { font-size: 14px; }
+  .guide-section { padding: 24px 20px; }
+  pre { font-size: 12px; }
+  .form-row.options-row { grid-template-columns: 1fr; }
+  input, textarea, select { font-size: 16px; }
+  label, .form-row label { font-size: 13px; }
+  label small { display: block; margin: 6px 0 0; font-size: 12px; }
+  .doc-brand { font-size: 13px; }
+  .doc-top { gap: 10px; flex-wrap: wrap; }
+  .doc-top .button { font-size: 12px; }
+  footer { font-size: 11px; row-gap: 6px; }
+  footer > span:first-child { max-width: none; }
+  footer > span:last-child { white-space: normal; }
+}
+html[data-motion-paused="true"] *, html[data-motion-paused="true"] *::before, html[data-motion-paused="true"] *::after { animation-play-state: paused !important; }
+html[data-motion="off"] *, html[data-motion="off"] *::before, html[data-motion="off"] *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion:reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
