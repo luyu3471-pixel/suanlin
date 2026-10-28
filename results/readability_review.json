@@ -1,0 +1,227 @@
+{
+  "checks": [
+    "all five status styles and sampled reading text have contrast at least 4.5:1",
+    "status styles have distinct colors and retain labels and SVG icons",
+    "keyboard users can open details, close with Escape and return to the action",
+    "dialog title and submit stay visible at both scroll ends on desktop and phones",
+    "long task names wrap, mobile cards need no sideways scrolling and actions are at least 44px",
+    "mobile detail and cancellation actions operate on real isolated tasks"
+  ],
+  "sampled_contrast": [
+    {
+      "selector": ".page-heading p",
+      "color": "rgb(86, 100, 123)",
+      "background": "rgb(244, 245, 251)",
+      "ratio": 5.507267297669035
+    },
+    {
+      "selector": ".metric-top",
+      "color": "rgb(71, 85, 113)",
+      "background": "rgb(237, 243, 255)",
+      "ratio": 6.723696660284194
+    },
+    {
+      "selector": ".metric-top",
+      "color": "rgb(71, 85, 113)",
+      "background": "rgb(243, 238, 255)",
+      "ratio": 6.58812234521699
+    },
+    {
+      "selector": ".metric-top",
+      "color": "rgb(71, 85, 113)",
+      "background": "rgb(255, 244, 228)",
+      "ratio": 6.883160557546441
+    },
+    {
+      "selector": ".metric-top",
+      "color": "rgb(71, 85, 113)",
+      "background": "rgb(255, 240, 245)",
+      "ratio": 6.784075079106685
+    },
+    {
+      "selector": ".metric-foot b",
+      "color": "rgb(82, 96, 121)",
+      "background": "rgb(237, 243, 255)",
+      "ratio": 5.702864962104455
+    },
+    {
+      "selector": ".metric-foot b",
+      "color": "rgb(82, 96, 121)",
+      "background": "rgb(243, 238, 255)",
+      "ratio": 5.587874347533007
+    },
+    {
+      "selector": ".metric-foot b",
+      "color": "rgb(82, 96, 121)",
+      "background": "rgb(255, 244, 228)",
+      "ratio": 5.838118100127349
+    },
+    {
+      "selector": ".metric-foot b",
+      "color": "rgb(82, 96, 121)",
+      "background": "rgb(255, 240, 245)",
+      "ratio": 5.754076369544049
+    },
+    {
+      "selector": ".metric-foot span",
+      "color": "rgb(82, 96, 121)",
+      "background": "rgb(237, 243, 255)",
+      "ratio": 5.702864962104455
+    },
+    {
+      "selector": ".metric-foot span",
+      "color": "rgb(82, 96, 121)",
+      "background": "rgb(243, 238, 255)",
+      "ratio": 5.587874347533007
+    },
+    {
+      "selector": ".metric-foot span",
+      "color": "rgb(82, 96, 121)",
+      "background": "rgb(255, 244, 228)",
+      "ratio": 5.838118100127349
+    },
+    {
+      "selector": ".metric-foot span",
+      "color": "rgb(82, 96, 121)",
+      "background": "rgb(255, 240, 245)",
+      "ratio": 5.754076369544049
+    },
+    {
+      "selector": ".metric-value",
+      "color": "rgb(48, 89, 200)",
+      "background": "rgb(237, 243, 255)",
+      "ratio": 5.567150298137461
+    },
+    {
+      "selector": ".metric-value",
+      "color": "rgb(104, 66, 173)",
+      "background": "rgb(243, 238, 255)",
+      "ratio": 6.221050576954767
+    },
+    {
+      "selector": ".metric-value",
+      "color": "rgb(145, 84, 19)",
+      "background": "rgb(255, 244, 228)",
+      "ratio": 5.547225002621295
+    },
+    {
+      "selector": ".metric-value",
+      "color": "rgb(167, 61, 96)",
+      "background": "rgb(255, 240, 245)",
+      "ratio": 5.470482627188875
+    },
+    {
+      "selector": ".notice",
+      "color": "rgb(82, 97, 123)",
+      "background": "rgb(238, 241, 249)",
+      "ratio": 5.540195504654314
+    },
+    {
+      "selector": ".panel-sub",
+      "color": "rgb(87, 101, 125)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 5.894152463085141
+    },
+    {
+      "selector": ".status.completed",
+      "color": "rgb(48, 89, 200)",
+      "background": "rgb(237, 243, 255)",
+      "ratio": 5.567150298137461
+    },
+    {
+      "selector": ".status.running",
+      "color": "rgb(104, 66, 173)",
+      "background": "rgb(243, 238, 255)",
+      "ratio": 6.221050576954767
+    },
+    {
+      "selector": ".status.queued",
+      "color": "rgb(145, 84, 19)",
+      "background": "rgb(255, 244, 228)",
+      "ratio": 5.547225002621295
+    },
+    {
+      "selector": ".status.failed",
+      "color": "rgb(167, 61, 96)",
+      "background": "rgb(255, 240, 245)",
+      "ratio": 5.470482627188875
+    },
+    {
+      "selector": ".status.cancelled",
+      "color": "rgb(89, 99, 119)",
+      "background": "rgb(240, 242, 246)",
+      "ratio": 5.390470838945898
+    },
+    {
+      "selector": ".filter-chip",
+      "color": "rgb(48, 89, 200)",
+      "background": "rgb(237, 243, 255)",
+      "ratio": 5.567150298137461
+    },
+    {
+      "selector": ".filter-chip",
+      "color": "rgb(104, 66, 173)",
+      "background": "rgb(244, 245, 251)",
+      "ratio": 6.495621121498017
+    },
+    {
+      "selector": ".filter-chip",
+      "color": "rgb(145, 84, 19)",
+      "background": "rgb(244, 245, 251)",
+      "ratio": 5.543786423002758
+    },
+    {
+      "selector": ".filter-chip",
+      "color": "rgb(48, 89, 200)",
+      "background": "rgb(244, 245, 251)",
+      "ratio": 5.695651956697356
+    },
+    {
+      "selector": ".filter-chip",
+      "color": "rgb(167, 61, 96)",
+      "background": "rgb(244, 245, 251)",
+      "ratio": 5.546941764620239
+    },
+    {
+      "selector": ".filter-chip",
+      "color": "rgb(89, 99, 119)",
+      "background": "rgb(244, 245, 251)",
+      "ratio": 5.55270851881212
+    },
+    {
+      "selector": ".filter-summary",
+      "color": "rgb(86, 100, 124)",
+      "background": "rgb(244, 245, 251)",
+      "ratio": 5.499366168315771
+    },
+    {
+      "selector": ".row-button",
+      "color": "rgb(49, 84, 175)",
+      "background": "rgb(240, 244, 255)",
+      "ratio": 6.3256773602255265
+    },
+    {
+      "selector": ".row-button",
+      "color": "rgb(152, 59, 85)",
+      "background": "rgb(255, 245, 247)",
+      "ratio": 6.357390724718599
+    },
+    {
+      "selector": ".mono",
+      "color": "rgb(86, 100, 124)",
+      "background": "rgb(255, 255, 255)",
+      "ratio": 5.983583574385948
+    }
+  ],
+  "minimum_sampled_contrast": 5.39,
+  "contrast_scope": "sampled solid text backgrounds and CSS status probes, not a full accessibility audit",
+  "javascript_errors": [],
+  "isolated_test_data": true,
+  "existing_user_state_modified": false,
+  "passed": true,
+  "source_sha256": {
+    "web/app.js": "019343828a7ef10e684cb5617548c381d72917c4b79373bf92a9c8ff3bf7e52e",
+    "web/style.css": "37672964936a00c5ab8d37653b5d7ad41b5c0b27483e4fe2633d8ce4f5298915",
+    "web/index.html": "09d2510e86e50e7de4c8f34f104441a6607e10e97e1c1c7a3c408629c63f0686"
+  }
+}

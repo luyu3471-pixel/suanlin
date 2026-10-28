@@ -1,6 +1,6 @@
 {
   "date": "2026-10-28",
-  "palette": "graphite, cool white, electric blue",
+  "palette": "indigo, blue, violet, amber and rose",
   "functional_checks": "results/browser_qa.json",
   "viewport_checks": [
     {

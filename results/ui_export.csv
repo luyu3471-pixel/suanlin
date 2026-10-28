@@ -1,2 +1,2 @@
 ﻿id,name,policy,privacy,status,worker_id,created_at,started_at,finished_at,deadline_ms,latency_ms,deadline_met,attempts,payload_bytes,predicted_ms
-a8018dfb0ecd,浏览器验收任务,smart,local_only,completed,local-2,1793166900.1094377,1793166900.255292,1793166900.2602212,5000,150.784,True,1,97,60.301060001940215
+a4ec2b991aeb,浏览器验收任务,smart,local_only,completed,local-1,1793169254.4055882,1793169254.5130856,1793169254.5180788,5000,112.491,True,1,97,60.28055999863821

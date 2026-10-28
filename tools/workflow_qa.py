@@ -81,7 +81,7 @@ def main():
             checks.append("double submission produces one task and shows a pending state")
 
             page.locator('a[data-page="tasks"]').click()
-            page.get_by_role("button", name="查看 ↗").first.click()
+            page.get_by_role("button", name="查看详情").first.click()
             expect(page.locator("#detail-content .status")).to_have_text("待调度")
             expect(page.locator(".task-guidance")).to_contain_text("还没有在线节点")
             expect(page.locator(".submitted-events")).to_contain_text("消防出口被纸箱堵塞")

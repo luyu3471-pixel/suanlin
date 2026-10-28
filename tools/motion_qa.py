@@ -132,11 +132,15 @@ def main():
             checks.append("CSV export remains available with motion enabled")
 
             page.set_viewport_size({"width":390, "height":844})
-            page.locator(".table-wrapper").evaluate("e => { window.savedTable=e; e.scrollLeft=90; }")
+            page.locator("tbody tr").first.evaluate("""e => {
+                window.savedMobileRow=e; e.scrollIntoView({block:'center'}); window.savedPageY=scrollY;
+            }""")
             page.wait_for_timeout(1700)
-            assert page.evaluate("""() => savedTable===document.querySelector('.table-wrapper') &&
-                savedTable.scrollLeft===90""")
-            checks.append("horizontal table scroll survives polling")
+            assert page.evaluate("""() => savedMobileRow===document.querySelector('tbody tr') &&
+                Math.abs(scrollY-savedPageY)<2 &&
+                getComputedStyle(savedMobileRow).display==='grid'""")
+            assert page.locator(".task-table-wrapper").evaluate("e=>e.scrollWidth<=e.clientWidth")
+            checks.append("mobile task cards and reading position survive polling without horizontal scrolling")
             assert page.locator("td").first.evaluate("e => parseFloat(getComputedStyle(e).fontSize)") >= 13
             assert page.locator(".page-heading p").evaluate("e => parseFloat(getComputedStyle(e).fontSize)") >= 13
             assert not page.evaluate("document.documentElement.scrollWidth > innerWidth")

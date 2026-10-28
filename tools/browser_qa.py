@@ -30,7 +30,7 @@ def run(url='http://127.0.0.1:8765'):
         page.goto(url + '/#tasks')
         page.get_by_role('heading',name='任务中心',exact=True).wait_for()
         page.locator('#task-search').fill('浏览器验收任务')
-        page.get_by_role('button',name='查看 ↗').first.click()
+        page.get_by_role('button',name='查看详情').first.click()
         page.locator('#detail-dialog').wait_for(state='visible')
         page.get_by_text('通道占用',exact=True).wait_for()
         page.get_by_text('烟雾风险',exact=True).wait_for()

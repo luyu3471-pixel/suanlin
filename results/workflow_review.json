@@ -18,8 +18,8 @@
   "isolated_test_data": true,
   "existing_user_state_modified": false,
   "source_sha256": {
-    "web/app.js": "5a9370e13495fc8650db00102833ae8888d6820e91e773a769ac32e32a618ae4",
-    "web/style.css": "e981fbcbe0b8c38f3be6dfb75d25ac4816124fb5191a288852d0641695057602",
-    "web/index.html": "566fc06baa166881b9524883b0c0a1be4836a6fd03b0028efabd6d2f0cd3bfb8"
+    "web/app.js": "019343828a7ef10e684cb5617548c381d72917c4b79373bf92a9c8ff3bf7e52e",
+    "web/style.css": "37672964936a00c5ab8d37653b5d7ad41b5c0b27483e4fe2633d8ce4f5298915",
+    "web/index.html": "09d2510e86e50e7de4c8f34f104441a6607e10e97e1c1c7a3c408629c63f0686"
   }
 }
