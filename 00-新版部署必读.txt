@@ -1,0 +1,54 @@
+﻿算邻 2.4.1 软件包 — 请先读此文件
+
+版本：2.4.1-slot-aware
+源码提交：ea8b630a0a8d4dc360ca8bcca413fbb5d397b59f
+本包包含完整项目源码、网页、A/B执行代码、测试集、最新报告与原始测试记录。
+不包含模型GGUF、llama.cpp运行时、Python运行时、令牌、运行数据库或本机日志。
+核心项目使用Python 3.10+标准库；制作历史PDF等材料所需依赖另列在tools/requirements-artifacts.txt。
+
+分工
+A：协调网页、资源监控和本地Qwen3.5-9B Q6_K调度，兼任执行节点。
+B：执行CPU日志分析、文档检索、脱敏压缩等任务；不需要安装Qwen。
+本次验证配置为A四槽、B四槽。Qwen模型只监听A的回环接口 http://127.0.0.1:8086/v1，模型别名qwen3.5-9b。
+
+当前两机升级
+本机A已运行本版，B已运行兼容执行代码且并发为4；打包不会改变正在运行的服务。
+若交给另一台电脑或项目主人，请先解压到独立目录，保留旧目录和数据备份。
+已有系统需要等排队/运行任务清空再停止原执行器与协调器。新旧协调器不得同时使用同一数据库。
+沿用原数据目录及其access_token，B沿用原令牌文件；不要将令牌放进代码仓库、聊天或软件包。
+
+A启动（在解压后的项目目录执行）
+先确认本地模型接口可用。现有A机器的正式数据目录为 D:\Suanlin-A\source\.local\office-field。
+python launch.py --host 0.0.0.0 --port 8765 --workers 1 --concurrency 4 --scheduler qwen --data-dir "D:\Suanlin-A\source\.local\office-field" --no-browser
+更换电脑时将数据目录替换为该机实际目录。全新部署可以使用 --data-dir .local/production，首次启动会生成新的令牌。
+如仅测试规则调度，可改用 --scheduler rules，此时不需要启动Qwen。
+网页：A本机 http://127.0.0.1:8765；本次局域网 http://192.168.5.43:8765。
+需要跨机接入时确认局域网地址和防火墙允许B连接A的8765，不需要对B开放模型端口。
+
+B启动（在B解压后的项目目录执行）
+python -m suanlin.worker --coordinator http://192.168.5.43:8765 --token-file "<原B令牌文件路径>" --id office-b --name Office-B --concurrency 4
+替换实际A地址和令牌路径；已有office-b须先退出，避免重复节点。全新节点需在A网页核实后设为可信。
+从网页“算力节点”确认两台不同主机在线、并发槽为4。槽数由执行器参数控制，不能只改网页显示。
+若用PowerShell Start-Process后台运行，请使用-WindowStyle Hidden，并保存PID和输出日志。
+
+使用与复现
+网页“创建任务”可选择业务类型、规模、时限与调度策略；任务详情显示模型建议、保护调整和实际节点。
+python -m unittest discover -s tests -v
+python tools/business_suite.py --url http://127.0.0.1:8765 --token-file "<A数据目录中的access_token路径>" --profile standard --rounds 3
+python tools/business_suite.py --url http://127.0.0.1:8765 --token-file "<A数据目录中的access_token路径>" --profile mixed_deadlines --rounds 3
+python tools/business_suite.py --url http://127.0.0.1:8765 --token-file "<A数据目录中的access_token路径>" --dataset benchmarks/business-v2.json --profile throughput --rounds 1
+一次只运行一组性能测试。完整默认对照包含A单机、B单机、双机规则、Qwen路径。--policies ai仅用于专项复测。
+
+最新验证
+57项回归通过。此次优化包含450项正式任务和54项预热，均一次执行成功。
+最终24项持续任务AI专项复测58.28秒，无规则回退，包含6项原样Qwen方案和18项采用排程保护方案。
+前轮同任务参考：A单机101.64秒，B单机87.65秒，双机规则51.56秒。规则仍更快，不宣称Qwen必然优于规则。
+详见results/slot_aware_20261111_report.txt与summary；release-evidence中包含完整原始结果、回归日志及网页截图。
+日志与检索结果跨机一致；压缩输出跨机差异仍待核实，不能宣称整体正确性验收全部通过。
+输入是固定种子合成数据，真实执行算法；网络传输的是紧凑任务描述，不代表完整业务文件传输性能。
+4槽已实测，不宣称是B的绝对性能上限；8/16槽尚未调参。
+
+文档版本
+本文件、并发与排程优化说明.txt及最新slot_aware报告优先说明当前2.4.1部署。
+START_HERE.txt、AI调度部署说明.txt及delivery内PDF/视频等包含旧版历史材料，历史端口、分工及性能数字不代表当前版本。
+包内MANIFEST.sha256列出文件校验值，RELEASE.json记录源码版本与打包内容。

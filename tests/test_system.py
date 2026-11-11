@@ -132,6 +132,8 @@ class StoreTests(unittest.TestCase):
         self.store = Store(self.temp.name)
         self.assertEqual(self.store.task(task["id"])["status"], "queued")
         self.assertFalse(self.store.snapshot()["nodes"][0]["online"])
+        with self.assertRaises(InputError):
+            self.store.heartbeat(self.credentials)
 
 class IntegrationTests(unittest.TestCase):
     def test_http_workers_execute_with_auth_and_reject_cross_origin(self):

@@ -9,6 +9,7 @@ import threading
 import time
 from pathlib import Path
 from urllib.parse import urlparse
+from . import __version__
 from .inference import DEMO_EVENTS
 from .store import Store, InputError
 
@@ -19,6 +20,11 @@ MAX_BODY = 1024 * 1024
 class Server(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = True
+
+    def server_close(self):
+        if getattr(self, 'store', None) and self.store.ai:
+            self.store.ai.close()
+        super().server_close()
 
 class Handler(BaseHTTPRequestHandler):
     server_version = "Suanlin/1.0"
@@ -99,7 +105,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(403, {"error": "主机地址不受支持"})
             path = urlparse(self.path).path
             if path == "/api/health":
-                return self.send(200, {"ok": True, "service": "suanlin", "version": "2.0.0-queue-capacity"})
+                return self.send(200, {"ok": True, "service": "suanlin", "version": __version__})
             if path.startswith("/api/"):
                 if not self.authorized():
                     return self.send(401, {"error": "请使用接入令牌登录"})
@@ -157,8 +163,8 @@ class Handler(BaseHTTPRequestHandler):
                 count = number(data.get("count", 12), "任务数量", 1, 30)
                 if not isinstance(count, int):
                     raise InputError("任务数量应为整数")
-                policy = data.get("policy", "smart")
-                if policy not in ("smart", "fixed", "round_robin", "random"):
+                policy = data.get("policy", "ai" if self.store.ai else "smart")
+                if policy not in ("ai", "smart", "fixed", "round_robin", "random"):
                     raise InputError("无效调度策略")
                 tasks = [self.store.submit({"name": f"合成巡检事件 {i + 1:02d}", "events": [DEMO_EVENTS[i % len(DEMO_EVENTS)]], "compute_loops": 250000 + (i % 3) * 100000, "deadline_ms": 5000,
                                             "policy": policy, "privacy": "local_only"}) for i in range(count)]

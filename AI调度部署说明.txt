@@ -1,0 +1,50 @@
+版本：2.2.0-qwen-scheduler
+分支：codex/qwen-scheduler，基于原双机版 4a61efd，未沿用误改为 Qwen 分类的分支。
+
+架构
+A 的 Qwen3.5-9B Q6_K 只做任务分配决策。A/B 执行原来的贝叶斯分类或 CPU 压测任务。
+worker 不调用、下载或加载 Qwen；B 不需要部署模型。
+配置检测来自已安装执行端的电脑自报，不是扫描局域网后远程读取任意电脑。
+旧版 B 可以继续工作；未上报的硬件配置标为未知，仍可根据历史实际耗时分配任务。
+
+资源采集
+Windows：CPU 型号、物理/逻辑核心、总/可用内存、整机 CPU 使用率、NVIDIA GPU/显存/利用率、工作盘空闲空间。
+核心信息启动时采集；动态指标每 5 秒采样，通过心跳上报。重复旧样本不刷新采样年龄。
+超过 15 秒的数据标记过期，规则估计不再采用过期负载惩罚。
+无 NVIDIA 工具、权限不足或非 Windows 系统时，对应字段可能未知；不伪装成零负载。
+并发槽仍由 --concurrency 明确配置；更多核心并不自动代表更快，历史实测耗时优先。
+
+Qwen 调度
+默认模型接口 http://127.0.0.1:8086/v1，alias=qwen3.5-9b。
+可用 SUANLIN_SCHEDULER_URL 修改为 A 的其他回环 HTTP 地址，不允许转发到外部服务。
+启动已部署模型时使用支持 Qwen3.5 的 llama.cpp，--alias qwen3.5-9b --reasoning off。
+接口使用 llama.cpp 的结构化 JSON 输出；参考 https://github.com/ggml-org/llama.cpp/tree/master/tools/server 。
+任务正文不传给调度模型；只传数量、长度、人工负载次数、时限、符合约束的节点与配置/负载/完成时间估计。
+每批最多 8 个任务，每任务最多 4 个候选节点。短暂合并窗口为 60 ms。
+模型在独立线程调用，不占数据库锁；单次接口超时 3 秒，任务等候决策最多约 4 秒或至时限临近。
+超时、输出不完整、无效节点、节点离线或信任撤销时自动回退规则调度。
+每项任务记录 source、reason、model_ms、wait_ms 和实际选择节点。模型等待时间包含在总完成时延内。
+硬件自报不构成可信证明。GPU 仅作为配置展示；现有任务使用 CPU，不会因显卡强就自动指派更多 CPU 任务。
+
+启动
+python launch.py --host 127.0.0.1 --port 8768 --workers 1 --concurrency 4 --scheduler qwen --data-dir .local/ai-live --no-browser
+使用规则基线：--scheduler rules，或在任务策略中选择 smart/fixed/round_robin/random。
+新任务默认使用 ai（启动启用 Qwen 时），前端也提供显式 Qwen AI 调度选项。
+旧仿真页面保留原四策略历史结果，不是 Qwen 实测证据。
+
+局域网切换
+先确认旧协调器无排队/运行任务，停止并备份完整数据目录。
+然后用本分支 launch.py --host 0.0.0.0 --port 8765 启动，--data-dir 指向原数据目录以沿用令牌。
+只运行一个协调器访问该数据库。Qwen 仍只监听 A 的回环地址，不需要开放模型端口给 B。
+保留旧源码与升级前备份作为回滚点。B 原连接地址和凭证可以继续使用。
+本轮自动化尚未替换 8765 局域网服务；8768 是实际运行的新版本机预览。
+
+测试
+python -m unittest discover -s tests -v
+python tools/check_ai_scheduler.py
+完整回归包含原有 34 项与新增 10 项测试。
+后者需要真实模型接口；启动两个本机 worker，不能称为双机测试。
+首轮模型输出过长导致全部回退，该记录保存在本机 .local/ai-smoke-iteration1.json。
+迭代后压缩为按任务顺序的节点数组，并合并短时到达任务：一次调用约 2.06 秒决定 8 项任务，8/8 完成且均为 Qwen 决策。
+实际工作台测试确认：policy=ai、source=qwen，而执行结果 model=char-bigram-naive-bayes-v1。
+这证明分工正确，不证明 Qwen 更快。短任务的模型决策开销可能超过调度收益，必须通过真实双机对照衡量。

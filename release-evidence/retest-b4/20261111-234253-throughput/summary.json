@@ -1,0 +1,44 @@
+{
+  "status": "complete",
+  "trials": [
+    {
+      "submitted": 24,
+      "completed": 24,
+      "failed": 0,
+      "cancelled": 0,
+      "deadline_rate": 1.0,
+      "server_makespan_s": 58.27753019332886,
+      "throughput_tasks_s": 0.4118225312634702,
+      "mean_latency_ms": 29863.657666666666,
+      "p95_latency_ms": 48805.697,
+      "nodes": {
+        "local-1": {
+          "completed": 15,
+          "capacity": 4,
+          "peak_inflight": 4,
+          "mean_compute_ms": 11306.085066666667,
+          "mean_queue_ms": 15935.310777028402
+        },
+        "office-b": {
+          "completed": 9,
+          "capacity": 4,
+          "peak_inflight": 4,
+          "mean_compute_ms": 18489.835555555557,
+          "mean_queue_ms": 15358.769337336222
+        }
+      },
+      "round": 1,
+      "policy": "ai",
+      "ai_sources": {
+        "qwen": 6,
+        "qwen_guarded": 18
+      }
+    }
+  ],
+  "consistency_mismatches": [],
+  "notes": [
+    "Report every strategy and all failures.",
+    "Model overhead is included. No guarantee AI beats rules.",
+    "Seeded inputs generated locally; full file transfer is not benchmarked."
+  ]
+}

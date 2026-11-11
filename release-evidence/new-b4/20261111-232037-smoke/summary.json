@@ -1,0 +1,144 @@
+{
+  "status": "complete",
+  "trials": [
+    {
+      "submitted": 6,
+      "completed": 6,
+      "failed": 0,
+      "cancelled": 0,
+      "deadline_rate": 1.0,
+      "server_makespan_s": 1.6197850704193115,
+      "throughput_tasks_s": 3.7041951488334117,
+      "mean_latency_ms": 963.9808333333333,
+      "p95_latency_ms": 1354.931,
+      "nodes": {
+        "local-1": {
+          "completed": 6,
+          "capacity": 4,
+          "peak_inflight": 3,
+          "mean_compute_ms": 206.57583333333332,
+          "mean_queue_ms": 584.689180056254
+        },
+        "office-b": {
+          "completed": 0,
+          "capacity": 4,
+          "peak_inflight": 0,
+          "mean_compute_ms": null,
+          "mean_queue_ms": null
+        }
+      },
+      "round": 1,
+      "policy": "fixed_A",
+      "ai_sources": {}
+    },
+    {
+      "submitted": 6,
+      "completed": 6,
+      "failed": 0,
+      "cancelled": 0,
+      "deadline_rate": 1.0,
+      "server_makespan_s": 1.9599006175994873,
+      "throughput_tasks_s": 3.061379717992477,
+      "mean_latency_ms": 1091.0578333333333,
+      "p95_latency_ms": 1519.364,
+      "nodes": {
+        "local-1": {
+          "completed": 0,
+          "capacity": 4,
+          "peak_inflight": 0,
+          "mean_compute_ms": null,
+          "mean_queue_ms": null
+        },
+        "office-b": {
+          "completed": 6,
+          "capacity": 4,
+          "peak_inflight": 3,
+          "mean_compute_ms": 218.2395,
+          "mean_queue_ms": 647.3076740900675
+        }
+      },
+      "round": 1,
+      "policy": "fixed_B",
+      "ai_sources": {}
+    },
+    {
+      "submitted": 6,
+      "completed": 6,
+      "failed": 0,
+      "cancelled": 0,
+      "deadline_rate": 1.0,
+      "server_makespan_s": 1.6657931804656982,
+      "throughput_tasks_s": 3.6018877195322694,
+      "mean_latency_ms": 966.9936666666667,
+      "p95_latency_ms": 1132.872,
+      "nodes": {
+        "local-1": {
+          "completed": 4,
+          "capacity": 4,
+          "peak_inflight": 2,
+          "mean_compute_ms": 169.43725,
+          "mean_queue_ms": 647.859513759613
+        },
+        "office-b": {
+          "completed": 2,
+          "capacity": 4,
+          "peak_inflight": 2,
+          "mean_compute_ms": 231.135,
+          "mean_queue_ms": 297.33502864837646
+        }
+      },
+      "round": 1,
+      "policy": "smart",
+      "ai_sources": {}
+    },
+    {
+      "submitted": 6,
+      "completed": 6,
+      "failed": 0,
+      "cancelled": 0,
+      "deadline_rate": 1.0,
+      "server_makespan_s": 3.596888780593872,
+      "throughput_tasks_s": 1.6681082919137014,
+      "mean_latency_ms": 2875.6866666666665,
+      "p95_latency_ms": 3313.401,
+      "nodes": {
+        "local-1": {
+          "completed": 5,
+          "capacity": 4,
+          "peak_inflight": 4,
+          "mean_compute_ms": 233.4802,
+          "mean_queue_ms": 2502.598237991333
+        },
+        "office-b": {
+          "completed": 1,
+          "capacity": 4,
+          "peak_inflight": 1,
+          "mean_compute_ms": 144.916,
+          "mean_queue_ms": 1987.398386001587
+        }
+      },
+      "round": 1,
+      "policy": "ai",
+      "ai_sources": {
+        "qwen_guarded": 6
+      }
+    }
+  ],
+  "consistency_mismatches": [
+    {
+      "round": 1,
+      "policy": "fixed_B",
+      "index": 2
+    },
+    {
+      "round": 1,
+      "policy": "fixed_B",
+      "index": 5
+    }
+  ],
+  "notes": [
+    "Report every strategy and all failures.",
+    "Model overhead is included. No guarantee AI beats rules.",
+    "Seeded inputs generated locally; full file transfer is not benchmarked."
+  ]
+}

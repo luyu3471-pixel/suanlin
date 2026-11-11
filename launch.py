@@ -18,7 +18,9 @@ def main():
     parser.add_argument('--concurrency', type=int, choices=range(1, 33), default=1)
     parser.add_argument('--stop-file', help='Gracefully stop this coordinator when the file appears')
     parser.add_argument("--data-dir")
+    parser.add_argument("--scheduler", choices=("qwen", "rules"), default="qwen")
     args = parser.parse_args()
+    os.environ["SUANLIN_AI_SCHEDULER"] = "1" if args.scheduler == "qwen" else "0"
     try:
         server = create_server(args.host, args.port, args.data_dir)
     except OSError as exc:

@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "pageErrors": [],
+  "task": "8cc1efa24840",
+  "source": "qwen_guarded",
+  "detail": "throughput-5\n8cc1efa24840\n已完成\n已提交\n2026/11/11 23:42:55\n最近一次开始\n2026/11/11 23:42:59\n已完成\n2026/11/11 23:43:09\n已收到业务处理结果，请查看统计与校验摘要。\n调度决策：Qwen 方案经排程保护调整 · 模型调用 2,106.4 ms · batch_plan_regression · 模型建议 local-1 → 最终节点 local-1\n执行节点\n本机执行节点 1\n完成时延\n13,614.2 ms\n调度策略\nQwen AI 调度\n派发尝试\n1 次\n完成时限\n300,000 ms · 按时完成\n计算耗时 / 附加负载\n9,131.5 ms / 0 ms\n业务任务：archive\n\n处理规模 400,000 · 合成输入，真实业务算法\n\n{\n  \"records\": 400000,\n  \"uncompressed_bytes\": 93589539,\n  \"compressed_bytes\": 7582457,\n  \"compression_ratio\": 0.081018,\n  \"archive_sha256\": \"1c43d8b0afa4ad11395c343a1a96f854adb6b7313b0071928d60e94b002242f1\",\n  \"artifact_retained\": false,\n  \"purpose\": \"redact + compress + integrity validation; benchmark discards archive bytes\"\n}\n已提交的文本\n业务处理：archive\n执行已结束\n刷新详情\n\n合成业务输入，实际执行解析、检索或压缩算法。完整统计结果保存在本地数据库。"
+}

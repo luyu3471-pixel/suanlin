@@ -1,0 +1,174 @@
+{
+  "status": "complete",
+  "trials": [
+    {
+      "submitted": 12,
+      "completed": 12,
+      "failed": 0,
+      "cancelled": 0,
+      "deadline_rate": 1.0,
+      "server_makespan_s": 32.30481767654419,
+      "throughput_tasks_s": 0.3714616228499235,
+      "mean_latency_ms": 11571.92725,
+      "p95_latency_ms": 31846.344,
+      "nodes": {
+        "local-1": {
+          "completed": 12,
+          "capacity": 4,
+          "peak_inflight": 4,
+          "mean_compute_ms": 8249.988833333333,
+          "mean_queue_ms": 3183.2027236620584
+        },
+        "office-b": {
+          "completed": 0,
+          "capacity": 4,
+          "peak_inflight": 0,
+          "mean_compute_ms": null,
+          "mean_queue_ms": null
+        }
+      },
+      "round": 1,
+      "policy": "fixed_A",
+      "ai_sources": {}
+    },
+    {
+      "submitted": 12,
+      "completed": 12,
+      "failed": 0,
+      "cancelled": 0,
+      "deadline_rate": 1.0,
+      "server_makespan_s": 19.07997441291809,
+      "throughput_tasks_s": 0.6289316610338536,
+      "mean_latency_ms": 7878.7108333333335,
+      "p95_latency_ms": 18516.495,
+      "nodes": {
+        "local-1": {
+          "completed": 0,
+          "capacity": 4,
+          "peak_inflight": 0,
+          "mean_compute_ms": null,
+          "mean_queue_ms": null
+        },
+        "office-b": {
+          "completed": 12,
+          "capacity": 4,
+          "peak_inflight": 4,
+          "mean_compute_ms": 5097.01025,
+          "mean_queue_ms": 2628.7264426549277
+        }
+      },
+      "round": 1,
+      "policy": "fixed_B",
+      "ai_sources": {}
+    },
+    {
+      "submitted": 12,
+      "completed": 12,
+      "failed": 0,
+      "cancelled": 0,
+      "deadline_rate": 1.0,
+      "server_makespan_s": 24.56047558784485,
+      "throughput_tasks_s": 0.4885898873203776,
+      "mean_latency_ms": 8616.88175,
+      "p95_latency_ms": 24064.729,
+      "nodes": {
+        "local-1": {
+          "completed": 4,
+          "capacity": 4,
+          "peak_inflight": 4,
+          "mean_compute_ms": 4877.02025,
+          "mean_queue_ms": 813.1209015846252
+        },
+        "office-b": {
+          "completed": 8,
+          "capacity": 4,
+          "peak_inflight": 4,
+          "mean_compute_ms": 8384.295375,
+          "mean_queue_ms": 1401.635229587555
+        }
+      },
+      "round": 1,
+      "policy": "smart",
+      "ai_sources": {}
+    },
+    {
+      "submitted": 12,
+      "completed": 12,
+      "failed": 0,
+      "cancelled": 0,
+      "deadline_rate": 1.0,
+      "server_makespan_s": 32.14259934425354,
+      "throughput_tasks_s": 0.37333632764038926,
+      "mean_latency_ms": 12676.789416666667,
+      "p95_latency_ms": 31726.711,
+      "nodes": {
+        "local-1": {
+          "completed": 7,
+          "capacity": 4,
+          "peak_inflight": 4,
+          "mean_compute_ms": 11759.219714285715,
+          "mean_queue_ms": 4651.291983468192
+        },
+        "office-b": {
+          "completed": 5,
+          "capacity": 4,
+          "peak_inflight": 4,
+          "mean_compute_ms": 3926.336,
+          "mean_queue_ms": 3062.7326488494873
+        }
+      },
+      "round": 1,
+      "policy": "ai",
+      "ai_sources": {
+        "qwen": 12
+      }
+    }
+  ],
+  "consistency_mismatches": [
+    {
+      "round": 1,
+      "policy": "fixed_B",
+      "index": 2
+    },
+    {
+      "round": 1,
+      "policy": "fixed_B",
+      "index": 5
+    },
+    {
+      "round": 1,
+      "policy": "fixed_B",
+      "index": 8
+    },
+    {
+      "round": 1,
+      "policy": "fixed_B",
+      "index": 11
+    },
+    {
+      "round": 1,
+      "policy": "smart",
+      "index": 5
+    },
+    {
+      "round": 1,
+      "policy": "ai",
+      "index": 2
+    },
+    {
+      "round": 1,
+      "policy": "ai",
+      "index": 5
+    },
+    {
+      "round": 1,
+      "policy": "ai",
+      "index": 11
+    }
+  ],
+  "notes": [
+    "Report every strategy and all failures.",
+    "Model overhead is included. No guarantee AI beats rules.",
+    "Seeded inputs generated locally; full file transfer is not benchmarked."
+  ]
+}

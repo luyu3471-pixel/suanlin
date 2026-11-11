@@ -1,0 +1,1228 @@
+[
+  {
+    "id": "2ebc73bd693b",
+    "name": "smoke-log_analysis-0",
+    "created_at": 1794410439.879633,
+    "deadline_at": 1794410739.879633,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 10000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 131,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 10000,
+        "seed": 2030
+      },
+      "summary": {
+        "records": 10000,
+        "input_bytes": 2299302,
+        "status_counts": {
+          "200": 8980,
+          "500": 303,
+          "400": 717
+        },
+        "alert_terms": {
+          "温度偏高": 1207,
+          "告警": 1240,
+          "冒烟": 1310,
+          "断线": 1234,
+          "超时": 1289
+        },
+        "p95_latency_ms": 173.79,
+        "top_error_devices": [
+          [
+            "edge-396",
+            {
+              "count": 22,
+              "errors": 6,
+              "latency": 1390.1100000000001
+            }
+          ],
+          [
+            "edge-123",
+            {
+              "count": 21,
+              "errors": 6,
+              "latency": 1319.8
+            }
+          ],
+          [
+            "edge-417",
+            {
+              "count": 20,
+              "errors": 6,
+              "latency": 1392.07
+            }
+          ],
+          [
+            "edge-432",
+            {
+              "count": 30,
+              "errors": 5,
+              "latency": 2017.0699999999995
+            }
+          ],
+          [
+            "edge-027",
+            {
+              "count": 26,
+              "errors": 5,
+              "latency": 2178.5
+            }
+          ],
+          [
+            "edge-229",
+            {
+              "count": 26,
+              "errors": 5,
+              "latency": 2135.21
+            }
+          ],
+          [
+            "edge-448",
+            {
+              "count": 25,
+              "errors": 5,
+              "latency": 1988.8399999999997
+            }
+          ],
+          [
+            "edge-435",
+            {
+              "count": 24,
+              "errors": 5,
+              "latency": 1452.8
+            }
+          ],
+          [
+            "edge-220",
+            {
+              "count": 23,
+              "errors": 5,
+              "latency": 1918.22
+            }
+          ],
+          [
+            "edge-352",
+            {
+              "count": 23,
+              "errors": 5,
+              "latency": 1355.7199999999998
+            }
+          ]
+        ]
+      },
+      "digest": "f3dba3a439c25ccbfe198d6c2a00e358ba88468ae1d0fb8def0931372edeb2f3",
+      "compute_ms": 271.757,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "started_at": 1794410440.0731556,
+    "predicted_ms": 643.0700720388917,
+    "finished_at": 1794410440.4447203,
+    "latency_ms": 565.087,
+    "deadline_met": true
+  },
+  {
+    "id": "8ef1e0e3ac49",
+    "name": "smoke-document_search-1",
+    "created_at": 1794410439.9233222,
+    "deadline_at": 1794410739.9233222,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 1000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 136,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "document_search",
+        "units": 1000,
+        "seed": 2031
+      },
+      "summary": {
+        "documents": 1000,
+        "vocabulary": 304,
+        "queries": 8,
+        "rankings": [
+          {
+            "query": "配电柜冒烟",
+            "top10": [
+              [
+                8.45164,
+                322
+              ],
+              [
+                8.433658,
+                931
+              ],
+              [
+                7.073196,
+                578
+              ],
+              [
+                7.058082,
+                457
+              ],
+              [
+                7.058082,
+                542
+              ],
+              [
+                7.028048,
+                829
+              ],
+              [
+                7.013126,
+                763
+              ],
+              [
+                6.998268,
+                534
+              ],
+              [
+                6.954069,
+                432
+              ],
+              [
+                5.719797,
+                774
+              ]
+            ]
+          },
+          {
+            "query": "门禁夜间访问",
+            "top10": [
+              [
+                8.285546,
+                697
+              ],
+              [
+                8.250512,
+                538
+              ],
+              [
+                7.023924,
+                876
+              ],
+              [
+                6.934066,
+                76
+              ],
+              [
+                6.904622,
+                454
+              ],
+              [
+                6.889993,
+                173
+              ],
+              [
+                6.846478,
+                705
+              ],
+              [
+                6.832094,
+                241
+              ],
+              [
+                6.803508,
+                993
+              ],
+              [
+                5.692913,
+                222
+              ]
+            ]
+          },
+          {
+            "query": "网络请求超时",
+            "top10": [
+              [
+                8.140107,
+                571
+              ],
+              [
+                6.842027,
+                778
+              ],
+              [
+                6.812599,
+                356
+              ],
+              [
+                6.754496,
+                673
+              ],
+              [
+                6.754496,
+                881
+              ],
+              [
+                6.697375,
+                228
+              ],
+              [
+                6.655165,
+                236
+              ],
+              [
+                5.545485,
+                572
+              ],
+              [
+                5.533377,
+                181
+              ],
+              [
+                5.533377,
+                544
+              ]
+            ]
+          },
+          {
+            "query": "清理磁盘备份",
+            "top10": [
+              [
+                7.18204,
+                19
+              ],
+              [
+                6.195496,
+                946
+              ],
+              [
+                6.169132,
+                758
+              ],
+              [
+                6.130005,
+                436
+              ],
+              [
+                6.065883,
+                736
+              ],
+              [
+                6.003089,
+                390
+              ],
+              [
+                5.151905,
+                998
+              ],
+              [
+                5.11916,
+                738
+              ],
+              [
+                5.11916,
+                964
+              ],
+              [
+                5.09756,
+                386
+              ]
+            ]
+          },
+          {
+            "query": "消防出口畅通",
+            "top10": [
+              [
+                7.003604,
+                49
+              ],
+              [
+                6.988412,
+                279
+              ],
+              [
+                6.973286,
+                667
+              ],
+              [
+                6.958224,
+                730
+              ],
+              [
+                6.928297,
+                95
+              ],
+              [
+                6.928297,
+                746
+              ],
+              [
+                6.913429,
+                118
+              ],
+              [
+                6.840038,
+                584
+              ],
+              [
+                6.768189,
+                153
+              ],
+              [
+                5.664454,
+                670
+              ]
+            ]
+          },
+          {
+            "query": "检查摄像头供电",
+            "top10": [
+              [
+                8.980511,
+                621
+              ],
+              [
+                8.561312,
+                691
+              ],
+              [
+                8.319456,
+                827
+              ],
+              [
+                7.839581,
+                650
+              ],
+              [
+                7.754553,
+                47
+              ],
+              [
+                7.704416,
+                567
+              ],
+              [
+                7.687847,
+                856
+              ],
+              [
+                7.622279,
+                929
+              ],
+              [
+                7.55235,
+                247
+              ],
+              [
+                7.502881,
+                508
+              ]
+            ]
+          },
+          {
+            "query": "机房线路散热",
+            "top10": [
+              [
+                5.165924,
+                646
+              ],
+              [
+                5.155071,
+                852
+              ],
+              [
+                5.133502,
+                967
+              ],
+              [
+                5.122785,
+                896
+              ],
+              [
+                5.112112,
+                461
+              ],
+              [
+                5.0909,
+                948
+              ],
+              [
+                5.08036,
+                431
+              ],
+              [
+                5.038632,
+                859
+              ],
+              [
+                4.176704,
+                671
+              ],
+              [
+                4.176704,
+                838
+              ]
+            ]
+          },
+          {
+            "query": "巡查仓库设备",
+            "top10": [
+              [
+                3.966118,
+                279
+              ],
+              [
+                3.887217,
+                189
+              ],
+              [
+                3.877114,
+                70
+              ],
+              [
+                3.860367,
+                778
+              ],
+              [
+                3.84499,
+                786
+              ],
+              [
+                3.843262,
+                480
+              ],
+              [
+                3.827652,
+                559
+              ],
+              [
+                3.803452,
+                26
+              ],
+              [
+                3.802872,
+                806
+              ],
+              [
+                3.80226,
+                28
+              ]
+            ]
+          }
+        ]
+      },
+      "digest": "14051f5f9d2e81b5d2aea98ba7be01f9ce578218b5c8555759716ab7a1aa4210",
+      "compute_ms": 125.155,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "started_at": 1794410440.2649229,
+    "predicted_ms": 469.1160425663863,
+    "finished_at": 1794410440.628816,
+    "latency_ms": 705.494,
+    "deadline_met": true
+  },
+  {
+    "id": "06957c2c0ac8",
+    "name": "smoke-archive-2",
+    "created_at": 1794410439.973045,
+    "deadline_at": 1794410739.973045,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 10000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 121,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "archive",
+        "units": 10000,
+        "seed": 2032
+      },
+      "summary": {
+        "records": 10000,
+        "uncompressed_bytes": 2339469,
+        "compressed_bytes": 190128,
+        "compression_ratio": 0.08127,
+        "archive_sha256": "821ca5883d081e5302b22db41e452ac48347e7838f2b249b511120f397941a09",
+        "artifact_retained": false,
+        "purpose": "redact + compress + integrity validation; benchmark discards archive bytes"
+      },
+      "digest": "50b6ea141678d493a7e6b7e14143f31562a9096641763d176f1200aa5e321738",
+      "compute_ms": 218.005,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "started_at": 1794410440.3434765,
+    "predicted_ms": 578.2795492224049,
+    "finished_at": 1794410440.7541287,
+    "latency_ms": 781.084,
+    "deadline_met": true
+  },
+  {
+    "id": "4803b7067706",
+    "name": "smoke-log_analysis-3",
+    "created_at": 1794410440.0233705,
+    "deadline_at": 1794410740.0233705,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 10000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 131,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 10000,
+        "seed": 2033
+      },
+      "summary": {
+        "records": 10000,
+        "input_bytes": 2298961,
+        "status_counts": {
+          "400": 674,
+          "200": 9021,
+          "500": 305
+        },
+        "alert_terms": {
+          "温度偏高": 1186,
+          "超时": 1252,
+          "告警": 1265,
+          "断线": 1263,
+          "冒烟": 1265
+        },
+        "p95_latency_ms": 171.66,
+        "top_error_devices": [
+          [
+            "edge-033",
+            {
+              "count": 26,
+              "errors": 7,
+              "latency": 2505.76
+            }
+          ],
+          [
+            "edge-427",
+            {
+              "count": 24,
+              "errors": 7,
+              "latency": 2225.47
+            }
+          ],
+          [
+            "edge-208",
+            {
+              "count": 28,
+              "errors": 6,
+              "latency": 1873.0999999999995
+            }
+          ],
+          [
+            "edge-412",
+            {
+              "count": 24,
+              "errors": 6,
+              "latency": 1557.8799999999997
+            }
+          ],
+          [
+            "edge-437",
+            {
+              "count": 23,
+              "errors": 6,
+              "latency": 1243.1299999999999
+            }
+          ],
+          [
+            "edge-100",
+            {
+              "count": 22,
+              "errors": 6,
+              "latency": 1777.07
+            }
+          ],
+          [
+            "edge-327",
+            {
+              "count": 22,
+              "errors": 6,
+              "latency": 1203.24
+            }
+          ],
+          [
+            "edge-121",
+            {
+              "count": 28,
+              "errors": 5,
+              "latency": 1906.2500000000002
+            }
+          ],
+          [
+            "edge-152",
+            {
+              "count": 28,
+              "errors": 5,
+              "latency": 1717.6500000000005
+            }
+          ],
+          [
+            "edge-278",
+            {
+              "count": 28,
+              "errors": 5,
+              "latency": 1675.64
+            }
+          ]
+        ]
+      },
+      "digest": "bdf6c2088c5b126ed7d33cfa1f82f0cebd802f17ee4937923a80cf86210bda89",
+      "compute_ms": 284.385,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "started_at": 1794410440.8849256,
+    "predicted_ms": 542.5931394301405,
+    "finished_at": 1794410441.3783016,
+    "latency_ms": 1354.931,
+    "deadline_met": true
+  },
+  {
+    "id": "7c929d4789f4",
+    "name": "smoke-document_search-4",
+    "created_at": 1794410440.1585438,
+    "deadline_at": 1794410740.1585438,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 1000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 136,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "document_search",
+        "units": 1000,
+        "seed": 2034
+      },
+      "summary": {
+        "documents": 1000,
+        "vocabulary": 305,
+        "queries": 8,
+        "rankings": [
+          {
+            "query": "配电柜冒烟",
+            "top10": [
+              [
+                8.215244,
+                780
+              ],
+              [
+                6.933994,
+                262
+              ],
+              [
+                6.919178,
+                292
+              ],
+              [
+                6.919178,
+                727
+              ],
+              [
+                6.919178,
+                845
+              ],
+              [
+                6.889735,
+                657
+              ],
+              [
+                6.846037,
+                132
+              ],
+              [
+                6.760283,
+                305
+              ],
+              [
+                5.643879,
+                489
+              ],
+              [
+                5.631609,
+                673
+              ]
+            ]
+          },
+          {
+            "query": "门禁夜间访问",
+            "top10": [
+              [
+                8.204926,
+                969
+              ],
+              [
+                6.910332,
+                95
+              ],
+              [
+                6.895629,
+                404
+              ],
+              [
+                6.880989,
+                643
+              ],
+              [
+                6.808709,
+                952
+              ],
+              [
+                6.794435,
+                300
+              ],
+              [
+                6.780221,
+                517
+              ],
+              [
+                6.75197,
+                251
+              ],
+              [
+                5.66104,
+                877
+              ],
+              [
+                5.624201,
+                678
+              ]
+            ]
+          },
+          {
+            "query": "网络请求超时",
+            "top10": [
+              [
+                9.547753,
+                822
+              ],
+              [
+                8.398211,
+                905
+              ],
+              [
+                8.166413,
+                551
+              ],
+              [
+                6.998509,
+                999
+              ],
+              [
+                6.952965,
+                393
+              ],
+              [
+                6.937916,
+                500
+              ],
+              [
+                6.937916,
+                871
+              ],
+              [
+                6.863634,
+                200
+              ],
+              [
+                6.863634,
+                216
+              ],
+              [
+                6.863634,
+                427
+              ]
+            ]
+          },
+          {
+            "query": "清理磁盘备份",
+            "top10": [
+              [
+                6.157991,
+                91
+              ],
+              [
+                6.145161,
+                158
+              ],
+              [
+                5.28616,
+                183
+              ],
+              [
+                5.241076,
+                236
+              ],
+              [
+                5.241076,
+                816
+              ],
+              [
+                5.196754,
+                723
+              ],
+              [
+                5.196754,
+                892
+              ],
+              [
+                5.174873,
+                119
+              ],
+              [
+                5.164001,
+                175
+              ],
+              [
+                5.153175,
+                217
+              ]
+            ]
+          },
+          {
+            "query": "消防出口畅通",
+            "top10": [
+              [
+                8.328031,
+                323
+              ],
+              [
+                7.169322,
+                21
+              ],
+              [
+                7.029962,
+                742
+              ],
+              [
+                6.999725,
+                661
+              ],
+              [
+                6.984704,
+                633
+              ],
+              [
+                6.984704,
+                988
+              ],
+              [
+                6.954855,
+                841
+              ],
+              [
+                6.940026,
+                341
+              ],
+              [
+                6.866819,
+                371
+              ],
+              [
+                5.685366,
+                424
+              ]
+            ]
+          },
+          {
+            "query": "检查摄像头供电",
+            "top10": [
+              [
+                8.536622,
+                155
+              ],
+              [
+                8.13204,
+                624
+              ],
+              [
+                8.097509,
+                744
+              ],
+              [
+                7.853413,
+                351
+              ],
+              [
+                7.639023,
+                35
+              ],
+              [
+                7.639023,
+                482
+              ],
+              [
+                7.35571,
+                377
+              ],
+              [
+                7.292637,
+                558
+              ],
+              [
+                7.180195,
+                508
+              ],
+              [
+                6.934067,
+                670
+              ]
+            ]
+          },
+          {
+            "query": "机房线路散热",
+            "top10": [
+              [
+                5.980282,
+                187
+              ],
+              [
+                5.108941,
+                1
+              ],
+              [
+                5.087609,
+                332
+              ],
+              [
+                5.055944,
+                104
+              ],
+              [
+                5.02467,
+                353
+              ],
+              [
+                5.02467,
+                771
+              ],
+              [
+                5.014331,
+                8
+              ],
+              [
+                5.014331,
+                531
+              ],
+              [
+                4.99378,
+                435
+              ],
+              [
+                4.130449,
+                178
+              ]
+            ]
+          },
+          {
+            "query": "巡查仓库设备",
+            "top10": [
+              [
+                3.979744,
+                21
+              ],
+              [
+                3.965509,
+                262
+              ],
+              [
+                3.943164,
+                424
+              ],
+              [
+                3.915446,
+                596
+              ],
+              [
+                3.902309,
+                341
+              ],
+              [
+                3.883804,
+                718
+              ],
+              [
+                3.880214,
+                382
+              ],
+              [
+                3.871887,
+                260
+              ],
+              [
+                3.862727,
+                37
+              ],
+              [
+                3.856612,
+                871
+              ]
+            ]
+          }
+        ]
+      },
+      "digest": "229e424175a9b9dfb73d26351908452a604958af8186567b0f443ce3aded94aa",
+      "compute_ms": 120.1,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "started_at": 1794410440.9966323,
+    "predicted_ms": 371.32017469388774,
+    "finished_at": 1794410441.2450354,
+    "latency_ms": 1086.492,
+    "deadline_met": true
+  },
+  {
+    "id": "eb32eb1f32d9",
+    "name": "smoke-archive-5",
+    "created_at": 1794410440.2086208,
+    "deadline_at": 1794410740.2086208,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 10000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 121,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "archive",
+        "units": 10000,
+        "seed": 2035
+      },
+      "summary": {
+        "records": 10000,
+        "uncompressed_bytes": 2340127,
+        "compressed_bytes": 190518,
+        "compression_ratio": 0.081414,
+        "archive_sha256": "5900eff765ee5794323aa256f587fdcf47a06a0dbcb3d7bb691198bcb4d79e07",
+        "artifact_retained": false,
+        "purpose": "redact + compress + integrity validation; benchmark discards archive bytes"
+      },
+      "digest": "4b3587af943f5f4a69b076eb16f83795b63b0c194c1a3aca1522adf4d9edd487",
+      "compute_ms": 220.053,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "started_at": 1794410441.1115575,
+    "predicted_ms": 479.29007802189705,
+    "finished_at": 1794410441.499418,
+    "latency_ms": 1290.797,
+    "deadline_met": true
+  }
+]

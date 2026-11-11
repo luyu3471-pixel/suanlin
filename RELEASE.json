@@ -1,0 +1,20 @@
+{
+  "version": "2.4.1-slot-aware",
+  "commit": "ea8b630a0a8d4dc360ca8bcca413fbb5d397b59f",
+  "branch": "codex/business-workloads",
+  "date": "2026-11-11",
+  "source": "git archive HEAD; tracked source files preserved byte-for-byte",
+  "additions": [
+    "00-新版部署必读.txt",
+    "release-evidence/",
+    "MANIFEST.sha256"
+  ],
+  "excluded": [
+    "GGUF models",
+    "model runtime",
+    "Python runtime",
+    "credentials",
+    "live databases",
+    ".local runtime files"
+  ]
+}

@@ -12,6 +12,8 @@ import urllib.error
 import urllib.request
 import uuid
 from .inference import run_task
+from .resources import Monitor
+from .business import KINDS
 
 OFFLINE_REJOIN_SECONDS = 11
 
@@ -23,6 +25,7 @@ class Worker:
         self.name, self.id = name or socket.gethostname(), node_id or f'node-{uuid.uuid4().hex[:10]}'
         self.bandwidth, self.capacity = bandwidth, concurrency
         self.stop = stop or threading.Event()
+        self.monitor = Monitor(self.stop)
         self.session = None
         self.rtt_ms = 1
         self.active = {}
@@ -47,7 +50,7 @@ class Worker:
             if self.session:
                 with self.lock:
                     items = [{'id': k, 'lease': v[1]['lease']} for k, v in self.active.items()]
-                message = dict(self.identity(), rtt_ms=self.rtt_ms, active_tasks=items)
+                message = dict(self.identity(), rtt_ms=self.rtt_ms, active_tasks=items, resources=self.monitor.data, resource_sequence=self.monitor.sequence)
                 if len(items) == 1:
                     message.update(active_task=items[0]['id'], lease=items[0]['lease'])
                 try:
@@ -56,6 +59,7 @@ class Worker:
                     pass
 
     def run(self):
+        threading.Thread(target=self.monitor.run, daemon=True, name="resource-monitor").start()
         executor = ProcessPoolExecutor(max_workers=self.capacity) if self.capacity > 1 else nullcontext()
         with executor as pool:
             heart = threading.Thread(target=self.heartbeat, daemon=True)
@@ -65,7 +69,7 @@ class Worker:
                     try:
                         if not self.session:
                             result = self.post('/api/worker/register', dict(id=self.id, name=self.name,
-                                host=socket.gethostname(), bandwidth_mbps=self.bandwidth, capacity=self.capacity))
+                                host=socket.gethostname(), bandwidth_mbps=self.bandwidth, capacity=self.capacity, resources=self.monitor.data, workload_kinds=list(KINDS)))
                             if self.capacity > result.get('capacity', 1):
                                 raise RuntimeError('Upgrade coordinator A before enabling concurrent workers')
                             self.session = result['session']

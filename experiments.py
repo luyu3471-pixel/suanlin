@@ -10,6 +10,9 @@ import random
 import statistics
 from suanlin.scheduler import choose, POLICIES
 
+# This simulator has no model endpoint and cannot measure AI decision latency.
+POLICIES = {key: value for key, value in POLICIES.items() if key != 'ai'}
+
 PROFILES = {
     "normal": [("a-edge", 32, 3, 80, True), ("b-laptop", 65, 9, 40, True), ("c-cloud", 12, 80, 25, False)],
     "congested": [("a-edge", 32, 15, 8, True), ("b-laptop", 65, 25, 4, True), ("c-cloud", 12, 180, 1, False)],

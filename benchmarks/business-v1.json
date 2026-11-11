@@ -1,0 +1,316 @@
+{
+  "schema": 1,
+  "source": "seeded_synthetic_inputs_real_algorithms",
+  "input_generation_included_in_timing": true,
+  "network_transfer": "compact seeded specifications, not full log/document files",
+  "profiles": {
+    "smoke": [
+      {
+        "name": "smoke-log_analysis-0",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 10000,
+          "seed": 2030
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "smoke-document_search-1",
+        "workload": {
+          "kind": "document_search",
+          "units": 1000,
+          "seed": 2031
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "smoke-archive-2",
+        "workload": {
+          "kind": "archive",
+          "units": 10000,
+          "seed": 2032
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "smoke-log_analysis-3",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 10000,
+          "seed": 2033
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "smoke-document_search-4",
+        "workload": {
+          "kind": "document_search",
+          "units": 1000,
+          "seed": 2034
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "smoke-archive-5",
+        "workload": {
+          "kind": "archive",
+          "units": 10000,
+          "seed": 2035
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      }
+    ],
+    "standard": [
+      {
+        "name": "standard-log_analysis-0",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 1000000,
+          "seed": 2030
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "standard-document_search-1",
+        "workload": {
+          "kind": "document_search",
+          "units": 60000,
+          "seed": 2031
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "standard-archive-2",
+        "workload": {
+          "kind": "archive",
+          "units": 400000,
+          "seed": 2032
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "standard-log_analysis-3",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 1000000,
+          "seed": 2033
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "standard-document_search-4",
+        "workload": {
+          "kind": "document_search",
+          "units": 60000,
+          "seed": 2034
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "standard-archive-5",
+        "workload": {
+          "kind": "archive",
+          "units": 400000,
+          "seed": 2035
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      }
+    ],
+    "heavy": [
+      {
+        "name": "heavy-log_analysis-0",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 2000000,
+          "seed": 2030
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "heavy-document_search-1",
+        "workload": {
+          "kind": "document_search",
+          "units": 100000,
+          "seed": 2031
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "heavy-archive-2",
+        "workload": {
+          "kind": "archive",
+          "units": 500000,
+          "seed": 2032
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "heavy-log_analysis-3",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 2000000,
+          "seed": 2033
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "heavy-document_search-4",
+        "workload": {
+          "kind": "document_search",
+          "units": 100000,
+          "seed": 2034
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "heavy-archive-5",
+        "workload": {
+          "kind": "archive",
+          "units": 500000,
+          "seed": 2035
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      }
+    ],
+    "mixed_deadlines": [
+      {
+        "name": "mixed-log_analysis-0",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 1000000,
+          "seed": 2100
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-document_search-1",
+        "workload": {
+          "kind": "document_search",
+          "units": 6000,
+          "seed": 2101
+        },
+        "deadline_ms": 30000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-archive-2",
+        "workload": {
+          "kind": "archive",
+          "units": 400000,
+          "seed": 2102
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-log_analysis-3",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 100000,
+          "seed": 2103
+        },
+        "deadline_ms": 30000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-document_search-4",
+        "workload": {
+          "kind": "document_search",
+          "units": 60000,
+          "seed": 2104
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-archive-5",
+        "workload": {
+          "kind": "archive",
+          "units": 40000,
+          "seed": 2105
+        },
+        "deadline_ms": 30000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-log_analysis-6",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 1000000,
+          "seed": 2106
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-document_search-7",
+        "workload": {
+          "kind": "document_search",
+          "units": 6000,
+          "seed": 2107
+        },
+        "deadline_ms": 30000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-archive-8",
+        "workload": {
+          "kind": "archive",
+          "units": 400000,
+          "seed": 2108
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-log_analysis-9",
+        "workload": {
+          "kind": "log_analysis",
+          "units": 100000,
+          "seed": 2109
+        },
+        "deadline_ms": 30000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-document_search-10",
+        "workload": {
+          "kind": "document_search",
+          "units": 60000,
+          "seed": 2110
+        },
+        "deadline_ms": 300000,
+        "privacy": "local_only"
+      },
+      {
+        "name": "mixed-archive-11",
+        "workload": {
+          "kind": "archive",
+          "units": 40000,
+          "seed": 2111
+        },
+        "deadline_ms": 30000,
+        "privacy": "local_only"
+      }
+    ]
+  }
+}

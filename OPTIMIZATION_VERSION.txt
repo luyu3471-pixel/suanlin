@@ -1,3 +1,5 @@
-2.0.0-queue-capacity
-Base revision: 9867e8d522f9cc5043675b530453e9144c231c8c
-Queue-aware scheduling, per-node CPU capacity, renewable task leases and reproducible benchmarks.
+2.4.1-slot-aware
+Base: 0299c70fcc7528ab45dcda06fccdbdab83c4bcf9
+Real log analysis, document retrieval and redaction/compression on synthetic inputs; Qwen schedules only.
+Slot timeline model inputs, whole-batch plan guard, idle-node dispatch repair and capacity-aware calibration reuse.
+Bounded eight-task model batches; up to eight seconds of planning queue time for heavy jobs, four for short jobs.

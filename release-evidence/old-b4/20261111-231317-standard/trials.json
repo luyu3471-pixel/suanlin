@@ -1,0 +1,124 @@
+[
+  {
+    "submitted": 6,
+    "completed": 6,
+    "failed": 0,
+    "cancelled": 0,
+    "deadline_rate": 1.0,
+    "server_makespan_s": 28.337767601013184,
+    "throughput_tasks_s": 0.21173156913692373,
+    "mean_latency_ms": 18309.546333333332,
+    "p95_latency_ms": 28337.768,
+    "nodes": {
+      "local-1": {
+        "completed": 6,
+        "capacity": 4,
+        "peak_inflight": 4,
+        "mean_compute_ms": 14972.890333333333,
+        "mean_queue_ms": 3233.8460286458335
+      },
+      "office-b": {
+        "completed": 0,
+        "capacity": 4,
+        "peak_inflight": 0,
+        "mean_compute_ms": null,
+        "mean_queue_ms": null
+      }
+    },
+    "round": 1,
+    "policy": "fixed_A",
+    "ai_sources": {}
+  },
+  {
+    "submitted": 6,
+    "completed": 6,
+    "failed": 0,
+    "cancelled": 0,
+    "deadline_rate": 1.0,
+    "server_makespan_s": 23.643198490142822,
+    "throughput_tasks_s": 0.253772771162983,
+    "mean_latency_ms": 17566.5925,
+    "p95_latency_ms": 23211.66,
+    "nodes": {
+      "local-1": {
+        "completed": 0,
+        "capacity": 4,
+        "peak_inflight": 0,
+        "mean_compute_ms": null,
+        "mean_queue_ms": null
+      },
+      "office-b": {
+        "completed": 6,
+        "capacity": 4,
+        "peak_inflight": 4,
+        "mean_compute_ms": 13766.103,
+        "mean_queue_ms": 3585.02467473348
+      }
+    },
+    "round": 1,
+    "policy": "fixed_B",
+    "ai_sources": {}
+  },
+  {
+    "submitted": 6,
+    "completed": 6,
+    "failed": 0,
+    "cancelled": 0,
+    "deadline_rate": 1.0,
+    "server_makespan_s": 21.02949357032776,
+    "throughput_tasks_s": 0.28531357542845887,
+    "mean_latency_ms": 12986.9475,
+    "p95_latency_ms": 20830.731,
+    "nodes": {
+      "local-1": {
+        "completed": 4,
+        "capacity": 4,
+        "peak_inflight": 4,
+        "mean_compute_ms": 8666.48125,
+        "mean_queue_ms": 317.0056343078613
+      },
+      "office-b": {
+        "completed": 2,
+        "capacity": 4,
+        "peak_inflight": 2,
+        "mean_compute_ms": 20250.1285,
+        "mean_queue_ms": 370.800256729126
+      }
+    },
+    "round": 1,
+    "policy": "smart",
+    "ai_sources": {}
+  },
+  {
+    "submitted": 6,
+    "completed": 6,
+    "failed": 0,
+    "cancelled": 0,
+    "deadline_rate": 1.0,
+    "server_makespan_s": 22.883838415145874,
+    "throughput_tasks_s": 0.26219377584963394,
+    "mean_latency_ms": 14906.3635,
+    "p95_latency_ms": 22726.261,
+    "nodes": {
+      "local-1": {
+        "completed": 4,
+        "capacity": 4,
+        "peak_inflight": 4,
+        "mean_compute_ms": 8754.0305,
+        "mean_queue_ms": 2161.2377762794495
+      },
+      "office-b": {
+        "completed": 2,
+        "capacity": 4,
+        "peak_inflight": 2,
+        "mean_compute_ms": 20235.7675,
+        "mean_queue_ms": 1704.819917678833
+      }
+    },
+    "round": 1,
+    "policy": "ai",
+    "ai_sources": {
+      "qwen": 6
+    }
+  }
+]

@@ -43,6 +43,9 @@ class Classifier:
 MODEL = Classifier()
 
 def run_task(payload):
+    if payload.get('workload') is not None:
+        from .business import run
+        return run(payload['workload'])
     start = time.perf_counter()
     predictions = [MODEL.predict(x) for x in payload["events"]]
     classification_ms = (time.perf_counter() - start) * 1000

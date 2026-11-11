@@ -1,0 +1,37 @@
+评测完成：2条，准确率 100.0%；数据来源、重复与缺失类别请查看 metrics.json。保存至 D:\coedx\AI+6G\suanlin-business-workloads\tmp\field-tool-tests\tmpqbkgqfcb\20261111-233916-model-evaluation-bfc5bc
+本次数据保存至：D:\coedx\AI+6G\suanlin-business-workloads\tmp\field-tool-tests\tmp0ruhocq6\20261111-233916-comparison-7810cf
+第 1/2 轮 固定单节点：完成 2/2，按时率 100.0%
+第 1/2 轮 轮询分配：完成 2/2，按时率 100.0%
+第 1/2 轮 随机分配：完成 2/2，按时率 100.0%
+第 1/2 轮 联合调度：完成 2/2，按时率 100.0%
+第 2/2 轮 轮询分配：完成 2/2，按时率 100.0%
+第 2/2 轮 随机分配：完成 2/2，按时率 100.0%
+第 2/2 轮 联合调度：完成 2/2，按时率 100.0%
+第 2/2 轮 固定单节点：完成 2/2，按时率 100.0%
+测试完成。请人工核实设备与数据来源后再使用报告。
+本次数据保存至：D:\coedx\AI+6G\suanlin-business-workloads\tmp\field-tool-tests\tmpwofc5twm\20261111-233922-comparison-bd902e
+第 1/2 轮 固定单节点：完成 1/1，按时率 100.0%
+第 1/2 轮 轮询分配：完成 1/1，按时率 100.0%
+第 1/2 轮 随机分配：完成 1/1，按时率 100.0%
+第 1/2 轮 联合调度：完成 1/1，按时率 100.0%
+第 2/2 轮 轮询分配：完成 1/1，按时率 100.0%
+第 2/2 轮 随机分配：完成 1/1，按时率 100.0%
+第 2/2 轮 联合调度：完成 1/1，按时率 100.0%
+第 2/2 轮 固定单节点：完成 1/1，按时率 100.0%
+测试完成。请人工核实设备与数据来源后再使用报告。
+受控故障测试记录：D:\coedx\AI+6G\suanlin-business-workloads\tmp\field-tool-tests\tmpib1qcfn3\20261111-233926-process-failure-d9f193
+目标端必须使用 tools/fault_worker.py 启动；它收到任务后会按预设退出。
+已观察到目标端领取任务。正在等待租约到期和接替，通常约25秒。
+观察结果：本次未形成指定恢复证据，请查 result.json
+受控故障测试记录：D:\coedx\AI+6G\suanlin-business-workloads\tmp\field-tool-tests\tmp1xcwkna9\20261111-233928-process-failure-67d9ae
+目标端必须使用 tools/fault_worker.py 启动；它收到任务后会按预设退出。
+已观察到目标端领取任务。正在等待租约到期和接替，通常约25秒。
+观察结果：进程中断后任务由指定接替端完成
+C:\Users\Yuzi\AppData\Local\Quark\User Data\quark-agent\resources\runtimes\python\3.14.6\Lib\tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 401: 'Unauthorized'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+C:\Users\Yuzi\AppData\Local\Quark\User Data\quark-agent\resources\runtimes\python\3.14.6\Lib\tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'Forbidden'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+----------------------------------------------------------------------
+Ran 57 tests in 48.337s
+
+OK

@@ -1,0 +1,76 @@
+{
+  "scope": "two local worker processes/threads, not two hosts",
+  "counts": {
+    "completed": 8
+  },
+  "decisions": [
+    {
+      "source": "qwen",
+      "model_ms": 2056.62,
+      "reason": "model_assignment",
+      "wait_ms": 2140.74
+    },
+    {
+      "source": "qwen",
+      "model_ms": 2056.62,
+      "reason": "model_assignment",
+      "wait_ms": 2141.26
+    },
+    {
+      "source": "qwen",
+      "model_ms": 2056.62,
+      "reason": "model_assignment",
+      "wait_ms": 2426.74
+    },
+    {
+      "source": "qwen",
+      "model_ms": 2056.62,
+      "reason": "model_assignment",
+      "wait_ms": 2427.58
+    },
+    {
+      "source": "qwen",
+      "model_ms": 2056.62,
+      "reason": "model_assignment",
+      "wait_ms": 2712.05
+    },
+    {
+      "source": "qwen",
+      "model_ms": 2056.62,
+      "reason": "model_assignment",
+      "wait_ms": 2713.33
+    },
+    {
+      "source": "qwen",
+      "model_ms": 2056.62,
+      "reason": "model_assignment",
+      "wait_ms": 2996.16
+    },
+    {
+      "source": "qwen",
+      "model_ms": 2056.62,
+      "reason": "model_assignment",
+      "wait_ms": 2997.56
+    }
+  ],
+  "workers": {
+    "test-a": 4,
+    "test-b": 4
+  },
+  "execution_models": [
+    "char-bigram-naive-bayes-v1"
+  ],
+  "ai_status": {
+    "enabled": true,
+    "model": "qwen3.5-9b",
+    "calls": 1,
+    "accepted": 8,
+    "errors": 0
+  },
+  "notes": [
+    "Original 34 tests plus 10 new scheduling/resource tests; full final run recorded locally.",
+    "Two workers on one physical host; not a two-host performance comparison.",
+    "Earlier attempt timed out and fell back for all 8 tasks; reduced output and 60ms coalescing fixed this smoke case.",
+    "No claim that model decisions improve throughput; model latency must be included."
+  ]
+}

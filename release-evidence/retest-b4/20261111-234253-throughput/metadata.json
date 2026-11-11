@@ -1,0 +1,671 @@
+{
+  "coordinator_version": "2.4.1-slot-aware",
+  "policies": [
+    "ai"
+  ],
+  "dataset": {
+    "schema": 2,
+    "source": "seeded_synthetic_inputs_real_algorithms",
+    "input_generation_included_in_timing": true,
+    "network_transfer": "compact seeded specifications, not full log/document files",
+    "profiles": {
+      "smoke": [
+        {
+          "name": "smoke-log_analysis-0",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 10000,
+            "seed": 2030
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "smoke-document_search-1",
+          "workload": {
+            "kind": "document_search",
+            "units": 1000,
+            "seed": 2031
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "smoke-archive-2",
+          "workload": {
+            "kind": "archive",
+            "units": 10000,
+            "seed": 2032
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "smoke-log_analysis-3",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 10000,
+            "seed": 2033
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "smoke-document_search-4",
+          "workload": {
+            "kind": "document_search",
+            "units": 1000,
+            "seed": 2034
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "smoke-archive-5",
+          "workload": {
+            "kind": "archive",
+            "units": 10000,
+            "seed": 2035
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        }
+      ],
+      "standard": [
+        {
+          "name": "standard-log_analysis-0",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2030
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "standard-document_search-1",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2031
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "standard-archive-2",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2032
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "standard-log_analysis-3",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2033
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "standard-document_search-4",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2034
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "standard-archive-5",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2035
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        }
+      ],
+      "heavy": [
+        {
+          "name": "heavy-log_analysis-0",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 2000000,
+            "seed": 2030
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "heavy-document_search-1",
+          "workload": {
+            "kind": "document_search",
+            "units": 100000,
+            "seed": 2031
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "heavy-archive-2",
+          "workload": {
+            "kind": "archive",
+            "units": 500000,
+            "seed": 2032
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "heavy-log_analysis-3",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 2000000,
+            "seed": 2033
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "heavy-document_search-4",
+          "workload": {
+            "kind": "document_search",
+            "units": 100000,
+            "seed": 2034
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "heavy-archive-5",
+          "workload": {
+            "kind": "archive",
+            "units": 500000,
+            "seed": 2035
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        }
+      ],
+      "mixed_deadlines": [
+        {
+          "name": "mixed-log_analysis-0",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2100
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-document_search-1",
+          "workload": {
+            "kind": "document_search",
+            "units": 6000,
+            "seed": 2101
+          },
+          "deadline_ms": 30000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-archive-2",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2102
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-log_analysis-3",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 100000,
+            "seed": 2103
+          },
+          "deadline_ms": 30000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-document_search-4",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2104
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-archive-5",
+          "workload": {
+            "kind": "archive",
+            "units": 40000,
+            "seed": 2105
+          },
+          "deadline_ms": 30000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-log_analysis-6",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2106
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-document_search-7",
+          "workload": {
+            "kind": "document_search",
+            "units": 6000,
+            "seed": 2107
+          },
+          "deadline_ms": 30000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-archive-8",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2108
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-log_analysis-9",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 100000,
+            "seed": 2109
+          },
+          "deadline_ms": 30000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-document_search-10",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2110
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "mixed-archive-11",
+          "workload": {
+            "kind": "archive",
+            "units": 40000,
+            "seed": 2111
+          },
+          "deadline_ms": 30000,
+          "privacy": "local_only"
+        }
+      ],
+      "throughput": [
+        {
+          "name": "throughput-0",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2300
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-1",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2301
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-2",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2302
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-3",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2303
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-4",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2304
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-5",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2305
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-6",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2306
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-7",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2307
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-8",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2308
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-9",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2309
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-10",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2310
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-11",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2311
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-12",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2312
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-13",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2313
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-14",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2314
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-15",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2315
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-16",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2316
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-17",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2317
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-18",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2318
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-19",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2319
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-20",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2320
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-21",
+          "workload": {
+            "kind": "log_analysis",
+            "units": 1000000,
+            "seed": 2321
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-22",
+          "workload": {
+            "kind": "document_search",
+            "units": 60000,
+            "seed": 2322
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        },
+        {
+          "name": "throughput-23",
+          "workload": {
+            "kind": "archive",
+            "units": 400000,
+            "seed": 2323
+          },
+          "deadline_ms": 300000,
+          "privacy": "local_only"
+        }
+      ]
+    }
+  },
+  "sha256": "a456ee12b991c8340f30ce2766346f4145a9299d56516c17dbd863dd9eb054b8",
+  "nodes": [
+    {
+      "id": "local-1",
+      "name": "本机执行节点 1",
+      "host": "DESKTOP-2MHR2M3",
+      "peer": "127.0.0.1",
+      "last_seen": 1794411772.9934387,
+      "busy_task": null,
+      "capacity": 4,
+      "active_tasks": {},
+      "busy_until": 0,
+      "ms_per_unit": 6816.529225917522,
+      "rtt_ms": 28.044065249266296,
+      "bandwidth_mbps": 100,
+      "trusted": true,
+      "draining": false,
+      "completed": 2263,
+      "mode": "same_host",
+      "workload_kinds": [
+        "archive",
+        "document_search",
+        "log_analysis"
+      ],
+      "business_ms_per_unit": {
+        "document_search": 0.1349660200796717,
+        "log_analysis": 0.027377314437097223,
+        "archive": 0.022182688530083747
+      },
+      "overhead_ms": 117.36446089273386,
+      "resources": {
+        "cpu_name": "AMD Ryzen Threadripper 2920X 12-Core Processor ",
+        "os": "Windows 11",
+        "architecture": "AMD64",
+        "logical_cores": 24,
+        "physical_cores": 12,
+        "memory_total_gib": 31.87,
+        "memory_available_gib": 10.75,
+        "disk_free_gib": 1434.0,
+        "cpu_percent": 5.9,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total_mib": 22528.0,
+            "memory_used_mib": 1154.0,
+            "utilization_percent": 4.0
+          },
+          {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total_mib": 22528.0,
+            "memory_used_mib": 1154.0,
+            "utilization_percent": 4.0
+          }
+        ]
+      },
+      "resources_at": 1794411771.4784203,
+      "resource_sequence": 17,
+      "online": true
+    },
+    {
+      "id": "office-b",
+      "name": "Office-B",
+      "host": "柚夏",
+      "peer": "192.168.5.40",
+      "last_seen": 1794411773.1136708,
+      "busy_task": null,
+      "capacity": 4,
+      "active_tasks": {},
+      "busy_until": 0,
+      "ms_per_unit": 14782.12951713878,
+      "rtt_ms": 122.72930745532427,
+      "bandwidth_mbps": 100,
+      "trusted": true,
+      "draining": false,
+      "completed": 1213,
+      "mode": "remote_host",
+      "workload_kinds": [
+        "archive",
+        "document_search",
+        "log_analysis"
+      ],
+      "business_ms_per_unit": {
+        "log_analysis": 0.021514085945902324,
+        "document_search": 0.1724697931138443,
+        "archive": 0.02899882675603628
+      },
+      "overhead_ms": 159.4487590330161,
+      "resources": {
+        "cpu_name": "AMD Ryzen 7 H 255 w/ Radeon 780M Graphics",
+        "os": "Windows 11",
+        "architecture": "AMD64",
+        "logical_cores": 16,
+        "physical_cores": 8,
+        "memory_total_gib": 31.31,
+        "memory_available_gib": 15.63,
+        "disk_free_gib": 134.66,
+        "cpu_percent": 16.7
+      },
+      "resources_at": 1794411771.3824542,
+      "resource_sequence": 383,
+      "online": true
+    }
+  ],
+  "profile": "throughput",
+  "rounds": 1,
+  "warmup": "one smoke task per kind per node",
+  "status": "running"
+}

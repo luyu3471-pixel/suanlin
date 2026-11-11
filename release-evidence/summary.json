@@ -1,0 +1,1431 @@
+{
+  "reports": [
+    {
+      "profile": "standard",
+      "requested_rounds": 1,
+      "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\slot-aware-tests\\old-b4\\20261111-231317-standard",
+      "policies": {
+        "fixed_A": {
+          "rounds": 1,
+          "submitted": 6,
+          "completed": 6,
+          "failed": 0,
+          "attempts": {
+            "1": 6
+          },
+          "total_batch_seconds": 28.337767601013184,
+          "mean_batch_seconds": 28.337767601013184,
+          "throughput_tasks_s": 0.21173156913692373,
+          "mean_latency_s": 18.309546333333333,
+          "p95_latency_s": 28.337768,
+          "deadline_met": 6,
+          "distribution": {
+            "local-1": 6
+          },
+          "ai_sources": {
+            "none": 6
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@local-1": 27.653878499999998,
+            "document_search@local-1": 8.322903,
+            "archive@local-1": 8.9418895
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 0
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.7980004023651506,
+            "office-b": 0.0
+          },
+          "changed_model_node_count": 0
+        },
+        "fixed_B": {
+          "rounds": 1,
+          "submitted": 6,
+          "completed": 6,
+          "failed": 0,
+          "attempts": {
+            "1": 6
+          },
+          "total_batch_seconds": 23.643198490142822,
+          "mean_batch_seconds": 23.643198490142822,
+          "throughput_tasks_s": 0.253772771162983,
+          "mean_latency_s": 17.5665925,
+          "p95_latency_s": 23.21166,
+          "deadline_met": 6,
+          "distribution": {
+            "office-b": 6
+          },
+          "ai_sources": {
+            "none": 6
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 20.9022075,
+            "document_search@office-b": 9.137201000000001,
+            "archive@office-b": 11.2589005
+          },
+          "peak_inflight": {
+            "local-1": 0,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.0,
+            "office-b": 0.8870353102786597
+          },
+          "changed_model_node_count": 0
+        },
+        "smart": {
+          "rounds": 1,
+          "submitted": 6,
+          "completed": 6,
+          "failed": 0,
+          "attempts": {
+            "1": 6
+          },
+          "total_batch_seconds": 21.02949357032776,
+          "mean_batch_seconds": 21.02949357032776,
+          "throughput_tasks_s": 0.28531357542845887,
+          "mean_latency_s": 12.9869475,
+          "p95_latency_s": 20.830731,
+          "deadline_met": 6,
+          "distribution": {
+            "office-b": 2,
+            "local-1": 4
+          },
+          "ai_sources": {
+            "none": 6
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 20.2501285,
+            "document_search@local-1": 8.3671455,
+            "archive@local-1": 8.965817000000001
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 2
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.41615885007326586,
+            "office-b": 0.48628872239698545
+          },
+          "changed_model_node_count": 0
+        },
+        "ai": {
+          "rounds": 1,
+          "submitted": 6,
+          "completed": 6,
+          "failed": 0,
+          "attempts": {
+            "1": 6
+          },
+          "total_batch_seconds": 22.883838415145874,
+          "mean_batch_seconds": 22.883838415145874,
+          "throughput_tasks_s": 0.26219377584963394,
+          "mean_latency_s": 14.9063635,
+          "p95_latency_s": 22.726260999999997,
+          "deadline_met": 6,
+          "distribution": {
+            "office-b": 2,
+            "local-1": 4
+          },
+          "ai_sources": {
+            "qwen": 6
+          },
+          "model_ms_task_weighted_mean": 1184.9866666666667,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 20.2357675,
+            "document_search@local-1": 8.435686,
+            "archive@local-1": 9.072375
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 2
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.38694020557548553,
+            "office-b": 0.458455443754817
+          },
+          "changed_model_node_count": 0
+        }
+      },
+      "status": "complete",
+      "raw_consistency_mismatches": [
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 5
+        }
+      ],
+      "phase": "old-b4",
+      "version": "2.3.0-business-workloads"
+    },
+    {
+      "profile": "mixed_deadlines",
+      "requested_rounds": 1,
+      "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\slot-aware-tests\\old-b4\\20261111-231517-mixed_deadlines",
+      "policies": {
+        "fixed_A": {
+          "rounds": 1,
+          "submitted": 12,
+          "completed": 12,
+          "failed": 0,
+          "attempts": {
+            "1": 12
+          },
+          "total_batch_seconds": 32.30481767654419,
+          "mean_batch_seconds": 32.30481767654419,
+          "throughput_tasks_s": 0.3714616228499235,
+          "mean_latency_s": 11.57192725,
+          "p95_latency_s": 31.846344000000002,
+          "deadline_met": 12,
+          "distribution": {
+            "local-1": 12
+          },
+          "ai_sources": {
+            "none": 12
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@local-1": 15.25985725,
+            "document_search@local-1": 4.547825250000001,
+            "archive@local-1": 4.942284
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 0
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.7790223157211773,
+            "office-b": 0.0
+          },
+          "changed_model_node_count": 0
+        },
+        "fixed_B": {
+          "rounds": 1,
+          "submitted": 12,
+          "completed": 12,
+          "failed": 0,
+          "attempts": {
+            "1": 12
+          },
+          "total_batch_seconds": 19.07997441291809,
+          "mean_batch_seconds": 19.07997441291809,
+          "throughput_tasks_s": 0.6289316610338536,
+          "mean_latency_s": 7.878710833333334,
+          "p95_latency_s": 18.516495,
+          "deadline_met": 12,
+          "distribution": {
+            "office-b": 12
+          },
+          "ai_sources": {
+            "none": 12
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 6.971248,
+            "document_search@office-b": 3.6906592500000004,
+            "archive@office-b": 4.6291235
+          },
+          "peak_inflight": {
+            "local-1": 0,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.0,
+            "office-b": 0.8254703496921728
+          },
+          "changed_model_node_count": 0
+        },
+        "smart": {
+          "rounds": 1,
+          "submitted": 12,
+          "completed": 12,
+          "failed": 0,
+          "attempts": {
+            "1": 12
+          },
+          "total_batch_seconds": 24.56047558784485,
+          "mean_batch_seconds": 24.56047558784485,
+          "throughput_tasks_s": 0.4885898873203776,
+          "mean_latency_s": 8.61688175,
+          "p95_latency_s": 24.064729,
+          "deadline_met": 12,
+          "distribution": {
+            "office-b": 8,
+            "local-1": 4
+          },
+          "ai_sources": {
+            "none": 12
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 11.45833375,
+            "document_search@office-b": 6.823983,
+            "archive@local-1": 6.241781333333333,
+            "archive@office-b": 0.769079,
+            "document_search@local-1": 0.782737
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.20656491483627082,
+            "office-b": 0.6987210493639119
+          },
+          "changed_model_node_count": 0
+        },
+        "ai": {
+          "rounds": 1,
+          "submitted": 12,
+          "completed": 12,
+          "failed": 0,
+          "attempts": {
+            "1": 12
+          },
+          "total_batch_seconds": 32.14259934425354,
+          "mean_batch_seconds": 32.14259934425354,
+          "throughput_tasks_s": 0.37333632764038926,
+          "mean_latency_s": 12.676789416666667,
+          "p95_latency_s": 31.726710999999998,
+          "deadline_met": 12,
+          "distribution": {
+            "local-1": 7,
+            "office-b": 5
+          },
+          "ai_sources": {
+            "qwen": 12
+          },
+          "model_ms_task_weighted_mean": 1753.6299999999999,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@local-1": 27.4300125,
+            "document_search@local-1": 4.58876575,
+            "archive@office-b": 4.990151,
+            "log_analysis@office-b": 2.3306135,
+            "archive@local-1": 9.099450000000001
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.6473170402767159,
+            "office-b": 0.1635131943293337
+          },
+          "changed_model_node_count": 0
+        }
+      },
+      "status": "complete",
+      "raw_consistency_mismatches": [
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 5
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 8
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 11
+        },
+        {
+          "round": 1,
+          "policy": "smart",
+          "index": 5
+        },
+        {
+          "round": 1,
+          "policy": "ai",
+          "index": 2
+        },
+        {
+          "round": 1,
+          "policy": "ai",
+          "index": 5
+        },
+        {
+          "round": 1,
+          "policy": "ai",
+          "index": 11
+        }
+      ],
+      "phase": "old-b4",
+      "version": "2.3.0-business-workloads"
+    },
+    {
+      "profile": "smoke",
+      "requested_rounds": 1,
+      "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\slot-aware-tests\\new-b4\\20261111-232037-smoke",
+      "policies": {
+        "fixed_A": {
+          "rounds": 1,
+          "submitted": 6,
+          "completed": 6,
+          "failed": 0,
+          "attempts": {
+            "1": 6
+          },
+          "total_batch_seconds": 1.6197850704193115,
+          "mean_batch_seconds": 1.6197850704193115,
+          "throughput_tasks_s": 3.7041951488334117,
+          "mean_latency_s": 0.9639808333333334,
+          "p95_latency_s": 1.354931,
+          "deadline_met": 6,
+          "distribution": {
+            "local-1": 6
+          },
+          "ai_sources": {
+            "none": 6
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@local-1": 0.278071,
+            "document_search@local-1": 0.1226275,
+            "archive@local-1": 0.219029
+          },
+          "peak_inflight": {
+            "local-1": 3,
+            "office-b": 0
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.35124250224945397,
+            "office-b": 0.0
+          },
+          "changed_model_node_count": 0
+        },
+        "fixed_B": {
+          "rounds": 1,
+          "submitted": 6,
+          "completed": 6,
+          "failed": 0,
+          "attempts": {
+            "1": 6
+          },
+          "total_batch_seconds": 1.9599006175994873,
+          "mean_batch_seconds": 1.9599006175994873,
+          "throughput_tasks_s": 3.061379717992477,
+          "mean_latency_s": 1.0910578333333334,
+          "p95_latency_s": 1.519364,
+          "deadline_met": 6,
+          "distribution": {
+            "office-b": 6
+          },
+          "ai_sources": {
+            "none": 6
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 0.1606925,
+            "document_search@office-b": 0.1456655,
+            "archive@office-b": 0.3483605
+          },
+          "peak_inflight": {
+            "local-1": 0,
+            "office-b": 3
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.0,
+            "office-b": 0.3396218611241106
+          },
+          "changed_model_node_count": 0
+        },
+        "smart": {
+          "rounds": 1,
+          "submitted": 6,
+          "completed": 6,
+          "failed": 0,
+          "attempts": {
+            "1": 6
+          },
+          "total_batch_seconds": 1.6657931804656982,
+          "mean_batch_seconds": 1.6657931804656982,
+          "throughput_tasks_s": 3.6018877195322694,
+          "mean_latency_s": 0.9669936666666666,
+          "p95_latency_s": 1.132872,
+          "deadline_met": 6,
+          "distribution": {
+            "office-b": 2,
+            "local-1": 4
+          },
+          "ai_sources": {
+            "none": 6
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 0.231135,
+            "document_search@local-1": 0.12110749999999999,
+            "archive@local-1": 0.217767
+          },
+          "peak_inflight": {
+            "local-1": 2,
+            "office-b": 2
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.2339184521535692,
+            "office-b": 0.15866540152684125
+          },
+          "changed_model_node_count": 0
+        },
+        "ai": {
+          "rounds": 1,
+          "submitted": 6,
+          "completed": 6,
+          "failed": 0,
+          "attempts": {
+            "1": 6
+          },
+          "total_batch_seconds": 3.596888780593872,
+          "mean_batch_seconds": 3.596888780593872,
+          "throughput_tasks_s": 1.6681082919137014,
+          "mean_latency_s": 2.8756866666666667,
+          "p95_latency_s": 3.313401,
+          "deadline_met": 6,
+          "distribution": {
+            "local-1": 5,
+            "office-b": 1
+          },
+          "ai_sources": {
+            "qwen_guarded": 6
+          },
+          "model_ms_task_weighted_mean": 1615.83,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@local-1": 0.2910505,
+            "document_search@local-1": 0.12990700000000002,
+            "archive@local-1": 0.2276965,
+            "document_search@office-b": 0.144916
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 1
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.1670625187047048,
+            "office-b": 0.024334112509607136
+          },
+          "changed_model_node_count": 2
+        }
+      },
+      "status": "complete",
+      "raw_consistency_mismatches": [
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 5
+        }
+      ],
+      "phase": "new-b4",
+      "version": "2.4.0-slot-aware"
+    },
+    {
+      "profile": "standard",
+      "requested_rounds": 3,
+      "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\slot-aware-tests\\new-b4\\20261111-232103-standard",
+      "policies": {
+        "fixed_A": {
+          "rounds": 3,
+          "submitted": 18,
+          "completed": 18,
+          "failed": 0,
+          "attempts": {
+            "1": 18
+          },
+          "total_batch_seconds": 84.61204767227173,
+          "mean_batch_seconds": 28.204015890757244,
+          "throughput_tasks_s": 0.21273566229858296,
+          "mean_latency_s": 18.28520877777778,
+          "p95_latency_s": 28.298991,
+          "deadline_met": 18,
+          "distribution": {
+            "local-1": 18
+          },
+          "ai_sources": {
+            "none": 18
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@local-1": 27.425083333333333,
+            "document_search@local-1": 8.357192333333334,
+            "archive@local-1": 8.994772666666666
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 0
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.8013271500793276,
+            "office-b": 0.0
+          },
+          "changed_model_node_count": 0
+        },
+        "fixed_B": {
+          "rounds": 3,
+          "submitted": 18,
+          "completed": 18,
+          "failed": 0,
+          "attempts": {
+            "1": 18
+          },
+          "total_batch_seconds": 76.434645652771,
+          "mean_batch_seconds": 25.478215217590332,
+          "throughput_tasks_s": 0.23549530250680822,
+          "mean_latency_s": 19.08758177777778,
+          "p95_latency_s": 27.784954000000003,
+          "deadline_met": 18,
+          "distribution": {
+            "office-b": 18
+          },
+          "ai_sources": {
+            "none": 18
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 21.954784,
+            "document_search@office-b": 9.952703,
+            "archive@office-b": 12.102856333333333
+          },
+          "peak_inflight": {
+            "local-1": 0,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.0,
+            "office-b": 0.8803732906445595
+          },
+          "changed_model_node_count": 0
+        },
+        "smart": {
+          "rounds": 3,
+          "submitted": 18,
+          "completed": 18,
+          "failed": 0,
+          "attempts": {
+            "1": 18
+          },
+          "total_batch_seconds": 70.98874807357788,
+          "mean_batch_seconds": 23.66291602452596,
+          "throughput_tasks_s": 0.2535613106085981,
+          "mean_latency_s": 13.8761245,
+          "p95_latency_s": 23.976551999999998,
+          "deadline_met": 18,
+          "distribution": {
+            "office-b": 6,
+            "local-1": 12
+          },
+          "ai_sources": {
+            "none": 18
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 22.639165,
+            "document_search@local-1": 8.325632833333334,
+            "archive@local-1": 8.9964835
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 2
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.3707910175433694,
+            "office-b": 0.4881268232886163
+          },
+          "changed_model_node_count": 0
+        },
+        "ai": {
+          "rounds": 3,
+          "submitted": 18,
+          "completed": 18,
+          "failed": 0,
+          "attempts": {
+            "1": 18
+          },
+          "total_batch_seconds": 75.64261937141418,
+          "mean_batch_seconds": 25.21420645713806,
+          "throughput_tasks_s": 0.23796108793665482,
+          "mean_latency_s": 15.796102833333332,
+          "p95_latency_s": 25.698719,
+          "deadline_met": 18,
+          "distribution": {
+            "office-b": 6,
+            "local-1": 12
+          },
+          "ai_sources": {
+            "qwen": 10,
+            "qwen_guarded": 8
+          },
+          "model_ms_task_weighted_mean": 1369.2433333333333,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 22.5883895,
+            "document_search@local-1": 8.400662,
+            "archive@local-1": 9.050948
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 2
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.35032309862464256,
+            "office-b": 0.4564911207078936
+          },
+          "changed_model_node_count": 4
+        }
+      },
+      "status": "complete",
+      "raw_consistency_mismatches": [
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 5
+        },
+        {
+          "round": 2,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 2,
+          "policy": "fixed_B",
+          "index": 5
+        },
+        {
+          "round": 3,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 3,
+          "policy": "fixed_B",
+          "index": 5
+        }
+      ],
+      "phase": "new-b4",
+      "version": "2.4.0-slot-aware"
+    },
+    {
+      "profile": "mixed_deadlines",
+      "requested_rounds": 3,
+      "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\slot-aware-tests\\new-b4\\20261111-232640-mixed_deadlines",
+      "policies": {
+        "fixed_A": {
+          "rounds": 3,
+          "submitted": 36,
+          "completed": 36,
+          "failed": 0,
+          "attempts": {
+            "1": 36
+          },
+          "total_batch_seconds": 95.12606763839722,
+          "mean_batch_seconds": 31.708689212799072,
+          "throughput_tasks_s": 0.3784451611817575,
+          "mean_latency_s": 11.53062575,
+          "p95_latency_s": 31.092984,
+          "deadline_met": 36,
+          "distribution": {
+            "local-1": 36
+          },
+          "ai_sources": {
+            "none": 36
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@local-1": 15.038316083333333,
+            "document_search@local-1": 4.556942333333333,
+            "archive@local-1": 4.96756925
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 0
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.786705650906294,
+            "office-b": 0.0
+          },
+          "changed_model_node_count": 0
+        },
+        "fixed_B": {
+          "rounds": 3,
+          "submitted": 36,
+          "completed": 36,
+          "failed": 0,
+          "attempts": {
+            "1": 36
+          },
+          "total_batch_seconds": 72.55329751968384,
+          "mean_batch_seconds": 24.18443250656128,
+          "throughput_tasks_s": 0.49618695814939545,
+          "mean_latency_s": 10.848538083333333,
+          "p95_latency_s": 23.800347000000002,
+          "deadline_met": 36,
+          "distribution": {
+            "office-b": 36
+          },
+          "ai_sources": {
+            "none": 36
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 11.118134,
+            "document_search@office-b": 4.651863333333334,
+            "archive@office-b": 6.071641916666667
+          },
+          "peak_inflight": {
+            "local-1": 0,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.0,
+            "office-b": 0.9263474110624598
+          },
+          "changed_model_node_count": 0
+        },
+        "smart": {
+          "rounds": 3,
+          "submitted": 36,
+          "completed": 36,
+          "failed": 0,
+          "attempts": {
+            "1": 36
+          },
+          "total_batch_seconds": 67.42049598693848,
+          "mean_batch_seconds": 22.473498662312824,
+          "throughput_tasks_s": 0.533962253955746,
+          "mean_latency_s": 7.781483777777778,
+          "p95_latency_s": 22.285719,
+          "deadline_met": 36,
+          "distribution": {
+            "office-b": 15,
+            "local-1": 21
+          },
+          "ai_sources": {
+            "none": 36
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 11.13469075,
+            "document_search@local-1": 4.954011111111111,
+            "archive@local-1": 4.940766666666667,
+            "document_search@office-b": 3.1998693333333335
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.3960047265163105,
+            "office-b": 0.5406866251089143
+          },
+          "changed_model_node_count": 0
+        },
+        "ai": {
+          "rounds": 3,
+          "submitted": 36,
+          "completed": 36,
+          "failed": 0,
+          "attempts": {
+            "1": 36
+          },
+          "total_batch_seconds": 73.09026145935059,
+          "mean_batch_seconds": 24.363420486450195,
+          "throughput_tasks_s": 0.4925416776627832,
+          "mean_latency_s": 10.681502,
+          "p95_latency_s": 24.153559,
+          "deadline_met": 36,
+          "distribution": {
+            "office-b": 15,
+            "local-1": 21
+          },
+          "ai_sources": {
+            "qwen_guarded": 26,
+            "qwen": 10
+          },
+          "model_ms_task_weighted_mean": 1966.2852777777778,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 12.569811099999999,
+            "document_search@local-1": 3.637364625,
+            "archive@local-1": 5.303137727272727,
+            "document_search@office-b": 6.53608675,
+            "log_analysis@local-1": 2.7797655,
+            "archive@office-b": 1.045703
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.3274635901979176,
+            "office-b": 0.5336218730939467
+          },
+          "changed_model_node_count": 12
+        }
+      },
+      "status": "complete",
+      "raw_consistency_mismatches": [
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 5
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 8
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 11
+        },
+        {
+          "round": 1,
+          "policy": "ai",
+          "index": 11
+        },
+        {
+          "round": 2,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 2,
+          "policy": "fixed_B",
+          "index": 5
+        },
+        {
+          "round": 2,
+          "policy": "fixed_B",
+          "index": 8
+        },
+        {
+          "round": 2,
+          "policy": "fixed_B",
+          "index": 11
+        },
+        {
+          "round": 3,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 3,
+          "policy": "fixed_B",
+          "index": 5
+        },
+        {
+          "round": 3,
+          "policy": "fixed_B",
+          "index": 8
+        },
+        {
+          "round": 3,
+          "policy": "fixed_B",
+          "index": 11
+        }
+      ],
+      "phase": "new-b4",
+      "version": "2.4.0-slot-aware"
+    },
+    {
+      "profile": "throughput",
+      "requested_rounds": 1,
+      "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\slot-aware-tests\\new-b4\\20261111-233213-throughput",
+      "policies": {
+        "fixed_A": {
+          "rounds": 1,
+          "submitted": 24,
+          "completed": 24,
+          "failed": 0,
+          "attempts": {
+            "1": 24
+          },
+          "total_batch_seconds": 101.64378905296326,
+          "mean_batch_seconds": 101.64378905296326,
+          "throughput_tasks_s": 0.236118706549737,
+          "mean_latency_s": 51.924579333333334,
+          "p95_latency_s": 90.527704,
+          "deadline_met": 24,
+          "distribution": {
+            "local-1": 24
+          },
+          "ai_sources": {
+            "none": 24
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@local-1": 27.755466875,
+            "document_search@local-1": 8.3015195,
+            "archive@local-1": 8.990238125
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 0
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.8925467119798015,
+            "office-b": 0.0
+          },
+          "changed_model_node_count": 0
+        },
+        "fixed_B": {
+          "rounds": 1,
+          "submitted": 24,
+          "completed": 24,
+          "failed": 0,
+          "attempts": {
+            "1": 24
+          },
+          "total_batch_seconds": 87.64618515968323,
+          "mean_batch_seconds": 87.64618515968323,
+          "throughput_tasks_s": 0.2738282328691685,
+          "mean_latency_s": 47.41538070833333,
+          "p95_latency_s": 84.82010000000001,
+          "deadline_met": 24,
+          "distribution": {
+            "office-b": 24
+          },
+          "ai_sources": {
+            "none": 24
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 20.288901125,
+            "document_search@office-b": 8.6515655,
+            "archive@office-b": 10.97179675
+          },
+          "peak_inflight": {
+            "local-1": 0,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.0,
+            "office-b": 0.9215518334282266
+          },
+          "changed_model_node_count": 0
+        },
+        "smart": {
+          "rounds": 1,
+          "submitted": 24,
+          "completed": 24,
+          "failed": 0,
+          "attempts": {
+            "1": 24
+          },
+          "total_batch_seconds": 51.55863809585571,
+          "mean_batch_seconds": 51.55863809585571,
+          "throughput_tasks_s": 0.4654894094638454,
+          "mean_latency_s": 25.951247125,
+          "p95_latency_s": 43.083779,
+          "deadline_met": 24,
+          "distribution": {
+            "office-b": 10,
+            "local-1": 14
+          },
+          "ai_sources": {
+            "none": 24
+          },
+          "model_ms_task_weighted_mean": null,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 20.82298157142857,
+            "document_search@local-1": 8.39842657142857,
+            "archive@local-1": 9.039253833333333,
+            "document_search@office-b": 8.632603999999999,
+            "log_analysis@local-1": 27.584297,
+            "archive@office-b": 11.272188
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.6902655418684858,
+            "office-b": 0.8644007760886965
+          },
+          "changed_model_node_count": 0
+        },
+        "ai": {
+          "rounds": 1,
+          "submitted": 24,
+          "completed": 24,
+          "failed": 0,
+          "attempts": {
+            "1": 24
+          },
+          "total_batch_seconds": 53.332064151763916,
+          "mean_batch_seconds": 53.332064151763916,
+          "throughput_tasks_s": 0.4500107089743351,
+          "mean_latency_s": 28.067189791666667,
+          "p95_latency_s": 45.15578,
+          "deadline_met": 24,
+          "distribution": {
+            "office-b": 10,
+            "local-1": 14
+          },
+          "ai_sources": {
+            "qwen": 7,
+            "rules_fallback": 16,
+            "qwen_guarded": 1
+          },
+          "model_ms_task_weighted_mean": 2137.480833333333,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 20.22664442857143,
+            "document_search@local-1": 8.380933285714285,
+            "archive@local-1": 9.013189333333333,
+            "document_search@office-b": 8.519446,
+            "log_analysis@local-1": 27.483766,
+            "archive@office-b": 11.511351000000001
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.6658123918233774,
+            "office-b": 0.8178900412529093
+          },
+          "changed_model_node_count": 1
+        }
+      },
+      "status": "complete",
+      "raw_consistency_mismatches": [
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 2
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 5
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 8
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 11
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 14
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 17
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 20
+        },
+        {
+          "round": 1,
+          "policy": "fixed_B",
+          "index": 23
+        },
+        {
+          "round": 1,
+          "policy": "smart",
+          "index": 17
+        },
+        {
+          "round": 1,
+          "policy": "smart",
+          "index": 23
+        },
+        {
+          "round": 1,
+          "policy": "ai",
+          "index": 17
+        },
+        {
+          "round": 1,
+          "policy": "ai",
+          "index": 23
+        }
+      ],
+      "phase": "new-b4",
+      "version": "2.4.0-slot-aware"
+    },
+    {
+      "profile": "standard",
+      "requested_rounds": 1,
+      "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\slot-aware-tests\\retest-b4\\20261111-234156-standard",
+      "policies": {
+        "ai": {
+          "rounds": 1,
+          "submitted": 6,
+          "completed": 6,
+          "failed": 0,
+          "attempts": {
+            "1": 6
+          },
+          "total_batch_seconds": 24.960805416107178,
+          "mean_batch_seconds": 24.960805416107178,
+          "throughput_tasks_s": 0.24037685883838536,
+          "mean_latency_s": 15.626121166666668,
+          "p95_latency_s": 24.797357,
+          "deadline_met": 6,
+          "distribution": {
+            "office-b": 2,
+            "local-1": 4
+          },
+          "ai_sources": {
+            "qwen": 4,
+            "qwen_guarded": 2
+          },
+          "model_ms_task_weighted_mean": 1268.3666666666668,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 22.6913025,
+            "document_search@local-1": 8.311302,
+            "archive@local-1": 8.899825
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 2
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.35325174300231094,
+            "office-b": 0.4573800185276588
+          },
+          "changed_model_node_count": 1
+        }
+      },
+      "status": "complete",
+      "raw_consistency_mismatches": [],
+      "phase": "retest-b4",
+      "version": "2.4.1-slot-aware"
+    },
+    {
+      "profile": "mixed_deadlines",
+      "requested_rounds": 1,
+      "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\slot-aware-tests\\retest-b4\\20261111-234224-mixed_deadlines",
+      "policies": {
+        "ai": {
+          "rounds": 1,
+          "submitted": 12,
+          "completed": 12,
+          "failed": 0,
+          "attempts": {
+            "1": 12
+          },
+          "total_batch_seconds": 26.790424346923828,
+          "mean_batch_seconds": 26.790424346923828,
+          "throughput_tasks_s": 0.44792123650620275,
+          "mean_latency_s": 11.174285416666667,
+          "p95_latency_s": 26.479859,
+          "deadline_met": 12,
+          "distribution": {
+            "office-b": 6,
+            "local-1": 6
+          },
+          "ai_sources": {
+            "qwen": 12
+          },
+          "model_ms_task_weighted_mean": 1854.0166666666667,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 15.232332000000001,
+            "document_search@local-1": 4.525636,
+            "archive@local-1": 6.251153666666666,
+            "document_search@office-b": 6.0489405,
+            "log_analysis@local-1": 2.700038,
+            "archive@office-b": 1.2040719999999998
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.2903892874987416,
+            "office-b": 0.5626848048448023
+          },
+          "changed_model_node_count": 0
+        }
+      },
+      "status": "complete",
+      "raw_consistency_mismatches": [],
+      "phase": "retest-b4",
+      "version": "2.4.1-slot-aware"
+    },
+    {
+      "profile": "throughput",
+      "requested_rounds": 1,
+      "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\slot-aware-tests\\retest-b4\\20261111-234253-throughput",
+      "policies": {
+        "ai": {
+          "rounds": 1,
+          "submitted": 24,
+          "completed": 24,
+          "failed": 0,
+          "attempts": {
+            "1": 24
+          },
+          "total_batch_seconds": 58.27753019332886,
+          "mean_batch_seconds": 58.27753019332886,
+          "throughput_tasks_s": 0.4118225312634702,
+          "mean_latency_s": 29.86365766666667,
+          "p95_latency_s": 48.805697,
+          "deadline_met": 24,
+          "distribution": {
+            "office-b": 9,
+            "local-1": 15
+          },
+          "ai_sources": {
+            "qwen": 6,
+            "qwen_guarded": 18
+          },
+          "model_ms_task_weighted_mean": 1941.5666666666666,
+          "compute_mean_s_by_kind_node": {
+            "log_analysis@office-b": 22.021642166666666,
+            "document_search@local-1": 8.469746714285714,
+            "archive@local-1": 9.185973,
+            "document_search@office-b": 9.946477999999999,
+            "log_analysis@local-1": 27.593605500000002,
+            "archive@office-b": 12.1660945
+          },
+          "peak_inflight": {
+            "local-1": 4,
+            "office-b": 4
+          },
+          "slot_busy_fraction": {
+            "local-1": 0.735658265142989,
+            "office-b": 0.7206028131688138
+          },
+          "changed_model_node_count": 12
+        }
+      },
+      "status": "complete",
+      "raw_consistency_mismatches": [],
+      "phase": "retest-b4",
+      "version": "2.4.1-slot-aware"
+    }
+  ],
+  "correctness": {
+    "formal_tasks": 450,
+    "accepted_with_warmup": 504,
+    "statuses": {
+      "completed": 450
+    },
+    "attempts": {
+      "1": 450
+    },
+    "within_host_unstable": [],
+    "cross_host_differences": [
+      [
+        "archive",
+        400000,
+        2032
+      ],
+      [
+        "archive",
+        400000,
+        2035
+      ],
+      [
+        "archive",
+        400000,
+        2102
+      ],
+      [
+        "archive",
+        40000,
+        2105
+      ],
+      [
+        "archive",
+        400000,
+        2108
+      ],
+      [
+        "archive",
+        40000,
+        2111
+      ],
+      [
+        "archive",
+        10000,
+        2032
+      ],
+      [
+        "archive",
+        10000,
+        2035
+      ],
+      [
+        "archive",
+        400000,
+        2302
+      ],
+      [
+        "archive",
+        400000,
+        2305
+      ],
+      [
+        "archive",
+        400000,
+        2308
+      ],
+      [
+        "archive",
+        400000,
+        2311
+      ],
+      [
+        "archive",
+        400000,
+        2314
+      ],
+      [
+        "archive",
+        400000,
+        2317
+      ],
+      [
+        "archive",
+        400000,
+        2320
+      ],
+      [
+        "archive",
+        400000,
+        2323
+      ]
+    ]
+  }
+}

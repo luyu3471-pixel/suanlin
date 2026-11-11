@@ -1,0 +1,622 @@
+[
+  {
+    "profile": "smoke",
+    "requested_rounds": 1,
+    "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\business-tests\\20261111-223651-smoke",
+    "policies": {
+      "fixed_A": {
+        "rounds": 1,
+        "submitted": 6,
+        "completed": 6,
+        "failed": 0,
+        "attempts": {
+          "1": 6
+        },
+        "total_batch_seconds": 1.6755106449127197,
+        "mean_batch_seconds": 1.6755106449127197,
+        "throughput_tasks_s": 3.5809978398033695,
+        "mean_latency_s": 0.9701071666666667,
+        "p95_latency_s": 1.340694,
+        "deadline_met": 6,
+        "distribution": {
+          "local-1": 6
+        },
+        "ai_sources": {
+          "none": 6
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@local-1": 0.264388,
+          "document_search@local-1": 0.127366,
+          "archive@local-1": 0.2205765
+        }
+      },
+      "fixed_B": {
+        "rounds": 1,
+        "submitted": 6,
+        "completed": 6,
+        "failed": 0,
+        "attempts": {
+          "1": 6
+        },
+        "total_batch_seconds": 2.7468931674957275,
+        "mean_batch_seconds": 2.7468931674957275,
+        "throughput_tasks_s": 2.1842858946968247,
+        "mean_latency_s": 1.4146828333333332,
+        "p95_latency_s": 2.365523,
+        "deadline_met": 6,
+        "distribution": {
+          "office-b": 6
+        },
+        "ai_sources": {
+          "none": 6
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@office-b": 0.133239,
+          "document_search@office-b": 0.084241,
+          "archive@office-b": 0.185754
+        }
+      },
+      "smart": {
+        "rounds": 1,
+        "submitted": 6,
+        "completed": 6,
+        "failed": 0,
+        "attempts": {
+          "1": 6
+        },
+        "total_batch_seconds": 1.8109817504882812,
+        "mean_batch_seconds": 1.8109817504882812,
+        "throughput_tasks_s": 3.3131200788645527,
+        "mean_latency_s": 0.9343005,
+        "p95_latency_s": 1.3844100000000001,
+        "deadline_met": 6,
+        "distribution": {
+          "local-1": 3,
+          "office-b": 3
+        },
+        "ai_sources": {
+          "none": 6
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@local-1": 0.264959,
+          "document_search@local-1": 0.1208995,
+          "archive@office-b": 0.179038,
+          "log_analysis@office-b": 0.119447
+        }
+      },
+      "ai": {
+        "rounds": 1,
+        "submitted": 6,
+        "completed": 6,
+        "failed": 0,
+        "attempts": {
+          "1": 6
+        },
+        "total_batch_seconds": 3.2284443378448486,
+        "mean_batch_seconds": 3.2284443378448486,
+        "throughput_tasks_s": 1.858480237576376,
+        "mean_latency_s": 2.3369123333333333,
+        "p95_latency_s": 2.971791,
+        "deadline_met": 6,
+        "distribution": {
+          "office-b": 2,
+          "local-1": 4
+        },
+        "ai_sources": {
+          "qwen": 6
+        },
+        "model_ms_task_weighted_mean": 1183.2633333333333,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@office-b": 0.1197375,
+          "document_search@local-1": 0.120498,
+          "archive@local-1": 0.2928375
+        }
+      }
+    },
+    "status": "complete",
+    "raw_consistency_mismatches": [
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 2
+      },
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 5
+      },
+      {
+        "round": 1,
+        "policy": "smart",
+        "index": 2
+      },
+      {
+        "round": 1,
+        "policy": "smart",
+        "index": 5
+      }
+    ]
+  },
+  {
+    "profile": "standard",
+    "requested_rounds": 3,
+    "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\business-tests\\20261111-223717-standard",
+    "policies": {
+      "fixed_A": {
+        "rounds": 3,
+        "submitted": 18,
+        "completed": 18,
+        "failed": 0,
+        "attempts": {
+          "1": 18
+        },
+        "total_batch_seconds": 84.2376914024353,
+        "mean_batch_seconds": 28.079230467478435,
+        "throughput_tasks_s": 0.21368106960585131,
+        "mean_latency_s": 18.094024611111113,
+        "p95_latency_s": 28.47875,
+        "deadline_met": 18,
+        "distribution": {
+          "local-1": 18
+        },
+        "ai_sources": {
+          "none": 18
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@local-1": 27.052594166666665,
+          "document_search@local-1": 8.2530515,
+          "archive@local-1": 8.9761125
+        }
+      },
+      "fixed_B": {
+        "rounds": 3,
+        "submitted": 18,
+        "completed": 18,
+        "failed": 0,
+        "attempts": {
+          "1": 18
+        },
+        "total_batch_seconds": 172.0485553741455,
+        "mean_batch_seconds": 57.3495184580485,
+        "throughput_tasks_s": 0.10462162824242428,
+        "mean_latency_s": 33.524893166666665,
+        "p95_latency_s": 64.849863,
+        "deadline_met": 18,
+        "distribution": {
+          "office-b": 18
+        },
+        "ai_sources": {
+          "none": 18
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@office-b": 13.203408666666666,
+          "document_search@office-b": 6.534102333333333,
+          "archive@office-b": 8.064414
+        }
+      },
+      "smart": {
+        "rounds": 3,
+        "submitted": 18,
+        "completed": 18,
+        "failed": 0,
+        "attempts": {
+          "1": 18
+        },
+        "total_batch_seconds": 77.78269600868225,
+        "mean_batch_seconds": 25.927565336227417,
+        "throughput_tasks_s": 0.23141393810765837,
+        "mean_latency_s": 12.6537725,
+        "p95_latency_s": 27.456546,
+        "deadline_met": 18,
+        "distribution": {
+          "office-b": 6,
+          "local-1": 12
+        },
+        "ai_sources": {
+          "none": 18
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@office-b": 12.211768600000001,
+          "document_search@local-1": 8.2683526,
+          "archive@local-1": 8.946337,
+          "log_analysis@local-1": 26.951543,
+          "document_search@office-b": 6.264513
+        }
+      },
+      "ai": {
+        "rounds": 3,
+        "submitted": 18,
+        "completed": 18,
+        "failed": 0,
+        "attempts": {
+          "1": 18
+        },
+        "total_batch_seconds": 86.02953124046326,
+        "mean_batch_seconds": 28.67651041348775,
+        "throughput_tasks_s": 0.20923047865607633,
+        "mean_latency_s": 15.03797788888889,
+        "p95_latency_s": 29.949258,
+        "deadline_met": 18,
+        "distribution": {
+          "office-b": 5,
+          "local-1": 13
+        },
+        "ai_sources": {
+          "qwen": 18
+        },
+        "model_ms_task_weighted_mean": 1297.3111111111111,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@office-b": 12.21897075,
+          "document_search@office-b": 5.49206,
+          "archive@local-1": 9.007229166666665,
+          "log_analysis@local-1": 27.5167515,
+          "document_search@local-1": 8.320615400000001
+        }
+      }
+    },
+    "status": "complete",
+    "raw_consistency_mismatches": [
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 2
+      },
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 5
+      },
+      {
+        "round": 2,
+        "policy": "fixed_B",
+        "index": 2
+      },
+      {
+        "round": 2,
+        "policy": "fixed_B",
+        "index": 5
+      },
+      {
+        "round": 3,
+        "policy": "fixed_B",
+        "index": 2
+      },
+      {
+        "round": 3,
+        "policy": "fixed_B",
+        "index": 5
+      }
+    ]
+  },
+  {
+    "profile": "mixed_deadlines",
+    "requested_rounds": 3,
+    "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\business-tests\\20261111-224443-mixed_deadlines",
+    "policies": {
+      "fixed_A": {
+        "rounds": 3,
+        "submitted": 36,
+        "completed": 36,
+        "failed": 0,
+        "attempts": {
+          "1": 36
+        },
+        "total_batch_seconds": 95.33776688575745,
+        "mean_batch_seconds": 31.779255628585815,
+        "throughput_tasks_s": 0.37760481681030494,
+        "mean_latency_s": 11.538565055555555,
+        "p95_latency_s": 31.403147,
+        "deadline_met": 36,
+        "distribution": {
+          "local-1": 36
+        },
+        "ai_sources": {
+          "none": 36
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@local-1": 15.112945416666667,
+          "document_search@local-1": 4.534576333333334,
+          "archive@local-1": 4.9500910000000005
+        }
+      },
+      "fixed_B": {
+        "rounds": 3,
+        "submitted": 36,
+        "completed": 36,
+        "failed": 0,
+        "attempts": {
+          "1": 36
+        },
+        "total_batch_seconds": 233.1494255065918,
+        "mean_batch_seconds": 77.71647516886394,
+        "throughput_tasks_s": 0.1544074145659097,
+        "mean_latency_s": 27.9793805,
+        "p95_latency_s": 74.486578,
+        "deadline_met": 36,
+        "distribution": {
+          "office-b": 36
+        },
+        "ai_sources": {
+          "none": 36
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@office-b": 9.122069666666667,
+          "document_search@office-b": 3.99081275,
+          "archive@office-b": 5.400017083333333
+        }
+      },
+      "smart": {
+        "rounds": 3,
+        "submitted": 36,
+        "completed": 36,
+        "failed": 0,
+        "attempts": {
+          "1": 36
+        },
+        "total_batch_seconds": 93.12891221046448,
+        "mean_batch_seconds": 31.04297073682149,
+        "throughput_tasks_s": 0.38656094166162547,
+        "mean_latency_s": 9.540889722222222,
+        "p95_latency_s": 30.612367,
+        "deadline_met": 36,
+        "distribution": {
+          "office-b": 9,
+          "local-1": 27
+        },
+        "ai_sources": {
+          "none": 36
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@office-b": 9.2210305,
+          "document_search@office-b": 0.586464,
+          "archive@local-1": 5.242027416666667,
+          "document_search@local-1": 6.008897666666667,
+          "log_analysis@local-1": 15.251907666666668
+        }
+      },
+      "ai": {
+        "rounds": 3,
+        "submitted": 36,
+        "completed": 36,
+        "failed": 0,
+        "attempts": {
+          "1": 36
+        },
+        "total_batch_seconds": 161.06592965126038,
+        "mean_batch_seconds": 53.68864321708679,
+        "throughput_tasks_s": 0.2235109565253628,
+        "mean_latency_s": 17.700878416666665,
+        "p95_latency_s": 55.668754,
+        "deadline_met": 36,
+        "distribution": {
+          "local-1": 24,
+          "office-b": 12
+        },
+        "ai_sources": {
+          "qwen": 36
+        },
+        "model_ms_task_weighted_mean": 1696.108888888889,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@local-1": 11.661026666666666,
+          "document_search@office-b": 5.990429,
+          "archive@local-1": 4.1607810999999995,
+          "document_search@local-1": 3.676546,
+          "log_analysis@office-b": 11.464621666666666,
+          "archive@office-b": 10.295189999999998
+        }
+      }
+    },
+    "status": "complete",
+    "raw_consistency_mismatches": [
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 2
+      },
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 5
+      },
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 8
+      },
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 11
+      },
+      {
+        "round": 2,
+        "policy": "fixed_B",
+        "index": 2
+      },
+      {
+        "round": 2,
+        "policy": "fixed_B",
+        "index": 5
+      },
+      {
+        "round": 2,
+        "policy": "fixed_B",
+        "index": 8
+      },
+      {
+        "round": 2,
+        "policy": "fixed_B",
+        "index": 11
+      },
+      {
+        "round": 2,
+        "policy": "ai",
+        "index": 8
+      },
+      {
+        "round": 3,
+        "policy": "ai",
+        "index": 8
+      },
+      {
+        "round": 3,
+        "policy": "fixed_B",
+        "index": 2
+      },
+      {
+        "round": 3,
+        "policy": "fixed_B",
+        "index": 5
+      },
+      {
+        "round": 3,
+        "policy": "fixed_B",
+        "index": 8
+      },
+      {
+        "round": 3,
+        "policy": "fixed_B",
+        "index": 11
+      }
+    ]
+  },
+  {
+    "profile": "heavy",
+    "requested_rounds": 1,
+    "directory": "D:\\coedx\\AI+6G\\suanlin-business-workloads\\.local\\business-tests\\20261111-225521-heavy",
+    "policies": {
+      "fixed_A": {
+        "rounds": 1,
+        "submitted": 6,
+        "completed": 6,
+        "failed": 0,
+        "attempts": {
+          "1": 6
+        },
+        "total_batch_seconds": 56.28485298156738,
+        "mean_batch_seconds": 56.28485298156738,
+        "throughput_tasks_s": 0.10660061601235644,
+        "mean_latency_s": 31.360094666666665,
+        "p95_latency_s": 56.137023,
+        "deadline_met": 6,
+        "distribution": {
+          "local-1": 6
+        },
+        "ai_sources": {
+          "none": 6
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@local-1": 55.092090999999996,
+          "document_search@local-1": 13.906197500000001,
+          "archive@local-1": 11.237313499999999
+        }
+      },
+      "fixed_B": {
+        "rounds": 1,
+        "submitted": 6,
+        "completed": 6,
+        "failed": 0,
+        "attempts": {
+          "1": 6
+        },
+        "total_batch_seconds": 123.68758130073547,
+        "mean_batch_seconds": 123.68758130073547,
+        "throughput_tasks_s": 0.04850931627009124,
+        "mean_latency_s": 75.38440166666668,
+        "p95_latency_s": 123.252001,
+        "deadline_met": 6,
+        "distribution": {
+          "office-b": 6
+        },
+        "ai_sources": {
+          "none": 6
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@office-b": 34.818865,
+          "document_search@office-b": 13.089136499999999,
+          "archive@office-b": 12.9221675
+        }
+      },
+      "smart": {
+        "rounds": 1,
+        "submitted": 6,
+        "completed": 6,
+        "failed": 0,
+        "attempts": {
+          "1": 6
+        },
+        "total_batch_seconds": 56.392369747161865,
+        "mean_batch_seconds": 56.392369747161865,
+        "throughput_tasks_s": 0.10639737302938879,
+        "mean_latency_s": 25.66411983333333,
+        "p95_latency_s": 56.29375099999999,
+        "deadline_met": 6,
+        "distribution": {
+          "local-1": 5,
+          "office-b": 1
+        },
+        "ai_sources": {
+          "none": 6
+        },
+        "model_ms_task_weighted_mean": null,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@local-1": 55.726014000000006,
+          "document_search@local-1": 13.8719135,
+          "archive@local-1": 11.168526499999999,
+          "log_analysis@office-b": 34.497336000000004
+        }
+      },
+      "ai": {
+        "rounds": 1,
+        "submitted": 6,
+        "completed": 6,
+        "failed": 0,
+        "attempts": {
+          "1": 6
+        },
+        "total_batch_seconds": 58.90132260322571,
+        "mean_batch_seconds": 58.90132260322571,
+        "throughput_tasks_s": 0.10186528476478408,
+        "mean_latency_s": 33.334241666666664,
+        "p95_latency_s": 58.746649,
+        "deadline_met": 6,
+        "distribution": {
+          "local-1": 6
+        },
+        "ai_sources": {
+          "qwen": 6
+        },
+        "model_ms_task_weighted_mean": 1419.0549999999998,
+        "compute_mean_s_by_kind_node": {
+          "log_analysis@local-1": 55.6764745,
+          "document_search@local-1": 13.8725575,
+          "archive@local-1": 11.1962175
+        }
+      }
+    },
+    "status": "complete",
+    "raw_consistency_mismatches": [
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 2
+      },
+      {
+        "round": 1,
+        "policy": "fixed_B",
+        "index": 5
+      }
+    ]
+  }
+]

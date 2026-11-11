@@ -1,0 +1,64 @@
+{
+  "formal_tasks": 264,
+  "statuses": {
+    "completed": 264
+  },
+  "attempts": {
+    "1": 264
+  },
+  "cross_host_summary_difference_specs": [
+    [
+      "archive",
+      10000,
+      2032
+    ],
+    [
+      "archive",
+      10000,
+      2035
+    ],
+    [
+      "archive",
+      400000,
+      2032
+    ],
+    [
+      "archive",
+      400000,
+      2035
+    ],
+    [
+      "archive",
+      400000,
+      2102
+    ],
+    [
+      "archive",
+      40000,
+      2105
+    ],
+    [
+      "archive",
+      400000,
+      2108
+    ],
+    [
+      "archive",
+      40000,
+      2111
+    ],
+    [
+      "archive",
+      500000,
+      2032
+    ],
+    [
+      "archive",
+      500000,
+      2035
+    ]
+  ],
+  "within_host_unstable_specs": [],
+  "archive_record_or_input_length_difference_specs": [],
+  "limits": "Equal archive input lengths do not prove equal content or successful decompression. Compression byte differences are unresolved without runtime versions and decompressed-content verification."
+}

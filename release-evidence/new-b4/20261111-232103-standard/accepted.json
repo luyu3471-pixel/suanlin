@@ -1,0 +1,2186 @@
+[
+  {
+    "id": "8ecf534128e9",
+    "name": "business-warmup",
+    "created_at": 1794410463.9354832,
+    "deadline_at": 1794410763.9354832,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 10000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 121,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 2
+  },
+  {
+    "id": "f0e568b3921f",
+    "name": "business-warmup",
+    "created_at": 1794410463.9794178,
+    "deadline_at": 1794410763.9794178,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 1000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 136,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 1
+  },
+  {
+    "id": "3b5055c61428",
+    "name": "business-warmup",
+    "created_at": 1794410464.0294027,
+    "deadline_at": 1794410764.0294027,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 10000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 131,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 0
+  },
+  {
+    "id": "3788730811b2",
+    "name": "business-warmup",
+    "created_at": 1794410464.0795498,
+    "deadline_at": 1794410764.0795498,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 10000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 131,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 3
+  },
+  {
+    "id": "0119d6085bf6",
+    "name": "business-warmup",
+    "created_at": 1794410464.2960734,
+    "deadline_at": 1794410764.2960734,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 1000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 136,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 4
+  },
+  {
+    "id": "9a52d216a40b",
+    "name": "business-warmup",
+    "created_at": 1794410464.354377,
+    "deadline_at": 1794410764.354377,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 10000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 121,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 5
+  },
+  {
+    "id": "709225dd7a8f",
+    "name": "standard-document_search-1",
+    "created_at": 1794410465.9872587,
+    "deadline_at": 1794410765.9872587,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 1
+  },
+  {
+    "id": "f12bbfefee96",
+    "name": "standard-archive-2",
+    "created_at": 1794410466.046271,
+    "deadline_at": 1794410766.046271,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 2
+  },
+  {
+    "id": "e326adf75ca6",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410466.1128461,
+    "deadline_at": 1794410766.1128461,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 0
+  },
+  {
+    "id": "30ef710dc5d6",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410466.1876063,
+    "deadline_at": 1794410766.1876063,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 3
+  },
+  {
+    "id": "beeb3eb56311",
+    "name": "standard-document_search-4",
+    "created_at": 1794410466.3379154,
+    "deadline_at": 1794410766.3379154,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 4
+  },
+  {
+    "id": "2e1958e7210d",
+    "name": "standard-archive-5",
+    "created_at": 1794410466.3893824,
+    "deadline_at": 1794410766.3893824,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 5
+  },
+  {
+    "id": "90b099ff6e43",
+    "name": "standard-archive-2",
+    "created_at": 1794410494.7662761,
+    "deadline_at": 1794410794.7662761,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 2
+  },
+  {
+    "id": "64db7d101dcb",
+    "name": "standard-document_search-1",
+    "created_at": 1794410494.8188167,
+    "deadline_at": 1794410794.8188167,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 1
+  },
+  {
+    "id": "260b474121b7",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410494.8688948,
+    "deadline_at": 1794410794.8688948,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 0
+  },
+  {
+    "id": "301f7e719123",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410494.9212937,
+    "deadline_at": 1794410794.9212937,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 3
+  },
+  {
+    "id": "8b0f4e470663",
+    "name": "standard-document_search-4",
+    "created_at": 1794410495.054051,
+    "deadline_at": 1794410795.054051,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 4
+  },
+  {
+    "id": "320a7e40aa53",
+    "name": "standard-archive-5",
+    "created_at": 1794410495.103953,
+    "deadline_at": 1794410795.103953,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 5
+  },
+  {
+    "id": "56f01f933900",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410519.743319,
+    "deadline_at": 1794410819.743319,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 0
+  },
+  {
+    "id": "c8a9bd8c641e",
+    "name": "standard-archive-2",
+    "created_at": 1794410519.8004863,
+    "deadline_at": 1794410819.8004863,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 2
+  },
+  {
+    "id": "ea5e6619c83e",
+    "name": "standard-document_search-1",
+    "created_at": 1794410519.8504791,
+    "deadline_at": 1794410819.8504791,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 1
+  },
+  {
+    "id": "f3a79195571d",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410519.9004972,
+    "deadline_at": 1794410819.9004972,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 3
+  },
+  {
+    "id": "be280e3b00c2",
+    "name": "standard-document_search-4",
+    "created_at": 1794410520.1171932,
+    "deadline_at": 1794410820.1171932,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 4
+  },
+  {
+    "id": "1f1e23b25685",
+    "name": "standard-archive-5",
+    "created_at": 1794410520.1687937,
+    "deadline_at": 1794410820.1687937,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 5
+  },
+  {
+    "id": "60bf868e486c",
+    "name": "standard-document_search-1",
+    "created_at": 1794410544.2343802,
+    "deadline_at": 1794410844.2343802,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 1
+  },
+  {
+    "id": "480198448d62",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410544.2817934,
+    "deadline_at": 1794410844.2817934,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 0
+  },
+  {
+    "id": "5cd255d11064",
+    "name": "standard-archive-2",
+    "created_at": 1794410544.3317745,
+    "deadline_at": 1794410844.3317745,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 2
+  },
+  {
+    "id": "3edcfc0967d8",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410544.3877864,
+    "deadline_at": 1794410844.3877864,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 3
+  },
+  {
+    "id": "5f9aca913cc7",
+    "name": "standard-document_search-4",
+    "created_at": 1794410544.4440432,
+    "deadline_at": 1794410844.4440432,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 4
+  },
+  {
+    "id": "885fc4580d9e",
+    "name": "standard-archive-5",
+    "created_at": 1794410544.5098188,
+    "deadline_at": 1794410844.5098188,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 5
+  },
+  {
+    "id": "a0e4b59bb0bf",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410569.735472,
+    "deadline_at": 1794410869.735472,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 0
+  },
+  {
+    "id": "166dcf832593",
+    "name": "standard-document_search-1",
+    "created_at": 1794410569.796102,
+    "deadline_at": 1794410869.796102,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 1
+  },
+  {
+    "id": "6273dff6350f",
+    "name": "standard-archive-2",
+    "created_at": 1794410569.8460233,
+    "deadline_at": 1794410869.8460233,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 2
+  },
+  {
+    "id": "ae77f1c36502",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410569.896383,
+    "deadline_at": 1794410869.896383,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 3
+  },
+  {
+    "id": "e74afdae5fe5",
+    "name": "standard-document_search-4",
+    "created_at": 1794410570.0213964,
+    "deadline_at": 1794410870.0213964,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 4
+  },
+  {
+    "id": "a9e69a16b425",
+    "name": "standard-archive-5",
+    "created_at": 1794410570.0729458,
+    "deadline_at": 1794410870.0729458,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 5
+  },
+  {
+    "id": "c9ea392fa8df",
+    "name": "standard-archive-2",
+    "created_at": 1794410598.227456,
+    "deadline_at": 1794410898.227456,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 2
+  },
+  {
+    "id": "1e2c80b39d84",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410598.2775202,
+    "deadline_at": 1794410898.2775202,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 0
+  },
+  {
+    "id": "5f0482c8f8ce",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410598.327706,
+    "deadline_at": 1794410898.327706,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 3
+  },
+  {
+    "id": "fa1d6949c82f",
+    "name": "standard-document_search-1",
+    "created_at": 1794410598.377672,
+    "deadline_at": 1794410898.377672,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 1
+  },
+  {
+    "id": "84ef8547fbc3",
+    "name": "standard-document_search-4",
+    "created_at": 1794410598.5041046,
+    "deadline_at": 1794410898.5041046,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 4
+  },
+  {
+    "id": "debcd8ee89c7",
+    "name": "standard-archive-5",
+    "created_at": 1794410598.5524545,
+    "deadline_at": 1794410898.5524545,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 5
+  },
+  {
+    "id": "41fdd33a4553",
+    "name": "standard-document_search-1",
+    "created_at": 1794410621.839427,
+    "deadline_at": 1794410921.839427,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 1
+  },
+  {
+    "id": "70af334b5bdd",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410621.8920221,
+    "deadline_at": 1794410921.8920221,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 0
+  },
+  {
+    "id": "001b83d5ad25",
+    "name": "standard-archive-2",
+    "created_at": 1794410621.9419653,
+    "deadline_at": 1794410921.9419653,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 2
+  },
+  {
+    "id": "f8564b832d74",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410621.992076,
+    "deadline_at": 1794410921.992076,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 3
+  },
+  {
+    "id": "4e67d34a39b9",
+    "name": "standard-document_search-4",
+    "created_at": 1794410622.0621061,
+    "deadline_at": 1794410922.0621061,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 4
+  },
+  {
+    "id": "0284c9c9187f",
+    "name": "standard-archive-5",
+    "created_at": 1794410622.1171684,
+    "deadline_at": 1794410922.1171684,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 5
+  },
+  {
+    "id": "021afe192bbf",
+    "name": "standard-document_search-1",
+    "created_at": 1794410647.8826392,
+    "deadline_at": 1794410947.8826392,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 1
+  },
+  {
+    "id": "c264f138eaab",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410647.9318535,
+    "deadline_at": 1794410947.9318535,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 0
+  },
+  {
+    "id": "6f77c7d07647",
+    "name": "standard-archive-2",
+    "created_at": 1794410647.9818144,
+    "deadline_at": 1794410947.9818144,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 2
+  },
+  {
+    "id": "4d08f8568638",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410648.032078,
+    "deadline_at": 1794410948.032078,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 3
+  },
+  {
+    "id": "72e0d8d02915",
+    "name": "standard-document_search-4",
+    "created_at": 1794410648.1668036,
+    "deadline_at": 1794410948.1668036,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 4
+  },
+  {
+    "id": "c1f0216ba7a9",
+    "name": "standard-archive-5",
+    "created_at": 1794410648.2149553,
+    "deadline_at": 1794410948.2149553,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 5
+  },
+  {
+    "id": "36ba7f759cd0",
+    "name": "standard-document_search-1",
+    "created_at": 1794410676.0762427,
+    "deadline_at": 1794410976.0762427,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 1
+  },
+  {
+    "id": "30f46fec4d29",
+    "name": "standard-archive-2",
+    "created_at": 1794410676.1376376,
+    "deadline_at": 1794410976.1376376,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 2
+  },
+  {
+    "id": "ddf2cfe13af0",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410676.1877298,
+    "deadline_at": 1794410976.1877298,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 0
+  },
+  {
+    "id": "497e906f54cd",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410676.237651,
+    "deadline_at": 1794410976.237651,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 3
+  },
+  {
+    "id": "6178101166ad",
+    "name": "standard-document_search-4",
+    "created_at": 1794410676.4631035,
+    "deadline_at": 1794410976.4631035,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 4
+  },
+  {
+    "id": "9f12d15eb53d",
+    "name": "standard-archive-5",
+    "created_at": 1794410676.5144475,
+    "deadline_at": 1794410976.5144475,
+    "deadline_ms": 300000,
+    "policy": "smart",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 5
+  },
+  {
+    "id": "3ed67a3bdecc",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410699.850635,
+    "deadline_at": 1794410999.850635,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 0
+  },
+  {
+    "id": "92e1cf21a9fb",
+    "name": "standard-document_search-1",
+    "created_at": 1794410699.902399,
+    "deadline_at": 1794410999.902399,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 1
+  },
+  {
+    "id": "cdac9592a225",
+    "name": "standard-archive-2",
+    "created_at": 1794410699.9523747,
+    "deadline_at": 1794410999.9523747,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 2
+  },
+  {
+    "id": "b3c0373969f5",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410700.0024292,
+    "deadline_at": 1794411000.0024292,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 3
+  },
+  {
+    "id": "b881c8841cd4",
+    "name": "standard-document_search-4",
+    "created_at": 1794410700.0590272,
+    "deadline_at": 1794411000.0590272,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 4
+  },
+  {
+    "id": "a5d7c44c47a6",
+    "name": "standard-archive-5",
+    "created_at": 1794410700.1278198,
+    "deadline_at": 1794411000.1278198,
+    "deadline_ms": 300000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": null,
+    "input_index": 5
+  },
+  {
+    "id": "76059c5a74b2",
+    "name": "standard-document_search-1",
+    "created_at": 1794410724.761757,
+    "deadline_at": 1794411024.761757,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 1
+  },
+  {
+    "id": "687cf97922a9",
+    "name": "standard-archive-2",
+    "created_at": 1794410724.8257508,
+    "deadline_at": 1794411024.8257508,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 2
+  },
+  {
+    "id": "fdcdd1699ccd",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410724.892408,
+    "deadline_at": 1794411024.892408,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 0
+  },
+  {
+    "id": "886ec70d93f9",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410724.9592018,
+    "deadline_at": 1794411024.9592018,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 3
+  },
+  {
+    "id": "d1f0d61ccdff",
+    "name": "standard-document_search-4",
+    "created_at": 1794410725.0939465,
+    "deadline_at": 1794411025.0939465,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 4
+  },
+  {
+    "id": "363e5d9d5742",
+    "name": "standard-archive-5",
+    "created_at": 1794410725.1520665,
+    "deadline_at": 1794411025.1520665,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "local-1",
+    "input_index": 5
+  },
+  {
+    "id": "32a2c450ec7c",
+    "name": "standard-log_analysis-0",
+    "created_at": 1794410753.4153485,
+    "deadline_at": 1794411053.4153485,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2030
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 0
+  },
+  {
+    "id": "5896f5a52e60",
+    "name": "standard-archive-2",
+    "created_at": 1794410753.4648192,
+    "deadline_at": 1794411053.4648192,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2032
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 2
+  },
+  {
+    "id": "5307ebacac53",
+    "name": "standard-document_search-1",
+    "created_at": 1794410753.514774,
+    "deadline_at": 1794411053.514774,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2031
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 1
+  },
+  {
+    "id": "f575904e982f",
+    "name": "standard-log_analysis-3",
+    "created_at": 1794410753.564911,
+    "deadline_at": 1794411053.564911,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 1000000,
+        "seed": 2033
+      }
+    },
+    "payload_bytes": 133,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 3
+  },
+  {
+    "id": "e848fa252cb6",
+    "name": "standard-document_search-4",
+    "created_at": 1794410753.6940482,
+    "deadline_at": 1794411053.6940482,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 60000,
+        "seed": 2034
+      }
+    },
+    "payload_bytes": 137,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 4
+  },
+  {
+    "id": "ed07bad2a25a",
+    "name": "standard-archive-5",
+    "created_at": 1794410753.7485578,
+    "deadline_at": 1794411053.7485578,
+    "deadline_ms": 300000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 400000,
+        "seed": 2035
+      }
+    },
+    "payload_bytes": 122,
+    "status": "queued",
+    "attempts": 0,
+    "worker_id": null,
+    "result": null,
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "input_index": 5
+  }
+]

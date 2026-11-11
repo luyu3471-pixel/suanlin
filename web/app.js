@@ -258,7 +258,7 @@ const icon = name => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
 document.querySelectorAll('[data-icon]').forEach(e => e.innerHTML = icon(e.dataset.icon));
 const titles = {overview:'协同工作台',nodes:'算力节点',tasks:'任务中心',experiments:'对比实验',guide:'部署与验证'};
 const labels = {completed:'已完成',running:'执行中',queued:'待调度',failed:'执行失败',cancelled:'已取消'};
-const policies = {smart:'联合调度',fixed:'固定单节点',round_robin:'轮询分配',random:'随机分配'};
+const policies = {ai:'Qwen AI 调度',smart:'联合调度',fixed:'固定单节点',round_robin:'轮询分配',random:'随机分配'};
 let state = null, current = 'overview', simulation = null, scenario = 'normal', taskFilter = 'all', taskSearch = '', lastError = false, fetching = false;
 let toastTimer;
 let taskSort = 'newest', lastSyncAt = null, connectionError = '', authRequired = false, experimentsError = '', experimentsLoading = false;
@@ -324,11 +324,11 @@ function taskTable(tasks, title='最近任务', all=false) {
 }
 function overview() {
  const online=state.nodes.filter(n=>n.online),busy=online.reduce((s,n)=>s+Object.keys(n.active_tasks||{}).length,0),slots=online.reduce((s,n)=>s+(n.capacity||1),0);
- return heading('协同工作台','把任务交给合适的设备，让每一份算力有序协作。')+`<section class="hero"><div class="hero-grid-motion" aria-hidden="true"></div><div class="hero-scan" aria-hidden="true"></div><div class="hero-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="hero-copy"><span class="eyebrow">MULTI-DEVICE TASK SCHEDULER</span><h2>让任务流转，<span>让设备协作。</span></h2><p>连接执行节点，分配任务，在一个工作台掌握处理进度。</p><div class="hero-bottom"><div class="hero-tags"><span>${icon("check")} 时限感知</span><span>${icon("check")} 多端执行</span><span>${icon("check")} 过程可追溯</span></div><button class="hero-action" data-action="demo">运行演示任务 ${icon("arrow")}</button></div></div>${heroArt()}</section>`+metrics()+`<div class="dashboard-grid"><div>${topology()}${taskTable(state.tasks.slice(0,5))}</div><div class="dashboard-right"><section class="panel strategy"><span class="eyebrow">SCHEDULING POLICY</span><h3>联合调度</h3><p>综合预测等待、通信和计算耗时，优先处理临近截止的任务。</p><div class="strategy-list"><div class="strategy-row"><span>执行时间预测</span><b>在线 EWMA 更新</b></div><div class="strategy-row"><span>数据范围</span><b>按任务约束筛选</b></div><div class="strategy-row"><span>故障处理</span><b>租约到期重新调度</b></div></div><div class="strategy-footer"><span>另有 3 种基线策略</span><a href="#experiments">查看对比 ↗</a></div></section><section class="panel secondary-panel"><h3>工作空间动态</h3><div class="progress-row"><span>节点执行槽占用</span><span>${busy} / ${slots}</span></div><div class="progress-track"><div class="progress-fill" style="--progress:${slots?busy/slots*100:0}%"></div></div><div class="event-list">${state.events.slice(0,4).map(e=>`<div class="event-item" data-key="event-${esc(e.at+'-'+e.message)}"><span>${esc(e.message)}</span><time>${time(e.at)}</time></div>`).join('')||'<p class="fine-label">等待节点接入与任务提交。</p>'}</div><button class="button secondary mini" data-action="demo">${icon('play')} 运行 12 项演示任务</button><p class="fine-label">合成事件，真实进程执行；含附加 CPU 负载。</p></section></div></div>`+notice();
+ return heading('协同工作台','把任务交给合适的设备，让每一份算力有序协作。')+`<section class="hero"><div class="hero-grid-motion" aria-hidden="true"></div><div class="hero-scan" aria-hidden="true"></div><div class="hero-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="hero-copy"><span class="eyebrow">MULTI-DEVICE TASK SCHEDULER</span><h2>让任务流转，<span>让设备协作。</span></h2><p>连接执行节点，分配任务，在一个工作台掌握处理进度。</p><div class="hero-bottom"><div class="hero-tags"><span>${icon("check")} 时限感知</span><span>${icon("check")} 多端执行</span><span>${icon("check")} 过程可追溯</span></div><button class="hero-action" data-action="demo">运行演示任务 ${icon("arrow")}</button></div></div>${heroArt()}</section>`+metrics()+`<div class="dashboard-grid"><div>${topology()}${taskTable(state.tasks.slice(0,5))}</div><div class="dashboard-right"><section class="panel strategy"><span class="eyebrow">SCHEDULING POLICY</span><h3>Qwen 辅助调度</h3><p>模型在 A 上参考节点配置、负载与预计完成时间选择节点；超时或无效决策回退到规则。</p><p class="fine-label">模型状态：${state.ai_scheduler?.enabled ? "已启用 · 调用 "+state.ai_scheduler.calls+" 次 · 接受 "+state.ai_scheduler.accepted+" 项决策" : "未启用，使用规则回退"}</p><div class="strategy-list"><div class="strategy-row"><span>执行时间预测</span><b>在线 EWMA 更新</b></div><div class="strategy-row"><span>数据范围</span><b>按任务约束筛选</b></div><div class="strategy-row"><span>故障处理</span><b>租约到期重新调度</b></div></div><div class="strategy-footer"><span>另有 3 种基线策略</span><a href="#experiments">查看对比 ↗</a></div></section><section class="panel secondary-panel"><h3>工作空间动态</h3><div class="progress-row"><span>节点执行槽占用</span><span>${busy} / ${slots}</span></div><div class="progress-track"><div class="progress-fill" style="--progress:${slots?busy/slots*100:0}%"></div></div><div class="event-list">${state.events.slice(0,4).map(e=>`<div class="event-item" data-key="event-${esc(e.at+'-'+e.message)}"><span>${esc(e.message)}</span><time>${time(e.at)}</time></div>`).join('')||'<p class="fine-label">等待节点接入与任务提交。</p>'}</div><button class="button secondary mini" data-action="demo">${icon('play')} 运行 12 项演示任务</button><p class="fine-label">合成事件，真实进程执行；含附加 CPU 负载。</p></section></div></div>`+notice();
 }
 function notice() { return `<div class="notice">${icon('info')}<span>${state.measurement==='application_loopback'?'当前为同机多进程演示。':'当前含远程连接，请核实物理终端与网络配置。'}系统使用合成巡检文本与轻量分类模型，尚未验证图像识别、真实用户收益或 6G 无线性能。</span></div>`; }
 function nodesPage() {
- return heading('算力节点','连接身边的设备，观察每个执行节点的可用状态。','CONNECTED EXECUTION NODES')+metrics()+`<section class="node-grid">${state.nodes.map(n=>`<article class="panel node-card" data-key="node-${esc(n.id)}"><div class="node-header"><span class="metric-icon">${icon(n.mode==='same_host'?'monitor':'server')}</span><div><h3>${esc(n.name)}</h3><p>${esc(n.id)} · ${n.mode==='same_host'?'同机进程':'远程接入'}</p></div></div><div class="node-details"><div><span>当前状态</span>${badge(n)}</div><div><span>主机 / 来源</span><b>${esc(n.host)} / ${esc(n.peer)}</b></div><div><span>HTTP 往返耗时</span><b>${ms(n.rtt_ms)}</b></div><div><span>并行槽位占用</span><b>${Object.keys(n.active_tasks||{}).length} / ${n.capacity||1}</b></div><div><span>配置带宽（非测量）</span><b>${fmt(n.bandwidth_mbps)} Mbps</b></div><div><span>累计完成</span><b>${fmt(n.completed)} 项</b></div><div><span>管理员可信设置</span><b>${n.trusted?'可信':'未设为可信'}</b></div></div><div class="node-buttons"><button class="button secondary mini" data-node="${esc(n.id)}" data-drain="${!n.draining}">${n.draining?'恢复接收任务':'暂停接收任务'}</button><button class="button secondary mini" data-trust="${esc(n.id)}" data-value="${!n.trusted}">${n.trusted?'撤销可信设置':'设为可信'}</button></div></article>`).join('')||'<div class="panel empty">暂无节点。使用一键启动脚本，或按部署说明连接执行端。</div>'}</section>`+notice()+`<div class="notice">${icon('shield')}<span>“可信”是管理员对节点的部署设置，不代表硬件证明、加密存储或可信执行环境。远程节点默认不可信。</span></div>`;
+ return heading('算力节点','已接入的执行端自动上报配置；旧版节点需升级。Qwen 调度模型只在协调端 A 运行。','CONNECTED EXECUTION NODES')+metrics()+`<section class="node-grid">${state.nodes.map(n=>`<article class="panel node-card" data-key="node-${esc(n.id)}"><div class="node-header"><span class="metric-icon">${icon(n.mode==='same_host'?'monitor':'server')}</span><div><h3>${esc(n.name)}</h3><p>${esc(n.id)} · ${n.mode==='same_host'?'同机进程':'远程接入'}</p></div></div><div class="node-details"><div><span>当前状态</span>${badge(n)}</div><div><span>主机 / 来源</span><b>${esc(n.host)} / ${esc(n.peer)}</b></div><div><span>HTTP 往返耗时</span><b>${ms(n.rtt_ms)}</b></div><div><span>CPU</span><b>${esc(n.resources?.cpu_name || '未上报：需升级执行端')}</b></div><div><span>物理 / 逻辑核心</span><b>${n.resources?.physical_cores ?? '—'} / ${n.resources?.logical_cores ?? '—'}</b></div><div><span>CPU 使用率</span><b>${n.resources?.cpu_percent == null ? '未知' : n.resources.cpu_percent+'%'}</b></div><div><span>可用 / 总内存</span><b>${n.resources?.memory_available_gib ?? '—'} / ${n.resources?.memory_total_gib ?? '—'} GiB</b></div><div><span>GPU（当前任务使用 CPU）</span><b>${esc(n.resources?.gpus?.map(g=>g.name+' '+g.memory_total_mib+' MiB').join('；') || '未检测到或未上报')}</b></div><div><span>配置上报</span><b>${n.resources_at ? (state.server_time-n.resources_at>15?'已过期':'有效')+' · '+Math.max(0,Math.round(state.server_time-n.resources_at))+' 秒前' : '未知'}</b></div><div><span>并行槽位占用</span><b>${Object.keys(n.active_tasks||{}).length} / ${n.capacity||1}</b></div><div><span>配置带宽（非测量）</span><b>${fmt(n.bandwidth_mbps)} Mbps</b></div><div><span>累计完成</span><b>${fmt(n.completed)} 项</b></div><div><span>管理员可信设置</span><b>${n.trusted?'可信':'未设为可信'}</b></div></div><div class="node-buttons"><button class="button secondary mini" data-node="${esc(n.id)}" data-drain="${!n.draining}">${n.draining?'恢复接收任务':'暂停接收任务'}</button><button class="button secondary mini" data-trust="${esc(n.id)}" data-value="${!n.trusted}">${n.trusted?'撤销可信设置':'设为可信'}</button></div></article>`).join('')||'<div class="panel empty">暂无节点。使用一键启动脚本，或按部署说明连接执行端。</div>'}</section>`+notice()+`<div class="notice">${icon('shield')}<span>“可信”是管理员对节点的部署设置，不代表硬件证明、加密存储或可信执行环境。远程节点默认不可信。</span></div>`;
 }
 function emptyTasks(all) {
  const filtered = all && (taskSearch.trim() || taskFilter !== 'all');
@@ -420,15 +420,17 @@ function queueAdvice(task) {
 const fullTime=value=>value?new Date(value*1000).toLocaleString('zh-CN',{hour12:false}):'—';
 function taskDetailHTML(t) {
  const steps=[['已提交',t.created_at],['最近一次开始',t.started_at],[labels[t.status]||'执行结束',['completed','failed','cancelled'].includes(t.status)?t.finished_at:null]];
- const statusMessage=t.status==='queued'?queueAdvice(t):t.status==='running'?'节点正在处理，完成后会自动显示分类结果。':t.status==='cancelled'?'任务已取消。运行中的计算可能仍在结束，后续结果不会记为完成。':t.status==='failed'?(t.error||'任务执行失败，请检查节点状态后重新创建任务。'):'已收到执行结果，可逐条查看下方分类。';
+ const statusMessage=t.status==='queued'?queueAdvice(t):t.status==='running'?'节点正在处理，完成后会自动显示分类结果。':t.status==='cancelled'?'任务已取消。运行中的计算可能仍在结束，后续结果不会记为完成。':t.status==='failed'?(t.error||'任务执行失败，请检查节点状态后重新创建任务。'):(t.payload?.workload?'已收到业务处理结果，请查看统计与校验摘要。':'已收到执行结果，可逐条查看下方分类。');
  const terminal=['completed','failed','cancelled'].includes(t.status);
  return `<div class="detail-title"><div><h3>${esc(t.name)}</h3><span class="mono">${esc(t.id)}</span></div><span class="status ${t.status}" aria-live="polite">${statusLabel(t.status)}</span></div>
  <ol class="task-timeline">${steps.map(([label,at],i)=>`<li class="${at?'done':''}"><span>${i===2&&!terminal?'等待结束':label}</span><time>${at?fullTime(at):'—'}</time></li>`).join('')}</ol>
  <div class="task-guidance ${t.status==='failed'?'is-error':''}"><span>${esc(statusMessage)}</span>${t.status==='queued'?'<a href="#nodes" data-detail-nodes>查看节点 ↗</a>':''}</div>
  ${detailError?`<p class="inline-error" role="status">详情更新中断：${esc(detailError)}</p>`:''}
+   ${t.policy==='ai'?`<div class="notice"><span>调度决策：${esc(({qwen:'Qwen 方案',qwen_guarded:'Qwen 方案经排程保护调整',rules_fallback:'规则回退'})[t.scheduler_decision?.source] || '等待 A 上的 Qwen')} · 模型调用 ${ms(t.scheduler_decision?.model_ms)} · ${esc(t.scheduler_decision?.reason || '')}${t.scheduler_decision?.model_worker_id?` · 模型建议 ${esc(t.scheduler_decision.model_worker_id)} → 最终节点 ${esc(t.scheduler_decision.selected_worker || t.scheduler_decision.worker_id || '待定')}`:''}</span></div>`:''}
  <div class="detail-meta"><span>执行节点<b>${esc(state?.nodes.find(n=>n.id===t.worker_id)?.name||t.worker_id||'尚未分配')}</b></span><span>完成时延<b>${ms(t.latency_ms)}</b></span><span>调度策略<b>${esc(policies[t.policy])}</b></span><span>派发尝试<b>${t.attempts} 次</b></span><span>完成时限<b>${ms(t.deadline_ms)}${t.status==='completed'?(t.deadline_met?' · 按时完成':' · 已超时'):''}</b></span><span>计算耗时 / 附加负载<b>${ms(t.result?.compute_ms)} / ${ms(t.result?.load_ms)}</b></span></div>
+ ${t.payload?.workload?`<section class="panel"><h3>业务任务：${esc(t.payload.workload.kind)}</h3><p>处理规模 ${fmt(t.payload.workload.units)} · 合成输入，真实业务算法</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(JSON.stringify(t.result?.summary || {status:t.status},null,2))}</pre></section>`:''}
  ${t.result?.predictions?.map((p,i)=>`<div class="prediction" data-key="prediction-${i}"><div class="prediction-title"><b>${esc(p.label)}</b><span>模型分数 ${percent(p.confidence)}</span></div><p>${esc(p.text)}</p></div>`).join('')||`<div class="submitted-events"><h3>已提交的文本</h3><ol>${(t.payload?.events||[]).map(text=>`<li>${esc(text)}</li>`).join('')}</ol></div>`}
- <div class="detail-toolbar"><span>${terminal?'执行已结束':'状态每 1.5 秒自动更新'}</span><button class="button secondary mini" data-action="detail-refresh">刷新详情</button></div><p class="form-note">合成文本训练的轻量模型。分数未经概率校准，所有结果均需人工复核。完整结果保存在本地 SQLite 数据库。</p>`;
+ <div class="detail-toolbar"><span>${terminal?'执行已结束':'状态每 1.5 秒自动更新'}</span><button class="button secondary mini" data-action="detail-refresh">刷新详情</button></div><p class="form-note">${t.payload?.workload?"合成业务输入，实际执行解析、检索或压缩算法。完整统计结果保存在本地数据库。":"合成文本训练的轻量模型。分数未经概率校准，所有结果均需人工复核。完整结果保存在本地 SQLite 数据库。"}</p>`;
 }
 async function refreshDetail(force=false) {
  if(!activeTask||detailLoading||!$('#detail-dialog').open) return;
@@ -455,16 +457,22 @@ async function detail(id) {
 }
 function updateFormHelp() {
  const form=$('#task-form'),field=form.elements.events;
+ const business=form.elements.workload_kind.value;
+ field.required=!business;field.disabled=Boolean(business);
+ const size=form.elements.workload_units;size.disabled=!business;
+ const bounds={log_analysis:[1000,2000000],document_search:[100,100000],archive:[1000,500000]};
+ if(business){size.min=bounds[business][0];size.max=bounds[business][1];}
+ form.elements.compute_loops.disabled=Boolean(business);
  const lines=field.value.split('\n').map(x=>x.trim()).filter(Boolean);
  const tooLong=lines.some(x=>Array.from(x).length>2000);
  const error=lines.length>128?'最多支持 128 条，请减少后提交。':tooLong?'有一条文本超过 2000 字，请缩短后提交。':!lines.length?'请输入至少一条非空文本。':'';
- field.setCustomValidity(error);
+ field.setCustomValidity(business?'':error);
  $('#event-count').textContent=`已输入 ${lines.length} / 128 条 · 每条最多 2000 字`;
  $('#event-count').classList.toggle('is-error',lines.length>128||tooLong);
  $('#fill-example').disabled=Boolean(field.value.trim());
  form.elements.name.setCustomValidity(form.elements.name.value.trim()?'':'请填写任务名称。');
  const hint=$('#task-node-hint');
- const eligible=state?.nodes.filter(n=>n.online&&!n.draining&&(form.elements.privacy.value==='any'||n.trusted))||[];
+ const eligible=state?.nodes.filter(n=>n.online&&!n.draining&&(form.elements.privacy.value==='any'||n.trusted)&&(!business||(n.workload_kinds||[]).includes(business)))||[];
  hint.textContent=eligible.length?`${eligible.length} 个节点可接收该范围的任务；提交后将排队分配。`:queueAdvice({privacy:form.elements.privacy.value});
  hint.classList.toggle('is-warning',!eligible.length);
  return lines;
@@ -498,7 +506,7 @@ document.addEventListener('click',async event=>{
    const blob=await request('/api/tasks/export.csv',undefined,true),url=URL.createObjectURL(blob),a=document.createElement('a');
    a.href=url;a.download='任务调度记录.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),5000);toast('全部任务记录已导出');
   }
-  if(action==='demo') {await api('/api/demo',{count:12,policy:'smart'});toast('12 项合成事件已提交，正在真实执行');await refresh(true);}
+  if(action==='demo') {await api('/api/demo',{count:12,policy:state.ai_scheduler?.enabled?'ai':'smart'});toast('12 项合成事件已提交，正在真实执行');await refresh(true);}
   if(action==='experiments') await loadExperiments();
   if(button.dataset.detail) await detail(button.dataset.detail);
   if(button.dataset.cancel) {await api('/api/tasks/'+button.dataset.cancel+'/cancel',{});toast('任务已取消');await refresh(true);}
@@ -511,7 +519,7 @@ document.addEventListener('click',async event=>{
 });
 $('#detail-dialog').addEventListener('close',()=>{detailVersion++;activeTask=null;detailLoading=false;});
 $('#task-form').addEventListener('input',updateFormHelp);
-$('#task-form').addEventListener('change',updateFormHelp);
+$('#task-form').addEventListener('change',e=>{if(e.target.name==='workload_kind'&&e.target.value) $('#task-form').elements.deadline_ms.value=300000;updateFormHelp();});
 $('#task-form').addEventListener('submit',async event=>{
  event.preventDefault();
  if(pending.has('submit')) return;
@@ -519,7 +527,10 @@ $('#task-form').addEventListener('submit',async event=>{
  const f=new FormData(event.target),button=$('button[type="submit"]',event.target);
  pending.add('submit');button.disabled=true;button.setAttribute('aria-busy','true');button.textContent='正在提交…';$('#form-error').hidden=true;
  try {
-  await api('/api/tasks',{name:f.get('name').trim(),events,policy:f.get('policy'),privacy:f.get('privacy'),deadline_ms:Number(f.get('deadline_ms')),compute_loops:Number(f.get('compute_loops'))});
+  const body={name:f.get('name').trim(),policy:f.get('policy'),privacy:f.get('privacy'),deadline_ms:Number(f.get('deadline_ms')),compute_loops:Number(f.get('compute_loops'))};
+  if(f.get('workload_kind')) body.workload={kind:f.get('workload_kind'),units:Number(f.get('workload_units')),seed:2030};
+  else body.events=events;
+  await api('/api/tasks',body);
   $('#create-dialog').close();event.target.reset();updateFormHelp();toast('任务已提交，可在任务中心查看执行结果');await refresh(true);
  } catch(error) {$('#form-error').textContent=error.message;$('#form-error').hidden=false;}
  finally {pending.delete('submit');button.disabled=false;button.removeAttribute('aria-busy');button.textContent='提交任务 ↗';}
