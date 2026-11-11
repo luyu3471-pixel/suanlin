@@ -1,0 +1,45 @@
+基线：9867e8d522f9cc5043675b530453e9144c231c8c
+本地改版：2.0.0-queue-capacity
+
+suanlin/scheduler.py
+- 根据完整待派发队列，在各节点的虚拟计算槽上逐一预留预计完成时间。
+- 文本长度和人工循环数分项估计；兼容旧的仿真profile输入。
+
+suanlin/store.py
+- 注册支持capacity，任务槽由active_tasks独立管理。
+- 心跳可批量续租；单任务完成/取消/过期不会清空同节点其他活跃任务。
+- 过期回收不会更新已离线节点的last_seen，避免错误复活。
+- 条件变量长轮询；移除无任务轮询和空闲心跳的数据库写入。
+- 分项学习文本、哈希成本及派发后额外开销；暴露版本与并发容量。
+
+suanlin/worker.py
+- 单并发直接计算，多并发使用有界进程池，保持一个逻辑节点ID。
+- 多任务心跳与独立lease；暂时回传失败保留结果重试；重连处理旧session。
+- 长轮询等待不当作RTT；--stop-file支持优雅停止进程池。
+
+suanlin/inference.py
+- 增加classification_ms，用于分项学习，保留原有结果字段。
+
+launch.py、suanlin/server.py、web/app.js
+- --concurrency可配置本机节点槽数；启动器管理worker停止文件和子进程回收。
+- 健康接口与状态版本同步；工作台显示实际槽占用/总容量。
+
+tools/performance_suite.py、benchmarks/*.json
+- 四类固定种子合成工作负载，可并发提交。
+- 记录吞吐、总完成时间、P95、按时率、失败、分节点任务数及峰值占用槽。
+- 保留输入、预热、全部已接受任务、失败和未完成记录；不自动更改节点配置。
+
+tools/local_performance_check.py
+- 使用临时回环端口、独立数据库；旧/新worker都在独立进程中执行，避免压测客户端GIL争用。
+- 同机检查只验证软件与并行能力，不代替双机测量。
+
+tests/test_capacity.py、tests/test_performance_suite.py
+- 容量上限、独立完成、队列分担、轻任务选择、多租约恢复、分项估计、唤醒、权限、离线回收、数据可复现、失败统计。
+tests/test_system.py
+- 保留原仓库测试；完整仓库包含experiments.py，仿真测试正常执行。
+
+当前范围
+- 并发数是显式配置，不自动占满逻辑CPU；建议先4槽，再同条件对比8槽。
+- HTTP与SQLite全局串行部分仍可能限制极轻任务吞吐；本次未实现自动合批或GPU推理。
+- 已完成A四槽/B一槽的双机测试，2304项均完成、981项按时；公开汇总见results/role_swap_20261111_summary.json。
+- 人工重计算和混合任务分别观察到24.4%和10.7%的吞吐提升；轻负载仍有大量超时。

@@ -1,0 +1,331 @@
+{
+  "date": "2026-11-11",
+  "version": "2.0.0-queue-capacity",
+  "scope": "actual_two_host_synthetic_cpu_tasks",
+  "configuration": {
+    "A_slots": 4,
+    "B_slots": 1,
+    "rounds": 3,
+    "tasks_per_trial": 64,
+    "submission_concurrency": 8,
+    "policies": [
+      "fixed",
+      "round_robin",
+      "smart"
+    ],
+    "coordinator_storage": "HDD",
+    "background_load": "uncontrolled"
+  },
+  "metric_notes": [
+    "Throughput = completed tasks / sum of three trial makespans.",
+    "P95 pools the 192 completed tasks in each workload/policy group.",
+    "Deadline rate uses all submitted tasks."
+  ],
+  "limitations": [
+    "Synthetic text and explicit SHA256 loops; not Qwen/GPU or real business data.",
+    "Storage bottleneck is suspected, not proven by an SSD/HDD controlled comparison.",
+    "Device roles, capacity, submission method and storage changed; not a controlled old-code/new-code comparison.",
+    "Private raw records remain local and are not included in this public aggregate."
+  ],
+  "results": {
+    "formal_tasks": 2304,
+    "warmup_tasks": 10,
+    "status_counts": {
+      "completed": 2304
+    },
+    "deadline_met": 981,
+    "workers": {
+      "local-1": 1618,
+      "office-b": 686
+    },
+    "attempts": {
+      "1": 2304
+    },
+    "groups": [
+      {
+        "case": "tiny_control",
+        "policy": "fixed",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 176,
+        "deadline_rate": 0.08333333333333333,
+        "throughput_tasks_s": 3.0750246430556767,
+        "mean_makespan_s": 20.812841335932415,
+        "mean_latency_ms": 9848.14315625,
+        "pooled_p95_ms": 15967.589,
+        "workers": {
+          "local-1": 192
+        },
+        "mean_compute_ms": 0.15863020833333333,
+        "mean_queue_ms": 9538.875514020523,
+        "peak_inflight": {
+          "local-1": 2,
+          "office-b": 0
+        }
+      },
+      {
+        "case": "tiny_control",
+        "policy": "round_robin",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 179,
+        "deadline_rate": 0.06770833333333333,
+        "throughput_tasks_s": 2.660953716137538,
+        "mean_makespan_s": 24.05152694384257,
+        "mean_latency_ms": 10867.289661458333,
+        "pooled_p95_ms": 17007.088,
+        "workers": {
+          "local-1": 96,
+          "office-b": 96
+        },
+        "mean_compute_ms": 0.18409895833333334,
+        "mean_queue_ms": 10344.467719395956,
+        "peak_inflight": {
+          "local-1": 2,
+          "office-b": 1
+        }
+      },
+      {
+        "case": "tiny_control",
+        "policy": "smart",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 177,
+        "deadline_rate": 0.078125,
+        "throughput_tasks_s": 3.1256000513723023,
+        "mean_makespan_s": 20.476068258285522,
+        "mean_latency_ms": 9659.708489583334,
+        "pooled_p95_ms": 14032.72,
+        "workers": {
+          "office-b": 84,
+          "local-1": 108
+        },
+        "mean_compute_ms": 0.161453125,
+        "mean_queue_ms": 9193.32150494059,
+        "peak_inflight": {
+          "local-1": 2,
+          "office-b": 1
+        }
+      },
+      {
+        "case": "text_batch",
+        "policy": "fixed",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 186,
+        "deadline_rate": 0.03125,
+        "throughput_tasks_s": 2.538427216172858,
+        "mean_makespan_s": 25.212462107340496,
+        "mean_latency_ms": 12130.209140625,
+        "pooled_p95_ms": 18013.931,
+        "workers": {
+          "local-1": 192
+        },
+        "mean_compute_ms": 17.898239583333332,
+        "mean_queue_ms": 11765.74337358276,
+        "peak_inflight": {
+          "local-1": 2,
+          "office-b": 0
+        }
+      },
+      {
+        "case": "text_batch",
+        "policy": "round_robin",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 180,
+        "deadline_rate": 0.0625,
+        "throughput_tasks_s": 2.330424089207408,
+        "mean_makespan_s": 27.462812582651775,
+        "mean_latency_ms": 12104.285390625,
+        "pooled_p95_ms": 19007.861,
+        "workers": {
+          "local-1": 96,
+          "office-b": 96
+        },
+        "mean_compute_ms": 14.425989583333333,
+        "mean_queue_ms": 11479.879386723042,
+        "peak_inflight": {
+          "local-1": 2,
+          "office-b": 1
+        }
+      },
+      {
+        "case": "text_batch",
+        "policy": "smart",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 180,
+        "deadline_rate": 0.0625,
+        "throughput_tasks_s": 2.5879560108416793,
+        "mean_makespan_s": 24.729941209157307,
+        "mean_latency_ms": 11333.031458333333,
+        "pooled_p95_ms": 16688.81,
+        "workers": {
+          "office-b": 82,
+          "local-1": 110
+        },
+        "mean_compute_ms": 15.310208333333334,
+        "mean_queue_ms": 10748.258439203104,
+        "peak_inflight": {
+          "local-1": 2,
+          "office-b": 1
+        }
+      },
+      {
+        "case": "cpu_heavy",
+        "policy": "fixed",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 0,
+        "deadline_rate": 1.0,
+        "throughput_tasks_s": 2.0144225510682596,
+        "mean_makespan_s": 31.770891348520916,
+        "mean_latency_ms": 15550.933828125,
+        "pooled_p95_ms": 25419.485,
+        "workers": {
+          "local-1": 192
+        },
+        "mean_compute_ms": 1326.212546875,
+        "mean_queue_ms": 14028.426130612692,
+        "peak_inflight": {
+          "local-1": 4,
+          "office-b": 0
+        }
+      },
+      {
+        "case": "cpu_heavy",
+        "policy": "round_robin",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 1,
+        "deadline_rate": 0.9947916666666666,
+        "throughput_tasks_s": 1.9077854090854434,
+        "mean_makespan_s": 33.546749909718834,
+        "mean_latency_ms": 13275.275859375,
+        "pooled_p95_ms": 24733.107,
+        "workers": {
+          "local-1": 96,
+          "office-b": 96
+        },
+        "mean_compute_ms": 902.0806041666667,
+        "mean_queue_ms": 12031.811439742645,
+        "peak_inflight": {
+          "local-1": 4,
+          "office-b": 1
+        }
+      },
+      {
+        "case": "cpu_heavy",
+        "policy": "smart",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 0,
+        "deadline_rate": 1.0,
+        "throughput_tasks_s": 2.504991413325634,
+        "mean_makespan_s": 25.54898977279663,
+        "mean_latency_ms": 11824.970494791667,
+        "pooled_p95_ms": 18567.227,
+        "workers": {
+          "office-b": 64,
+          "local-1": 128
+        },
+        "mean_compute_ms": 1043.30075,
+        "mean_queue_ms": 10491.129409521818,
+        "peak_inflight": {
+          "local-1": 4,
+          "office-b": 1
+        }
+      },
+      {
+        "case": "mixed",
+        "policy": "fixed",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 86,
+        "deadline_rate": 0.5520833333333334,
+        "throughput_tasks_s": 2.483991745205178,
+        "mean_makespan_s": 25.764980951944988,
+        "mean_latency_ms": 12067.716536458332,
+        "pooled_p95_ms": 19559.66,
+        "workers": {
+          "local-1": 192
+        },
+        "mean_compute_ms": 384.825765625,
+        "mean_queue_ms": 11368.612757573525,
+        "peak_inflight": {
+          "local-1": 4,
+          "office-b": 0
+        }
+      },
+      {
+        "case": "mixed",
+        "policy": "round_robin",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 82,
+        "deadline_rate": 0.5729166666666666,
+        "throughput_tasks_s": 2.031602329670652,
+        "mean_makespan_s": 31.502228101094563,
+        "mean_latency_ms": 12210.837197916666,
+        "pooled_p95_ms": 23882.539,
+        "workers": {
+          "local-1": 96,
+          "office-b": 96
+        },
+        "mean_compute_ms": 320.57216666666665,
+        "mean_queue_ms": 11394.328178217014,
+        "peak_inflight": {
+          "local-1": 4,
+          "office-b": 1
+        }
+      },
+      {
+        "case": "mixed",
+        "policy": "smart",
+        "submitted": 192,
+        "completed": 192,
+        "failed": 0,
+        "cancelled": 0,
+        "late_completed": 76,
+        "deadline_rate": 0.6041666666666666,
+        "throughput_tasks_s": 2.7509613215198043,
+        "mean_makespan_s": 23.26459463437398,
+        "mean_latency_ms": 10536.48634375,
+        "pooled_p95_ms": 16712.666,
+        "workers": {
+          "office-b": 72,
+          "local-1": 120
+        },
+        "mean_compute_ms": 326.54589583333336,
+        "mean_queue_ms": 9750.391120711962,
+        "peak_inflight": {
+          "local-1": 4,
+          "office-b": 1
+        }
+      }
+    ]
+  }
+}

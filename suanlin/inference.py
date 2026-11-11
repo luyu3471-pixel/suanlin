@@ -45,6 +45,7 @@ MODEL = Classifier()
 def run_task(payload):
     start = time.perf_counter()
     predictions = [MODEL.predict(x) for x in payload["events"]]
+    classification_ms = (time.perf_counter() - start) * 1000
     # Optional bounded CPU load for scheduling demonstrations. This is measured
     # separately and is never described as neural-model inference time.
     loops = payload.get("compute_loops", 0)
@@ -52,4 +53,4 @@ def run_task(payload):
     before_load = time.perf_counter()
     for _ in range(loops):
         digest = hashlib.sha256(digest).digest()
-    return {"predictions": predictions, "model": "char-bigram-naive-bayes-v1", "training_source": "48 authored synthetic examples", "load_loops": loops, "load_ms": round((time.perf_counter() - before_load) * 1000, 3), "compute_ms": round((time.perf_counter() - start) * 1000, 3), "digest": digest.hex()}
+    return {"predictions": predictions, "classification_ms": round(classification_ms, 3), "model": "char-bigram-naive-bayes-v1", "training_source": "48 authored synthetic examples", "load_loops": loops, "load_ms": round((time.perf_counter() - before_load) * 1000, 3), "compute_ms": round((time.perf_counter() - start) * 1000, 3), "digest": digest.hex()}

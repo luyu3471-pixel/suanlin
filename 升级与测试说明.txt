@@ -1,0 +1,50 @@
+算邻 2.0.0-queue-capacity 升级与测试
+
+升级顺序
+先等待排队和运行任务归零，备份现有源码及完整数据目录。
+先升级协调端，再升级执行端。保留原 access_token，不要新建令牌后仍假设旧执行端能接入。
+新协调端兼容旧单槽worker；新多槽worker需要新版协调端。
+使用独立源码目录，--data-dir 指向现有数据目录的绝对路径；不要让两套协调器同时写同一数据库。
+
+协调端示例
+python launch.py --host 0.0.0.0 --workers 1 --concurrency 4 --data-dir <数据目录> --no-browser
+一个逻辑节点local-1拥有4个计算槽，不等于4台物理机器。
+执行端示例
+python -m suanlin.worker --coordinator http://<协调端局域网IP>:8765 --token-file <本地令牌文件> --id office-b --concurrency 4
+后台启动时记录Python路径、PID和stdout/stderr，Windows使用Start-Process -WindowStyle Hidden。
+使用--stop-file <文件路径>后，创建该文件可优雅停止worker或launch.py启动的协调端。
+优先从4槽开始，再在相同输入下比较8槽；不要假设逻辑CPU数量就是最佳并发数。
+
+测试集
+benchmarks/performance-v2.json固定种子2030，每类64项；smoke-v2.json每类16项。
+tiny_control：单条短文本，无人工负载。
+text_batch：每任务128条较长合成文本，无人工负载。
+cpu_heavy：每任务100万次SHA256循环，仅用于CPU并行和排队测试。
+mixed：短文本、文本批处理、20万循环、100万循环混合。
+文本任务截止时间5秒，带循环任务30秒。全部为合成负载，不是模型准确率或真实业务评测集。
+
+正式测试
+python tools/performance_suite.py run --url http://<协调端IP>:8765 --token-file <本地令牌文件> --rounds 3 --submit-concurrency 8
+默认四类、三策略、三轮、每轮64项，共2304项正式任务；另有每节点每槽2项预热。
+固定单机基线使用A配置的全部槽数。先固定1+1槽比较代码，再比较4+4槽等容量变化，分开归因。
+不要并行运行多套基准。保留所有失败、超时、不利轮次和incomplete.json。
+结果位于.local/performance-suite：完整输入、预热、已接受任务、逐轮结果、trials.json和summary.json。
+重点查看吞吐、批次总完成时间、平均/P95延迟、按时率、失败、各节点任务数和峰值占用槽。
+峰值占用槽包含通信等待，不等于CPU利用率。
+python tools/summarize_performance.py <已完成测试目录>
+上述汇总工具用于本项目默认四类、固定A/轮询/联合、3轮64项的现场报告；其他配置以原始metadata/trials为准。
+
+本地回归
+python -m unittest discover -s tests -v
+python tools/local_performance_check.py --baseline-root <旧版源码目录> --output <新建结果目录>
+本地回环检查使用独立数据库和进程，不能冒充真实双机测试。
+
+2026-11-11验证
+34项单元/集成测试全部通过，包括仿真测试。双机2304项全部完成，但仅981项按时。
+人工重计算吞吐提升24.4%，混合任务提升10.7%；轻任务收益很小且大量超时。
+配置为A四槽/B一槽、协调数据库位于HDD，背景负载未控制。公开摘要见results/role_swap_20261111_summary.json。
+当前瓶颈可能包含同步数据库写入与通信；尚未做SSD/HDD单变量对照。
+
+数据与回滚
+凭证、数据库、原始运行日志留在.local，不上传GitHub。公开前筛除主机名、局域网地址和本机路径。
+需要回滚时先停新版进程，再使用旧源码和升级前数据备份恢复，沿用正确令牌。

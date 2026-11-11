@@ -8,7 +8,7 @@ import threading
 import time
 import uuid
 from pathlib import Path
-from .scheduler import choose, estimate_ms, POLICIES
+from .scheduler import choose, estimate_ms, reserve, service_ms, text_units, POLICIES
 
 OFFLINE_SECONDS = 10
 LEASE_SECONDS = 25
@@ -27,6 +27,7 @@ class Store:
         self.directory = Path(directory)
         self.directory.mkdir(parents=True, exist_ok=True)
         self.lock = threading.RLock()
+        self.changed = threading.Condition(self.lock)
         self.db = sqlite3.connect(self.directory / "suanlin.db", check_same_thread=False)
         self.db.row_factory = sqlite3.Row
         self.db.execute("PRAGMA journal_mode=WAL")
@@ -41,7 +42,7 @@ class Store:
         self.rng = random.Random(2030)
         # Running work cannot retain leases across a coordinator restart.
         for n in self.workers.values():
-            n.update(last_seen=0, busy_task=None, busy_until=0)
+            n.update(last_seen=0, busy_task=None, busy_until=0, active_tasks={})
             self.save("workers", n)
         for t in self.tasks.values():
             if t["status"] == "running":
@@ -90,6 +91,7 @@ class Store:
             self.tasks[t["id"]] = t
             self.save("tasks", t)
             self.event("task", f"任务 {t['id']} 已入队，{POLICIES[policy]}")
+            self.changed.notify_all()
             return self.public_task(t, True)
 
     def register(self, data, peer):
@@ -104,11 +106,15 @@ class Store:
             if not isinstance(host, str) or len(host) > 120:
                 raise InputError("无效的主机名称")
             previous = self.workers.get(node_id)
+            capacity = number(data.get('capacity', 1), '并行进程数', 1, 32)
+            if not isinstance(capacity, int):
+                raise InputError('并行进程数应为整数')
             if previous and time.time() - previous["last_seen"] < OFFLINE_SECONDS:
                 raise InputError("节点 ID 已在线，请为此进程设置不同的 --id")
             if len(self.workers) >= 64 and not previous:
                 raise InputError("原型最多保存 64 个节点")
             n = {"id": node_id, "name": name, "host": host, "peer": peer, "last_seen": time.time(), "busy_task": None,
+                 "capacity": capacity, "active_tasks": {},
                  "busy_until": 0, "ms_per_unit": number(data.get("ms_per_unit", 25), "初始单位耗时", 0.001, 100000),
                  "rtt_ms": 1.0, "bandwidth_mbps": number(data.get("bandwidth_mbps", 100), "带宽配置", 0.1, 10000),
                  "trusted": previous.get("trusted", peer in ("127.0.0.1", "::1")) if previous else peer in ("127.0.0.1", "::1"),
@@ -117,7 +123,8 @@ class Store:
             self.workers[node_id] = n
             self.save("workers", n)
             self.event("node", f"节点 {name} 已连接（{'同机进程' if n['mode'] == 'same_host' else '远程终端'}）")
-            return {"id": node_id, "session": n["session"], "heartbeat_seconds": 2, "lease_seconds": LEASE_SECONDS}
+            self.changed.notify_all()
+            return {"id": node_id, "session": n["session"], "heartbeat_seconds": 2, "lease_seconds": LEASE_SECONDS, "capacity": capacity, "protocol": 2}
 
     def worker(self, data):
         node_id = data.get("id", "")
@@ -133,37 +140,65 @@ class Store:
             n["rtt_ms"] = number(data.get("rtt_ms", 1), "HTTP 往返耗时", 0, 120000)
             n["last_seen"] = time.time()
             # A live worker renews its lease even for a slow inference.
-            t = self.tasks.get(n.get("busy_task"))
-            if t and t["status"] == "running" and t.get("worker_id") == n["id"] and data.get("active_task") == t["id"] and data.get("lease") == t["lease"]:
-                t["lease_until"] = time.time() + LEASE_SECONDS
-                self.save("tasks", t)
-            self.save("workers", n)
+            active = data.get('active_tasks', [{'id': data.get('active_task'), 'lease': data.get('lease')}])
+            if not isinstance(active, list) or len(active) > 32 or any(not isinstance(x, dict) for x in active):
+                raise InputError('无效的活跃任务列表')
+            for item in active:
+                t = self.tasks.get(item.get('id'))
+                if t and t['status'] == 'running' and t.get('worker_id') == n['id'] and item.get('lease') == t['lease']:
+                    t['lease_until'] = time.time() + LEASE_SECONDS
+                    self.save('tasks', t)
             return {"ok": True, "draining": n["draining"]}
 
     def recover(self, now):
         for t in self.tasks.values():
+            if t['status'] == 'cancelled' and now > t.get('lease_until', 0):
+                n = self.workers.get(t.get('worker_id'))
+                if n and t['id'] in n.get('active_tasks', {}):
+                    self.release(n, t['id'])
             if t["status"] != "running":
                 continue
             n = self.workers.get(t["worker_id"])
             if now > t.get("lease_until", 0):
-                if n and n.get("busy_task") == t["id"]:
-                    n.update(busy_task=None, busy_until=0)
-                    self.save("workers", n)
+                if n:
+                    self.release(n, t['id'])
                 t.update(status="queued" if t["attempts"] < MAX_ATTEMPTS else "failed", lease=None, worker_id=None,
                          error="节点租约到期，任务已重排" if t["attempts"] < MAX_ATTEMPTS else "重试次数已耗尽", finished_at=now if t["attempts"] >= MAX_ATTEMPTS else None)
                 self.save("tasks", t)
                 self.event("recovery", f"任务 {t['id']} 租约到期，状态 {t['status']}")
 
+    def release(self, node, task_id):
+        node.setdefault('active_tasks', {}).pop(task_id, None)
+        node['busy_task'] = next(iter(node['active_tasks']), None)
+        node['busy_until'] = min(node['active_tasks'].values(), default=0)
+        self.save('workers', node)
+        with self.changed:
+            self.changed.notify_all()
+
     def poll(self, data):
+        wait = number(data.get('wait_seconds', 0), '长轮询等待秒数', 0, 2)
+        end = time.monotonic() + wait
+        with self.changed:
+            while True:
+                result = self._poll(data)
+                remaining = end - time.monotonic()
+                if result['task'] or remaining <= 0:
+                    return result
+                self.changed.wait(min(.2, remaining))
+
+    def _poll(self, data):
         with self.lock:
             n = self.worker(data)
             now = time.time()
             n["last_seen"] = now
             self.recover(now)
-            self.save("workers", n)
-            if n["draining"] or n["busy_task"]:
+            if n["draining"] or len(n.get('active_tasks', {})) >= n.get('capacity', 1):
                 return {"task": None}
             candidates = [dict(x, online=now - x["last_seen"] < OFFLINE_SECONDS) for x in self.workers.values()]
+            for candidate in candidates:
+                active = candidate.get('active_tasks', {})
+                candidate['_slots'] = [max(now + .02, end) for end in active.values()]
+                candidate['_slots'] += [now] * max(0, candidate.get('capacity', 1) - len(active))
             queued = sorted((t for t in self.tasks.values() if t["status"] == "queued"), key=lambda t: (t["deadline_at"], t["created_at"]))
             for t in queued:
                 # Persist the random/round-robin choice while waiting for that
@@ -177,11 +212,14 @@ class Store:
                         t["desired_worker"] = desired["id"]
                         self.save("tasks", t)
                 if not desired or desired["id"] != n["id"]:
+                    if desired:
+                        reserve(t, desired, now)
                     continue
-                predicted = estimate_ms(t, n, now)
+                predicted = service_ms(t, n)
                 t.update(status="running", started_at=now, worker_id=n["id"], lease=secrets.token_urlsafe(24),
                          lease_until=now + LEASE_SECONDS, attempts=t["attempts"] + 1, predicted_ms=predicted, error=None)
-                n.update(busy_task=t["id"], busy_until=now + predicted / 1000)
+                n.setdefault('active_tasks', {})[t['id']] = now + predicted / 1000
+                n.update(busy_task=next(iter(n['active_tasks'])), busy_until=min(n['active_tasks'].values()))
                 self.save("tasks", t)
                 self.save("workers", n)
                 self.event("dispatch", f"任务 {t['id']} 分配至 {n['name']}")
@@ -191,12 +229,12 @@ class Store:
     def complete(self, data):
         with self.lock:
             n = self.worker(data)
+            n['last_seen'] = time.time()
             t = self.tasks.get(data.get("task_id"))
             if not t or not isinstance(data.get("lease"), str) or t.get("worker_id") != n["id"] or not secrets.compare_digest(t.get("lease") or "", data["lease"]):
                 return {"accepted": False, "reason": "stale_lease"}
             if t["status"] == "cancelled":
-                n.update(last_seen=time.time(), busy_task=None, busy_until=0)
-                self.save("workers", n)
+                self.release(n, t['id'])
                 return {"accepted": False, "reason": "cancelled"}
             if t["status"] != "running":
                 return {"accepted": False, "reason": "already_finished"}
@@ -211,13 +249,20 @@ class Store:
                 if not isinstance(result, dict) or not isinstance(result.get("predictions"), list) or len(result["predictions"]) != len(t["payload"]["events"]):
                     raise InputError("推理结果不完整")
                 compute_ms = number(result.get("compute_ms"), "计算耗时", 0, 3600000)
+                load_ms = number(result.get('load_ms', 0), '附加负载耗时', 0, 3600000)
+                classify_ms = number(result.get('classification_ms', max(0, compute_ms - load_ms)), '分类耗时', 0, 3600000)
+                n['text_ms_per_unit'] = .65 * n.get('text_ms_per_unit', .2) + .35 * classify_ms / text_units(t['payload'])
+                if t['payload'].get('compute_loops'):
+                    n['hash_ms_per_unit'] = .65 * n.get('hash_ms_per_unit', 25) + .35 * load_ms / (t['payload']['compute_loops'] / 20000)
+                overhead = max(0, (time.time() - t['started_at']) * 1000 - compute_ms)
+                n['overhead_ms'] = .65 * n.get('overhead_ms', overhead) + .35 * overhead
                 units = max(1, len(t["payload"]["events"])) + t["payload"].get("compute_loops", 0) / 20000
                 n["ms_per_unit"] = max(0.001, n["ms_per_unit"] * .65 + compute_ms / units * .35)
                 n["completed"] += 1
                 now = time.time()
                 t.update(status="completed", result=result, finished_at=now, latency_ms=round((now - t["created_at"]) * 1000, 3),
                          deadline_met=now <= t["deadline_at"], lease=None)
-            n.update(last_seen=time.time(), busy_task=None, busy_until=0)
+            self.release(n, t['id'])
             self.save("tasks", t)
             self.save("workers", n)
             self.event("complete", f"任务 {t['id']} {t['status']}")
@@ -248,6 +293,7 @@ class Store:
                 n["bandwidth_mbps"] = number(data["bandwidth_mbps"], "配置带宽", .1, 10000)
             self.save("workers", n)
             self.event("config", f"节点 {n['name']} 配置已更新")
+            self.changed.notify_all()
             return {"ok": True}
 
     @staticmethod
@@ -265,7 +311,7 @@ class Store:
             tasks = sorted(self.tasks.values(), key=lambda x: x["created_at"], reverse=True)
             done = [t for t in tasks if t["status"] == "completed"]
             latencies = sorted(t["latency_ms"] for t in done)
-            return {"server_time": now, "version": "1.0.0", "nodes": nodes, "tasks": [self.public_task(t) for t in tasks[:200]],
+            return {"server_time": now, "version": "2.0.0-queue-capacity", "nodes": nodes, "tasks": [self.public_task(t) for t in tasks[:200]],
                     "counts": {s: sum(t["status"] == s for t in tasks) for s in ("queued", "running", "completed", "failed", "cancelled")},
                     "metrics": {"total": len(tasks), "completed": len(done), "deadline_rate": sum(t.get("deadline_met", False) for t in done) / len(tasks) if tasks else None,
                                 "mean_ms": sum(latencies) / len(latencies) if latencies else None,

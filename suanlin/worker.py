@@ -1,7 +1,10 @@
-"""Actual worker process. No arbitrary code execution or remote shell."""
+"""One node, bounded CPU processes, individual renewable leases."""
 import argparse
+from concurrent.futures import ProcessPoolExecutor, Future
+from contextlib import nullcontext
 import json
 import os
+from pathlib import Path
 import socket
 import threading
 import time
@@ -10,100 +13,138 @@ import urllib.request
 import uuid
 from .inference import run_task
 
+OFFLINE_REJOIN_SECONDS = 11
+
 class Worker:
-    def __init__(self, url, token, name=None, node_id=None, bandwidth=100, stop=None):
-        self.url = url.rstrip("/")
-        self.token = token
-        self.name = name or socket.gethostname()
-        self.id = node_id or f"node-{uuid.uuid4().hex[:10]}"
-        self.bandwidth = bandwidth
+    def __init__(self, url, token, name=None, node_id=None, bandwidth=100, stop=None, concurrency=1):
+        if not 1 <= concurrency <= 32:
+            raise ValueError('concurrency must be 1..32')
+        self.url, self.token = url.rstrip('/'), token
+        self.name, self.id = name or socket.gethostname(), node_id or f'node-{uuid.uuid4().hex[:10]}'
+        self.bandwidth, self.capacity = bandwidth, concurrency
         self.stop = stop or threading.Event()
         self.session = None
-        self.active_task = None
-        self.active_lease = None
         self.rtt_ms = 1
+        self.active = {}
+        self.lock = threading.Lock()
         self.opener = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
     def post(self, path, data):
-        req = urllib.request.Request(self.url + path, json.dumps(data, ensure_ascii=False).encode(), {"Content-Type": "application/json", "Authorization": "Bearer " + self.token})
+        request = urllib.request.Request(self.url + path, json.dumps(data, ensure_ascii=False).encode(),
+            {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + self.token})
         before = time.perf_counter()
-        with self.opener.open(req, timeout=8) as response:
+        with self.opener.open(request, timeout=8) as response:
             result = json.load(response)
-        self.rtt_ms = (time.perf_counter() - before) * 1000
+        if path != '/api/worker/poll':  # Long-poll waiting is not network RTT.
+            self.rtt_ms = .7 * self.rtt_ms + .3 * (time.perf_counter() - before) * 1000
         return result
 
     def identity(self):
-        return {"id": self.id, "session": self.session}
+        return {'id': self.id, 'session': self.session}
 
     def heartbeat(self):
         while not self.stop.wait(2):
-            if not self.session:
-                continue
-            try:
-                self.post("/api/worker/heartbeat", dict(self.identity(), rtt_ms=self.rtt_ms, active_task=self.active_task, lease=self.active_lease))
-            except (OSError, ValueError):
-                pass
+            if self.session:
+                with self.lock:
+                    items = [{'id': k, 'lease': v[1]['lease']} for k, v in self.active.items()]
+                message = dict(self.identity(), rtt_ms=self.rtt_ms, active_tasks=items)
+                if len(items) == 1:
+                    message.update(active_task=items[0]['id'], lease=items[0]['lease'])
+                try:
+                    self.post('/api/worker/heartbeat', message)
+                except (OSError, ValueError):
+                    pass
 
     def run(self):
-        thread = threading.Thread(target=self.heartbeat, daemon=True)
-        thread.start()
-        while not self.stop.is_set():
+        executor = ProcessPoolExecutor(max_workers=self.capacity) if self.capacity > 1 else nullcontext()
+        with executor as pool:
+            heart = threading.Thread(target=self.heartbeat, daemon=True)
+            heart.start()
             try:
-                if not self.session:
-                    result = self.post("/api/worker/register", {"id": self.id, "name": self.name, "host": socket.gethostname(), "bandwidth_mbps": self.bandwidth})
-                    self.session = result["session"]
-                claim = self.post("/api/worker/poll", self.identity()).get("task")
-                if not claim:
-                    self.stop.wait(.15)
-                    continue
-                message = dict(self.identity(), task_id=claim["id"], lease=claim["lease"])
-                self.active_task, self.active_lease = claim["id"], claim["lease"]
-                try:
-                    message["result"] = run_task(claim["payload"])
-                except Exception as exc:
-                    message["error"] = str(exc)[:1000]
-                # Retry delivery of the same result/lease on transient errors.
-                for _ in range(5):
+                while not self.stop.is_set():
                     try:
-                        self.post("/api/worker/result", message)
-                        break
-                    except OSError:
-                        if self.stop.wait(1):
-                            break
-                self.active_task = self.active_lease = None
-            except urllib.error.HTTPError as exc:
-                if exc.code == 400:
-                    # Coordinator may have restarted or replaced this session.
-                    self.stop.wait(OFFLINE_REJOIN_SECONDS)
-                    self.session = None
-                self.stop.wait(1)
-            except (OSError, ValueError):
-                self.stop.wait(1)
-
-OFFLINE_REJOIN_SECONDS = 11
+                        if not self.session:
+                            result = self.post('/api/worker/register', dict(id=self.id, name=self.name,
+                                host=socket.gethostname(), bandwidth_mbps=self.bandwidth, capacity=self.capacity))
+                            if self.capacity > result.get('capacity', 1):
+                                raise RuntimeError('Upgrade coordinator A before enabling concurrent workers')
+                            self.session = result['session']
+                        with self.lock:
+                            pending = list(self.active.items())
+                        for task_id, (future, message) in pending:
+                            if not future.done():
+                                continue
+                            if 'result' not in message and 'error' not in message:
+                                try:
+                                    message['result'] = future.result()
+                                except Exception as exc:
+                                    message['error'] = str(exc)[:1000]
+                            self.post('/api/worker/result', message)
+                            with self.lock:
+                                self.active.pop(task_id, None)
+                        with self.lock:
+                            count = len(self.active)
+                        if count < self.capacity:
+                            claim = self.post('/api/worker/poll', dict(self.identity(), wait_seconds=0 if count else 1)).get('task')
+                            if claim:
+                                message = dict(self.identity(), task_id=claim['id'], lease=claim['lease'])
+                                future = pool.submit(run_task, claim['payload']) if pool else Future()
+                                with self.lock:
+                                    self.active[claim['id']] = (future, message)
+                                if pool is None:
+                                    try:
+                                        future.set_result(run_task(claim['payload']))
+                                    except Exception as exc:
+                                        future.set_exception(exc)
+                            else:
+                                self.stop.wait(.005)
+                        else:
+                            self.stop.wait(.005)
+                    except urllib.error.HTTPError as exc:
+                        if exc.code == 400:
+                            with self.lock:
+                                old = list(self.active.values())
+                            while not self.stop.is_set() and any(not f.done() for f, _ in old):
+                                self.stop.wait(.05)
+                            with self.lock:
+                                self.active.clear()
+                            self.session = None
+                            self.stop.wait(OFFLINE_REJOIN_SECONDS)
+                        else:
+                            self.stop.wait(1)
+                    except (OSError, ValueError):
+                        self.stop.wait(1)
+            finally:
+                self.stop.set()
+                heart.join(timeout=10)
 
 def main():
-    parser = argparse.ArgumentParser(description="任务执行节点")
-    parser.add_argument("--coordinator", required=True)
-    parser.add_argument("--name")
-    parser.add_argument("--id")
-    parser.add_argument("--token-file")
-    parser.add_argument("--token-env", default="SUANLIN_TOKEN")
-    parser.add_argument("--bandwidth", type=float, default=100)
+    parser = argparse.ArgumentParser(description='并行任务执行节点')
+    parser.add_argument('--coordinator', required=True)
+    parser.add_argument('--name')
+    parser.add_argument('--id')
+    parser.add_argument('--token-file')
+    parser.add_argument('--token-env', default='SUANLIN_TOKEN')
+    parser.add_argument('--bandwidth', type=float, default=100)
+    parser.add_argument('--concurrency', type=int, choices=range(1, 33), default=1)
+    parser.add_argument('--stop-file', help='Exit gracefully when this local file appears')
     args = parser.parse_args()
-    if not args.coordinator.startswith(("http://", "https://")):
-        parser.error("coordinator 应为 http(s) 地址")
-    if args.token_file:
-        from pathlib import Path
-        token = Path(args.token_file).read_text(encoding="utf-8").strip()
-    else:
-        token = os.environ.get(args.token_env, "")
+    if not args.coordinator.startswith(('http://', 'https://')):
+        parser.error('coordinator must be an HTTP(S) URL')
+    token = Path(args.token_file).read_text(encoding='utf-8-sig').strip() if args.token_file else os.environ.get(args.token_env, '')
     if not token:
-        parser.error("请通过 --token-file 或 SUANLIN_TOKEN 提供接入令牌")
+        parser.error('Missing token file or environment variable')
+    worker = Worker(args.coordinator, token, args.name, args.id, args.bandwidth, concurrency=args.concurrency)
+    if args.stop_file:
+        def watch_stop():
+            while not worker.stop.wait(.2):
+                if Path(args.stop_file).exists():
+                    worker.stop.set()
+        threading.Thread(target=watch_stop, daemon=True).start()
     try:
-        Worker(args.coordinator, token, args.name, args.id, args.bandwidth).run()
+        worker.run()
     except KeyboardInterrupt:
         pass
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

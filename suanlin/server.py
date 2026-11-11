@@ -99,7 +99,7 @@ class Handler(BaseHTTPRequestHandler):
                 return self.send(403, {"error": "主机地址不受支持"})
             path = urlparse(self.path).path
             if path == "/api/health":
-                return self.send(200, {"ok": True, "service": "suanlin", "version": "1.0.0"})
+                return self.send(200, {"ok": True, "service": "suanlin", "version": "2.0.0-queue-capacity"})
             if path.startswith("/api/"):
                 if not self.authorized():
                     return self.send(401, {"error": "请使用接入令牌登录"})
