@@ -177,6 +177,11 @@
       "sha256": "9ae1b1cdf8500963977d2b6a9289025dec722377185701f4a6186927b15795ba"
     },
     {
+      "path": "docs/动态拓扑说明.md",
+      "bytes": 3311,
+      "sha256": "148d26584178451bf7fc41740e1a990e2455a8867399e30fecc2a59d5739d5c3"
+    },
+    {
       "path": "docs/场景设计方案.md",
       "bytes": 21156,
       "sha256": "883b4927a42993df2bce09b52c8dfd5e50d5b1982c5d5841bfe46bced04ab23c"
@@ -253,8 +258,8 @@
     },
     {
       "path": "PACKAGE-CHECK.json",
-      "bytes": 593,
-      "sha256": "cc61aae0d3e415d3bbe8e59f5608790c7808b5740911122735fb4c6bffea3a27"
+      "bytes": 655,
+      "sha256": "7898ddb8c458679c52bf84976e64cdafba5215dac79b8befa0989f12eb1fc6de"
     },
     {
       "path": "package_launcher.py",
@@ -273,8 +278,8 @@
     },
     {
       "path": "README.txt",
-      "bytes": 3588,
-      "sha256": "b2620c763841ac4625cf547e6d0890338ef4e2acd786cc5085d39031af5391c7"
+      "bytes": 3638,
+      "sha256": "c865fb4ef51ca78bc8fe72ac124c0e4d23f01c58d9d85098f80aaafd2f6797cc"
     },
     {
       "path": "regression-new.log",
@@ -1242,6 +1247,11 @@
       "sha256": "19471a7538349414a2033ebaa83c446a76f41f6a90f428b0bcb9c45b6ff15c11"
     },
     {
+      "path": "results/topology_checks.json",
+      "bytes": 582,
+      "sha256": "4298f302aac95ee79de19803cf9431f71cb0c587475e389199959f526468b0d6"
+    },
+    {
       "path": "results/tutorial_artifact_checks.json",
       "bytes": 490,
       "sha256": "47fbc288627ccec4b667d40e14504bf9bdefff9fa04c279ab204f21172a7f081"
@@ -1353,8 +1363,8 @@
     },
     {
       "path": "suanlin/store.py",
-      "bytes": 29608,
-      "sha256": "8d808614fe9d9fbb8a4caa2c05d49e2e6567868622b66625e863680a5c2bf7d1"
+      "bytes": 30717,
+      "sha256": "0d2b8e73ecf481a070397f596ae1f686f4bbb0def61a0015372152b4bb8b1116"
     },
     {
       "path": "suanlin/worker.py",
@@ -1395,6 +1405,11 @@
       "path": "tests/test_system.py",
       "bytes": 9255,
       "sha256": "878153c608dace635aa84cb374f800e4d4d84518b8a12c75ea6e15582141a721"
+    },
+    {
+      "path": "tests/test_topology.py",
+      "bytes": 2785,
+      "sha256": "2c2a563a457b6bb234e94ce177c96b8caf96ad747cf7ebefc57f612f784f8072"
     },
     {
       "path": "tools/benchmark.py",
@@ -1498,8 +1513,8 @@
     },
     {
       "path": "web/app.js",
-      "bytes": 69346,
-      "sha256": "a7c22564e6c23ccadf2b51a555b41f85c7aab715e126c0b418c13be0beb4890a"
+      "bytes": 76674,
+      "sha256": "5b6ecc751962da2cdfeb1eee92f1e79d7bf575d7af122ea93fb7ecd4f8e94add"
     },
     {
       "path": "web/favicon.svg",
@@ -1513,13 +1528,13 @@
     },
     {
       "path": "web/index.html",
-      "bytes": 7346,
-      "sha256": "d5dc92830c55c80f882339ea6c066e659de819c1542956f41cabae5770c10a78"
+      "bytes": 7019,
+      "sha256": "4a79be72c865f267d8790b0a8f164b8701bde68f896344e3e8e03a5b5b397a15"
     },
     {
       "path": "web/style.css",
-      "bytes": 83317,
-      "sha256": "75221811a863d834bcab6f405868dd79c3e1e8fc6dc2278432e7cb991e4ae24d"
+      "bytes": 89389,
+      "sha256": "82c4aa14f2decb7bab566cc009bf58286d4304865173dd33b89564dc412d9777"
     },
     {
       "path": "业务重任务说明.txt",

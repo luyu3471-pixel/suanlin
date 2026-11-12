@@ -30,7 +30,7 @@ A 端改 port 后，同时修改 B 的 coordinator_url；仅访问受信任的�
 
 包内内容
 suanlin/、web/：核心服务和网页。
-tests/：本地整合后70项回归测试；命令 python -m unittest discover -s tests -v。
+tests/：本地整合后73项回归测试；命令 python -m unittest discover -s tests -v。
 reports/single-dual-comparison/：最新三轮单机/双机对照，324项任务。
 reports/dual-validation/：之前双机正常与节点暂停场景的原始证据。
 MANIFEST-SHA256.json：打包文件逐项 SHA256。

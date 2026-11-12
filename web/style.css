@@ -107,46 +107,6 @@ small{
   letter-spacing:2.5px;
   margin-top:4px
 }
-.workspace{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:13px 11px;
-  margin:0 3px 28px;
-  border:1px solid #2a303d;
-  border-radius:9px;
-  background:#191e29;
-  font-size:14px;
-  color:#dce2ed
-}
-.workspace-symbol{
-  width:30px;
-  height:32px;
-  display:grid;
-  place-items:center;
-  background:#242c3c;
-  color:#a0b7f7;
-  border-radius:6px
-}
-.workspace-symbol svg{
-  width:17px;
-  height:17px
-}
-.workspace small{
-  display:block;
-  color:#8290a7;
-  font-size:13px;
-  margin-top:4px
-}
-.dot,.status-led{
-  width:6px;
-  height:6px;
-  background:#79a4ff;
-  border-radius:50%;
-  margin-left:auto;
-  flex-shrink:0;
-  box-shadow:0 0 0 3px #6f97f510
-}
 .nav-label{
   margin:0 15px 13px;
   color:#78859b;
@@ -253,22 +213,6 @@ small{
   font-size:13px;
   line-height:1.8;
   margin:7px 0 0
-}
-.side-profile{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  padding:19px 0 20px;
-  margin-top:19px;
-  border-top:1px solid #272e3b;
-  font-size:13px;
-  color:#c1cadb
-}
-.side-profile small{
-  display:block;
-  font-size:12px;
-  color:#7e8ba0;
-  margin-top:4px
 }
 .avatar{
   width:32px;
@@ -1729,7 +1673,7 @@ textarea{
     margin-top:3px;
     letter-spacing:2px
   }
-  .sidebar .workspace,.nav-label,.side-bottom,.sidebar nav:nth-of-type(2){
+  .nav-label,.side-bottom,.sidebar nav:nth-of-type(2){
     display:none
   }
   .sidebar nav{
@@ -2151,14 +2095,11 @@ textarea{
 /* Readable type and a motion layer that does not replay during data polling. */
 body { font-size: 16px; }
 .brand small { font-size: 12px; letter-spacing: 1.5px; }
-.workspace > div, .step > div { min-width: 0; }
-.workspace { font-size: 14px; }
-.workspace small { font-size: 12px; line-height: 1.7; }
+.step > div { min-width: 0; }
 .nav-label { font-size: 12px; }
 .nav-label span { display: none; }
 .sidebar nav a { font-size: 15px; min-height: 49px; }
 .side-note-tag { font-size: 10px; letter-spacing: .7px; }
-.side-profile small { font-size: 12px; line-height: 1.6; }
 .breadcrumb { font-size: 13px; }
 .top-actions { gap: 14px; font-size: 13px; }
 .eyebrow { font-size: 11px; letter-spacing: 1.5px; }
@@ -2480,7 +2421,7 @@ button[aria-busy="true"] { cursor: progress; opacity: .65; }
 body { background: radial-gradient(ellipse at 90% 0,#eae5fc88,transparent 42%),var(--bg); }
 .sidebar { background: linear-gradient(165deg,#171c30,#1a1c2c 48%,#212035); border-color: #303348; }
 .brand-icon { background: linear-gradient(140deg,#466de9,#7660d2); border-color: #7c8ce4; }
-.brand small, .workspace small, .side-profile small, .side-note p { color: #aebbd4; }
+.brand small, .side-note p { color: #aebbd4; }
 .nav-label { color: #a8b2c8; }
 .sidebar nav a { color: #c0c9dd; }
 .sidebar nav a[data-page="nodes"] svg { color: #aac8ff; }
@@ -2489,7 +2430,7 @@ body { background: radial-gradient(ellipse at 90% 0,#eae5fc88,transparent 42%),v
 .sidebar nav a[data-page="guide"] svg { color: #e2adc3; }
 .sidebar nav a:hover { background: #30354d; color: #fff; }
 .sidebar nav a.active { background: linear-gradient(100deg,#34476e,#383654); color: #fff; box-shadow: inset 0 0 0 1px #859ce533; }
-.workspace, .side-note { background: #ffffff06; border-color: #ffffff1a; }
+.side-note { background: #ffffff06; border-color: #ffffff1a; }
 .topbar { background: #ffffffed; border-bottom-color: #e0e4ef; }
 .top-actions, .breadcrumb { color: #52627d; }
 .motion-toggle { color: #3c56a0; border-color: #c8d6f9; background: #f2f5ff; min-height: 38px; }
@@ -2655,6 +2596,92 @@ footer { color: #56647b; }
 
 .status.running, .status.queued, .status.failed, .status.cancelled { color: var(--status-ink); background: var(--status-bg); border-color: var(--status-border); }
 .bar-row.smart .bar-fill { background: linear-gradient(90deg,var(--bar-start),var(--bar-end)); }
+
+/* Live task topology: motion follows task state, with node-specific results. */
+.business-topology .panel-sub { max-width:none; }
+.topology-workflow { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); list-style:none; gap:12px; padding:20px 23px 4px; margin:0; }
+.topology-workflow li { padding:0 10px 0 0; border-right:1px solid #dbe3f1; min-width:0; }
+.topology-workflow li:last-child { border:0; padding:0; }
+.topology-workflow b { display:block; color:#354665; font-size:13px; line-height:1.8; }
+.topology-workflow span { display:block; color:#526079; font-size:12px; line-height:1.8; margin-top:4px; overflow-wrap:anywhere; }
+.business-topology .topology { height:380px; position:relative; }
+.business-topology .network-node { min-width:100px; max-width:30%; width:150px; }
+.business-topology .network-node.center { width:135px; top:50%; }
+.business-topology .network-node strong { font-size:13px; font-weight:600; }
+.business-topology .network-node .node-orb { cursor:pointer; padding:0; }
+.business-topology .network-node.center .node-orb { cursor:default; }
+.business-topology .network-node.is-selected > .node-orb { border-color:#5479c7; background:#edf3ff; color:#3154af; }
+.business-topology .network-node.is-offline > .node-orb { background:#f3f4f7; border-color:#cbd2df; color:#6a7485; }
+.business-topology .network-node.is-offline .node-pulse { background:#8a94a5; }
+.topology-node-name { display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.topology-node-task { display:block; margin-top:5px; color:#435a80; font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.business-topology .network-node .topology-node-progress { color:#805016; }
+.topology-result-link { display:inline-block; border:0; background:transparent; color:#3154af; font-size:12px; line-height:1.7; min-height:32px; padding:5px 0 0; }
+.topology-result-link:hover { text-decoration:underline; text-underline-offset:3px; }
+.topology-no-nodes { position:absolute; bottom:4px; left:12px; right:12px; text-align:center; font-size:13px; line-height:1.8; color:#526079; }
+.business-topology .topology-legend span:nth-child(3)::before { background:#3b826d; }
+.topology-node-picker { display:flex; align-items:center; gap:12px; padding:18px 23px 0; flex-wrap:wrap; }
+.topology-node-picker label { margin:0; font-size:13px; color:#526079; }
+.topology-node-picker select { flex:1 1 160px; max-width:100%; min-width:0; min-height:44px; }
+.topology-task-panel { padding:20px 23px 0; }
+.topology-selection { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+.topology-selection h3 { color:#283954; font-size:17px; margin:0 0 6px; overflow-wrap:anywhere; }
+.topology-selection p { color:#526079; font-size:12px; line-height:1.9; margin:0; }
+.topology-selection .badge { flex-shrink:0; }
+.topology-task-panel h4 { font-size:13px; font-weight:600; color:#354665; margin:22px 0 12px; }
+.topology-warning { font-size:13px; line-height:1.8; color:#845015; margin:12px 0 0; }
+.topology-task-list { list-style:none; padding:0; margin:0; max-height:340px; overflow:auto; }
+.topology-task-list li { border-bottom:1px solid #e1e6f1; padding:0 0 16px; margin:0 0 16px; }
+.topology-task-list li:last-child { margin:0; }
+.topology-task-title { display:flex; align-items:baseline; justify-content:space-between; gap:10px; }
+.topology-task-title .text-button { min-height:36px; text-align:left; padding:4px 0; font-size:13px; overflow-wrap:anywhere; }
+.topology-task-title .mono { font-size:11px; flex-shrink:0; }
+.topology-task-list p { color:#805016; font-size:12px; line-height:1.8; margin:6px 0; }
+.topology-task-list progress { appearance:none; display:block; width:100%; height:7px; border:0; border-radius:4px; overflow:hidden; background:#e8edf7; accent-color:#4a70c4; }
+.topology-task-list progress::-webkit-progress-bar { background:#e8edf7; }
+.topology-task-list progress::-webkit-progress-value { background:#4a70c4; }
+.topology-task-list progress::-moz-progress-bar { background:#4a70c4; }
+.topology-task-list progress.is-stale { opacity:.55; }
+.topology-task-list small { display:block; font-size:12px; color:#526079; line-height:1.8; margin-top:6px; }
+.topology-results { padding:0; margin:0; list-style:none; }
+.topology-results li { display:flex; justify-content:space-between; align-items:center; gap:14px; border-bottom:1px solid #e1e6f1; padding:12px 0; }
+.topology-results li:first-child { padding-top:0; }
+.topology-results li > div { min-width:0; }
+.topology-results b { display:block; font-size:13px; font-weight:500; color:#354665; overflow-wrap:anywhere; line-height:1.8; }
+.topology-results small { display:block; font-size:12px; color:#526079; line-height:1.8; margin-top:4px; }
+.topology-results .row-button { flex-shrink:0; }
+.topology-empty, .topology-footnote, .topology-caption { color:#526079; font-size:12px; line-height:1.85; }
+.topology-empty { margin:0; }
+.topology-caption { padding:0 23px 18px; margin:12px 0 0; }
+html[data-motion="on"] .business-topology .network-lines .topology-link { animation:none; stroke:#bdcfee; stroke-dasharray:4 3; }
+.business-topology .network-lines .topology-link.is-offline,
+html[data-motion="on"] .business-topology .network-lines .topology-link.is-offline { stroke:#c9ced7; stroke-dasharray:2 5; }
+.business-topology .network-lines .topology-link.is-running { stroke:#b67c2f; }
+.business-topology .network-lines .topology-link.is-returning { stroke:#3b826d; }
+html[data-motion="on"] .business-topology .network-lines .topology-link.is-running { animation:topologyDispatch 2s linear infinite; animation-play-state:var(--fx-topology-play,paused); stroke:#b67c2f; stroke-dasharray:5 7; }
+html[data-motion="on"] .business-topology .network-lines .topology-link.is-returning { animation:topologyReturn 1.6s linear infinite; animation-play-state:var(--fx-topology-play,paused); stroke:#3b826d; stroke-dasharray:5 7; }
+.business-topology .network-node.busy .node-pulse { animation-play-state:var(--fx-topology-play,paused); }
+html[data-motion-paused="true"] .business-topology .network-lines .topology-link { animation-play-state:paused; }
+@keyframes topologyDispatch { to { stroke-dashoffset:-48; } }
+@keyframes topologyReturn { to { stroke-dashoffset:48; } }
+@media(prefers-reduced-motion:reduce) {
+ html[data-motion="on"] .business-topology .network-lines .topology-link { animation:none; }
+}
+@media(max-width:700px) {
+ .topology-workflow { grid-template-columns:repeat(2,minmax(0,1fr)); padding:18px 17px 0; gap:16px 12px; }
+ .topology-workflow li:nth-child(2) { border:0; }
+ .business-topology .topology { height:390px; padding:16px 7px; }
+ .business-topology .network-node { width:105px; min-width:85px; }
+ .business-topology .network-node.center { width:120px; }
+ .business-topology .network-node small { font-size:11px; }
+ .business-topology .network-node strong { font-size:12px; }
+ .topology-node-picker { padding:16px 17px 0; }
+ .topology-task-panel { padding:18px 17px 0; }
+ .topology-task-title { align-items:flex-start; flex-direction:column; gap:0; }
+ .topology-task-title .mono { font-size:11px; }
+ .topology-results li { gap:10px; }
+ .topology-caption { padding:0 17px 18px; }
+}
 
 /* Start with a real task; reveal operating details when they become useful. */
 .start-panel { padding:28px 30px 0; margin-bottom:24px; }

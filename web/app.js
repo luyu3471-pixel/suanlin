@@ -174,7 +174,21 @@ const InterfaceMotion = (() => {
     }
   }, {threshold:.06}) : null;
 
+  let flowSurface = null;
+  const flowVisibility = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
+    for (const entry of entries) entry.target.style.setProperty('--fx-topology-play', entry.isIntersecting ? 'running' : 'paused');
+  }) : null;
+
   function decorate(container) {
+    const nextSurface = container.querySelector('.business-topology');
+    if (nextSurface !== flowSurface) {
+      if (flowSurface) flowVisibility?.unobserve(flowSurface);
+      flowSurface = nextSurface;
+      if (flowSurface) {
+        if (flowVisibility) flowVisibility.observe(flowSurface);
+        else flowSurface.style.setProperty('--fx-topology-play', 'running');
+      }
+    }
     observer?.disconnect();
     let index = 0;
     container.querySelectorAll('.page-heading,.hero,.metric,.panel,.notice,.bar-fill').forEach(element => {
@@ -265,6 +279,7 @@ let toastTimer;
 let taskSort = 'newest', lastSyncAt = null, connectionError = '', authRequired = false, experimentsError = '', experimentsLoading = false;
 let activeTask = null, detailVersion = 0, detailLoading = false, detailError = '';
 let lastExampleId = null, introVisible = false;
+let selectedTopologyNode = null;
 const taskKinds = {log_analysis:'业务日志分析',document_search:'文档检索与排序',archive:'数据脱敏压缩'};
 const pending = new Set();
 function toast(text) { $('#toast').textContent = text; $('#toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('#toast').classList.remove('visible'), 3500); }
@@ -305,9 +320,31 @@ function metrics() {
 function heroArt() {
  return `<div class="hero-art" aria-hidden="true"><svg viewBox="0 0 340 180" fill="none"><defs><pattern id="hero-grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" stroke="#7b9bce" stroke-opacity=".1" stroke-width=".6"/></pattern><linearGradient id="chip-fill" x1="143" y1="46" x2="204" y2="112" gradientUnits="userSpaceOnUse"><stop stop-color="#365d9c"/><stop offset="1" stop-color="#1d355a"/></linearGradient></defs><rect x="10" y="4" width="320" height="166" fill="url(#hero-grid)"/><path d="M60 54H111L156 87M279 47H241L193 87M278 136H239L192 103M61 134H110L156 103" stroke="#759bdb" stroke-opacity=".5" stroke-width="1.2"/><path class="hero-flow" d="M60 54H111L156 87M279 47H241L193 87M278 136H239L192 103" stroke="#8eb8ff" stroke-opacity=".7" stroke-width="1.2" stroke-dasharray="3 18"/><path d="m143 63 31-18 32 18v45l-32 19-31-19z" fill="#6f9fe0" fill-opacity=".08" stroke="#6494dd" stroke-opacity=".3"/><circle class="hero-chip-ring" cx="174" cy="87" r="39" stroke="#8eb5fa" stroke-width=".7"/><rect class="hero-chip" x="148" y="61" width="52" height="52" rx="12" fill="url(#chip-fill)" stroke="#91b7f1" stroke-opacity=".7"/><path d="M165 77h18v19h-18zM160 82h5m18 0h5m-28 9h5m18 0h5m-18-19v5m8-5v5m-8 19v5m8-5v5" stroke="#b5d2ff" stroke-width="1.6"/><g fill="#1a2a44" stroke="#5b79a8" stroke-opacity=".7"><rect x="38" y="34" width="42" height="36" rx="8"/><rect x="258" y="27" width="42" height="36" rx="8"/><rect x="258" y="118" width="42" height="36" rx="8"/><rect x="38" y="117" width="42" height="36" rx="8"/></g><g stroke="#a2c0ef" stroke-width="1.2"><path d="M49 44h20v13H49zm10 13v4m-5 0h10M269 37h20v5h-20zm0 9h20v5h-20zM269 128h20v13h-20zm10 13v4m-5 0h10M49 127h20v5H49zm0 9h20v5H49z"/></g><g class="hero-sparks" fill="#8fb5f7"><circle cx="110" cy="54" r="2.5"/><circle cx="240" cy="136" r="2.5"/><circle cx="300" cy="45" r="2"/></g><g fill="#849fc7" font-family="Consolas,monospace" font-size="7" letter-spacing="1.2"><text x="136" y="145">COORDINATOR</text><text x="36" y="21">EXECUTION NODES</text></g></svg></div>`;
 }
+
+function topologyTasks(node) {
+ const reported=state.topology?.node_tasks?.[node.id];
+ if(reported) return reported;
+ const tasks=state.tasks.filter(t=>t.worker_id===node.id);
+ return {running:tasks.filter(t=>t.status==='running'),recent:tasks.filter(t=>t.status==='completed').sort((a,b)=>(b.finished_at||0)-(a.finished_at||0)).slice(0,3)};
+}
+function taskStage(task,node) {
+ const p=task.progress;
+ if(!p||!Number.isFinite(p.done)||!Number.isFinite(p.total)||p.total<=0) return {label:'处理中 · 等待进度上报',value:null,stale:!node.online};
+ const value=Math.max(0,Math.min(100,p.done/p.total*100));
+ const stages={compute:'附加 CPU 负载',log_analysis:'日志分析',build_index:'建立索引',search:'本轮检索',archive:'脱敏压缩',complete:'计算结束，等待结果接收'};
+ const age=Math.max(0,Math.floor(state.server_time-(p.at||0))),stale=!node.online||age>15;
+ return {value,stale,label:`${stages[p.stage]||'执行阶段'} · ${fmt(value,1)}%${stale?' · 最近上报已过期':''}`,detail:`${fmt(p.done)} / ${fmt(p.total)} · ${age} 秒前上报`};
+}
+function topologyTaskPanel(node) {
+ const {running,recent}=topologyTasks(node),active=Object.keys(node.active_tasks||{}).length;
+ return `<div class="topology-task-panel" id="topology-task-panel" data-key="topology-panel-${esc(node.id)}"><div class="topology-selection"><div><h3>${esc(node.name)}</h3><p>${node.mode==='same_host'?'同机执行进程':'远程执行端'} · 执行处理并回传结果 · 槽位占用 ${active} / ${node.capacity||1}</p></div>${badge(node)}</div>${!node.online?'<p class="topology-warning">节点离线，执行状态等待确认；租约到期后由系统重排。</p>':''}<h4>正在处理 · ${running.length} 项</h4>${running.length?`<ul class="topology-task-list">${running.map(t=>{const progress=taskStage(t,node);return `<li data-key="live-task-${esc(t.id)}"><div class="topology-task-title"><button class="text-button" data-detail="${esc(t.id)}">${esc(t.name)}</button><span class="mono">${esc(t.id)}</span></div><p>${esc(progress.label)}</p>${progress.value==null?'':`<progress max="100" value="${progress.value}" aria-label="${esc(t.name)}当前阶段进度" class="${progress.stale?'is-stale':''}"></progress><small>${esc(progress.detail)}</small>`}</li>`;}).join('')}</ul>`:`<p class="topology-empty">${active?'执行槽仍被占用，正在等待清理或状态回报。':node.online?'当前没有执行中的任务。':'当前没有可确认的运行任务。'}</p>`}<h4>最近完成 · 最多 3 项</h4>${recent.length?`<ul class="topology-results">${recent.map(t=>`<li data-key="node-result-${esc(t.id)}"><div><b>${esc(t.name)}</b><small>${fullTime(t.finished_at)} · ${ms(t.latency_ms)}</small></div><button class="row-button" data-detail="${esc(t.id)}">查看结果</button></li>`).join('')}</ul>`:'<p class="topology-empty">这个节点完成任务后，结果入口会出现在这里。</p>'}<p class="topology-footnote">进度来自执行端心跳，只表示当前阶段；短任务可能直接显示完成。</p></div>`;
+}
 function topology() {
- const allOnline=state.nodes.filter(n=>n.online),online=allOnline.slice(0,4),positions=[[18,25],[82,25],[18,77],[82,77]];
- return `<section class="panel"><div class="panel-head"><div><h2>算力协同网络 <small>COMPUTE NETWORK</small></h2><div class="panel-sub">执行端注册 → 任务分配 → 结果反馈；连线表示 HTTP 应用层连接</div></div><span class="badge"><i></i>${allOnline.length} 个节点在线</span></div>${allOnline.length>4?`<div class="topology-more">图中展示 4 个节点，<a href="#nodes">查看全部 ${allOnline.length} 个 ↗</a></div>`:''}<div class="topology"><div class="network"><svg class="network-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${positions.slice(0,online.length).map(([x,y])=>`<path d="M50 50 C50 ${y},${x} 50,${x} ${y}"/>`).join('')}</svg><div class="network-node center"><div class="node-orb">${icon('nodes')}</div>协调服务<small>联合调度 · 租约恢复</small></div>${online.map((n,i)=>`<div data-key="network-${esc(n.id)}" class="network-node ${n.busy_task?'busy':''}" style="left:${positions[i][0]}%;top:${positions[i][1]}%"><div class="node-orb">${icon(n.mode==='same_host'?'monitor':'server')}<span class="node-pulse"></span></div>${esc(n.name)}<small>${n.mode==='same_host'?'同机进程':'远程终端'} · ${ms(n.rtt_ms)}</small></div>`).join('')}</div></div><div class="topology-legend"><span>在线节点</span><span>任务执行中</span><span>HTTP 应用层连接</span></div></section>`;
+ const nodes=[...state.nodes].sort((a,b)=>Number(b.online)-Number(a.online)||a.id.localeCompare(b.id)),allOnline=nodes.filter(n=>n.online);
+ const selected=nodes.find(n=>n.id===selectedTopologyNode)||nodes[0],visible=nodes.slice(0,4),positions=[[18,22],[82,22],[18,78],[82,78]];
+ if(selected&&!visible.some(n=>n.id===selected.id)) visible[visible.length-1]=selected;
+ const linkState=n=>{const data=topologyTasks(n);if(!n.online)return 'is-offline';if(data.running.length)return 'is-running';const at=data.recent[0]?.finished_at;return at!=null&&state.server_time-at>=0&&state.server_time-at<8?'is-returning':'';};
+ return `<section class="panel business-topology" aria-labelledby="topology-title"><div class="panel-head"><div><h2 id="topology-title">算力协同网络 <small>COMPUTE NETWORK</small></h2><div class="panel-sub">点击执行节点，查看它正在处理的任务和最近结果。</div></div><span class="badge"><i></i>${allOnline.length} 个节点在线</span></div><ol class="topology-workflow" aria-label="真实任务处理流程"><li><b>接收任务</b><span>待调度 ${state.counts.queued} 项</span></li><li><b>选择节点</b><span>${state.ai_scheduler?.enabled?'Qwen 辅助 / 规则':'规则联合调度'}</span></li><li><b>执行处理</b><span>执行中 ${state.counts.running} 项</span></li><li><b>汇总结果</b><span>已完成 ${state.counts.completed} 项</span></li></ol>${nodes.length>4?`<div class="topology-more">图中展示 ${visible.length} / ${nodes.length} 个已登记节点，可在下方切换或<a href="#nodes">查看全部节点 ↗</a></div>`:''}<div class="topology"><div class="network"><svg class="network-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">${visible.map((n,i)=>{const [x,y]=positions[i];return `<path data-key="link-${esc(n.id)}" class="topology-link ${linkState(n)}" d="M50 50 C50 ${y},${x} 50,${x} ${y}"/>`;}).join('')}</svg><div class="network-node center"><div class="node-orb">${icon('nodes')}</div><strong>协调端</strong><small>接收任务 · 选择节点<br>汇总结果</small></div>${visible.map((n,i)=>{const data=topologyTasks(n),first=data.running[0],last=data.recent[0],stage=first?taskStage(first,n):null;return `<div data-key="network-${esc(n.id)}" class="network-node ${data.running.length&&n.online?'busy':''} ${!n.online?'is-offline':''} ${n.id===selected?.id?'is-selected':''}" style="left:${positions[i][0]}%;top:${positions[i][1]}%"><button type="button" class="node-orb" data-topology-node="${esc(n.id)}" aria-label="查看${esc(n.name)}的任务" aria-pressed="${n.id===selected?.id}" aria-controls="topology-task-panel">${icon(n.mode==='same_host'?'monitor':'server')}<span class="node-pulse"></span></button><strong class="topology-node-name" title="${esc(n.name)}">${esc(n.name)}</strong><small>${!n.online?'已离线':n.draining?'已暂停接收':data.running.length?'执行中 '+data.running.length+' 项':'在线空闲'} · ${n.mode==='same_host'?'同机进程':'远程终端'}</small>${first?`<span class="topology-node-task" title="${esc(first.name)}">${esc(first.name)}</span><small class="topology-node-progress">${esc(stage.value==null?'等待进度上报':(stage.stale?'最近阶段 ':'当前阶段 ')+fmt(stage.value,1)+'%')}</small>`:last?`<button type="button" class="topology-result-link" data-detail="${esc(last.id)}">查看最近结果 ↗</button>`:'<small>等待任务分配</small>'}</div>`;}).join('')}</div>${nodes.length?'':'<p class="topology-no-nodes">尚无执行节点。<a href="#guide">查看启动步骤 ↗</a></p>'}</div><div class="topology-legend"><span>在线连接</span><span>任务执行中</span><span>近期结果接收</span></div>${selected?`<div class="topology-node-picker"><label for="topology-node-select">查看执行节点</label><select id="topology-node-select">${nodes.map(n=>`<option value="${esc(n.id)}" ${n.id===selected.id?'selected':''}>${esc(n.name)}${n.online?'':'（离线）'}</option>`).join('')}</select></div>${topologyTaskPanel(selected)}`:''}<p class="topology-caption">连线表示 HTTP 应用层关联。动效表示执行中或近 8 秒内收到结果，不是网络流量测量。</p></section>`;
 }
 function statusLabel(status) {
  const symbol={completed:'check',running:'play',queued:'clock',failed:'info',cancelled:'layers'}[status]||'info';
@@ -558,6 +595,7 @@ document.addEventListener('click',async event=>{
  try {
   const action=button.dataset.action;
   if(action==='toggle-intro') {introVisible=!introVisible;render();if(introVisible) $('#intro-panel').scrollIntoView({block:'start'});}
+  if(button.dataset.topologyNode) {selectedTopologyNode=button.dataset.topologyNode;render();}
   if(action==='create') openCreate();
   if(button.dataset.template) openCreate(button.dataset.template);
   if(action==='next-create') {$('#detail-dialog').close();$('#task-form').reset();$('#task-form details').open=false;openCreate();}
@@ -626,6 +664,7 @@ document.addEventListener('input',event=>{if(event.target.id==='task-search'&&!e
 document.addEventListener('input',event=>{if(event.target.dataset.offload){offload[event.target.dataset.offload]=event.target.value;const result=$('#offload-result');if(result) result.innerHTML=offloadResult();}});
 document.addEventListener('compositionend',event=>{if(event.target.id==='task-search'){taskSearch=event.target.value;render();}});
 document.addEventListener('change',event=>{
+ if(event.target.id==='topology-node-select') {selectedTopologyNode=event.target.value;render();}
  if(event.target.id==='task-filter'){taskFilter=event.target.value;render();}
  if(event.target.id==='task-sort'){taskSort=event.target.value;render();}
 });

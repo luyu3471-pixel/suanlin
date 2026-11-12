@@ -444,7 +444,21 @@ class Store:
             tasks = sorted(self.tasks.values(), key=lambda x: x["created_at"], reverse=True)
             done = [t for t in tasks if t["status"] == "completed"]
             latencies = sorted(t["latency_ms"] for t in done)
+            # The task table is capped at 200 rows. Keep live work and each node's
+            # latest results available independently, without exposing payloads.
+            topology_keys = ('id', 'name', 'status', 'worker_id', 'created_at',
+                             'started_at', 'finished_at', 'latency_ms', 'progress')
+            node_tasks = {n['id']: {'running': [], 'recent': []} for n in nodes}
+            for task in tasks:
+                bucket = node_tasks.get(task.get('worker_id'))
+                if bucket is not None and task['status'] == 'running':
+                    bucket['running'].append(copy.deepcopy({k: task[k] for k in topology_keys if k in task}))
+            for task in sorted(done, key=lambda t: t.get('finished_at', 0), reverse=True):
+                bucket = node_tasks.get(task.get('worker_id'))
+                if bucket is not None and len(bucket['recent']) < 3:
+                    bucket['recent'].append(copy.deepcopy({k: task[k] for k in topology_keys if k in task}))
             return {"server_time": now, "version": __version__, "ai_scheduler": dict(self.ai.status) if self.ai else {"enabled": False}, "nodes": nodes, "tasks": [self.public_task(t) for t in tasks[:200]],
+                    "topology": {"node_tasks": node_tasks, "recent_limit": 3},
                     "counts": {s: sum(t["status"] == s for t in tasks) for s in ("queued", "running", "completed", "failed", "cancelled")},
                     "metrics": {"total": len(tasks), "completed": len(done), "deadline_rate": sum(t.get("deadline_met", False) for t in done) / len(tasks) if tasks else None,
                                 "mean_ms": sum(latencies) / len(latencies) if latencies else None,

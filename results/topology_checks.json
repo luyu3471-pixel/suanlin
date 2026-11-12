@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checks": [
+    "Actual two-process execution, heartbeat progress, selected-node persistence and offscreen animation pause",
+    "Completed task can be opened directly from its node and shows real business results",
+    "Three viewport widths, more than four nodes, offline/long names, stale progress, empty state and reduced motion"
+  ],
+  "errors": [],
+  "source": "two actual local worker processes; additional layout states explicitly injected",
+  "regression_tests_passed": 73,
+  "regression_command": "python -m unittest discover -s tests"
+}

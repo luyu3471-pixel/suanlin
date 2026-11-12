@@ -5,10 +5,11 @@
   "PowerShell_launcher_check": "passed",
   "core_matches_live_tested_source": false,
   "local_integration_checked": true,
-  "local_regression_tests_passed": 70,
+  "local_regression_tests_passed": 73,
   "local_browser_checks": "results/integration_checks.json",
   "source_note": "Includes local UI changes and an urgent-arrival snapshot fix; existing dual-machine records describe the original remote source.",
   "credentials_included": false,
   "model_weights_included": false,
-  "standalone_executable": false
+  "standalone_executable": false,
+  "topology_browser_checks": "results/topology_checks.json"
 }
