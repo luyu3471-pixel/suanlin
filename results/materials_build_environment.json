@@ -1,0 +1,12 @@
+{
+  "packages": {
+    "reportlab": "4.4.9",
+    "pypdf": "6.21.4",
+    "pillow": "13.0.0"
+  },
+  "font": "simhei.ttf",
+  "source_date": "2026-11-12",
+  "measurement_date": "2026-11-11",
+  "version": "2.4.1-slot-aware",
+  "slide_editor": "Existing editable HTML design; Chromium PDF export via Node Playwright"
+}

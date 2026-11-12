@@ -1,0 +1,34 @@
+{
+  "version": "2.4.1-slot-aware",
+  "date": "2026-11-12",
+  "evidence_numbers_checked": true,
+  "obsolete_claims_checked": true,
+  "report_source_preserved_on_rebuild": true,
+  "pdfs": [
+    {
+      "file": "01-场景设计方案.pdf",
+      "pages": 6,
+      "bytes": 152039,
+      "sha256": "587af3fa3f85f96bbf4851f75061e10f2ef44d2aed5034bfbe1c48fc11ed9a18"
+    },
+    {
+      "file": "02-答辩展示.pdf",
+      "pages": 12,
+      "bytes": 495851,
+      "sha256": "fd3d296b45340c75ef8bb1de913931609198dec57984dfe6cff40c7ae677514a"
+    },
+    {
+      "file": "03-佐证材料.pdf",
+      "pages": 6,
+      "bytes": 595915,
+      "sha256": "a58a8b832897f4f07e724bea9242400459b7df68f057b2bebbff2d128ecf04a7"
+    },
+    {
+      "file": "05-操作与提交手册.pdf",
+      "pages": 11,
+      "bytes": 157538,
+      "sha256": "416d52ef35d096d747fb97897e5353c96845cedddad43c375e27790e58d82921"
+    }
+  ],
+  "note": "Checks use existing measurement records; no new physical-device benchmark. Visual PNG review is separate."
+}

@@ -1,0 +1,13 @@
+{
+  "duration": 192.034233,
+  "width": 1280,
+  "height": 720,
+  "sampled_seconds": [
+    1,
+    120,
+    190
+  ],
+  "sha256": "e188ddd4d274ce74b1ac892a84e0811ba80836f5a316741001fd6a949e8ec537",
+  "decoder": "system Chrome",
+  "note": "Existing report walkthrough; no new dual-machine test"
+}

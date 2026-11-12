@@ -1,90 +1,76 @@
 {
+  "version": "2.4.1-slot-aware",
+  "material_date": "2026-11-12",
+  "measurement_date": "2026-11-11",
   "file": "04-演示视频.mp4",
-  "bytes": 1888051,
-  "duration_seconds": 219.76,
-  "actual_media_duration_seconds": 219.76,
+  "bytes": 7797418,
+  "duration_seconds": 192.034233,
   "width": 1280,
   "height": 720,
   "video_codec": "H.264",
-  "processing_seconds": 235.47,
   "captioned": true,
   "audio": false,
-  "source": "actual browser screen recording of local process execution; synthetic input; simulation labelled",
+  "source": "192-second walkthrough of updated slides and existing evidence; not new live dual-machine recording",
   "scenes": [
     {
-      "at": 1.06,
-      "seconds": 14,
-      "caption": "多终端任务调度系统。应用层研究原型，本视频为真实本机界面操作，无旁白。"
+      "at": 0,
+      "seconds": 16,
+      "caption": "2.4.1报告讲解｜展示已有证据，非新录现场双机操作；无旁白。"
     },
     {
-      "at": 15.13,
-      "seconds": 15,
-      "caption": "设计假设：办公事件集中到达时，固定设备可能排队。实际用户需求仍需访谈验证。"
+      "at": 16,
+      "seconds": 16,
+      "caption": "办公需求为待验证假设，尚无实际用户访谈或业务试点。"
     },
     {
-      "at": 31.14,
-      "seconds": 17,
-      "caption": "两个真实执行进程都运行在本机。当前不是两台物理终端，也没有接入6G无线网络。"
+      "at": 32,
+      "seconds": 16,
+      "caption": "Qwen仅在A调度；A/B实际执行日志、检索、脱敏压缩CPU算法。"
     },
     {
-      "at": 48.18,
-      "seconds": 13,
-      "caption": "节点展示实际连接、心跳往返和执行状态。带宽为配置值，可信是管理员设置。"
+      "at": 48,
+      "seconds": 16,
+      "caption": "截图采集于2026-11-11；已验证A四槽/B四槽，不代表当前实时连接。"
     },
     {
-      "at": 61.26,
-      "seconds": 8,
-      "caption": "暂停节点接收新任务；已有任务仍可完成。恢复后节点重新参与分配。"
+      "at": 64,
+      "seconds": 16,
+      "caption": "原样模型、排程保护和规则回退分别记录；模型等待计入总时延。"
     },
     {
-      "at": 69.5,
-      "seconds": 15,
-      "caption": "输入三条合成巡检文本，设定时限与范围。轻量模型执行分类，所有结果需要人工复核。"
+      "at": 80,
+      "seconds": 16,
+      "caption": "租约可重排，可能重复计算；可信范围不等于硬件证明或加密。"
     },
     {
-      "at": 86.22,
-      "seconds": 17,
-      "caption": "这是执行节点真实返回的分类结果。模型训练仅有48条自编合成样本，分数未校准。"
+      "at": 96,
+      "seconds": 16,
+      "caption": "历史仿真不含Qwen，网络参数是假设，不能作为双机或6G成绩。"
     },
     {
-      "at": 103.48,
-      "seconds": 15,
-      "caption": "截止时间优先；估计等待、通信与计算耗时。该启发式没有最优性保证。"
+      "at": 112,
+      "seconds": 16,
+      "caption": "450项为跨版本总量。最终AI专项58.278秒，前轮规则51.559秒更快。"
     },
     {
-      "at": 119.21,
-      "seconds": 13,
-      "caption": "同样输入比较四种策略。此页是参数化仿真，全部网络和计算配置均是假设。"
+      "at": 128,
+      "seconds": 16,
+      "caption": "运行时AI是A上的Qwen；旧轻量分类保留演示，尚无6G无线测试。"
     },
     {
-      "at": 132.27,
-      "seconds": 12,
-      "caption": "切换受限带宽条件。固定节点在部分配置下积压，差距不能外推到任意真实网络。"
+      "at": 144,
+      "seconds": 16,
+      "caption": "压缩跨机差异未解，整体正确性未验收；继续需求与业务质量验证。"
     },
     {
-      "at": 144.3,
-      "seconds": 12,
-      "caption": "30个种子、每次240项任务，共86400条仿真记录，完整输入哈希和CSV一并交付。"
+      "at": 160,
+      "seconds": 16,
+      "caption": "11月12日只更新材料，未新增双机实测；两名成员仍须审核。"
     },
     {
-      "at": 156.49,
-      "seconds": 18,
-      "caption": "320项真实同机基准单独报告。全部策略按时完成，联合策略并非所有条件下都更快。"
-    },
-    {
-      "at": 174.55,
-      "seconds": 15,
-      "caption": "AI与6G的关联是通信与计算协同的应用设计，尚未验证6G空口、专网或标准协议栈。"
-    },
-    {
-      "at": 190.27,
-      "seconds": 15,
-      "caption": "在第二台真实电脑运行执行端，即可继续办公室多终端验证；需保存设备表、照片和原始数据。"
-    },
-    {
-      "at": 205.49,
-      "seconds": 15,
-      "caption": "已交付可运行系统、完整代码、原始数据与参赛材料。真实需求、物理多机收益和模型泛化仍待验证。"
+      "at": 176,
+      "seconds": 16,
+      "caption": "Qwen/llama.cpp为第三方资源；本地量化来源、哈希和构建号待补。"
     }
   ]
 }

@@ -71,6 +71,7 @@ const InterfaceMotion = (() => {
 
   function patchAttributes(element, template) {
     for (const attr of [...element.attributes]) {
+      if (element.tagName === 'DETAILS' && attr.name === 'open') continue;
       if (attr.name !== 'style' && !template.hasAttribute(attr.name)) element.removeAttribute(attr.name);
     }
     for (const attr of template.attributes) {
@@ -263,6 +264,8 @@ let state = null, current = 'overview', simulation = null, scenario = 'normal', 
 let toastTimer;
 let taskSort = 'newest', lastSyncAt = null, connectionError = '', authRequired = false, experimentsError = '', experimentsLoading = false;
 let activeTask = null, detailVersion = 0, detailLoading = false, detailError = '';
+let lastExampleId = null, introVisible = false;
+const taskKinds = {log_analysis:'业务日志分析',document_search:'文档检索与排序',archive:'数据脱敏压缩'};
 const pending = new Set();
 function toast(text) { $('#toast').textContent = text; $('#toast').classList.add('visible'); clearTimeout(toastTimer); toastTimer = setTimeout(() => $('#toast').classList.remove('visible'), 3500); }
 async function request(path, data, raw = false) {
@@ -292,11 +295,11 @@ const ms = x => x == null ? '—' : `${fmt(x,1)} ms`;
 const percent = x => x == null ? '—' : `${(x*100).toFixed(1)}%`;
 const time = x => new Date(x*1000).toLocaleTimeString('zh-CN',{hour12:false});
 function badge(node) { return `<span class="badge ${!node.online?'offline':node.draining?'warn':node.busy_task?'busy':''}"><i></i>${!node.online?'已离线':node.draining?'已暂停':node.busy_task?'执行中':'在线空闲'}</span>`; }
-function heading(title,desc,eyebrow='COMPUTING, TOGETHER',actions=true) { return `<section class="page-heading"><div><span class="eyebrow">${eyebrow}</span><h1>${title}</h1><p>${desc}</p></div>${actions?`<div class="heading-actions"><button class="button secondary" data-action="export">${icon('download')} 导出记录</button><button class="button primary" data-action="create">${icon('plus')} 创建任务</button></div>`:''}</section>`; }
+function heading(title,desc,eyebrow='COMPUTING, TOGETHER',actions=true,extraActions='') { return `<section class="page-heading"><div>${eyebrow?`<span class="eyebrow">${eyebrow}</span>`:''}<h1>${title}</h1><p>${desc}</p></div>${actions?`<div class="heading-actions">${extraActions}<button class="button secondary" data-action="export">${icon('download')} 导出记录</button><button class="button primary" data-action="create">${icon('plus')} 创建任务</button></div>`:''}</section>`; }
 function metrics() {
  const active=state.nodes.filter(n=>n.online),m=state.metrics;
  const values=[active.length,m.completed,m.mean_ms,m.deadline_rate==null?null:m.deadline_rate*100],formats=['integer','integer','decimal','percent'];
- const cards=[['nodes','在线算力节点',active.length,'个',`${state.nodes.filter(n=>n.online&&n.mode==='remote_host').length} 个远程终端`,'实时节点心跳'],['layers','累计完成任务',m.completed,'项',`${state.counts.running} 项正在执行`,`${state.counts.queued} 项等待调度`],['clock','平均完成时延',m.mean_ms==null?'—':fmt(m.mean_ms,1),'ms','服务端提交至结果接收','含人工附加 CPU 负载'],['shield','全量任务按时完成率',percent(m.deadline_rate),'',`${m.total} 项已提交任务`,'待完成与失败均计入分母']];
+ const cards=[['nodes','在线算力节点',active.length,'个',`${state.nodes.filter(n=>n.online&&n.mode==='remote_host').length} 个远程终端`,'实时节点心跳'],['layers','累计完成任务',m.completed,'项',`${state.counts.running} 项正在执行`,`${state.counts.queued} 项等待调度`],['clock','平均完成时延',m.mean_ms==null?'—':fmt(m.mean_ms,1),'ms','服务端提交至结果接收','应用层指标 · 非无线时延'],['shield','全量任务按时完成率',percent(m.deadline_rate),'',`${m.total} 项已提交任务`,'待完成与失败均计入分母']];
  return `<section class="metrics" aria-label="实时指标">${cards.map((c,i)=>`<article data-key="metric-${i}" data-tone="${['blue','violet','amber','rose'][i]}" class="metric ${i===3?'highlight':''}"><div class="metric-top">${c[1]}<span class="metric-icon">${icon(c[0])}</span></div><div class="metric-value" aria-label="${esc(c[2]+' '+c[3])}"><span class="metric-number" aria-hidden="true" data-value="${values[i]??''}" data-format="${formats[i]}">${c[2]}</span><small aria-hidden="true">${c[3]}</small></div><div class="metric-foot"><b>${c[4]}</b><span>${c[5]}</span></div></article>`).join('')}</section>`;
 }
 function heroArt() {
@@ -304,7 +307,7 @@ function heroArt() {
 }
 function topology() {
  const allOnline=state.nodes.filter(n=>n.online),online=allOnline.slice(0,4),positions=[[18,25],[82,25],[18,77],[82,77]];
- return `<section class="panel"><div class="panel-head"><div><h2>算力协同网络 <small>COMPUTE NETWORK</small></h2><div class="panel-sub">节点能力、网络状态与任务时限协同决策</div></div><span class="badge"><i></i>${allOnline.length} 个节点在线</span></div>${allOnline.length>4?`<div class="topology-more">图中展示 4 个节点，<a href="#nodes">查看全部 ${allOnline.length} 个 ↗</a></div>`:''}<div class="topology"><div class="network"><svg class="network-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${positions.slice(0,online.length).map(([x,y])=>`<path d="M50 50 C50 ${y},${x} 50,${x} ${y}"/>`).join('')}</svg><div class="network-node center"><div class="node-orb">${icon('nodes')}</div>协调服务<small>联合调度 · 租约恢复</small></div>${online.map((n,i)=>`<div data-key="network-${esc(n.id)}" class="network-node ${n.busy_task?'busy':''}" style="left:${positions[i][0]}%;top:${positions[i][1]}%"><div class="node-orb">${icon(n.mode==='same_host'?'monitor':'server')}<span class="node-pulse"></span></div>${esc(n.name)}<small>${n.mode==='same_host'?'同机进程':'远程终端'} · ${ms(n.rtt_ms)}</small></div>`).join('')}</div></div><div class="topology-legend"><span>在线节点</span><span>任务执行中</span><span>HTTP 应用层连接</span></div></section>`;
+ return `<section class="panel"><div class="panel-head"><div><h2>算力协同网络 <small>COMPUTE NETWORK</small></h2><div class="panel-sub">执行端注册 → 任务分配 → 结果反馈；连线表示 HTTP 应用层连接</div></div><span class="badge"><i></i>${allOnline.length} 个节点在线</span></div>${allOnline.length>4?`<div class="topology-more">图中展示 4 个节点，<a href="#nodes">查看全部 ${allOnline.length} 个 ↗</a></div>`:''}<div class="topology"><div class="network"><svg class="network-lines" viewBox="0 0 100 100" preserveAspectRatio="none">${positions.slice(0,online.length).map(([x,y])=>`<path d="M50 50 C50 ${y},${x} 50,${x} ${y}"/>`).join('')}</svg><div class="network-node center"><div class="node-orb">${icon('nodes')}</div>协调服务<small>联合调度 · 租约恢复</small></div>${online.map((n,i)=>`<div data-key="network-${esc(n.id)}" class="network-node ${n.busy_task?'busy':''}" style="left:${positions[i][0]}%;top:${positions[i][1]}%"><div class="node-orb">${icon(n.mode==='same_host'?'monitor':'server')}<span class="node-pulse"></span></div>${esc(n.name)}<small>${n.mode==='same_host'?'同机进程':'远程终端'} · ${ms(n.rtt_ms)}</small></div>`).join('')}</div></div><div class="topology-legend"><span>在线节点</span><span>任务执行中</span><span>HTTP 应用层连接</span></div></section>`;
 }
 function statusLabel(status) {
  const symbol={completed:'check',running:'play',queued:'clock',failed:'info',cancelled:'layers'}[status]||'info';
@@ -322,17 +325,51 @@ function taskRows(tasks) {
 function taskTable(tasks, title='最近任务', all=false) {
  return `<section class="panel table-panel task-table-panel"><div class="panel-head"><h2>${title} <small>RECENT TASKS</small></h2><div class="table-head-actions"><span class="badge">${all?`显示 ${tasks.length} 项`:'实时更新'}</span>${!all?'<a class="text-link" href="#tasks">全部任务 ↗</a>':''}</div></div><div class="table-wrapper task-table-wrapper"><table class="task-table" role="table" aria-label="${title}"><thead role="rowgroup"><tr role="row"><th scope="col" role="columnheader">任务名称 / ID</th><th scope="col" role="columnheader">调度策略</th><th scope="col" role="columnheader">执行节点</th><th scope="col" role="columnheader">状态</th><th scope="col" role="columnheader">完成时延</th><th scope="col" role="columnheader">操作</th></tr></thead><tbody role="rowgroup">${taskRows(tasks)}</tbody></table>${tasks.length?'':emptyTasks(all)}</div></section>`;
 }
+function exampleNodes() {
+ return state?.nodes.filter(n=>n.online&&!n.draining&&n.trusted)||[];
+}
+function startPanel() {
+ const ready=exampleNodes(),example=state.tasks.find(t=>t.id===lastExampleId),finished=example?.status==='completed';
+ const hasExample=example&&['queued','running','completed'].includes(example.status);
+ const online=state.nodes.filter(n=>n.online);
+ const message=ready.length?`${ready.length} 个可信执行节点可接收任务。提交后，系统自动分配并返回结果。`:!online.length?'还没有在线执行节点。请先按部署说明启动执行端。':!online.some(n=>!n.draining)?'在线节点均已暂停接收。恢复一个节点后即可体验。':'尚无可接收任务的可信节点。请先核实设备，再设为可信。';
+ return `<section class="panel start-panel" aria-labelledby="start-title"><div class="start-layout"><div class="start-copy"><h2 id="start-title">先试一条文字，看看系统如何处理</h2><p>把巡检文字交给已连接的电脑，查看事件分类、执行节点和处理耗时。点击下方按钮即可开始。</p><div class="start-actions">${hasExample?`<button class="button primary" data-detail="${esc(example.id)}">${icon(finished?'check':'clock')}${finished?'查看示例结果':'查看示例进度'}</button>`:`<button class="button primary" data-action="try-example" aria-describedby="start-readiness" ${ready.length?'':'disabled'}>${icon('play')}试跑一条示例</button>`}<button class="button secondary" data-action="create">填写自己的文本</button>${hasExample?'<button class="text-button" data-action="try-example">再跑一条示例</button>':''}</div><p class="start-note">示例为虚构文本，只提交 1 项分类任务。进度和结果会自动打开。</p></div><div class="start-sample"><h3>这次先处理什么</h3><blockquote>消防出口被纸箱堵塞</blockquote><p>完成后可查看分类结果，判断系统是否识别了这条文字中的事件。</p><a class="text-link" href="#guide">了解系统用途与部署方法 ↗</a></div></div><div id="start-readiness" class="start-readiness ${ready.length?'':'needs-setup'}">${icon(ready.length?'check':'info')}<span>${finished?'这条示例已完成。打开结果后，可以继续填写自己的文本。':esc(message)}</span>${ready.length?'':`<a href="${online.length?'#nodes':'#guide'}">${online.length?'检查执行节点':'查看启动步骤'} ↗</a>`}</div><ol class="start-steps" aria-label="首次使用流程"><li class="${example?'is-done':'is-current'}"><span>1</span><div><b>提交示例</b><small>不用准备数据</small></div></li><li class="${finished?'is-done':example?'is-current':''}"><span>2</span><div><b>电脑自动处理</b><small>分配与状态自动更新</small></div></li><li class="${finished?'is-current':''}"><span>3</span><div><b>查看分类结果</b><small>再尝试自己的文本</small></div></li></ol></section>`;
+}
 function overview() {
  const online=state.nodes.filter(n=>n.online),busy=online.reduce((s,n)=>s+Object.keys(n.active_tasks||{}).length,0),slots=online.reduce((s,n)=>s+(n.capacity||1),0);
- return heading('协同工作台','把任务交给合适的设备，让每一份算力有序协作。')+`<section class="hero"><div class="hero-grid-motion" aria-hidden="true"></div><div class="hero-scan" aria-hidden="true"></div><div class="hero-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="hero-copy"><span class="eyebrow">MULTI-DEVICE TASK SCHEDULER</span><h2>让任务流转，<span>让设备协作。</span></h2><p>连接执行节点，分配任务，在一个工作台掌握处理进度。</p><div class="hero-bottom"><div class="hero-tags"><span>${icon("check")} 时限感知</span><span>${icon("check")} 多端执行</span><span>${icon("check")} 过程可追溯</span></div><button class="hero-action" data-action="demo">运行演示任务 ${icon("arrow")}</button></div></div>${heroArt()}</section>`+metrics()+`<div class="dashboard-grid"><div>${topology()}${taskTable(state.tasks.slice(0,5))}</div><div class="dashboard-right"><section class="panel strategy"><span class="eyebrow">SCHEDULING POLICY</span><h3>Qwen 辅助调度</h3><p>模型在 A 上参考节点配置、负载与预计完成时间选择节点；超时或无效决策回退到规则。</p><p class="fine-label">模型状态：${state.ai_scheduler?.enabled ? "已启用 · 调用 "+state.ai_scheduler.calls+" 次 · 接受 "+state.ai_scheduler.accepted+" 项决策" : "未启用，使用规则回退"}</p><div class="strategy-list"><div class="strategy-row"><span>执行时间预测</span><b>在线 EWMA 更新</b></div><div class="strategy-row"><span>数据范围</span><b>按任务约束筛选</b></div><div class="strategy-row"><span>故障处理</span><b>租约到期重新调度</b></div></div><div class="strategy-footer"><span>另有 3 种基线策略</span><a href="#experiments">查看对比 ↗</a></div></section><section class="panel secondary-panel"><h3>工作空间动态</h3><div class="progress-row"><span>节点执行槽占用</span><span>${busy} / ${slots}</span></div><div class="progress-track"><div class="progress-fill" style="--progress:${slots?busy/slots*100:0}%"></div></div><div class="event-list">${state.events.slice(0,4).map(e=>`<div class="event-item" data-key="event-${esc(e.at+'-'+e.message)}"><span>${esc(e.message)}</span><time>${time(e.at)}</time></div>`).join('')||'<p class="fine-label">等待节点接入与任务提交。</p>'}</div><button class="button secondary mini" data-action="demo">${icon('play')} 运行 12 项演示任务</button><p class="fine-label">合成事件，真实进程执行；含附加 CPU 负载。</p></section></div></div>`+notice();
+ return heading('协同工作台','把处理任务分配给已连接的电脑，并在这里查看结果。','',true,`<button class="button secondary" data-action="toggle-intro" aria-expanded="${introVisible}" aria-controls="intro-panel">${icon('book')}${introVisible?'收起新手引导':'新手引导'}</button>`)+`<section class="hero"><div class="hero-grid-motion" aria-hidden="true"></div><div class="hero-scan" aria-hidden="true"></div><div class="hero-particles" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="hero-copy"><h2>让通信与计算共同决定任务去向</h2><p>本机处理，还是交给其他节点？把传输、排队和计算放在一起考虑。</p><div class="hero-bottom"><div class="hero-tags"><span>${icon("check")} 时限感知</span><span>${icon("check")} 通信代价</span><span>${icon("check")} 过程可追溯</span></div><button class="hero-action" data-action="demo">运行演示任务 ${icon("arrow")}</button></div></div>${heroArt()}</section>`+`<div id="intro-panel" ${introVisible?'':'hidden'}>${startPanel()}<section class="workload-choices" aria-labelledby="other-tasks-title"><h2 id="other-tasks-title">还可以体验哪些任务</h2><p>以下三类使用系统生成的合成数据，实际运行处理算法。</p><div>${[['log_analysis','统计状态码与异常关键词'],['document_search','按查询词对文档排序'],['archive','脱敏后压缩并生成校验摘要']].map(([kind,description])=>`<button type="button" data-template="${kind}"><span><b>${taskKinds[kind]}</b><small>${description}</small></span>${icon('arrow')}</button>`).join('')}</div></section></div>`+metrics()+`<div class="dashboard-grid"><div>${topology()}${taskTable(state.tasks.slice(0,5))}</div><div class="dashboard-right"><section class="panel strategy"><span class="eyebrow">SCHEDULING POLICY</span><h3>Qwen 辅助调度</h3><p>模型在 A 上提出节点分配建议，经整批排程保护后派发；异常或超时回退到规则。现有实测未证明模型优于规则。</p><p class="fine-label">模型状态：${state.ai_scheduler?.enabled ? "已启用 · 调用 "+state.ai_scheduler.calls+" 次 · 接受 "+state.ai_scheduler.accepted+" 项决策" : "未启用 · 当前采用规则调度"}</p><div class="strategy-list"><div class="strategy-row"><span>执行时间预测</span><b>在线 EWMA 更新</b></div><div class="strategy-row"><span>数据范围</span><b>按任务约束筛选</b></div><div class="strategy-row"><span>故障处理</span><b>租约到期重新调度</b></div></div><div class="strategy-footer"><span>另有 3 种基线策略</span><a href="#experiments">查看对比 ↗</a></div></section><section class="panel secondary-panel"><h3>工作空间动态</h3><div class="progress-row"><span>节点执行槽占用</span><span>${busy} / ${slots}</span></div><div class="progress-track"><div class="progress-fill" style="--progress:${slots?busy/slots*100:0}%"></div></div><div class="event-list">${state.events.slice(0,4).map(e=>`<div class="event-item" data-key="event-${esc(e.at+'-'+e.message)}"><span>${esc(e.message)}</span><time>${time(e.at)}</time></div>`).join('')||'<p class="fine-label">等待节点接入与任务提交。</p>'}</div><button class="button secondary mini" data-action="demo">${icon('play')} 运行 12 项演示任务</button><p class="fine-label">合成事件，真实进程执行；含附加 CPU 负载。</p></section></div></div>`+notice();
 }
-function notice() { return `<div class="notice">${icon('info')}<span>${state.measurement==='application_loopback'?'当前为同机多进程演示。':'当前含远程连接，请核实物理终端与网络配置。'}系统使用合成巡检文本与轻量分类模型，尚未验证图像识别、真实用户收益或 6G 无线性能。</span></div>`; }
+function notice() { return `<div class="notice">${icon('info')}<span>${state.measurement==='application_loopback'?'当前为同机多进程演示。':'当前含远程连接，请核实物理终端与网络配置。'}业务输入为合成数据；当前验证应用层任务协同，尚未接入 6G 网络。任务执行完成不等于结果正确性验收。</span></div>`; }
+function networkRoadmap() {
+ return `<section class="panel network-roadmap"><h2>本项目如何面向 6G 演进</h2><p>研究任务在哪里处理、何时完成，以及通信开销是否抵消远端计算收益。当前属于应用层协同；局域网和 5G 也可承载这一机制。</p><div class="table-wrapper"><table><thead><tr><th>结合点</th><th>当前实现与证据边界</th><th>未来能力与验证工作</th></tr></thead><tbody><tr><td>通信与计算联合调度</td><td>考虑逐槽等待、HTTP 往返、配置带宽与计算成本；带宽未经实测。</td><td>接入链路遥测，补完整业务文件传输与网络条件变化实验。</td></tr><tr><td>AI 辅助资源编排</td><td>Qwen 在 A 建议执行节点，经过排程保护；现有结果不支持优于规则。</td><td>验证动态条件下的决策收益，并将模型等待计入端到端耗时。</td></tr><tr><td>终端与边缘协同</td><td>已有真实双机 CPU 任务记录；当前在线节点以节点页为准。</td><td>扩展异构边缘节点，评估资源发现与跨接入协同。</td></tr><tr><td>任务时限保障</td><td>截止时间排序、租约重排；未取得网络服务质量保障。</td><td>对接可提供服务质量保障的试验网络，检验按时完成率与尾部时延。</td></tr></tbody></table></div><p class="fine-label">上述未来能力是演进需求，并非全部由 6G 首次提供。当前不涉及 6G 空口、基站控制或通感一体化。</p><a class="text-link" href="https://www.itu.int/rec/R-REC-M.2160-0-202311-I/en" target="_blank" rel="noopener">依据：ITU-R M.2160 · AI 与通信融合方向 ↗</a></section>`;
+}
+const offloadFields = [
+ ['payload','上传数据量（MB）',2,0,1024], ['result','返回结果量（KB）',64,0,1048576],
+ ['bandwidth','上下行可用带宽（Mbps）',100,.1,10000], ['rtt','额外往返开销（ms）',20,0,10000],
+ ['local','本机计算（ms）',800,0,300000], ['remote','远端计算（ms）',200,0,300000],
+ ['queue','远端排队（ms）',40,0,300000]
+];
+const offload = Object.fromEntries(offloadFields.map(([key,,value])=>[key,String(value)]));
+function offloadResult() {
+ const invalid=offloadFields.some(([key,,initial,min,max])=>offload[key].trim()===''||!Number.isFinite(Number(offload[key]))||Number(offload[key])<min||Number(offload[key])>max);
+ if(invalid) return '<p class="inline-error">请填写范围内的有效数值，带宽至少为 0.1 Mbps。</p>';
+ const upload=Number(offload.payload)*8000/Number(offload.bandwidth),download=Number(offload.result)*8/Number(offload.bandwidth);
+ const remote=upload+download+Number(offload.rtt)+Number(offload.queue)+Number(offload.remote), local=Number(offload.local);
+ const tied=Math.abs(remote-local)<.05;
+ return `<div class="offload-verdict"><h3>${tied?'两种位置预计耗时相当':remote<local?'此组假设下，远端预计更快':'此组假设下，本机预计更快'}</h3><p>${tied?'可结合数据范围与资源占用选择。':remote<local?'节省的计算时间覆盖了通信与排队开销。':'通信与排队开销抵消了远端计算优势。'}</p></div><dl class="offload-totals"><div><dt>本机预计完成</dt><dd>${ms(local)}</dd></div><div><dt>远端预计完成</dt><dd>${ms(remote)}</dd></div></dl><p class="offload-equation">远端 = 上传 ${ms(upload)} + 往返 ${ms(Number(offload.rtt))} + 排队 ${ms(Number(offload.queue))} + 计算 ${ms(Number(offload.remote))} + 回传 ${ms(download)}</p>`;
+}
+function offloadPanel() {
+ return `<section class="panel offload-panel" aria-labelledby="offload-title"><div class="offload-intro"><div><h2 id="offload-title">通信与计算如何影响执行位置</h2><p>保持计算能力不变，切换链路示例，观察本机与远端的预计耗时。</p></div><span class="badge warn">参数推演 · 非实测</span></div><div class="offload-presets" aria-label="假设链路示例"><button class="button secondary mini" data-offload-preset="fast">填入通畅链路示例</button><button class="button secondary mini" data-offload-preset="slow">填入受限链路示例</button></div><div class="offload-layout"><div class="offload-inputs">${offloadFields.map(([key,label,initial,min,max])=>`<label>${label}<input type="number" data-offload="${key}" min="${min}" max="${max}" step="any" inputmode="decimal" value="${esc(offload[key])}" aria-describedby="offload-assumptions"></label>`).join('')}</div><div id="offload-result" class="offload-result" role="status" aria-live="polite">${offloadResult()}</div></div><p id="offload-assumptions" class="fine-label">所有数值均为可编辑假设，示例不代表任何代际网络；MB、KB 使用十进制单位。上下行带宽相同，本机排队为零，往返参数不含文件序列化传输耗时。未计模型决策、协议头和重传。</p><p class="fine-label">此规划模型加入了结果回传，不复刻线上调度器。不会提交任务或修改节点配置；当前业务实测只传任务规格，完整数据在执行端生成，尚不能据此证明大文件传输收益。</p></section>`;
+}
+function decisionEvidence(t) {
+ return `<section class="decision-evidence"><h3>通信与计算决策依据</h3><p>先按在线状态与数据范围筛选节点，再由所选策略分配。联合调度估算逐槽等待、HTTP 往返、任务传输与计算成本；Qwen 建议另经整批排程保护。</p><dl><div><dt>任务 JSON 载荷</dt><dd>${fmt(t.payload_bytes)} 字节</dd></div><div><dt>派发时服务耗时估计</dt><dd>${ms(t.predicted_ms)}</dd></div><div><dt>最近开始距提交</dt><dd>${t.started_at==null?'—':ms((t.started_at-t.created_at)*1000)}</dd></div></dl><p class="fine-label">服务估计不含排队与模型等待；最近开始距提交可能包含重试等待。未保存逐节点通信与计算分项快照，不能从当前节点读数还原历史决策。上传与回传分段实测仍待补充。</p></section>`;
+}
 function nodesPage() {
- return heading('算力节点','已接入的执行端自动上报配置；旧版节点需升级。Qwen 调度模型只在协调端 A 运行。','CONNECTED EXECUTION NODES')+metrics()+`<section class="node-grid">${state.nodes.map(n=>`<article class="panel node-card" data-key="node-${esc(n.id)}"><div class="node-header"><span class="metric-icon">${icon(n.mode==='same_host'?'monitor':'server')}</span><div><h3>${esc(n.name)}</h3><p>${esc(n.id)} · ${n.mode==='same_host'?'同机进程':'远程接入'}</p></div></div><div class="node-details"><div><span>当前状态</span>${badge(n)}</div><div><span>主机 / 来源</span><b>${esc(n.host)} / ${esc(n.peer)}</b></div><div><span>HTTP 往返耗时</span><b>${ms(n.rtt_ms)}</b></div><div><span>CPU</span><b>${esc(n.resources?.cpu_name || '未上报：需升级执行端')}</b></div><div><span>物理 / 逻辑核心</span><b>${n.resources?.physical_cores ?? '—'} / ${n.resources?.logical_cores ?? '—'}</b></div><div><span>CPU 使用率</span><b>${n.resources?.cpu_percent == null ? '未知' : n.resources.cpu_percent+'%'}</b></div><div><span>可用 / 总内存</span><b>${n.resources?.memory_available_gib ?? '—'} / ${n.resources?.memory_total_gib ?? '—'} GiB</b></div><div><span>GPU（当前任务使用 CPU）</span><b>${esc(n.resources?.gpus?.map(g=>g.name+' '+g.memory_total_mib+' MiB').join('；') || '未检测到或未上报')}</b></div><div><span>配置上报</span><b>${n.resources_at ? (state.server_time-n.resources_at>15?'已过期':'有效')+' · '+Math.max(0,Math.round(state.server_time-n.resources_at))+' 秒前' : '未知'}</b></div><div><span>并行槽位占用</span><b>${Object.keys(n.active_tasks||{}).length} / ${n.capacity||1}</b></div><div><span>配置带宽（非测量）</span><b>${fmt(n.bandwidth_mbps)} Mbps</b></div><div><span>累计完成</span><b>${fmt(n.completed)} 项</b></div><div><span>管理员可信设置</span><b>${n.trusted?'可信':'未设为可信'}</b></div></div><div class="node-buttons"><button class="button secondary mini" data-node="${esc(n.id)}" data-drain="${!n.draining}">${n.draining?'恢复接收任务':'暂停接收任务'}</button><button class="button secondary mini" data-trust="${esc(n.id)}" data-value="${!n.trusted}">${n.trusted?'撤销可信设置':'设为可信'}</button></div></article>`).join('')||'<div class="panel empty">暂无节点。使用一键启动脚本，或按部署说明连接执行端。</div>'}</section>`+notice()+`<div class="notice">${icon('shield')}<span>“可信”是管理员对节点的部署设置，不代表硬件证明、加密存储或可信执行环境。远程节点默认不可信。</span></div>`;
+ return heading('算力节点','同时查看计算资源与通信代价。Qwen 只在协调端 A 运行，执行端处理 CPU 任务。','CONNECTED EXECUTION NODES')+`<div class="notice">${icon('info')}<span>HTTP 往返是应用请求观测值，含软件处理；配置带宽不是实测吞吐。节点连通不代表已接入 6G 网络。</span></div>`+metrics()+`<section class="node-grid">${state.nodes.map(n=>`<article class="panel node-card" data-key="node-${esc(n.id)}"><div class="node-header"><span class="metric-icon">${icon(n.mode==='same_host'?'monitor':'server')}</span><div><h3>${esc(n.name)}</h3><p>${esc(n.id)} · ${n.mode==='same_host'?'同机进程':'远程接入'}</p></div></div><div class="node-details"><div><span>当前状态</span>${badge(n)}</div><div><span>主机 / 来源</span><b>${esc(n.host)} / ${esc(n.peer)}</b></div><div><span>HTTP 往返耗时</span><b>${ms(n.rtt_ms)}</b></div><div><span>CPU</span><b>${esc(n.resources?.cpu_name || '未上报：需升级执行端')}</b></div><div><span>物理 / 逻辑核心</span><b>${n.resources?.physical_cores ?? '—'} / ${n.resources?.logical_cores ?? '—'}</b></div><div><span>CPU 使用率</span><b>${n.resources?.cpu_percent == null ? '未知' : n.resources.cpu_percent+'%'}</b></div><div><span>可用 / 总内存</span><b>${n.resources?.memory_available_gib ?? '—'} / ${n.resources?.memory_total_gib ?? '—'} GiB</b></div><div><span>GPU（当前任务使用 CPU）</span><b>${esc(n.resources?.gpus?.map(g=>g.name+' '+g.memory_total_mib+' MiB').join('；') || '未检测到或未上报')}</b></div><div><span>配置上报</span><b>${n.resources_at ? (state.server_time-n.resources_at>15?'已过期':'有效')+' · '+Math.max(0,Math.round(state.server_time-n.resources_at))+' 秒前' : '未知'}</b></div><div><span>并行槽位占用</span><b>${Object.keys(n.active_tasks||{}).length} / ${n.capacity||1}</b></div><div><span>配置带宽（非测量）</span><b>${fmt(n.bandwidth_mbps)} Mbps</b></div><div><span>累计完成</span><b>${fmt(n.completed)} 项</b></div><div><span>管理员可信设置</span><b>${n.trusted?'可信':'未设为可信'}</b></div></div><div class="node-buttons"><button class="button secondary mini" data-node="${esc(n.id)}" data-drain="${!n.draining}">${n.draining?'恢复接收任务':'暂停接收任务'}</button><button class="button secondary mini" data-trust="${esc(n.id)}" data-value="${!n.trusted}">${n.trusted?'撤销可信设置':'设为可信'}</button></div></article>`).join('')||'<div class="panel empty">暂无节点。使用一键启动脚本，或按部署说明连接执行端。</div>'}</section>`+notice()+`<div class="notice">${icon('shield')}<span>“可信”是管理员对节点的部署设置，不代表硬件证明、加密存储或可信执行环境。远程节点默认不可信。</span></div>`;
 }
 function emptyTasks(all) {
  const filtered = all && (taskSearch.trim() || taskFilter !== 'all');
- return `<div class="empty task-empty"><span class="empty-symbol">${icon(filtered?'layers':'plus')}</span><h3>${filtered?'没有符合条件的任务':'从第一个任务开始'}</h3><p>${filtered?'试试其他名称、ID 或任务状态。':'输入几行巡检文本，系统会分配节点并返回分类结果。'}</p><button class="button secondary" data-action="${filtered?'reset-filters':'create'}">${filtered?'清除筛选':'创建第一个任务'}</button></div>`;
+ return `<div class="empty task-empty"><span class="empty-symbol">${icon('layers')}</span><h3>${filtered?'没有符合条件的任务':'还没有处理记录'}</h3><p>${filtered?'试试其他名称、ID 或任务状态。':'运行示例或提交自己的文本后，这里会显示进度和结果入口。'}</p><button class="button secondary" data-action="${filtered?'reset-filters':'create'}">${filtered?'清除筛选':'填写自己的文本'}</button></div>`;
 }
 function tasksPage() {
  const query=taskSearch.trim().toLowerCase();
@@ -344,12 +381,12 @@ function tasksPage() {
  taskTable(tasks,'任务记录',true)+`<p class="fine-label">筛选与排序仅针对最近 200 条任务；“导出记录”包含全部任务。时延使用协调端时钟，避免跨机时钟偏差。</p>`+notice();
 }
 function experimentPage() {
- if(!simulation?.available) return heading('对比实验','在相同输入与约束下，对比调度策略的适用范围。','REPRODUCIBLE EXPERIMENTS',false)+`<section class="panel empty">${experimentsLoading?'正在加载实验结果…':experimentsError?esc(experimentsError):'尚未生成实验结果。<br>在项目目录运行 <code>python experiments.py</code>'}<br><button class="button secondary" data-action="experiments" ${experimentsLoading?'disabled':''}>${experimentsError?'重新加载':'加载结果'}</button></section>`;
+ if(!simulation?.available) return heading('对比实验','在相同输入与约束下，对比调度策略的适用范围。','REPRODUCIBLE EXPERIMENTS',false)+offloadPanel()+`<section class="panel empty">${experimentsLoading?'正在加载实验结果…':experimentsError?esc(experimentsError):'尚未生成实验结果。<br>在项目目录运行 <code>python experiments.py</code>'}<br><button class="button secondary" data-action="experiments" ${experimentsLoading?'disabled':''}>${experimentsError?'重新加载':'加载结果'}</button></section>`;
  const groups=simulation.groups.filter(g=>g.scenario===scenario), names={normal:'正常网络',congested:'受限带宽',burst:'任务突发'};
- return heading('对比实验','复现输入，保留原始记录，清楚呈现调度策略的适用范围。','REPRODUCIBLE EXPERIMENTS',false)+`<section class="panel experiment-intro"><div><h2>四种策略，同一份任务序列</h2><p>${simulation.seeds} 个随机种子 × ${simulation.tasks_per_seed} 项任务 × 4 种策略 × 3 类条件</p></div><span class="badge warn">离散事件仿真 · 非实测</span></section><div class="scenario-tabs">${Object.entries(names).map(([k,v])=>`<button class="${k===scenario?'active':''}" data-scenario="${k}">${v}</button>`).join('')}</div><section class="panel chart-panel"><h2>按时完成率</h2><p class="muted">当前条件：${names[scenario]}。各随机种子完成率的平均值，全部任务计入分母。</p>${groups.map(g=>`<div data-policy="${esc(g.policy)}" class="bar-row ${g.policy==='smart'?'smart':''}"><span>${esc(policies[g.policy] || g.label)}</span><div class="bar-track"><div class="bar-fill" style="--bar:${g.deadline_rate.mean*100}%"></div></div><span class="bar-value">${percent(g.deadline_rate.mean)}</span></div>`).join('')}</section><section class="panel"><div class="panel-head"><h2>指标与不确定性</h2><span class="badge">${simulation.seeds} 次独立任务序列</span></div><div class="table-wrapper"><table><thead><tr><th>策略</th><th>按时率</th><th>约 95% 区间</th><th>平均时延</th><th>各次 P95 均值</th></tr></thead><tbody>${groups.map(g=>`<tr><td>${esc(policies[g.policy] || g.label)}</td><td>${percent(g.deadline_rate.mean)}</td><td>${g.deadline_rate.ci95.map(percent).join(' ～ ')}</td><td>${ms(g.mean_ms.mean)}</td><td>${ms(g.p95_ms.mean)}</td></tr>`).join('')}</tbody></table></div></section><div class="notice">${icon('info')}<span>网络 RTT、带宽和计算时间为假设参数。调度器获知名义服务时间与队列，结果可能优于实际部署。原始 CSV、随机种子与输入哈希保存在 results 目录；不据此推断实际 6G 性能。</span></div>`;
+ return heading('对比实验','复现输入，保留原始记录，清楚呈现调度策略的适用范围。','REPRODUCIBLE EXPERIMENTS',false)+offloadPanel()+`<section class="panel experiment-intro"><div><h2>四种策略，同一份任务序列</h2><p>${simulation.seeds} 个随机种子 × ${simulation.tasks_per_seed} 项任务 × 4 种策略 × 3 类条件</p></div><span class="badge warn">离散事件仿真 · 非实测</span></section><div class="scenario-tabs">${Object.entries(names).map(([k,v])=>`<button class="${k===scenario?'active':''}" data-scenario="${k}">${v}</button>`).join('')}</div><section class="panel chart-panel"><h2>按时完成率</h2><p class="muted">当前条件：${names[scenario]}。各随机种子完成率的平均值，全部任务计入分母。</p>${groups.map(g=>`<div data-policy="${esc(g.policy)}" class="bar-row ${g.policy==='smart'?'smart':''}"><span>${esc(policies[g.policy] || g.label)}</span><div class="bar-track"><div class="bar-fill" style="--bar:${g.deadline_rate.mean*100}%"></div></div><span class="bar-value">${percent(g.deadline_rate.mean)}</span></div>`).join('')}</section><section class="panel"><div class="panel-head"><h2>指标与不确定性</h2><span class="badge">${simulation.seeds} 次独立任务序列</span></div><div class="table-wrapper"><table><thead><tr><th>策略</th><th>按时率</th><th>约 95% 区间</th><th>平均时延</th><th>各次 P95 均值</th></tr></thead><tbody>${groups.map(g=>`<tr><td>${esc(policies[g.policy] || g.label)}</td><td>${percent(g.deadline_rate.mean)}</td><td>${g.deadline_rate.ci95.map(percent).join(' ～ ')}</td><td>${ms(g.mean_ms.mean)}</td><td>${ms(g.p95_ms.mean)}</td></tr>`).join('')}</tbody></table></div></section><div class="notice">${icon('info')}<span>网络 RTT、带宽和计算时间为假设参数。调度器获知名义服务时间与队列，结果可能优于实际部署。原始 CSV、随机种子与输入哈希保存在 results 目录；不据此推断实际 6G 性能。</span></div>`;
 }
 function guidePage() {
- return heading('部署与验证','从单机演示，到真实办公室多终端验证。','BUILD YOUR LOCAL COMPUTE NETWORK',false)+`<div class="guides-grid"><section class="panel guide-section"><h2>三步开始协同</h2><div class="step"><span class="step-number">01</span><div><h3>启动协调端</h3><p>安装 Python 3.10 或更高版本，双击 start.bat。默认启动两个同机执行进程，无需安装第三方库。</p><pre>python launch.py</pre></div></div><div class="step"><span class="step-number">02</span><div><h3>提交巡检文本</h3><p>点击“创建任务”，每行输入一个巡检事件。选择策略、数据范围与完成时限，查看执行记录与分类结果。</p><p>“运行演示任务”提交合成文本，并加入单独计时的 CPU 负载。</p></div></div><div class="step"><span class="step-number">03</span><div><h3>接入第二台真实电脑</h3><p>协调端运行局域网模式；将项目和接入令牌以可信方式交给第二台电脑，在执行端启动 worker。</p><pre>python launch.py --host 0.0.0.0<br><br>python -m suanlin.worker --coordinator http://协调端IP:8765 --token-file token.txt --name 办公室节点B</pre><p>远程节点接入后，在节点页核实设备并设为可信，才可接收默认范围的任务。</p></div></div></section><section class="panel guide-section prose"><h2>实验与成果边界</h2><h3>已实现</h3><p>HTTP 节点注册与心跳、真实工作进程执行、任务时限感知、四种分配策略、取消与故障重试、SQLite 持久化、原始 CSV 导出。</p><h3>AI 能力</h3><p>内置字符与双字特征的朴素贝叶斯文本分类器，使用 48 条人工编写的合成样本。四类输出均须人工复核，尚未验证实际巡检准确率。</p><h3>通信指标口径</h3><p>HTTP 往返耗时包含软件处理，不等同无线 RTT。带宽由配置提供，不是自动测量。任务字节统计为 JSON 载荷乘以派发次数，不含 HTTP 头、心跳与 TCP 重传。</p><h3>6G 关联</h3><p>对应 AI 与通信融合、分布式计算和算力协同方向。当前验证层次为 HTTP 应用层原型与参数化仿真，尚未接入 6G 网络。</p><h3>完整材料位置</h3><p>delivery 目录提供场景方案、答辩展示、佐证材料和演示视频；docs 目录保存可修改的正文、讲稿、测试和提交指南。</p><pre>python -m unittest discover -s tests -v<br>python experiments.py</pre></section></div>`;
+ return heading('部署与验证','先启动执行节点，再运行示例；接入第二台电脑可体验跨机协作。','BUILD YOUR LOCAL COMPUTE NETWORK',false)+`<div class="guides-grid"><section class="panel guide-section"><h2>三步开始协同</h2><div class="step"><span class="step-number">01</span><div><h3>启动协调端</h3><p>安装 Python 3.10 或更高版本，在项目目录运行下方命令。它会启动网页服务与两个同机执行进程，足以体验第一条任务。Qwen 模式可在后续配置。</p><pre>python launch.py --scheduler rules</pre></div></div><div class="step"><span class="step-number">02</span><div><h3>提交巡检文本</h3><p>在工作台点击“试跑一条示例”，进度与结果会自动打开。完成后点击“填写自己的文本”，每行输入一个事件即可提交；调度策略与时限可在高级设置中调整。</p><p>需要观察排队时，可展开工作台的“运行概况与调度机制”，运行 12 项调度演示。它会加入单独计时的 CPU 负载。</p></div></div><div class="step"><span class="step-number">03</span><div><h3>接入第二台真实电脑</h3><p>协调端运行局域网模式；将项目和接入令牌以可信方式交给第二台电脑，在执行端启动 worker。</p><pre>python launch.py --host 0.0.0.0<br><br>python -m suanlin.worker --coordinator http://协调端IP:8765 --token-file token.txt --name 办公室节点B</pre><p>远程节点接入后，在节点页核实设备并设为可信，才可接收默认范围的任务。</p></div></div></section><section class="panel guide-section prose"><h2>实验与成果边界</h2><h3>已实现</h3><p>HTTP 节点注册与心跳、真实工作进程执行、任务时限感知、Qwen 辅助与四种规则或基线策略、取消与故障重试、SQLite 持久化、原始 CSV 导出。</p><h3>AI 能力</h3><p>Qwen 在 A 辅助选择执行节点，B 无需安装模型。日志分析、文档检索和脱敏压缩执行 CPU 算法；原有朴素贝叶斯分类器使用 48 条合成样本，仅作文本演示，输出须人工复核。</p><h3>通信指标口径</h3><p>HTTP 往返耗时包含软件处理，不等同无线 RTT。带宽由配置提供，不是自动测量。任务字节统计为 JSON 载荷乘以派发次数，不含 HTTP 头、心跳与 TCP 重传。</p><h3>6G 关联</h3><p>对应 IMT-2030 的 AI 与通信融合方向，聚焦应用层资源编排。当前不是 6G 空口或网络原生智能验证，未来依赖的能力见上方演进说明。</p><h3>完整材料位置</h3><p>delivery 目录提供场景方案、答辩展示、佐证材料和演示视频；docs 目录保存可修改的正文、讲稿、测试和提交指南。</p><pre>python -m unittest discover -s tests -v<br>python experiments.py</pre></section></div>`+networkRoadmap();
 }
 function render() {
  if (!state) return;
@@ -396,7 +433,7 @@ function pendingKey(button) {
  if(button.dataset.trust) return 'trust:'+button.dataset.trust;
  if(button.dataset.cancel) return 'cancel:'+button.dataset.cancel;
  if(button.dataset.detail) return 'detail:'+button.dataset.detail;
- return ['demo','export','experiments','refresh','detail-refresh'].includes(button.dataset.action)?button.dataset.action:null;
+ return ['try-example','demo','export','experiments','refresh','detail-refresh'].includes(button.dataset.action)?button.dataset.action:null;
 }
 function syncPending() {
  document.querySelectorAll('button').forEach(button=>{
@@ -405,7 +442,8 @@ function syncPending() {
   const busy=pending.has(key)||(key==='experiments'&&experimentsLoading);
   // Detail requests keep the trigger focusable so closing a dialog restores keyboard focus.
   const preserveFocus=key.startsWith('detail:');
-  button.disabled=busy&&!preserveFocus;
+  button.disabled=(busy&&!preserveFocus)||(key==='try-example'&&(!exampleNodes().length||lastError));
+  if(key==='try-example') button.textContent=busy?'正在提交示例…':lastExampleId?'再跑一条示例':'试跑一条示例';
   if(busy&&preserveFocus) button.setAttribute('aria-disabled','true'); else button.removeAttribute('aria-disabled');
   if(busy) button.setAttribute('aria-busy','true'); else button.removeAttribute('aria-busy');
  });
@@ -418,19 +456,34 @@ function queueAdvice(task) {
  return '正在等待符合任务条件的空闲节点。分配后，这里的执行状态会自动更新。';
 }
 const fullTime=value=>value?new Date(value*1000).toLocaleString('zh-CN',{hour12:false}):'—';
+function taskOutput(t) {
+ if(!t.payload?.workload) return `<section class="task-result" aria-label="分类结果"><h3>${t.result?.predictions?.length?'分类结果':'待处理的文字'}</h3>${t.result?.predictions?.map((p,i)=>`<div class="prediction" data-key="prediction-${i}"><div class="prediction-title"><b>${esc(p.label)}</b><span>模型分数 ${percent(p.confidence)}</span></div><p>${esc(p.text)}</p></div>`).join('')||`<div class="submitted-events"><ol>${(t.payload?.events||[]).map(text=>`<li>${esc(text)}</li>`).join('')}</ol></div>`}<p class="form-note">轻量分类器用合成样本训练，模型分数未校准，结果须由人复核。</p></section>`;
+ const kind=t.payload.workload.kind,result=t.result?.summary;
+ let rows=[];
+ if(result) {
+  if(kind==='log_analysis') rows=[['已分析记录',fmt(result.records)+' 条'],['状态码分布',Object.entries(result.status_counts||{}).map(([code,count])=>`${code}：${fmt(count)}`).join('；')]];
+  if(kind==='document_search') rows=[['已检索文档',fmt(result.documents)+' 篇'],['查询词',fmt(result.queries)+' 组']];
+  if(kind==='archive') rows=[['处理记录',fmt(result.records)+' 条'],['压缩前 / 后',fmt(result.uncompressed_bytes)+' / '+fmt(result.compressed_bytes)+' 字节']];
+ }
+ return `<section class="task-result"><h3>${esc(taskKinds[kind]||kind)}${result?'结果':'任务'}</h3>${result?`<dl class="result-summary">${rows.map(([label,value])=>`<div><dt>${label}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>`:`<p>提交规模：${fmt(t.payload.workload.units)}。处理完成后，结果会自动出现在这里。</p>`}<p class="form-note">输入在执行端按固定种子生成。${kind==='archive'?'压缩测试不保留压缩包，跨机输出差异仍待核查。':'这次执行用于演示业务算法，不是外部业务数据验证。'}</p></section>`;
+}
 function taskDetailHTML(t) {
  const steps=[['已提交',t.created_at],['最近一次开始',t.started_at],[labels[t.status]||'执行结束',['completed','failed','cancelled'].includes(t.status)?t.finished_at:null]];
- const statusMessage=t.status==='queued'?queueAdvice(t):t.status==='running'?'节点正在处理，完成后会自动显示分类结果。':t.status==='cancelled'?'任务已取消。运行中的计算可能仍在结束，后续结果不会记为完成。':t.status==='failed'?(t.error||'任务执行失败，请检查节点状态后重新创建任务。'):(t.payload?.workload?'已收到业务处理结果，请查看统计与校验摘要。':'已收到执行结果，可逐条查看下方分类。');
+ const statusMessage=t.status==='queued'?queueAdvice(t):t.status==='running'?'电脑正在处理任务，完成后下方会自动显示结果。':t.status==='cancelled'?'任务已取消。运行中的计算可能仍在结束，后续结果不会记为完成。':t.status==='failed'?(t.error||'任务执行失败，请检查节点状态后重新创建任务。'):'处理已完成。下方显示本次任务的结果。';
  const terminal=['completed','failed','cancelled'].includes(t.status);
  return `<div class="detail-title"><div><h3>${esc(t.name)}</h3><span class="mono">${esc(t.id)}</span></div><span class="status ${t.status}" aria-live="polite">${statusLabel(t.status)}</span></div>
  <ol class="task-timeline">${steps.map(([label,at],i)=>`<li class="${at?'done':''}"><span>${i===2&&!terminal?'等待结束':label}</span><time>${at?fullTime(at):'—'}</time></li>`).join('')}</ol>
  <div class="task-guidance ${t.status==='failed'?'is-error':''}"><span>${esc(statusMessage)}</span>${t.status==='queued'?'<a href="#nodes" data-detail-nodes>查看节点 ↗</a>':''}</div>
  ${detailError?`<p class="inline-error" role="status">详情更新中断：${esc(detailError)}</p>`:''}
-   ${t.policy==='ai'?`<div class="notice"><span>调度决策：${esc(({qwen:'Qwen 方案',qwen_guarded:'Qwen 方案经排程保护调整',rules_fallback:'规则回退'})[t.scheduler_decision?.source] || '等待 A 上的 Qwen')} · 模型调用 ${ms(t.scheduler_decision?.model_ms)} · ${esc(t.scheduler_decision?.reason || '')}${t.scheduler_decision?.model_worker_id?` · 模型建议 ${esc(t.scheduler_decision.model_worker_id)} → 最终节点 ${esc(t.scheduler_decision.selected_worker || t.scheduler_decision.worker_id || '待定')}`:''}</span></div>`:''}
+ ${taskOutput(t)}
+ <dl class="result-meta"><div><dt>执行电脑</dt><dd>${esc(state?.nodes.find(n=>n.id===t.worker_id)?.name||t.worker_id||'等待分配')}</dd></div><div><dt>从提交到完成</dt><dd>${ms(t.latency_ms)}</dd></div></dl>
+ ${t.status==='completed'?`<div class="result-next"><button class="button primary" data-action="next-create">${t.payload?.workload?'创建另一个任务':'填写自己的文本'}</button><a class="text-link" href="#tasks" data-detail-close>查看全部任务 ↗</a></div>`:''}
+ <details class="task-technical"><summary>查看调度与执行细节</summary>
+ ${t.policy==='ai'?`<div class="notice"><span>调度决策：${esc(({qwen:'Qwen 方案',qwen_guarded:'Qwen 方案经排程保护调整',rules_fallback:'规则回退'})[t.scheduler_decision?.source] || '等待 A 上的 Qwen')} · 模型调用 ${ms(t.scheduler_decision?.model_ms)} · ${esc(t.scheduler_decision?.reason || '')}${t.scheduler_decision?.model_worker_id?` · 模型建议 ${esc(t.scheduler_decision.model_worker_id)} → 最终节点 ${esc(t.scheduler_decision.selected_worker || t.scheduler_decision.worker_id || '待定')}`:''}</span></div>`:''}
  <div class="detail-meta"><span>执行节点<b>${esc(state?.nodes.find(n=>n.id===t.worker_id)?.name||t.worker_id||'尚未分配')}</b></span><span>完成时延<b>${ms(t.latency_ms)}</b></span><span>调度策略<b>${esc(policies[t.policy])}</b></span><span>派发尝试<b>${t.attempts} 次</b></span><span>完成时限<b>${ms(t.deadline_ms)}${t.status==='completed'?(t.deadline_met?' · 按时完成':' · 已超时'):''}</b></span><span>计算耗时 / 附加负载<b>${ms(t.result?.compute_ms)} / ${ms(t.result?.load_ms)}</b></span></div>
- ${t.payload?.workload?`<section class="panel"><h3>业务任务：${esc(t.payload.workload.kind)}</h3><p>处理规模 ${fmt(t.payload.workload.units)} · 合成输入，真实业务算法</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(JSON.stringify(t.result?.summary || {status:t.status},null,2))}</pre></section>`:''}
- ${t.result?.predictions?.map((p,i)=>`<div class="prediction" data-key="prediction-${i}"><div class="prediction-title"><b>${esc(p.label)}</b><span>模型分数 ${percent(p.confidence)}</span></div><p>${esc(p.text)}</p></div>`).join('')||`<div class="submitted-events"><h3>已提交的文本</h3><ol>${(t.payload?.events||[]).map(text=>`<li>${esc(text)}</li>`).join('')}</ol></div>`}
- <div class="detail-toolbar"><span>${terminal?'执行已结束':'状态每 1.5 秒自动更新'}</span><button class="button secondary mini" data-action="detail-refresh">刷新详情</button></div><p class="form-note">${t.payload?.workload?"合成业务输入，实际执行解析、检索或压缩算法。完整统计结果保存在本地数据库。":"合成文本训练的轻量模型。分数未经概率校准，所有结果均需人工复核。完整结果保存在本地 SQLite 数据库。"}</p>`;
+ ${decisionEvidence(t)}
+ ${t.payload?.workload?`<h3>完整业务结果</h3><pre class="raw-result">${esc(JSON.stringify(t.result?.summary||{status:t.status},null,2))}</pre>`:''}
+ </details><div class="detail-toolbar"><span>${terminal?'执行已结束':'状态每 1.5 秒自动更新'}</span><button class="button secondary mini" data-action="detail-refresh">刷新详情</button></div>`;
 }
 async function refreshDetail(force=false) {
  if(!activeTask||detailLoading||!$('#detail-dialog').open) return;
@@ -458,6 +511,8 @@ async function detail(id) {
 function updateFormHelp() {
  const form=$('#task-form'),field=form.elements.events;
  const business=form.elements.workload_kind.value;
+ $('#text-fields').hidden=Boolean(business);$('#business-fields').hidden=!business;
+ $('#workload-help').textContent=business?({log_analysis:'统计合成日志中的状态码与异常关键词。',document_search:'按预设查询词对合成文档排序。',archive:'对合成记录脱敏后压缩并生成校验摘要，不保留压缩包。'})[business]+' 当前由执行端生成输入，尚不支持上传自己的文件。':'每行填写一个巡检事件，系统会返回分类。也可以先填入示例再修改。';
  field.required=!business;field.disabled=Boolean(business);
  const size=form.elements.workload_units;size.disabled=!business;
  const bounds={log_analysis:[1000,2000000],document_search:[100,100000],archive:[1000,500000]};
@@ -477,13 +532,21 @@ function updateFormHelp() {
  hint.classList.toggle('is-warning',!eligible.length);
  return lines;
 }
-function openCreate() {
+function openCreate(kind) {
+ if(!kind) {
+  const f=$('#task-form').elements;f.workload_kind.value='';
+  if(Object.values(taskKinds).includes(f.name.value)) f.name.value='办公巡检事件分类';
+  f.deadline_ms.value=30000;
+ }
+ if(kind&&taskKinds[kind]) {
+  const f=$('#task-form').elements;f.workload_kind.value=kind;f.name.value=taskKinds[kind];f.workload_units.value=kind==='document_search'?1000:10000;f.deadline_ms.value=300000;f.compute_loops.value=0;
+ }
  $('#form-error').hidden=true;
  updateFormHelp();$('#create-dialog').showModal();
 }
 document.addEventListener('click',async event=>{
  const nodeLink=event.target.closest('[data-detail-nodes]');
- if(nodeLink) $('#detail-dialog').close();
+ if(nodeLink||event.target.closest('[data-detail-close]')) $('#detail-dialog').close();
  const button=event.target.closest('button');
  if(!button||button.disabled) return;
  const key=pendingKey(button);
@@ -491,7 +554,17 @@ document.addEventListener('click',async event=>{
  if(key) {pending.add(key);syncPending();}
  try {
   const action=button.dataset.action;
+  if(action==='toggle-intro') {introVisible=!introVisible;render();if(introVisible) $('#intro-panel').scrollIntoView({block:'start'});}
   if(action==='create') openCreate();
+  if(button.dataset.template) openCreate(button.dataset.template);
+  if(action==='next-create') {$('#detail-dialog').close();$('#task-form').reset();$('#task-form details').open=false;openCreate();}
+  if(action==='try-example') {
+   await refresh(true);
+   if(lastError) throw new Error('协调服务暂时无法连接，请恢复连接后再试。');
+   if(!exampleNodes().length) throw new Error('还没有可接收任务的可信节点，请先检查执行节点。');
+   const task=await api('/api/tasks',{name:'首次体验：巡检文字分类',events:['消防出口被纸箱堵塞'],policy:'smart',privacy:'local_only',deadline_ms:30000,compute_loops:0});
+   lastExampleId=task.id;await refresh(true);await detail(task.id);
+  }
   if(action==='close-dialog') $('#create-dialog').close();
   if(action==='close-detail') $('#detail-dialog').close();
   if(action==='refresh') await refresh(true);
@@ -512,6 +585,9 @@ document.addEventListener('click',async event=>{
   if(button.dataset.cancel) {await api('/api/tasks/'+button.dataset.cancel+'/cancel',{});toast('任务已取消');await refresh(true);}
   if(button.dataset.node) {await api('/api/nodes/'+button.dataset.node,{draining:button.dataset.drain==='true'});await refresh(true);toast('节点接收状态已更新');}
   if(button.dataset.trust) {await api('/api/nodes/'+button.dataset.trust,{trusted:button.dataset.value==='true'});await refresh(true);toast('节点可信范围已更新');}
+  if(button.dataset.offloadPreset) {
+   Object.assign(offload,button.dataset.offloadPreset==='slow'?{bandwidth:'10',rtt:'80'}:{bandwidth:'100',rtt:'20'});render();
+  }
   if(button.dataset.scenario) {scenario=button.dataset.scenario;render();}
   if(button.dataset.filter) {taskFilter=button.dataset.filter;render();}
  } catch(error) {toast(error.message);}
@@ -519,7 +595,8 @@ document.addEventListener('click',async event=>{
 });
 $('#detail-dialog').addEventListener('close',()=>{detailVersion++;activeTask=null;detailLoading=false;});
 $('#task-form').addEventListener('input',updateFormHelp);
-$('#task-form').addEventListener('change',e=>{if(e.target.name==='workload_kind'&&e.target.value) $('#task-form').elements.deadline_ms.value=300000;updateFormHelp();});
+$('#task-form').addEventListener('invalid',event=>{const section=event.target.closest('details');if(section)section.open=true;},true);
+$('#task-form').addEventListener('change',e=>{if(e.target.name==='workload_kind') {const f=$('#task-form').elements;f.deadline_ms.value=e.target.value?300000:30000;if(['办公巡检事件分类',...Object.values(taskKinds)].includes(f.name.value)) f.name.value=taskKinds[e.target.value]||'办公巡检事件分类';}updateFormHelp();});
 $('#task-form').addEventListener('submit',async event=>{
  event.preventDefault();
  if(pending.has('submit')) return;
@@ -530,10 +607,10 @@ $('#task-form').addEventListener('submit',async event=>{
   const body={name:f.get('name').trim(),policy:f.get('policy'),privacy:f.get('privacy'),deadline_ms:Number(f.get('deadline_ms')),compute_loops:Number(f.get('compute_loops'))};
   if(f.get('workload_kind')) body.workload={kind:f.get('workload_kind'),units:Number(f.get('workload_units')),seed:2030};
   else body.events=events;
-  await api('/api/tasks',body);
-  $('#create-dialog').close();event.target.reset();updateFormHelp();toast('任务已提交，可在任务中心查看执行结果');await refresh(true);
+  const task=await api('/api/tasks',body);
+  $('#create-dialog').close();event.target.reset();$('#task-form details').open=false;updateFormHelp();await refresh(true);await detail(task.id);
  } catch(error) {$('#form-error').textContent=error.message;$('#form-error').hidden=false;}
- finally {pending.delete('submit');button.disabled=false;button.removeAttribute('aria-busy');button.textContent='提交任务 ↗';}
+ finally {pending.delete('submit');button.disabled=false;button.removeAttribute('aria-busy');button.textContent='提交任务并查看结果';}
 });
 $('#login-form').addEventListener('submit',async event=>{
  event.preventDefault();if(pending.has('login')) return;
@@ -543,6 +620,7 @@ $('#login-form').addEventListener('submit',async event=>{
  finally{pending.delete('login');button.disabled=false;}
 });
 document.addEventListener('input',event=>{if(event.target.id==='task-search'&&!event.isComposing){taskSearch=event.target.value;render();}});
+document.addEventListener('input',event=>{if(event.target.dataset.offload){offload[event.target.dataset.offload]=event.target.value;const result=$('#offload-result');if(result) result.innerHTML=offloadResult();}});
 document.addEventListener('compositionend',event=>{if(event.target.id==='task-search'){taskSearch=event.target.value;render();}});
 document.addEventListener('change',event=>{
  if(event.target.id==='task-filter'){taskFilter=event.target.value;render();}

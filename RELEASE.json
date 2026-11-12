@@ -3,7 +3,7 @@
   "commit": "ea8b630a0a8d4dc360ca8bcca413fbb5d397b59f",
   "branch": "codex/business-workloads",
   "date": "2026-11-11",
-  "source": "git archive HEAD; tracked source files preserved byte-for-byte",
+  "source": "Original source commit retained; working-tree materials updated 2026-11-12; see MANIFEST.sha256 for delivered bytes",
   "additions": [
     "00-新版部署必读.txt",
     "release-evidence/",
@@ -16,5 +16,7 @@
     "credentials",
     "live databases",
     ".local runtime files"
-  ]
+  ],
+  "materials_updated": "2026-11-12",
+  "measurement_date": "2026-11-11"
 }

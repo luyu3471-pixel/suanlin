@@ -50,5 +50,5 @@ python tools/business_suite.py --url http://127.0.0.1:8765 --token-file "<A数�
 
 文档版本
 本文件、并发与排程优化说明.txt及最新slot_aware报告优先说明当前2.4.1部署。
-START_HERE.txt、AI调度部署说明.txt及delivery内PDF/视频等包含旧版历史材料，历史端口、分工及性能数字不代表当前版本。
+docs内方案、测试、讲稿、AI声明及delivery的01/02/03/04/05材料已按2.4.1更新，材料日期为2026-11-12，实测日期保留。START_HERE.txt、AI调度部署说明.txt及06零基础教程含历史启动/演示内容，不代表当前生产分工；当前部署以本文件为准。
 包内MANIFEST.sha256列出文件校验值，RELEASE.json记录源码版本与打包内容。

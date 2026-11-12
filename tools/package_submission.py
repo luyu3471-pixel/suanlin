@@ -18,6 +18,19 @@ def main():
     expected=['01-场景设计方案.pdf','02-答辩展示.pdf','02-答辩展示.html','03-佐证材料.pdf','04-演示视频.mp4','05-操作与提交手册.pdf','06-零基础图文使用教程.pdf']
     missing=[x for x in expected if not (delivery/x).exists()]
     if missing:raise RuntimeError('缺少最终材料：'+', '.join(missing))
+    current=json.loads((ROOT/'RELEASE.json').read_text(encoding='utf-8'))['version']
+    checked=json.loads((ROOT/'results/materials_consistency_checks.json').read_text(encoding='utf-8'))
+    if checked['version']!=current:raise RuntimeError('材料核对版本与发布版本不符')
+    for item in checked['pdfs']:
+        path=delivery/item['file']
+        if hashlib.sha256(path.read_bytes()).hexdigest()!=item['sha256']:
+            raise RuntimeError('PDF已变化，请重新运行tools/check_materials.py：'+item['file'])
+    video=json.loads((ROOT/'results/video_record.json').read_text(encoding='utf-8'))
+    if video.get('version')!=current or not 180<=video['duration_seconds']<=300 or video['bytes']!=(delivery/'04-演示视频.mp4').stat().st_size:
+        raise RuntimeError('视频版本、时长或文件大小未通过当前材料检查')
+    video_check=json.loads((ROOT/'results/materials_video_checks.json').read_text(encoding='utf-8'))
+    if video_check['sha256']!=hashlib.sha256((delivery/'04-演示视频.mp4').read_bytes()).hexdigest():
+        raise RuntimeError('视频已变化，请运行node tools/render_current_materials.cjs --check-video')
     if (delivery/expected[0]).stat().st_size>15*1024*1024:raise RuntimeError('方案超过15MB')
     if (delivery/'04-演示视频.mp4').stat().st_size>300*1024*1024:raise RuntimeError('视频超过300MB')
     excluded={'.local','.tools','tmp','.git','.codex','.agents','__pycache__','node_modules','submission'}
@@ -25,15 +38,17 @@ def main():
     for path in ROOT.rglob('*'):
         rel=path.relative_to(ROOT)
         if any(part in excluded for part in rel.parts) or not path.is_file():continue
-        if path.suffix in ('.zip','.pyc') or path.name in ('交付清单.json','token.txt','access_token'):continue
+        if path.suffix in ('.zip','.pyc') or path.name in ('交付清单.json','MANIFEST.sha256','token.txt','access_token'):continue
         files.append(path)
     files.sort()
-    manifest={'project':'多终端任务调度系统','date':datetime.now(timezone(timedelta(hours=8))).date().isoformat(),'evidence':['actual same-host process execution','parameterized discrete-event simulation'],'not_completed':['real user demand interviews','multiple physical-device measurement','6G radio verification','competition registration and upload'],
+    manifest={'project':'多终端任务调度系统','date':datetime.now(timezone(timedelta(hours=8))).date().isoformat(),'version':'2.4.1-slot-aware','measurement_date':'2026-11-11','evidence':['physical A4/B4 CPU business workload measurements across 2.3.0/2.4.0/2.4.1; 450 formal tasks plus 54 warmups','2.4.1 AI-only retests: 42 formal tasks','historical same-host execution','historical parameterized simulation without Qwen'],'not_completed':['real user demand interviews','archive cross-host correctness acceptance','real business pilot and quality evaluation','6G radio verification','competition registration and upload'],'historical_materials':['START_HERE.txt','AI调度部署说明.txt','delivery/06-零基础图文使用教程.pdf'],'resource_traceability_missing':['local Q6_K publisher/download URL/revision/SHA256','local llama.cpp build/commit'],
               'files':[{'path':x.relative_to(ROOT).as_posix(),'bytes':x.stat().st_size,'sha256':hashlib.sha256(x.read_bytes()).hexdigest()} for x in files]}
     manifest_path=delivery/'交付清单.json';manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
+    checks=ROOT/'MANIFEST.sha256'
+    checks.write_text(''.join(hashlib.sha256(x.read_bytes()).hexdigest()+'  '+x.relative_to(ROOT).as_posix()+'\n' for x in files+[manifest_path]),encoding='utf-8')
     archive=delivery/'多终端任务调度系统-交付包.zip'
     with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=7) as z:
-        for path in files+[manifest_path]:z.write(path,'多终端任务调度系统/'+path.relative_to(ROOT).as_posix())
+        for path in files+[manifest_path,checks]:z.write(path,'多终端任务调度系统/'+path.relative_to(ROOT).as_posix())
     with zipfile.ZipFile(archive) as z:
         if z.testzip():raise RuntimeError('ZIP校验失败')
         if any(any(part in excluded for part in Path(n).parts) or n.endswith(('/access_token','/token.txt')) for n in z.namelist()):raise RuntimeError('压缩包含不应交付的内容')
@@ -46,6 +61,6 @@ def main():
             shutil.copy2(delivery/source,target/f'{prefix}-{label}')
         shutil.copy2(archive,target/f'{prefix}-代码与数据.zip')
         shutil.copy2(ROOT/'docs/作品简介.txt',target/f'{prefix}-作品简介.txt')
-    print(f'Packaged {len(files)+1} files. ZIP size: {archive.stat().st_size} bytes. No access tokens, database or tool runtimes included.')
+    print(f'Packaged {len(files)+2} files. ZIP size: {archive.stat().st_size} bytes. No access tokens, database or tool runtimes included.')
 
 if __name__=='__main__':main()
