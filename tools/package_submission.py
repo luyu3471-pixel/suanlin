@@ -5,6 +5,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import runpy
 import shutil
 import sys
 import zipfile
@@ -33,22 +34,26 @@ def main():
         raise RuntimeError('视频已变化，请运行node tools/render_current_materials.cjs --check-video')
     if (delivery/expected[0]).stat().st_size>15*1024*1024:raise RuntimeError('方案超过15MB')
     if (delivery/'04-演示视频.mp4').stat().st_size>300*1024*1024:raise RuntimeError('视频超过300MB')
+    runtime_version=runpy.run_path(str(ROOT/'suanlin/__init__.py'))['__version__']
     excluded={'.local','.tools','tmp','.git','.codex','.agents','__pycache__','node_modules','submission'}
     files=[]
     for path in ROOT.rglob('*'):
         rel=path.relative_to(ROOT)
         if any(part in excluded for part in rel.parts) or not path.is_file():continue
-        if path.suffix in ('.zip','.pyc') or path.name in ('交付清单.json','MANIFEST.sha256','token.txt','access_token'):continue
+        if path.suffix in ('.zip','.pyc') or path.name in ('交付清单.json','MANIFEST.sha256','MANIFEST-SHA256.json','token.txt','access_token'):continue
         files.append(path)
     files.sort()
     manifest={'project':'多终端任务调度系统','date':datetime.now(timezone(timedelta(hours=8))).date().isoformat(),'version':'2.4.1-slot-aware','measurement_date':'2026-11-11','evidence':['physical A4/B4 CPU business workload measurements across 2.3.0/2.4.0/2.4.1; 450 formal tasks plus 54 warmups','2.4.1 AI-only retests: 42 formal tasks','historical same-host execution','historical parameterized simulation without Qwen'],'not_completed':['real user demand interviews','archive cross-host correctness acceptance','real business pilot and quality evaluation','6G radio verification','competition registration and upload'],'historical_materials':['START_HERE.txt','AI调度部署说明.txt','delivery/06-零基础图文使用教程.pdf'],'resource_traceability_missing':['local Q6_K publisher/download URL/revision/SHA256','local llama.cpp build/commit'],
               'files':[{'path':x.relative_to(ROOT).as_posix(),'bytes':x.stat().st_size,'sha256':hashlib.sha256(x.read_bytes()).hexdigest()} for x in files]}
+    manifest.update(version=runtime_version,materials_version=current)
     manifest_path=delivery/'交付清单.json';manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
     checks=ROOT/'MANIFEST.sha256'
     checks.write_text(''.join(hashlib.sha256(x.read_bytes()).hexdigest()+'  '+x.relative_to(ROOT).as_posix()+'\n' for x in files+[manifest_path]),encoding='utf-8')
+    json_checks=ROOT/'MANIFEST-SHA256.json'
+    json_checks.write_text(json.dumps({x.relative_to(ROOT).as_posix():hashlib.sha256(x.read_bytes()).hexdigest() for x in files+[manifest_path]},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     archive=delivery/'多终端任务调度系统-交付包.zip'
     with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED,compresslevel=7) as z:
-        for path in files+[manifest_path,checks]:z.write(path,'多终端任务调度系统/'+path.relative_to(ROOT).as_posix())
+        for path in files+[manifest_path,checks,json_checks]:z.write(path,'多终端任务调度系统/'+path.relative_to(ROOT).as_posix())
     with zipfile.ZipFile(archive) as z:
         if z.testzip():raise RuntimeError('ZIP校验失败')
         if any(any(part in excluded for part in Path(n).parts) or n.endswith(('/access_token','/token.txt')) for n in z.namelist()):raise RuntimeError('压缩包含不应交付的内容')
@@ -61,6 +66,6 @@ def main():
             shutil.copy2(delivery/source,target/f'{prefix}-{label}')
         shutil.copy2(archive,target/f'{prefix}-代码与数据.zip')
         shutil.copy2(ROOT/'docs/作品简介.txt',target/f'{prefix}-作品简介.txt')
-    print(f'Packaged {len(files)+2} files. ZIP size: {archive.stat().st_size} bytes. No access tokens, database or tool runtimes included.')
+    print(f'Packaged {len(files)+3} files. ZIP size: {archive.stat().st_size} bytes. No access tokens, database or tool runtimes included.')
 
 if __name__=='__main__':main()

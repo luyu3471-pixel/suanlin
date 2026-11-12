@@ -1,6 +1,7 @@
 """One node, bounded CPU processes, individual renewable leases."""
 import argparse
-from concurrent.futures import ProcessPoolExecutor, Future
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor, Future
+import tempfile
 from contextlib import nullcontext
 import json
 import os
@@ -14,6 +15,7 @@ import uuid
 from .inference import run_task
 from .resources import Monitor
 from .business import KINDS
+from .execution import execute
 
 OFFLINE_REJOIN_SECONDS = 11
 
@@ -50,18 +52,26 @@ class Worker:
             if self.session:
                 with self.lock:
                     items = [{'id': k, 'lease': v[1]['lease']} for k, v in self.active.items()]
+                for item in items:
+                    try:
+                        item['progress']=json.loads((self.control_dir / (item['lease']+'.json')).read_text(encoding='utf-8'))
+                    except (OSError,ValueError): pass
                 message = dict(self.identity(), rtt_ms=self.rtt_ms, active_tasks=items, resources=self.monitor.data, resource_sequence=self.monitor.sequence)
                 if len(items) == 1:
                     message.update(active_task=items[0]['id'], lease=items[0]['lease'])
                 try:
-                    self.post('/api/worker/heartbeat', message)
+                    response=self.post('/api/worker/heartbeat', message)
+                    for item in response.get('cancel_tasks',[]):
+                        if any(x['id']==item.get('id') and x['lease']==item.get('lease') for x in items):
+                            (self.control_dir / (item['lease']+'.cancel')).touch()
                 except (OSError, ValueError):
                     pass
 
     def run(self):
         threading.Thread(target=self.monitor.run, daemon=True, name="resource-monitor").start()
-        executor = ProcessPoolExecutor(max_workers=self.capacity) if self.capacity > 1 else nullcontext()
-        with executor as pool:
+        executor = ProcessPoolExecutor(max_workers=self.capacity) if self.capacity > 1 else ThreadPoolExecutor(max_workers=1)
+        with tempfile.TemporaryDirectory(prefix='suanlin-worker-') as control, executor as pool:
+            self.control_dir=Path(control)
             heart = threading.Thread(target=self.heartbeat, daemon=True)
             heart.start()
             try:
@@ -86,22 +96,21 @@ class Worker:
                             self.post('/api/worker/result', message)
                             with self.lock:
                                 self.active.pop(task_id, None)
+                            for suffix in ('.json','.cancel'):
+                                (self.control_dir / (message['lease']+suffix)).unlink(missing_ok=True)
                         with self.lock:
                             count = len(self.active)
                         if count < self.capacity:
                             claim = self.post('/api/worker/poll', dict(self.identity(), wait_seconds=0 if count else 1)).get('task')
                             if claim:
                                 message = dict(self.identity(), task_id=claim['id'], lease=claim['lease'])
-                                future = pool.submit(run_task, claim['payload']) if pool else Future()
+                                future = pool.submit(execute, claim['payload'],
+                                    str(self.control_dir / (claim['lease']+'.json')),
+                                    str(self.control_dir / (claim['lease']+'.cancel')))
                                 with self.lock:
                                     self.active[claim['id']] = (future, message)
-                                if pool is None:
-                                    try:
-                                        future.set_result(run_task(claim['payload']))
-                                    except Exception as exc:
-                                        future.set_exception(exc)
                             else:
-                                self.stop.wait(.005)
+                                self.stop.wait(.05)
                         else:
                             self.stop.wait(.005)
                     except urllib.error.HTTPError as exc:
@@ -120,6 +129,9 @@ class Worker:
                         self.stop.wait(1)
             finally:
                 self.stop.set()
+                with self.lock:
+                    for _, message in self.active.values():
+                        (self.control_dir / (message['lease']+'.cancel')).touch()
                 heart.join(timeout=10)
 
 def main():

@@ -1,0 +1,29 @@
+{
+  "status": {
+    "completed": 12
+  },
+  "workers": {
+    "local-1": 8,
+    "office-b": 4
+  },
+  "sources": {
+    "rules_fallback": 11,
+    "qwen": 1
+  },
+  "reasons": {
+    "TimeoutError": 8,
+    "decision_wait_budget": 3,
+    "model_assignment": 1
+  },
+  "deadline_met": 12,
+  "ai": {
+    "enabled": true,
+    "model": "qwen3.5-9b",
+    "calls": 2,
+    "accepted": 1,
+    "guarded": 0,
+    "dispatch_repairs": 0,
+    "errors": 1,
+    "last_error": "TimeoutError"
+  }
+}

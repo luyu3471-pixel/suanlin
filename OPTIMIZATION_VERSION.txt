@@ -1,5 +1,4 @@
-2.4.1-slot-aware
-Base: 0299c70fcc7528ab45dcda06fccdbdab83c4bcf9
-Real log analysis, document retrieval and redaction/compression on synthetic inputs; Qwen schedules only.
-Slot timeline model inputs, whole-batch plan guard, idle-node dispatch repair and capacity-aware calibration reuse.
-Bounded eight-task model batches; up to eight seconds of planning queue time for heavy jobs, four for short jobs.
+2.5.0-qwen-rolling
+Windows release: 2026-11-12.
+Qwen rolling scheduling, worker progress reporting and cooperative cancellation.
+See README.txt for Windows startup and MANIFEST-SHA256.json for package checksums.

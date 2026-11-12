@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "version": "2.5.0-qwen-rolling",
+  "checks": [
+    "2.5.0 backend and footer; original dashboard, optional onboarding, no automatic submissions; real example and duplicate guard",
+    "Simplified own-text form, automatic result opening, live detail disclosure and real document-search execution",
+    "Remote resource-wait, execution progress, memory and rolling-plan fields survive live polling (mocked API states)",
+    "Five pages at desktop, tablet and mobile widths"
+  ],
+  "errors": [],
+  "date": "2026-11-12",
+  "remote_main": "02405f45048d25516a77fcde6a09570bd24a3dfe",
+  "local_source": "f756492dd181bae89dd8cfb97e26a6a25d0f77a0",
+  "regression_tests_passed": 70,
+  "regression_command": "python -m unittest discover -s tests",
+  "new_physical_device_measurements": false,
+  "new_live_qwen_measurements": false
+}

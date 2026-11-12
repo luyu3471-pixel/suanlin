@@ -1,0 +1,363 @@
+[
+  {
+    "round": 1,
+    "case": "mixed",
+    "policy": "A",
+    "submitted": 12,
+    "completed": 12,
+    "span_s": 6.367103576660156,
+    "throughput_s": 1.8846874179946294,
+    "mean_latency_s": 3.0108936666666666,
+    "p95_latency_s": 5.742979,
+    "mean_wait_s": 1.6072037816047668,
+    "deadline_met": 12,
+    "workers": {
+      "local-1": 12
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 1,
+    "case": "mixed",
+    "policy": "B",
+    "submitted": 12,
+    "completed": 12,
+    "span_s": 13.232338905334473,
+    "throughput_s": 0.9068691548674235,
+    "mean_latency_s": 6.66445275,
+    "p95_latency_s": 12.614474,
+    "mean_wait_s": 3.4322258830070496,
+    "deadline_met": 12,
+    "workers": {
+      "office-b": 12
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 1,
+    "case": "mixed",
+    "policy": "dual",
+    "submitted": 12,
+    "completed": 12,
+    "span_s": 10.848747253417969,
+    "throughput_s": 1.106118496420803,
+    "mean_latency_s": 7.700777166666667,
+    "p95_latency_s": 10.294947,
+    "mean_wait_s": 6.065050363540649,
+    "deadline_met": 12,
+    "workers": {
+      "local-1": 10,
+      "office-b": 2
+    },
+    "ai_sources": {
+      "qwen": 12
+    },
+    "reasons": {
+      "model_assignment": 12
+    }
+  },
+  {
+    "round": 1,
+    "case": "heavy",
+    "policy": "A",
+    "submitted": 24,
+    "completed": 24,
+    "span_s": 85.41781854629517,
+    "throughput_s": 0.2809718207330753,
+    "mean_latency_s": 48.23367879166667,
+    "p95_latency_s": 83.506292,
+    "mean_wait_s": 34.46148332953453,
+    "deadline_met": 24,
+    "workers": {
+      "local-1": 24
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 1,
+    "case": "heavy",
+    "policy": "B",
+    "submitted": 24,
+    "completed": 24,
+    "span_s": 97.21626710891724,
+    "throughput_s": 0.246872264423724,
+    "mean_latency_s": 48.53394466666667,
+    "p95_latency_s": 94.937611,
+    "mean_wait_s": 33.03378137946129,
+    "deadline_met": 24,
+    "workers": {
+      "office-b": 24
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 1,
+    "case": "heavy",
+    "policy": "dual",
+    "submitted": 24,
+    "completed": 24,
+    "span_s": 60.54914402961731,
+    "throughput_s": 0.3963722424921568,
+    "mean_latency_s": 39.77997675,
+    "p95_latency_s": 59.641821,
+    "mean_wait_s": 21.93975441654523,
+    "deadline_met": 24,
+    "workers": {
+      "local-1": 16,
+      "office-b": 8
+    },
+    "ai_sources": {
+      "qwen": 20,
+      "rules_fallback": 4
+    },
+    "reasons": {
+      "model_assignment": 20,
+      "ValueError": 4
+    }
+  },
+  {
+    "round": 2,
+    "case": "mixed",
+    "policy": "B",
+    "submitted": 12,
+    "completed": 12,
+    "span_s": 12.712718963623047,
+    "throughput_s": 0.9439365437352573,
+    "mean_latency_s": 6.66680525,
+    "p95_latency_s": 12.131765,
+    "mean_wait_s": 3.445186416308085,
+    "deadline_met": 12,
+    "workers": {
+      "office-b": 12
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 2,
+    "case": "mixed",
+    "policy": "dual",
+    "submitted": 12,
+    "completed": 12,
+    "span_s": 14.538743495941162,
+    "throughput_s": 0.8253808180431883,
+    "mean_latency_s": 9.629919583333333,
+    "p95_latency_s": 14.175643,
+    "mean_wait_s": 6.93791941801707,
+    "deadline_met": 12,
+    "workers": {
+      "office-b": 8,
+      "local-1": 4
+    },
+    "ai_sources": {
+      "rules_fallback": 12
+    },
+    "reasons": {
+      "ValueError": 8,
+      "decision_wait_budget": 4
+    }
+  },
+  {
+    "round": 2,
+    "case": "mixed",
+    "policy": "A",
+    "submitted": 12,
+    "completed": 12,
+    "span_s": 6.597846269607544,
+    "throughput_s": 1.8187753260146495,
+    "mean_latency_s": 3.1942249166666667,
+    "p95_latency_s": 5.843112,
+    "mean_wait_s": 1.7673814098040264,
+    "deadline_met": 12,
+    "workers": {
+      "local-1": 12
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 2,
+    "case": "heavy",
+    "policy": "B",
+    "submitted": 24,
+    "completed": 24,
+    "span_s": 82.56015110015869,
+    "throughput_s": 0.2906971423887555,
+    "mean_latency_s": 48.99331854166667,
+    "p95_latency_s": 80.088189,
+    "mean_wait_s": 35.645602275927864,
+    "deadline_met": 24,
+    "workers": {
+      "office-b": 24
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 2,
+    "case": "heavy",
+    "policy": "dual",
+    "submitted": 24,
+    "completed": 24,
+    "span_s": 69.1804518699646,
+    "throughput_s": 0.34691880945085074,
+    "mean_latency_s": 44.8895125,
+    "p95_latency_s": 68.279444,
+    "mean_wait_s": 27.700335413217545,
+    "deadline_met": 24,
+    "workers": {
+      "office-b": 8,
+      "local-1": 16
+    },
+    "ai_sources": {
+      "rules_fallback": 8,
+      "qwen": 16
+    },
+    "reasons": {
+      "ValueError": 8,
+      "model_assignment": 16
+    }
+  },
+  {
+    "round": 2,
+    "case": "heavy",
+    "policy": "A",
+    "submitted": 24,
+    "completed": 24,
+    "span_s": 86.61878633499146,
+    "throughput_s": 0.27707615190060336,
+    "mean_latency_s": 48.91187075,
+    "p95_latency_s": 83.101633,
+    "mean_wait_s": 34.97625922163328,
+    "deadline_met": 24,
+    "workers": {
+      "local-1": 24
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 3,
+    "case": "mixed",
+    "policy": "dual",
+    "submitted": 12,
+    "completed": 12,
+    "span_s": 13.16575312614441,
+    "throughput_s": 0.9114556444302856,
+    "mean_latency_s": 8.02700875,
+    "p95_latency_s": 12.680729999999999,
+    "mean_wait_s": 6.087239940961202,
+    "deadline_met": 12,
+    "workers": {
+      "local-1": 8,
+      "office-b": 4
+    },
+    "ai_sources": {
+      "qwen": 12
+    },
+    "reasons": {
+      "model_assignment": 12
+    }
+  },
+  {
+    "round": 3,
+    "case": "mixed",
+    "policy": "A",
+    "submitted": 12,
+    "completed": 12,
+    "span_s": 6.831648826599121,
+    "throughput_s": 1.7565305689130024,
+    "mean_latency_s": 3.138832916666667,
+    "p95_latency_s": 6.147329,
+    "mean_wait_s": 1.698434333006541,
+    "deadline_met": 12,
+    "workers": {
+      "local-1": 12
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 3,
+    "case": "mixed",
+    "policy": "B",
+    "submitted": 12,
+    "completed": 12,
+    "span_s": 12.146759271621704,
+    "throughput_s": 0.9879178249654971,
+    "mean_latency_s": 6.315384416666666,
+    "p95_latency_s": 11.524025,
+    "mean_wait_s": 3.2432337403297424,
+    "deadline_met": 12,
+    "workers": {
+      "office-b": 12
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 3,
+    "case": "heavy",
+    "policy": "dual",
+    "submitted": 24,
+    "completed": 24,
+    "span_s": 47.51417922973633,
+    "throughput_s": 0.5051123767487877,
+    "mean_latency_s": 30.25920375,
+    "p95_latency_s": 46.713491000000005,
+    "mean_wait_s": 18.63690068324407,
+    "deadline_met": 24,
+    "workers": {
+      "office-b": 16,
+      "local-1": 8
+    },
+    "ai_sources": {
+      "rules_fallback": 12,
+      "qwen": 12
+    },
+    "reasons": {
+      "ValueError": 12,
+      "model_assignment": 12
+    }
+  },
+  {
+    "round": 3,
+    "case": "heavy",
+    "policy": "A",
+    "submitted": 24,
+    "completed": 24,
+    "span_s": 86.10358572006226,
+    "throughput_s": 0.27873403644336225,
+    "mean_latency_s": 49.029104374999996,
+    "p95_latency_s": 84.39628,
+    "mean_wait_s": 35.079811761776604,
+    "deadline_met": 24,
+    "workers": {
+      "local-1": 24
+    },
+    "ai_sources": {},
+    "reasons": {}
+  },
+  {
+    "round": 3,
+    "case": "heavy",
+    "policy": "B",
+    "submitted": 24,
+    "completed": 24,
+    "span_s": 95.84278130531311,
+    "throughput_s": 0.2504100952949864,
+    "mean_latency_s": 64.05455645833334,
+    "p95_latency_s": 94.233481,
+    "mean_wait_s": 48.49596097071966,
+    "deadline_met": 24,
+    "workers": {
+      "office-b": 24
+    },
+    "ai_sources": {},
+    "reasons": {}
+  }
+]

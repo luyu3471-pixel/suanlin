@@ -1,0 +1,2742 @@
+[
+  {
+    "id": "66b874858754",
+    "name": "Qwen-rolling-live-0",
+    "created_at": 1794416487.2782366,
+    "deadline_at": 1794416607.2782366,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 100000,
+        "seed": 2600
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 100000,
+        "seed": 2600
+      },
+      "summary": {
+        "records": 100000,
+        "input_bytes": 22995696,
+        "status_counts": {
+          "200": 89998,
+          "400": 7015,
+          "500": 2987
+        },
+        "alert_terms": {
+          "告警": 12694,
+          "温度偏高": 12421,
+          "断线": 12502,
+          "超时": 12567,
+          "冒烟": 12472
+        },
+        "p95_latency_ms": 172.75,
+        "top_error_devices": [
+          [
+            "edge-386",
+            {
+              "count": 225,
+              "errors": 35,
+              "latency": 14534.410000000007
+            }
+          ],
+          [
+            "edge-264",
+            {
+              "count": 197,
+              "errors": 34,
+              "latency": 13321.59
+            }
+          ],
+          [
+            "edge-114",
+            {
+              "count": 208,
+              "errors": 31,
+              "latency": 14266.41
+            }
+          ],
+          [
+            "edge-388",
+            {
+              "count": 197,
+              "errors": 30,
+              "latency": 12426.930000000002
+            }
+          ],
+          [
+            "edge-468",
+            {
+              "count": 196,
+              "errors": 30,
+              "latency": 12524.420000000002
+            }
+          ],
+          [
+            "edge-265",
+            {
+              "count": 213,
+              "errors": 29,
+              "latency": 15483.230000000016
+            }
+          ],
+          [
+            "edge-310",
+            {
+              "count": 209,
+              "errors": 29,
+              "latency": 16006.419999999998
+            }
+          ],
+          [
+            "edge-203",
+            {
+              "count": 194,
+              "errors": 29,
+              "latency": 12713.599999999999
+            }
+          ],
+          [
+            "edge-159",
+            {
+              "count": 216,
+              "errors": 28,
+              "latency": 13698.459999999992
+            }
+          ],
+          [
+            "edge-010",
+            {
+              "count": 211,
+              "errors": 28,
+              "latency": 14513.94
+            }
+          ]
+        ]
+      },
+      "digest": "c3a51858511fce5f21d926c07a99d28e6335c468b5c8e31f39d9c9a1eaa377de",
+      "compute_ms": 2821.435,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416487.6282258,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "local-1",
+      "order": 1,
+      "model_worker_id": "local-1",
+      "model_order": 1,
+      "model_ms": 4254.11,
+      "reason": "model_assignment",
+      "at": 1794416491.8832915,
+      "snapshot_id": "587f9b7ab3d97d31",
+      "plan_revision": 3,
+      "service_ms": 3634.5461354344216,
+      "predicted_start_at": 1794416491.8832915,
+      "predicted_finish_at": 1794416495.5178375,
+      "freeze_until": 1794416492.3832915,
+      "valid_until": 1794416501.8832915,
+      "unresolved_constraints": [],
+      "wait_ms": 4790.19,
+      "selected_worker": "local-1"
+    },
+    "revision": 2,
+    "started_at": 1794416492.0684235,
+    "predicted_ms": 3634.5461354344216,
+    "progress": {
+      "done": 56000,
+      "total": 100000,
+      "stage": "log_analysis",
+      "at": 1794416494.060489,
+      "elapsed_ms": 1577,
+      "memory_mib": 31.1
+    },
+    "finished_at": 1794416495.2191339,
+    "latency_ms": 7940.897,
+    "deadline_met": true
+  },
+  {
+    "id": "eceb1ae6bd24",
+    "name": "Qwen-rolling-live-1",
+    "created_at": 1794416487.3280065,
+    "deadline_at": 1794416607.3280065,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 5000,
+        "seed": 2601
+      }
+    },
+    "payload_bytes": 136,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "document_search",
+        "units": 5000,
+        "seed": 2601
+      },
+      "summary": {
+        "documents": 5000,
+        "vocabulary": 305,
+        "queries": 8,
+        "rankings": [
+          {
+            "query": "配电柜冒烟",
+            "top10": [
+              [
+                8.286727,
+                419
+              ],
+              [
+                8.286727,
+                1844
+              ],
+              [
+                8.251539,
+                1361
+              ],
+              [
+                8.234057,
+                1855
+              ],
+              [
+                8.164863,
+                4162
+              ],
+              [
+                7.025442,
+                3640
+              ],
+              [
+                7.010236,
+                1450
+              ],
+              [
+                7.010236,
+                3655
+              ],
+              [
+                6.995095,
+                3902
+              ],
+              [
+                6.980019,
+                258
+              ]
+            ]
+          },
+          {
+            "query": "门禁夜间访问",
+            "top10": [
+              [
+                9.468605,
+                3834
+              ],
+              [
+                8.34043,
+                3043
+              ],
+              [
+                8.270047,
+                3523
+              ],
+              [
+                7.086049,
+                4579
+              ],
+              [
+                7.05544,
+                4257
+              ],
+              [
+                7.040234,
+                369
+              ],
+              [
+                7.010018,
+                2709
+              ],
+              [
+                7.010018,
+                3583
+              ],
+              [
+                6.995008,
+                516
+              ],
+              [
+                6.995008,
+                1407
+              ]
+            ]
+          },
+          {
+            "query": "网络请求超时",
+            "top10": [
+              [
+                8.508007,
+                761
+              ],
+              [
+                8.489512,
+                1786
+              ],
+              [
+                8.434504,
+                2788
+              ],
+              [
+                8.416326,
+                2239
+              ],
+              [
+                8.416326,
+                2449
+              ],
+              [
+                8.36226,
+                768
+              ],
+              [
+                8.36226,
+                1471
+              ],
+              [
+                8.344392,
+                4447
+              ],
+              [
+                8.3266,
+                1459
+              ],
+              [
+                8.102023,
+                1637
+              ]
+            ]
+          },
+          {
+            "query": "清理磁盘备份",
+            "top10": [
+              [
+                7.187567,
+                304
+              ],
+              [
+                7.172467,
+                4716
+              ],
+              [
+                6.239587,
+                2621
+              ],
+              [
+                6.186821,
+                1093
+              ],
+              [
+                6.160772,
+                1816
+              ],
+              [
+                6.160772,
+                1845
+              ],
+              [
+                6.147829,
+                3186
+              ],
+              [
+                6.122106,
+                892
+              ],
+              [
+                6.122106,
+                4903
+              ],
+              [
+                6.096597,
+                2945
+              ]
+            ]
+          },
+          {
+            "query": "消防出口畅通",
+            "top10": [
+              [
+                9.803882,
+                3345
+              ],
+              [
+                9.782798,
+                3353
+              ],
+              [
+                8.439705,
+                3989
+              ],
+              [
+                8.331504,
+                2136
+              ],
+              [
+                8.313739,
+                1709
+              ],
+              [
+                8.313739,
+                2282
+              ],
+              [
+                8.296051,
+                3155
+              ],
+              [
+                8.260898,
+                3816
+              ],
+              [
+                8.208724,
+                4334
+              ],
+              [
+                7.188687,
+                855
+              ]
+            ]
+          },
+          {
+            "query": "检查摄像头供电",
+            "top10": [
+              [
+                10.245871,
+                3879
+              ],
+              [
+                9.770361,
+                2391
+              ],
+              [
+                9.510234,
+                4357
+              ],
+              [
+                9.313859,
+                1857
+              ],
+              [
+                9.293829,
+                3328
+              ],
+              [
+                9.254027,
+                2365
+              ],
+              [
+                9.234253,
+                3875
+              ],
+              [
+                9.034473,
+                3964
+              ],
+              [
+                9.034473,
+                4100
+              ],
+              [
+                8.995615,
+                673
+              ]
+            ]
+          },
+          {
+            "query": "机房线路散热",
+            "top10": [
+              [
+                6.008949,
+                3476
+              ],
+              [
+                5.99661,
+                1161
+              ],
+              [
+                5.984322,
+                2306
+              ],
+              [
+                5.984322,
+                2986
+              ],
+              [
+                5.959896,
+                34
+              ],
+              [
+                5.959896,
+                4543
+              ],
+              [
+                5.12342,
+                746
+              ],
+              [
+                5.101938,
+                3232
+              ],
+              [
+                5.101938,
+                4894
+              ],
+              [
+                5.091264,
+                2947
+              ]
+            ]
+          },
+          {
+            "query": "巡查仓库设备",
+            "top10": [
+              [
+                4.145702,
+                3345
+              ],
+              [
+                3.976623,
+                78
+              ],
+              [
+                3.969043,
+                4936
+              ],
+              [
+                3.967883,
+                3268
+              ],
+              [
+                3.966841,
+                1604
+              ],
+              [
+                3.947426,
+                3902
+              ],
+              [
+                3.932155,
+                2744
+              ],
+              [
+                3.924279,
+                2871
+              ],
+              [
+                3.923606,
+                506
+              ],
+              [
+                3.923146,
+                2791
+              ]
+            ]
+          }
+        ]
+      },
+      "digest": "aa3827db0e26c9f9682fccce54cf0cf08f0405da1c53d33e8486f6c87f2ed2c4",
+      "compute_ms": 694.325,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416487.6282258,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "local-1",
+      "order": 2,
+      "model_worker_id": "local-1",
+      "model_order": 2,
+      "model_ms": 4254.11,
+      "reason": "model_assignment",
+      "at": 1794416491.8832915,
+      "snapshot_id": "587f9b7ab3d97d31",
+      "plan_revision": 3,
+      "service_ms": 1076.9372554344209,
+      "predicted_start_at": 1794416491.8832915,
+      "predicted_finish_at": 1794416492.9602287,
+      "freeze_until": 1794416492.3832915,
+      "valid_until": 1794416501.8832915,
+      "unresolved_constraints": [],
+      "wait_ms": 4847.94,
+      "selected_worker": "local-1"
+    },
+    "revision": 2,
+    "started_at": 1794416492.1759484,
+    "predicted_ms": 1076.9372554344209,
+    "finished_at": 1794416493.1669853,
+    "latency_ms": 5838.979,
+    "deadline_met": true
+  },
+  {
+    "id": "f273808ca0e7",
+    "name": "Qwen-rolling-live-2",
+    "created_at": 1794416487.218847,
+    "deadline_at": 1794416607.218847,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 20000,
+        "seed": 2602
+      }
+    },
+    "payload_bytes": 121,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "archive",
+        "units": 20000,
+        "seed": 2602
+      },
+      "summary": {
+        "records": 20000,
+        "uncompressed_bytes": 4680295,
+        "compressed_bytes": 380104,
+        "compression_ratio": 0.081214,
+        "archive_sha256": "a673b64cf3cd658be7081dab20808a3237198378e068b6d36b36a5ea471f7487",
+        "artifact_retained": false,
+        "purpose": "redact + compress + integrity validation; benchmark discards archive bytes"
+      },
+      "digest": "711467e09759293fad158bc34e3c1bad012226dbf0625b6a130fe2090685e484",
+      "compute_ms": 463.682,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416487.6282258,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "local-1",
+      "order": 0,
+      "model_worker_id": "local-1",
+      "model_order": 0,
+      "model_ms": 4254.11,
+      "reason": "model_assignment",
+      "at": 1794416491.8832915,
+      "snapshot_id": "587f9b7ab3d97d31",
+      "plan_revision": 3,
+      "service_ms": 834.2107304344212,
+      "predicted_start_at": 1794416491.8832915,
+      "predicted_finish_at": 1794416492.717502,
+      "freeze_until": 1794416492.3832915,
+      "valid_until": 1794416501.8832915,
+      "unresolved_constraints": [],
+      "wait_ms": 4694.7,
+      "selected_worker": "local-1"
+    },
+    "revision": 2,
+    "started_at": 1794416491.9135444,
+    "predicted_ms": 834.2107304344212,
+    "finished_at": 1794416492.6825676,
+    "latency_ms": 5463.721,
+    "deadline_met": true
+  },
+  {
+    "id": "2bf3e2cb4ae8",
+    "name": "Qwen-rolling-live-3",
+    "created_at": 1794416487.3781056,
+    "deadline_at": 1794416607.3781056,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 100000,
+        "seed": 2603
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 100000,
+        "seed": 2603
+      },
+      "summary": {
+        "records": 100000,
+        "input_bytes": 22994402,
+        "status_counts": {
+          "200": 89999,
+          "400": 7058,
+          "500": 2943
+        },
+        "alert_terms": {
+          "超时": 12621,
+          "温度偏高": 12557,
+          "告警": 12403,
+          "断线": 12631,
+          "冒烟": 12335
+        },
+        "p95_latency_ms": 171.89,
+        "top_error_devices": [
+          [
+            "edge-454",
+            {
+              "count": 197,
+              "errors": 35,
+              "latency": 14971.550000000001
+            }
+          ],
+          [
+            "edge-348",
+            {
+              "count": 217,
+              "errors": 34,
+              "latency": 15314.650000000003
+            }
+          ],
+          [
+            "edge-295",
+            {
+              "count": 212,
+              "errors": 32,
+              "latency": 15104.780000000008
+            }
+          ],
+          [
+            "edge-207",
+            {
+              "count": 215,
+              "errors": 30,
+              "latency": 13980.140000000005
+            }
+          ],
+          [
+            "edge-058",
+            {
+              "count": 208,
+              "errors": 30,
+              "latency": 15091.900000000007
+            }
+          ],
+          [
+            "edge-377",
+            {
+              "count": 207,
+              "errors": 30,
+              "latency": 14901.079999999998
+            }
+          ],
+          [
+            "edge-301",
+            {
+              "count": 206,
+              "errors": 30,
+              "latency": 13798.619999999999
+            }
+          ],
+          [
+            "edge-035",
+            {
+              "count": 235,
+              "errors": 29,
+              "latency": 17683.42
+            }
+          ],
+          [
+            "edge-478",
+            {
+              "count": 214,
+              "errors": 29,
+              "latency": 14214.320000000003
+            }
+          ],
+          [
+            "edge-119",
+            {
+              "count": 209,
+              "errors": 29,
+              "latency": 15205.699999999999
+            }
+          ]
+        ]
+      },
+      "digest": "09e71db43c878ca8b1cae7862f298f3e7277280c184085dc95c17c429d478717",
+      "compute_ms": 2688.705,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416487.6282258,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "local-1",
+      "order": 3,
+      "model_worker_id": "local-1",
+      "model_order": 3,
+      "model_ms": 4254.11,
+      "reason": "model_assignment",
+      "at": 1794416491.8832915,
+      "snapshot_id": "587f9b7ab3d97d31",
+      "plan_revision": 3,
+      "service_ms": 3634.5461354344216,
+      "predicted_start_at": 1794416491.8832915,
+      "predicted_finish_at": 1794416495.5178375,
+      "freeze_until": 1794416492.3832915,
+      "valid_until": 1794416501.8832915,
+      "unresolved_constraints": [],
+      "wait_ms": 4923.84,
+      "selected_worker": "local-1"
+    },
+    "revision": 2,
+    "started_at": 1794416492.3019466,
+    "predicted_ms": 3634.5461354344216,
+    "progress": {
+      "done": 38000,
+      "total": 100000,
+      "stage": "log_analysis",
+      "at": 1794416494.0605056,
+      "elapsed_ms": 1021,
+      "memory_mib": 30.5
+    },
+    "finished_at": 1794416495.394276,
+    "latency_ms": 8016.17,
+    "deadline_met": true
+  },
+  {
+    "id": "aa56af7706bb",
+    "name": "Qwen-rolling-live-4",
+    "created_at": 1794416487.4288163,
+    "deadline_at": 1794416607.4288163,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 5000,
+        "seed": 2604
+      }
+    },
+    "payload_bytes": 136,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "document_search",
+        "units": 5000,
+        "seed": 2604
+      },
+      "summary": {
+        "documents": 5000,
+        "vocabulary": 305,
+        "queries": 8,
+        "rankings": [
+          {
+            "query": "配电柜冒烟",
+            "top10": [
+              [
+                9.651513,
+                4924
+              ],
+              [
+                8.255049,
+                2479
+              ],
+              [
+                8.219921,
+                3885
+              ],
+              [
+                8.185091,
+                3329
+              ],
+              [
+                8.185091,
+                4586
+              ],
+              [
+                8.133395,
+                224
+              ],
+              [
+                8.116308,
+                170
+              ],
+              [
+                6.983664,
+                105
+              ],
+              [
+                6.923589,
+                1180
+              ],
+              [
+                6.923589,
+                3804
+              ]
+            ]
+          },
+          {
+            "query": "门禁夜间访问",
+            "top10": [
+              [
+                9.645629,
+                1997
+              ],
+              [
+                8.410845,
+                380
+              ],
+              [
+                8.410845,
+                3444
+              ],
+              [
+                8.392679,
+                1879
+              ],
+              [
+                8.267682,
+                3288
+              ],
+              [
+                8.267682,
+                3946
+              ],
+              [
+                8.180653,
+                2796
+              ],
+              [
+                8.061847,
+                1819
+              ],
+              [
+                7.039512,
+                1050
+              ],
+              [
+                7.009037,
+                3469
+              ]
+            ]
+          },
+          {
+            "query": "网络请求超时",
+            "top10": [
+              [
+                9.922157,
+                2291
+              ],
+              [
+                9.858281,
+                3910
+              ],
+              [
+                8.523115,
+                4433
+              ],
+              [
+                8.486377,
+                3866
+              ],
+              [
+                8.468127,
+                1992
+              ],
+              [
+                8.37804,
+                1131
+              ],
+              [
+                7.133476,
+                2676
+              ],
+              [
+                7.102596,
+                508
+              ],
+              [
+                7.087255,
+                630
+              ],
+              [
+                7.087255,
+                1441
+              ]
+            ]
+          },
+          {
+            "query": "清理磁盘备份",
+            "top10": [
+              [
+                7.131068,
+                437
+              ],
+              [
+                6.242394,
+                2848
+              ],
+              [
+                6.215943,
+                1554
+              ],
+              [
+                6.189715,
+                2781
+              ],
+              [
+                6.176684,
+                303
+              ],
+              [
+                6.163708,
+                4094
+              ],
+              [
+                6.137919,
+                3382
+              ],
+              [
+                6.099636,
+                12
+              ],
+              [
+                6.099636,
+                3213
+              ],
+              [
+                6.086982,
+                2256
+              ]
+            ]
+          },
+          {
+            "query": "消防出口畅通",
+            "top10": [
+              [
+                11.218296,
+                39
+              ],
+              [
+                9.527302,
+                4340
+              ],
+              [
+                8.413722,
+                1193
+              ],
+              [
+                8.270509,
+                3608
+              ],
+              [
+                7.10369,
+                3748
+              ],
+              [
+                7.07267,
+                3713
+              ],
+              [
+                7.041919,
+                3302
+              ],
+              [
+                7.026644,
+                866
+              ],
+              [
+                6.996291,
+                3848
+              ],
+              [
+                6.981213,
+                2879
+              ]
+            ]
+          },
+          {
+            "query": "检查摄像头供电",
+            "top10": [
+              [
+                9.587265,
+                2019
+              ],
+              [
+                9.271226,
+                1183
+              ],
+              [
+                9.070151,
+                825
+              ],
+              [
+                8.845165,
+                25
+              ],
+              [
+                8.787227,
+                752
+              ],
+              [
+                8.768083,
+                2494
+              ],
+              [
+                8.578147,
+                4971
+              ],
+              [
+                8.559252,
+                1575
+              ],
+              [
+                8.466014,
+                3953
+              ],
+              [
+                8.308761,
+                1770
+              ]
+            ]
+          },
+          {
+            "query": "机房线路散热",
+            "top10": [
+              [
+                6.934668,
+                1123
+              ],
+              [
+                6.092292,
+                3267
+              ],
+              [
+                6.079653,
+                85
+              ],
+              [
+                6.067066,
+                164
+              ],
+              [
+                6.042047,
+                1644
+              ],
+              [
+                6.042047,
+                4973
+              ],
+              [
+                6.029615,
+                3744
+              ],
+              [
+                6.004903,
+                1079
+              ],
+              [
+                6.004903,
+                1925
+              ],
+              [
+                5.956083,
+                2727
+              ]
+            ]
+          },
+          {
+            "query": "巡查仓库设备",
+            "top10": [
+              [
+                3.997068,
+                4924
+              ],
+              [
+                3.98453,
+                3713
+              ],
+              [
+                3.962899,
+                467
+              ],
+              [
+                3.956825,
+                4586
+              ],
+              [
+                3.948661,
+                446
+              ],
+              [
+                3.933581,
+                3193
+              ],
+              [
+                3.930871,
+                2108
+              ],
+              [
+                3.922417,
+                269
+              ],
+              [
+                3.917786,
+                1748
+              ],
+              [
+                3.90774,
+                62
+              ]
+            ]
+          }
+        ]
+      },
+      "digest": "12337cba5f64c91496f08982e8af1f6b91014077b022f8011305ce9bd3e3270e",
+      "compute_ms": 682.474,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416487.6282258,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "local-1",
+      "order": 4,
+      "model_worker_id": "local-1",
+      "model_order": 4,
+      "model_ms": 4254.11,
+      "reason": "model_assignment",
+      "at": 1794416491.8832915,
+      "snapshot_id": "587f9b7ab3d97d31",
+      "plan_revision": 3,
+      "service_ms": 1076.9372554344209,
+      "predicted_start_at": 1794416492.717502,
+      "predicted_finish_at": 1794416493.7944393,
+      "freeze_until": 0,
+      "valid_until": 1794416501.8832915,
+      "unresolved_constraints": [],
+      "wait_ms": 5395.73,
+      "selected_worker": "local-1"
+    },
+    "revision": 2,
+    "started_at": 1794416492.8245447,
+    "predicted_ms": 1077.595523784113,
+    "finished_at": 1794416493.603937,
+    "latency_ms": 6175.121,
+    "deadline_met": true
+  },
+  {
+    "id": "b0056f3baf50",
+    "name": "Qwen-rolling-live-5",
+    "created_at": 1794416487.4782076,
+    "deadline_at": 1794416607.4782076,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 20000,
+        "seed": 2605
+      }
+    },
+    "payload_bytes": 121,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "archive",
+        "units": 20000,
+        "seed": 2605
+      },
+      "summary": {
+        "records": 20000,
+        "uncompressed_bytes": 4678279,
+        "compressed_bytes": 380125,
+        "compression_ratio": 0.081253,
+        "archive_sha256": "72bf663cf8eaa8230ea94b376565e9672cf03ba3dd04083ec8d199e8a3898283",
+        "artifact_retained": false,
+        "purpose": "redact + compress + integrity validation; benchmark discards archive bytes"
+      },
+      "digest": "16538fe62483ffcbdf6b46854a8695ab85b950082253bf3e9757b5b2d8d0e8fe",
+      "compute_ms": 508.863,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416487.6282258,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "local-1",
+      "order": 5,
+      "model_worker_id": "local-1",
+      "model_order": 5,
+      "model_ms": 4254.11,
+      "reason": "model_assignment",
+      "at": 1794416491.8832915,
+      "snapshot_id": "587f9b7ab3d97d31",
+      "plan_revision": 3,
+      "service_ms": 834.2107304344212,
+      "predicted_start_at": 1794416492.9602287,
+      "predicted_finish_at": 1794416493.7944393,
+      "freeze_until": 0,
+      "valid_until": 1794416501.8832915,
+      "unresolved_constraints": [],
+      "wait_ms": 5812.58,
+      "selected_worker": "local-1"
+    },
+    "revision": 2,
+    "started_at": 1794416493.2907915,
+    "predicted_ms": 833.5217014401728,
+    "finished_at": 1794416493.882353,
+    "latency_ms": 6404.145,
+    "deadline_met": true
+  },
+  {
+    "id": "b53fa15fee1d",
+    "name": "Qwen-rolling-live-6",
+    "created_at": 1794416487.5281627,
+    "deadline_at": 1794416607.5281627,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 100000,
+        "seed": 2606
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 100000,
+        "seed": 2606
+      },
+      "summary": {
+        "records": 100000,
+        "input_bytes": 22997523,
+        "status_counts": {
+          "200": 89957,
+          "400": 6949,
+          "500": 3094
+        },
+        "alert_terms": {
+          "超时": 12816,
+          "告警": 12477,
+          "温度偏高": 12616,
+          "冒烟": 12461,
+          "断线": 12350
+        },
+        "p95_latency_ms": 171.71,
+        "top_error_devices": [
+          [
+            "edge-145",
+            {
+              "count": 211,
+              "errors": 36,
+              "latency": 14784.290000000008
+            }
+          ],
+          [
+            "edge-164",
+            {
+              "count": 212,
+              "errors": 35,
+              "latency": 13888.319999999994
+            }
+          ],
+          [
+            "edge-073",
+            {
+              "count": 223,
+              "errors": 34,
+              "latency": 14861.339999999997
+            }
+          ],
+          [
+            "edge-173",
+            {
+              "count": 194,
+              "errors": 34,
+              "latency": 14634.329999999989
+            }
+          ],
+          [
+            "edge-479",
+            {
+              "count": 218,
+              "errors": 33,
+              "latency": 13920.520000000002
+            }
+          ],
+          [
+            "edge-477",
+            {
+              "count": 202,
+              "errors": 33,
+              "latency": 13697.890000000001
+            }
+          ],
+          [
+            "edge-332",
+            {
+              "count": 210,
+              "errors": 31,
+              "latency": 14862.12
+            }
+          ],
+          [
+            "edge-079",
+            {
+              "count": 182,
+              "errors": 31,
+              "latency": 12226.209999999992
+            }
+          ],
+          [
+            "edge-088",
+            {
+              "count": 206,
+              "errors": 30,
+              "latency": 15593.240000000003
+            }
+          ],
+          [
+            "edge-357",
+            {
+              "count": 241,
+              "errors": 29,
+              "latency": 17037.06
+            }
+          ]
+        ]
+      },
+      "digest": "d32efd6c8bb052df061315d3e4fc6bf4974d3b8280a9708f61cb3fb54ac31753",
+      "compute_ms": 2675.078,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416487.6282258,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "local-1",
+      "order": 6,
+      "model_worker_id": "local-1",
+      "model_order": 6,
+      "model_ms": 4254.11,
+      "reason": "model_assignment",
+      "at": 1794416491.8832915,
+      "snapshot_id": "587f9b7ab3d97d31",
+      "plan_revision": 3,
+      "service_ms": 3634.5461354344216,
+      "predicted_start_at": 1794416493.7944393,
+      "predicted_finish_at": 1794416497.4289854,
+      "freeze_until": 0,
+      "valid_until": 1794416501.8832915,
+      "unresolved_constraints": [],
+      "wait_ms": 6185.15,
+      "selected_worker": "local-1"
+    },
+    "revision": 2,
+    "started_at": 1794416493.7133136,
+    "predicted_ms": 3560.9995683936627,
+    "progress": {
+      "done": 76000,
+      "total": 100000,
+      "stage": "log_analysis",
+      "at": 1794416496.1188939,
+      "elapsed_ms": 2022,
+      "memory_mib": 42.0
+    },
+    "finished_at": 1794416496.615329,
+    "latency_ms": 9087.166,
+    "deadline_met": true
+  },
+  {
+    "id": "42f05df800da",
+    "name": "Qwen-rolling-live-7",
+    "created_at": 1794416487.5782387,
+    "deadline_at": 1794416607.5782387,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 5000,
+        "seed": 2607
+      }
+    },
+    "payload_bytes": 136,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "local-1",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "document_search",
+        "units": 5000,
+        "seed": 2607
+      },
+      "summary": {
+        "documents": 5000,
+        "vocabulary": 305,
+        "queries": 8,
+        "rankings": [
+          {
+            "query": "配电柜冒烟",
+            "top10": [
+              [
+                9.626788,
+                167
+              ],
+              [
+                8.339502,
+                1731
+              ],
+              [
+                8.321759,
+                2810
+              ],
+              [
+                8.286497,
+                2755
+              ],
+              [
+                8.268978,
+                408
+              ],
+              [
+                8.268978,
+                951
+              ],
+              [
+                8.251533,
+                506
+              ],
+              [
+                8.114578,
+                838
+              ],
+              [
+                7.085555,
+                1898
+              ],
+              [
+                7.054882,
+                3139
+              ]
+            ]
+          },
+          {
+            "query": "门禁夜间访问",
+            "top10": [
+              [
+                9.579439,
+                4552
+              ],
+              [
+                8.422843,
+                1352
+              ],
+              [
+                8.368851,
+                3946
+              ],
+              [
+                8.315546,
+                1474
+              ],
+              [
+                8.297928,
+                1939
+              ],
+              [
+                8.280385,
+                344
+              ],
+              [
+                8.228198,
+                4528
+              ],
+              [
+                8.176664,
+                795
+              ],
+              [
+                8.159629,
+                3597
+              ],
+              [
+                7.079939,
+                1113
+              ]
+            ]
+          },
+          {
+            "query": "网络请求超时",
+            "top10": [
+              [
+                8.470234,
+                1862
+              ],
+              [
+                8.470234,
+                4965
+              ],
+              [
+                8.45194,
+                691
+              ],
+              [
+                8.415587,
+                4134
+              ],
+              [
+                8.397528,
+                2898
+              ],
+              [
+                8.32606,
+                546
+              ],
+              [
+                8.32606,
+                3100
+              ],
+              [
+                8.308382,
+                3782
+              ],
+              [
+                8.273252,
+                1201
+              ],
+              [
+                8.273252,
+                4183
+              ]
+            ]
+          },
+          {
+            "query": "清理磁盘备份",
+            "top10": [
+              [
+                6.205257,
+                2860
+              ],
+              [
+                6.192138,
+                2422
+              ],
+              [
+                6.179075,
+                3845
+              ],
+              [
+                6.166066,
+                4667
+              ],
+              [
+                6.153112,
+                916
+              ],
+              [
+                6.140213,
+                3247
+              ],
+              [
+                6.127367,
+                3020
+              ],
+              [
+                6.127367,
+                4015
+              ],
+              [
+                6.114575,
+                555
+              ],
+              [
+                6.114575,
+                4581
+              ]
+            ]
+          },
+          {
+            "query": "消防出口畅通",
+            "top10": [
+              [
+                9.864984,
+                744
+              ],
+              [
+                8.437318,
+                624
+              ],
+              [
+                8.382649,
+                955
+              ],
+              [
+                8.328683,
+                895
+              ],
+              [
+                8.328683,
+                2009
+              ],
+              [
+                8.257801,
+                2750
+              ],
+              [
+                7.061802,
+                2533
+              ],
+              [
+                7.061802,
+                3346
+              ],
+              [
+                7.046417,
+                3483
+              ],
+              [
+                7.031099,
+                2008
+              ]
+            ]
+          },
+          {
+            "query": "检查摄像头供电",
+            "top10": [
+              [
+                9.40909,
+                1803
+              ],
+              [
+                9.227369,
+                1799
+              ],
+              [
+                9.20761,
+                1170
+              ],
+              [
+                9.145812,
+                243
+              ],
+              [
+                9.026778,
+                215
+              ],
+              [
+                9.007239,
+                2747
+              ],
+              [
+                9.007239,
+                3199
+              ],
+              [
+                8.968415,
+                2274
+              ],
+              [
+                8.783265,
+                1888
+              ],
+              [
+                8.745077,
+                4431
+              ]
+            ]
+          },
+          {
+            "query": "机房线路散热",
+            "top10": [
+              [
+                6.081711,
+                4097
+              ],
+              [
+                6.056632,
+                1672
+              ],
+              [
+                6.04417,
+                3005
+              ],
+              [
+                6.019399,
+                3220
+              ],
+              [
+                6.007089,
+                2963
+              ],
+              [
+                5.98262,
+                2415
+              ],
+              [
+                5.98262,
+                3980
+              ],
+              [
+                5.142624,
+                3188
+              ],
+              [
+                5.131842,
+                4806
+              ],
+              [
+                5.110415,
+                2167
+              ]
+            ]
+          },
+          {
+            "query": "巡查仓库设备",
+            "top10": [
+              [
+                4.061203,
+                4300
+              ],
+              [
+                4.029221,
+                744
+              ],
+              [
+                4.019891,
+                780
+              ],
+              [
+                3.968244,
+                1049
+              ],
+              [
+                3.967053,
+                244
+              ],
+              [
+                3.953957,
+                2118
+              ],
+              [
+                3.949917,
+                4753
+              ],
+              [
+                3.948475,
+                1415
+              ],
+              [
+                3.942589,
+                1957
+              ],
+              [
+                3.941404,
+                1706
+              ]
+            ]
+          }
+        ]
+      },
+      "digest": "c058d1b5b9b4244af06bb8037d04aa4c9511282ad14f9fcd9663d0fe28204dbf",
+      "compute_ms": 684.805,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416487.6282258,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "local-1",
+      "order": 7,
+      "model_worker_id": "local-1",
+      "model_order": 7,
+      "model_ms": 4254.11,
+      "reason": "model_assignment",
+      "at": 1794416491.8832915,
+      "snapshot_id": "587f9b7ab3d97d31",
+      "plan_revision": 3,
+      "service_ms": 1076.9372554344209,
+      "predicted_start_at": 1794416493.7944393,
+      "predicted_finish_at": 1794416494.8713765,
+      "freeze_until": 0,
+      "valid_until": 1794416501.8832915,
+      "unresolved_constraints": [],
+      "wait_ms": 6482.6,
+      "selected_worker": "local-1"
+    },
+    "revision": 2,
+    "started_at": 1794416494.0608351,
+    "predicted_ms": 963.804683042703,
+    "finished_at": 1794416494.8722086,
+    "latency_ms": 7293.97,
+    "deadline_met": true
+  },
+  {
+    "id": "6ab08a96db52",
+    "name": "Qwen-rolling-live-8",
+    "created_at": 1794416487.6304672,
+    "deadline_at": 1794416607.6304672,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 20000,
+        "seed": 2608
+      }
+    },
+    "payload_bytes": 121,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "archive",
+        "units": 20000,
+        "seed": 2608
+      },
+      "summary": {
+        "records": 20000,
+        "uncompressed_bytes": 4680514,
+        "compressed_bytes": 365443,
+        "compression_ratio": 0.078078,
+        "archive_sha256": "0b6e2536d50cc91191077c1c404529084429ed2c247960fd5a86ab91216ed667",
+        "artifact_retained": false,
+        "purpose": "redact + compress + integrity validation; benchmark discards archive bytes"
+      },
+      "digest": "c572de73f19c52dacfdd33c84a4e53dde9e34a76de1e0e2d6d306b328ee7cd43",
+      "compute_ms": 370.377,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416492.1524405,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "office-b",
+      "order": 0,
+      "model_worker_id": "office-b",
+      "model_order": 0,
+      "model_ms": 2582.17,
+      "reason": "model_assignment",
+      "at": 1794416494.7356834,
+      "snapshot_id": "14ac9b47cb141474",
+      "plan_revision": 4,
+      "service_ms": 556.9090520347365,
+      "predicted_start_at": 1794416494.7356834,
+      "predicted_finish_at": 1794416495.2925925,
+      "freeze_until": 1794416495.2356834,
+      "valid_until": 1794416504.7356834,
+      "unresolved_constraints": [],
+      "wait_ms": 7138.7,
+      "selected_worker": "office-b"
+    },
+    "revision": 2,
+    "started_at": 1794416494.7691648,
+    "predicted_ms": 556.9090520347365,
+    "finished_at": 1794416495.4943802,
+    "latency_ms": 7863.913,
+    "deadline_met": true
+  },
+  {
+    "id": "9f69ea781694",
+    "name": "Qwen-rolling-live-9",
+    "created_at": 1794416487.6784513,
+    "deadline_at": 1794416607.6784513,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 100000,
+        "seed": 2609
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 100000,
+        "seed": 2609
+      },
+      "summary": {
+        "records": 100000,
+        "input_bytes": 22996509,
+        "status_counts": {
+          "200": 90051,
+          "400": 6955,
+          "500": 2994
+        },
+        "alert_terms": {
+          "冒烟": 12449,
+          "超时": 12573,
+          "温度偏高": 12596,
+          "告警": 12580,
+          "断线": 12561
+        },
+        "p95_latency_ms": 172.19,
+        "top_error_devices": [
+          [
+            "edge-504",
+            {
+              "count": 194,
+              "errors": 33,
+              "latency": 12857.610000000002
+            }
+          ],
+          [
+            "edge-137",
+            {
+              "count": 193,
+              "errors": 33,
+              "latency": 12681.410000000007
+            }
+          ],
+          [
+            "edge-430",
+            {
+              "count": 194,
+              "errors": 31,
+              "latency": 12592.929999999997
+            }
+          ],
+          [
+            "edge-396",
+            {
+              "count": 205,
+              "errors": 30,
+              "latency": 14092.860000000006
+            }
+          ],
+          [
+            "edge-284",
+            {
+              "count": 209,
+              "errors": 29,
+              "latency": 15152.120000000003
+            }
+          ],
+          [
+            "edge-048",
+            {
+              "count": 208,
+              "errors": 29,
+              "latency": 16074.790000000006
+            }
+          ],
+          [
+            "edge-261",
+            {
+              "count": 208,
+              "errors": 29,
+              "latency": 15046.960000000005
+            }
+          ],
+          [
+            "edge-392",
+            {
+              "count": 206,
+              "errors": 29,
+              "latency": 14036.789999999995
+            }
+          ],
+          [
+            "edge-456",
+            {
+              "count": 203,
+              "errors": 29,
+              "latency": 13814.390000000003
+            }
+          ],
+          [
+            "edge-072",
+            {
+              "count": 189,
+              "errors": 29,
+              "latency": 13631.999999999996
+            }
+          ]
+        ]
+      },
+      "digest": "7cec1019a16e702e8366117a8cbfd30d149912d3cca262b1e42b867e8020b29c",
+      "compute_ms": 1229.733,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416492.1524405,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "office-b",
+      "order": 1,
+      "model_worker_id": "office-b",
+      "model_order": 1,
+      "model_ms": 2582.17,
+      "reason": "model_assignment",
+      "at": 1794416494.7356834,
+      "snapshot_id": "14ac9b47cb141474",
+      "plan_revision": 4,
+      "service_ms": 1529.0992320347366,
+      "predicted_start_at": 1794416494.7356834,
+      "predicted_finish_at": 1794416496.2647827,
+      "freeze_until": 1794416495.2356834,
+      "valid_until": 1794416504.7356834,
+      "unresolved_constraints": [],
+      "wait_ms": 7340.95,
+      "selected_worker": "office-b"
+    },
+    "revision": 2,
+    "started_at": 1794416495.0193985,
+    "predicted_ms": 1529.0992320347366,
+    "finished_at": 1794416496.4327326,
+    "latency_ms": 8754.281,
+    "deadline_met": true
+  },
+  {
+    "id": "90ed4679ba05",
+    "name": "Qwen-rolling-live-10",
+    "created_at": 1794416487.7454824,
+    "deadline_at": 1794416607.7454824,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：document_search"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "document_search",
+        "units": 5000,
+        "seed": 2610
+      }
+    },
+    "payload_bytes": 136,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "document_search",
+        "units": 5000,
+        "seed": 2610
+      },
+      "summary": {
+        "documents": 5000,
+        "vocabulary": 305,
+        "queries": 8,
+        "rankings": [
+          {
+            "query": "配电柜冒烟",
+            "top10": [
+              [
+                8.488251,
+                1210
+              ],
+              [
+                8.292505,
+                4239
+              ],
+              [
+                8.257881,
+                458
+              ],
+              [
+                8.122228,
+                1118
+              ],
+              [
+                7.134785,
+                3194
+              ],
+              [
+                7.119375,
+                631
+              ],
+              [
+                7.104032,
+                592
+              ],
+              [
+                7.088754,
+                792
+              ],
+              [
+                7.073542,
+                252
+              ],
+              [
+                7.073542,
+                1689
+              ]
+            ]
+          },
+          {
+            "query": "门禁夜间访问",
+            "top10": [
+              [
+                9.587178,
+                151
+              ],
+              [
+                8.358656,
+                2554
+              ],
+              [
+                8.340757,
+                3310
+              ],
+              [
+                8.322935,
+                4697
+              ],
+              [
+                8.287518,
+                1996
+              ],
+              [
+                8.287518,
+                3392
+              ],
+              [
+                8.287518,
+                4989
+              ],
+              [
+                8.234955,
+                2224
+              ],
+              [
+                8.200281,
+                4045
+              ],
+              [
+                8.200281,
+                4253
+              ]
+            ]
+          },
+          {
+            "query": "网络请求超时",
+            "top10": [
+              [
+                9.75146,
+                2643
+              ],
+              [
+                9.647278,
+                1097
+              ],
+              [
+                8.431234,
+                2085
+              ],
+              [
+                8.394656,
+                291
+              ],
+              [
+                8.358394,
+                1708
+              ],
+              [
+                8.340381,
+                1096
+              ],
+              [
+                8.286802,
+                1852
+              ],
+              [
+                8.269095,
+                2452
+              ],
+              [
+                8.233908,
+                1741
+              ],
+              [
+                8.181684,
+                4624
+              ]
+            ]
+          },
+          {
+            "query": "清理磁盘备份",
+            "top10": [
+              [
+                6.178712,
+                943
+              ],
+              [
+                6.178712,
+                1473
+              ],
+              [
+                6.139688,
+                2657
+              ],
+              [
+                6.139688,
+                4544
+              ],
+              [
+                6.113946,
+                104
+              ],
+              [
+                6.101155,
+                467
+              ],
+              [
+                6.101155,
+                1951
+              ],
+              [
+                6.063102,
+                4332
+              ],
+              [
+                6.037996,
+                3012
+              ],
+              [
+                6.037996,
+                4411
+              ]
+            ]
+          },
+          {
+            "query": "消防出口畅通",
+            "top10": [
+              [
+                9.732182,
+                1620
+              ],
+              [
+                8.523215,
+                2671
+              ],
+              [
+                8.467989,
+                1754
+              ],
+              [
+                8.449739,
+                1230
+              ],
+              [
+                8.431568,
+                575
+              ],
+              [
+                8.395458,
+                2617
+              ],
+              [
+                8.359657,
+                2793
+              ],
+              [
+                8.324159,
+                3880
+              ],
+              [
+                7.212434,
+                4405
+              ],
+              [
+                7.196547,
+                3
+              ]
+            ]
+          },
+          {
+            "query": "检查摄像头供电",
+            "top10": [
+              [
+                9.229444,
+                2995
+              ],
+              [
+                9.108125,
+                3090
+              ],
+              [
+                9.048853,
+                1047
+              ],
+              [
+                8.874675,
+                3781
+              ],
+              [
+                8.844061,
+                2240
+              ],
+              [
+                8.824708,
+                1211
+              ],
+              [
+                8.748138,
+                727
+              ],
+              [
+                8.447423,
+                2750
+              ],
+              [
+                8.221164,
+                100
+              ],
+              [
+                8.185955,
+                4735
+              ]
+            ]
+          },
+          {
+            "query": "机房线路散热",
+            "top10": [
+              [
+                7.778269,
+                343
+              ],
+              [
+                6.959086,
+                982
+              ],
+              [
+                6.944883,
+                439
+              ],
+              [
+                6.102199,
+                2194
+              ],
+              [
+                6.039029,
+                441
+              ],
+              [
+                6.014126,
+                1199
+              ],
+              [
+                6.001751,
+                2970
+              ],
+              [
+                6.001751,
+                4244
+              ],
+              [
+                5.989427,
+                1936
+              ],
+              [
+                5.977154,
+                2062
+              ]
+            ]
+          },
+          {
+            "query": "巡查仓库设备",
+            "top10": [
+              [
+                4.098274,
+                3194
+              ],
+              [
+                4.022896,
+                709
+              ],
+              [
+                4.003087,
+                4405
+              ],
+              [
+                3.997467,
+                4
+              ],
+              [
+                3.986681,
+                1284
+              ],
+              [
+                3.963538,
+                1620
+              ],
+              [
+                3.956091,
+                2178
+              ],
+              [
+                3.951639,
+                3058
+              ],
+              [
+                3.948476,
+                3679
+              ],
+              [
+                3.942258,
+                2503
+              ]
+            ]
+          }
+        ]
+      },
+      "digest": "f1c8086a991ea61be2316de99a17207fc6d2576360738c8dea71383de22e482b",
+      "compute_ms": 494.652,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416492.1524405,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "office-b",
+      "order": 2,
+      "model_worker_id": "office-b",
+      "model_order": 2,
+      "model_ms": 2582.17,
+      "reason": "model_assignment",
+      "at": 1794416494.7356834,
+      "snapshot_id": "14ac9b47cb141474",
+      "plan_revision": 4,
+      "service_ms": 714.0727020347366,
+      "predicted_start_at": 1794416494.7356834,
+      "predicted_finish_at": 1794416495.4497561,
+      "freeze_until": 1794416495.2356834,
+      "valid_until": 1794416504.7356834,
+      "unresolved_constraints": [],
+      "wait_ms": 7392.67,
+      "selected_worker": "office-b"
+    },
+    "revision": 2,
+    "started_at": 1794416495.1381497,
+    "predicted_ms": 714.0727020347366,
+    "finished_at": 1794416495.7468126,
+    "latency_ms": 8001.33,
+    "deadline_met": true
+  },
+  {
+    "id": "008e2505d9bb",
+    "name": "Qwen-rolling-live-11",
+    "created_at": 1794416487.8182242,
+    "deadline_at": 1794416607.8182242,
+    "deadline_ms": 120000,
+    "policy": "ai",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：archive"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "archive",
+        "units": 20000,
+        "seed": 2611
+      }
+    },
+    "payload_bytes": 121,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "archive",
+        "units": 20000,
+        "seed": 2611
+      },
+      "summary": {
+        "records": 20000,
+        "uncompressed_bytes": 4679704,
+        "compressed_bytes": 365360,
+        "compression_ratio": 0.078073,
+        "archive_sha256": "9bf8fe2eb81c4b38419a47324bdcfe681a4f7b16ecb4d300c47355f6376d0348",
+        "artifact_retained": false,
+        "purpose": "redact + compress + integrity validation; benchmark discards archive bytes"
+      },
+      "digest": "9f50841d2f052ff0ed2f602fd2f6947486f0c39e6f2385e0079058caa2486c8b",
+      "compute_ms": 375.797,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": null,
+    "planning_started_at": 1794416492.1524405,
+    "scheduler_decision": {
+      "source": "qwen",
+      "worker_id": "office-b",
+      "order": 3,
+      "model_worker_id": "office-b",
+      "model_order": 3,
+      "model_ms": 2582.17,
+      "reason": "model_assignment",
+      "at": 1794416494.7356834,
+      "snapshot_id": "14ac9b47cb141474",
+      "plan_revision": 4,
+      "service_ms": 556.9090520347365,
+      "predicted_start_at": 1794416494.7356834,
+      "predicted_finish_at": 1794416495.2925925,
+      "freeze_until": 1794416495.2356834,
+      "valid_until": 1794416504.7356834,
+      "unresolved_constraints": [],
+      "wait_ms": 7500.42,
+      "selected_worker": "office-b"
+    },
+    "revision": 2,
+    "started_at": 1794416495.3186483,
+    "predicted_ms": 556.9090520347365,
+    "finished_at": 1794416495.8542,
+    "latency_ms": 8035.976,
+    "deadline_met": true
+  }
+]

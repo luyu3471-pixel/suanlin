@@ -475,6 +475,9 @@ function taskDetailHTML(t) {
  <ol class="task-timeline">${steps.map(([label,at],i)=>`<li class="${at?'done':''}"><span>${i===2&&!terminal?'等待结束':label}</span><time>${at?fullTime(at):'—'}</time></li>`).join('')}</ol>
  <div class="task-guidance ${t.status==='failed'?'is-error':''}"><span>${esc(statusMessage)}</span>${t.status==='queued'?'<a href="#nodes" data-detail-nodes>查看节点 ↗</a>':''}</div>
  ${detailError?`<p class="inline-error" role="status">详情更新中断：${esc(detailError)}</p>`:''}
+   ${t.scheduling_blocked?`<div class="notice">等待可用执行节点；请检查节点能力、信任设置和内存。${Date.now()/1000>t.deadline_at?'任务已超过截止时间，请处理或取消。':''}</div>`:''}
+   ${t.progress?`<div class="notice">执行阶段：${esc(t.progress.stage)} · ${esc(t.progress.done)} / ${esc(t.progress.total)}${t.progress.memory_mib!=null?` · 进程内存 ${esc(t.progress.memory_mib)} MiB`:''}</div>`:''}
+   ${t.scheduler_decision?.plan_revision?`<div class="notice">计划版本 ${esc(t.scheduler_decision.plan_revision)} · 执行序号 ${esc(t.scheduler_decision.order+1)} · 已重规划 ${esc(t.replan_count||0)} 次${t.status==='queued'?` · 预计开始 ${time(t.scheduler_decision.predicted_start_at)} · 预计完成 ${time(t.scheduler_decision.predicted_finish_at)}`:''}</div>`:''}
  ${taskOutput(t)}
  <dl class="result-meta"><div><dt>执行电脑</dt><dd>${esc(state?.nodes.find(n=>n.id===t.worker_id)?.name||t.worker_id||'等待分配')}</dd></div><div><dt>从提交到完成</dt><dd>${ms(t.latency_ms)}</dd></div></dl>
  ${t.status==='completed'?`<div class="result-next"><button class="button primary" data-action="next-create">${t.payload?.workload?'创建另一个任务':'填写自己的文本'}</button><a class="text-link" href="#tasks" data-detail-close>查看全部任务 ↗</a></div>`:''}

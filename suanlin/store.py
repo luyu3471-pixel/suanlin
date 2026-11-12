@@ -1,4 +1,5 @@
 import csv
+import copy
 import io
 import json
 import random
@@ -13,6 +14,8 @@ from . import __version__
 from .resources import sanitize
 from .business import validate as validate_workload, KINDS
 from .scheduler import choose, estimate_ms, reserve, service_ms, text_units, POLICIES, eligible
+from .scheduler import cost_key
+from .planning import queue_key
 
 OFFLINE_SECONDS = 10
 LEASE_SECONDS = 25
@@ -43,6 +46,7 @@ class Store:
         self.tasks = {r["id"]: json.loads(r["body"]) for r in self.db.execute("SELECT * FROM tasks")}
         self.workers = {r["id"]: json.loads(r["body"]) for r in self.db.execute("SELECT * FROM workers")}
         self.turn = 0
+        self.plan_revision = max((t.get('scheduler_decision',{}).get('plan_revision',0) for t in self.tasks.values()),default=0)
         self.rng = random.Random(2030)
         # Running work cannot retain leases across a coordinator restart.
         for n in self.workers.values():
@@ -50,6 +54,8 @@ class Store:
             n.update(last_seen=0, busy_task=None, busy_until=0, active_tasks={}, session=secrets.token_urlsafe(24))
             self.save("workers", n)
         for t in self.tasks.values():
+            if t['status'] in ('queued','running'):
+                t.pop('scheduler_decision',None)
             if t["status"] == "running":
                 t.update(status="queued", lease=None, worker_id=None)
                 self.save("tasks", t)
@@ -70,6 +76,29 @@ class Store:
     def event(self, kind, message):
         self.db.execute("INSERT INTO events(at,kind,message) VALUES(?,?,?)", (time.time(), kind, message))
         self.db.commit()
+
+    def commit_plan(self, decisions, versions, expected_revision):
+        with self.lock:
+            if self.plan_revision != expected_revision:
+                raise InputError('Plan changed during inference')
+            updates = {}
+            for task_id, decision in decisions.items():
+                task = self.tasks[task_id]
+                if task['status']!='queued' or task.get('revision',0)!=versions[task_id]:
+                    raise InputError('Task changed during inference')
+                updated = copy.deepcopy(task)
+                old = updated.get('scheduler_decision')
+                if old:
+                    updated['plan_history'] = (updated.get('plan_history',[])+[old])[-5:]
+                    updated['replan_count'] = updated.get('replan_count',0)+1
+                updated.update(scheduler_decision=decision,revision=task.get('revision',0)+1)
+                updates[task_id] = updated
+            with self.db:
+                self.db.executemany('INSERT OR REPLACE INTO tasks(id,body) VALUES(?,?)',
+                    [(k,json.dumps(v,ensure_ascii=False)) for k,v in updates.items()])
+            self.tasks.update(updates)
+            self.plan_revision += 1
+            self.changed.notify_all()
 
     def submit(self, data):
         with self.lock:
@@ -178,7 +207,25 @@ class Store:
                 if t and t['status'] == 'running' and t.get('worker_id') == n['id'] and item.get('lease') == t['lease']:
                     t['lease_until'] = time.time() + LEASE_SECONDS
                     self.save('tasks', t)
-            return {"ok": True, "draining": n["draining"]}
+            cancel = [{'id':item.get('id'),'lease':item.get('lease')} for item in active
+                      if self.tasks.get(item.get('id'),{}).get('status')=='cancelled'
+                      and self.tasks[item['id']].get('worker_id')==n['id']
+                      and self.tasks[item['id']].get('lease')==item.get('lease')]
+            for item in active:
+                t = self.tasks.get(item.get('id'))
+                progress = item.get('progress')
+                if t and t['status']=='running' and t.get('worker_id')==n['id'] and item.get('lease')==t.get('lease') and isinstance(progress,dict):
+                    done,total = progress.get('done'),progress.get('total')
+                    if type(done) is int and type(total) is int and 0<=done<=total and total>0:
+                        t['progress']={'done':done,'total':total,'stage':str(progress.get('stage',''))[:40],'at':time.time()}
+                        for key in ('elapsed_ms','memory_mib'):
+                            value=progress.get(key)
+                            if isinstance(value,(int,float)) and not isinstance(value,bool) and 0<=value<=10**9:
+                                t['progress'][key]=value
+                        if progress.get('stage') in ('log_analysis','archive') and done>0:
+                            elapsed=time.time()-t.get('started_at',time.time())
+                            n['active_tasks'][t['id']]=time.time()+max(.25,elapsed*(total-done)/done)
+            return {"ok": True, "draining": n["draining"], 'cancel_tasks':cancel}
 
     def recover(self, now):
         for t in self.tasks.values():
@@ -234,7 +281,7 @@ class Store:
             if n["draining"] or len(n.get('active_tasks', {})) >= n.get('capacity', 1):
                 return {"task": None}
             candidates = self.candidates(now)
-            queued = sorted((t for t in self.tasks.values() if t["status"] == "queued"), key=lambda t: (t["deadline_at"], t["created_at"]))
+            queued = sorted((t for t in self.tasks.values() if t["status"] == "queued"), key=queue_key)
             for t in queued:
                 # Persist the random/round-robin choice while waiting for that
                 # worker. Polling frequency must not bias either baseline.
@@ -243,7 +290,7 @@ class Store:
                 if t['policy'] == 'ai':
                     decision = t.get('scheduler_decision')
                     fastest_service = min((service_ms(t, option) for option in candidates if eligible(t,option)), default=0) if not decision else 0
-                    decision_budget = 8 if fastest_service >= 1000 else 4
+                    decision_budget = self.ai.budget(t,candidates,now) if self.ai else 0
                     if not decision and self.ai and now - t['created_at'] < decision_budget and t['deadline_at'] - now > .1:
                         self.ai.wake.set()
                         hint = choose(t, candidates, now, 'smart')
@@ -252,13 +299,19 @@ class Store:
                     if not decision:
                         decision = {'source': 'rules_fallback', 'reason': 'decision_wait_budget' if self.ai else 'model_disabled', 'at': now, 'model_ms': 0}
                         t['scheduler_decision'] = decision
-                    model_decision = decision['source'] in ('qwen', 'qwen_guarded')
-                    desired = next((x for x in candidates if x['id']==decision.get('worker_id') and eligible(t,x)), None) if model_decision else None
+                    model_decision = decision['source'] in ('qwen', 'qwen_guarded') or bool(decision.get('plan_revision'))
+                    desired = next((x for x in candidates if x['id']==decision.get('worker_id') and eligible(t,x) and (not decision.get('node_session') or decision['node_session']==x.get('session'))), None) if model_decision else None
                     if not desired:
                         if model_decision:
+                            if self.ai and decision.get('plan_revision'):
+                                t['revision']=t.get('revision',0)+1
+                                t.pop('scheduler_decision',None)
+                                t['created_plan_after']=now
+                                self.ai.wake.set()
+                                continue
                             decision.update(source='rules_fallback', reason='node_no_longer_eligible')
                         desired = choose(t, candidates, now, 'smart')
-                    elif len(desired.get('active_tasks', {})) >= desired.get('capacity', 1):
+                    elif not decision.get('plan_revision') and len(desired.get('active_tasks', {})) >= desired.get('capacity', 1):
                         alternative = choose(t, candidates, now, 'smart')
                         if alternative and alternative['id'] != desired['id'] and len(alternative.get('active_tasks', {})) < alternative.get('capacity', 1):
                             expected = estimate_ms(t, desired, now)
@@ -282,6 +335,7 @@ class Store:
                     t['scheduler_decision']['selected_worker'] = n['id']
                 t.update(status="running", started_at=now, worker_id=n["id"], lease=secrets.token_urlsafe(24),
                          lease_until=now + LEASE_SECONDS, attempts=t["attempts"] + 1, predicted_ms=predicted, error=None)
+                t['revision']=t.get('revision',0)+1
                 n.setdefault('active_tasks', {})[t['id']] = now + predicted / 1000
                 n.update(busy_task=next(iter(n['active_tasks'])), busy_until=min(n['active_tasks'].values()))
                 self.save("tasks", t)
@@ -316,6 +370,9 @@ class Store:
                 if t['payload'].get('workload') and (result.get('workload')!=t['payload']['workload'] or not isinstance(result.get('summary'),dict) or result.get('model')!='business-algorithms-v1'):
                     raise InputError('Business result mismatch')
                 compute_ms = number(result.get("compute_ms"), "计算耗时", 0, 3600000)
+                stats=n.setdefault('cost_stats',{}).setdefault(cost_key(t,n),{'samples':0,'relative_error':.35})
+                stats['samples']+=1
+                stats['relative_error']=.7*stats['relative_error']+.3*min(3,abs(compute_ms-t.get('predicted_ms',compute_ms))/max(1,t.get('predicted_ms',compute_ms)))
                 load_ms = number(result.get('load_ms', 0), '附加负载耗时', 0, 3600000)
                 classify_ms = number(result.get('classification_ms', max(0, compute_ms - load_ms)), '分类耗时', 0, 3600000)
                 if t['payload'].get('workload'):
@@ -346,6 +403,7 @@ class Store:
             if not t:
                 raise InputError("任务不存在")
             if t["status"] in ("queued", "running"):
+                t['revision']=t.get('revision',0)+1
                 t.update(status="cancelled", finished_at=time.time())
                 self.save("tasks", t)
                 self.event("cancel", f"任务 {task_id} 已取消")
@@ -373,7 +431,10 @@ class Store:
         excluded = {"lease", "lease_until", "desired_worker"}
         if not detail:
             excluded.update(("payload", "result"))
-        return {k: v for k, v in t.items() if k not in excluded}
+        public = copy.deepcopy({k: v for k, v in t.items() if k not in excluded})
+        for d in [public.get('scheduler_decision',{})]+public.get('plan_history',[]):
+            d.pop('node_session',None)
+        return public
 
     def snapshot(self):
         with self.lock:

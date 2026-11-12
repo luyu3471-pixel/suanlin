@@ -42,10 +42,10 @@ class Classifier:
 
 MODEL = Classifier()
 
-def run_task(payload):
+def run_task(payload, progress=None):
     if payload.get('workload') is not None:
         from .business import run
-        return run(payload['workload'])
+        return run(payload['workload'], progress)
     start = time.perf_counter()
     predictions = [MODEL.predict(x) for x in payload["events"]]
     classification_ms = (time.perf_counter() - start) * 1000
@@ -55,5 +55,6 @@ def run_task(payload):
     digest = hashlib.sha256("\n".join(payload["events"]).encode()).digest()
     before_load = time.perf_counter()
     for _ in range(loops):
+        if progress and _%10000==0: progress('compute',_,max(1,loops))
         digest = hashlib.sha256(digest).digest()
     return {"predictions": predictions, "classification_ms": round(classification_ms, 3), "model": "char-bigram-naive-bayes-v1", "training_source": "48 authored synthetic examples", "load_loops": loops, "load_ms": round((time.perf_counter() - before_load) * 1000, 3), "compute_ms": round((time.perf_counter() - start) * 1000, 3), "digest": digest.hex()}

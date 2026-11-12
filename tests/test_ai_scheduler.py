@@ -28,7 +28,7 @@ class SchedulerTests(unittest.TestCase):
     def test_model_call_outside_lock_and_no_raw_event(self):
         t = self.submit()
         observed = []
-        def fake(rows, nodes):
+        def fake(rows, nodes, **kwargs):
             def heartbeat():
                 self.store.heartbeat(self.a)
                 observed.append(True)
@@ -55,12 +55,13 @@ class SchedulerTests(unittest.TestCase):
         with patch('suanlin.ai_scheduler.plan', return_value={t['id']:'b'}): self.store.ai.cycle()
         self.store.configure_worker('b', {'trusted':False})
         self.assertIsNone(self.store.poll(self.b)['task'])
+        with patch('suanlin.ai_scheduler.plan', return_value={t['id']:'a'}): self.store.ai.cycle()
         self.assertEqual(self.store.poll(self.a)['task']['id'], t['id'])
-        self.assertEqual(self.store.task(t['id'])['scheduler_decision']['reason'], 'node_no_longer_eligible')
+        self.assertEqual(self.store.task(t['id'])['scheduler_decision']['worker_id'], 'a')
 
     def test_cancelled_task_not_rewritten_by_model(self):
         t = self.submit()
-        def cancel(rows,nodes):
+        def cancel(rows,nodes, **kwargs):
             self.store.cancel(t['id'])
             return {t['id']:'a'}
         with patch('suanlin.ai_scheduler.plan',side_effect=cancel): self.store.ai.cycle()
@@ -69,22 +70,22 @@ class SchedulerTests(unittest.TestCase):
 
     def test_wait_budget_falls_back(self):
         t = self.submit()
-        self.store.tasks[t['id']]['created_at'] -= 5
+        self.store.tasks[t['id']]['created_at'] -= 31
         self.assertEqual(self.store.poll(self.a)['task']['id'],t['id'])
         self.assertEqual(self.store.task(t['id'])['scheduler_decision']['reason'],'decision_wait_budget')
 
     def test_heavy_queue_has_bounded_time_for_multiple_model_batches(self):
         self.store.workers['a']['text_ms_per_unit']=2000
         t=self.store.submit({'events':['x'*32], 'policy':'ai','deadline_ms':300000})
-        self.store.tasks[t['id']]['created_at']-=5
+        self.store.tasks[t['id']]['created_at']-=1
         self.assertIsNone(self.store.poll(self.a)['task'])
-        self.store.tasks[t['id']]['created_at']-=4
+        self.store.tasks[t['id']]['created_at']-=31
         self.assertEqual(self.store.poll(self.a)['task']['id'],t['id'])
         self.assertEqual(self.store.task(t['id'])['scheduler_decision']['reason'],'decision_wait_budget')
 
     def test_model_request_batches_stay_within_eight_tasks(self):
-        for _ in range(20):self.submit()
-        def fake(rows,nodes):
+        for _ in range(20):self.store.submit({'events':['normal'],'policy':'ai','deadline_ms':30000})
+        def fake(rows,nodes, **kwargs):
             self.assertEqual(len(rows),8)
             return {r['task_id']:'a' for r in rows}
         with patch('suanlin.ai_scheduler.plan',side_effect=fake):self.store.ai.cycle()
@@ -128,12 +129,12 @@ class SchedulerTests(unittest.TestCase):
             opener.open.return_value=io.BytesIO(json.dumps({'choices':[{'finish_reason':'stop','message':{'content':json.dumps({'workers':assignments})}}]}).encode())
             with patch('urllib.request.build_opener',return_value=opener), self.assertRaises(ValueError): plan(rows,[])
 
-    def test_batch_guard_rejects_serial_overload_and_reports_model_proposal(self):
+    def test_feasible_model_plan_is_preserved_without_blanket_replacement(self):
         self.store.configure_worker('b', {'trusted': True})
         self.store.workers['a']['text_ms_per_unit'] = 1000
         self.store.workers['b']['text_ms_per_unit'] = 700
         tasks = [self.store.submit({'events':['x'*32], 'policy':'ai', 'deadline_ms':300000}) for _ in range(6)]
-        def overload(rows, nodes):
+        def overload(rows, nodes, **kwargs):
             # No hypothetical previous assignment is baked into candidate times.
             first = {c['id']:c['service_ms'] for c in rows[0]['candidates']}
             for row in rows:
@@ -143,11 +144,11 @@ class SchedulerTests(unittest.TestCase):
             return {t['id']:'b' for t in tasks}
         with patch('suanlin.ai_scheduler.plan', side_effect=overload): self.store.ai.cycle()
         decisions=[self.store.tasks[t['id']]['scheduler_decision'] for t in tasks]
-        self.assertTrue(all(d['source']=='qwen_guarded' and d['model_worker_id']=='b' for d in decisions))
-        self.assertEqual({d['worker_id'] for d in decisions},{'a','b'})
-        self.assertEqual(self.store.ai.status['accepted'],0)
-        self.assertEqual(self.store.ai.status['guarded'],6)
-        self.assertIsNotNone(self.store.poll(self.a)['task'])
+        self.assertTrue(all(d['source']=='qwen' and d['model_worker_id']=='b' for d in decisions))
+        self.assertEqual({d['worker_id'] for d in decisions},{'b'})
+        self.assertEqual(self.store.ai.status['accepted'],6)
+        self.assertEqual(self.store.ai.status['guarded'],0)
+        self.assertIsNotNone(self.store.poll(self.b)['task'])
 
     def test_dispatch_rebalances_busy_node_to_idle_peer(self):
         self.store.configure_worker('b', {'trusted': True})

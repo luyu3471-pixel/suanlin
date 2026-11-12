@@ -1,7 +1,7 @@
 {
   "project": "多终端任务调度系统",
   "date": "2026-11-12",
-  "version": "2.4.1-slot-aware",
+  "version": "2.5.0-qwen-rolling",
   "measurement_date": "2026-11-11",
   "evidence": [
     "physical A4/B4 CPU business workload measurements across 2.3.0/2.4.0/2.4.1; 450 formal tasks plus 54 warmups",
@@ -187,6 +187,11 @@
       "sha256": "4239c7c60166113e33949689c717709c28bb312e457dacc2531d846c73897606"
     },
     {
+      "path": "docs/本地整合说明.md",
+      "bytes": 2650,
+      "sha256": "aa2937729822f6843ff9762d09712c58796f49db8825cdcc3a9cdbcdd1180750"
+    },
+    {
       "path": "docs/测试与验证报告.md",
       "bytes": 9076,
       "sha256": "e96c26cba154fe9fd3b1300162e5036c2e024cd000f2f94b6e8c86d06dae4cc2"
@@ -243,13 +248,38 @@
     },
     {
       "path": "OPTIMIZATION_VERSION.txt",
-      "bytes": 405,
-      "sha256": "5029ec2b4efd32d332258e3936d58a84241a78101c62256dac58c18c4f9a113d"
+      "bytes": 216,
+      "sha256": "3e4d24cf64acbc9b210a5c67c1cbf0e5f2de1a1d5f5a29895f45395b49c31b56"
+    },
+    {
+      "path": "PACKAGE-CHECK.json",
+      "bytes": 593,
+      "sha256": "cc61aae0d3e415d3bbe8e59f5608790c7808b5740911122735fb4c6bffea3a27"
+    },
+    {
+      "path": "package_launcher.py",
+      "bytes": 2425,
+      "sha256": "9551acf42622992852abfde1b0b8b7f8fe8cb4e6e2b0cb7233f1d23a4ca8ccae"
+    },
+    {
+      "path": "QWEN_UPGRADE.txt",
+      "bytes": 4193,
+      "sha256": "0db3d2c639e3653e024e4c95359f8c4c8de218d48741783e762abb43de5d951e"
     },
     {
       "path": "README.md",
-      "bytes": 10059,
-      "sha256": "1c02ffc8dd920240bcf86ca46e5da61f4b13f08269d6a6f2c609338e7b04abf7"
+      "bytes": 11375,
+      "sha256": "f22209d4301836b3b8650dd3176efce66f4413c0b29adbec7a9e77efb97662b6"
+    },
+    {
+      "path": "README.txt",
+      "bytes": 3588,
+      "sha256": "b2620c763841ac4625cf547e6d0890338ef4e2acd786cc5085d39031af5391c7"
+    },
+    {
+      "path": "regression-new.log",
+      "bytes": 12832,
+      "sha256": "6ae01343af19f87a26730cf75960bb598ed1972ccebd99f120cb87a72e543d68"
     },
     {
       "path": "release-evidence/after.json",
@@ -737,6 +767,296 @@
       "sha256": "fc515597b3a6f434a2052a98fbb2dea83d05cb513c1fbf717bdea41ac037b504"
     },
     {
+      "path": "reports/dual-validation/after.json",
+      "bytes": 78244,
+      "sha256": "bdee1984c7d4e29fe484cc559b46c367f6fe9a0c3ff6e6e2bf34416e3b8463f9"
+    },
+    {
+      "path": "reports/dual-validation/before.json",
+      "bytes": 24490,
+      "sha256": "204bfcace560356db91174e81b546107a7cdc8e4f280c84a3b466e3e13eed54f"
+    },
+    {
+      "path": "reports/dual-validation/correctness.json",
+      "bytes": 1198,
+      "sha256": "3f03e6732b54edbedc2fbd0be80e76cdcf39e4e6424dd17eae2259a6ce31aa30"
+    },
+    {
+      "path": "reports/dual-validation/first-results.json",
+      "bytes": 64973,
+      "sha256": "63596832f3081c986f6675e477740b227dd1fd314af45580142c66f83d169673"
+    },
+    {
+      "path": "reports/dual-validation/first-summary.json",
+      "bytes": 500,
+      "sha256": "b85ec408f821f0503d36ec091a4d6dcde9a5217d3ddb0f970a7a9d5bfb6be4d9"
+    },
+    {
+      "path": "reports/dual-validation/replan-observed.json",
+      "bytes": 995,
+      "sha256": "936a3b99cb20cb4b3cf1ea545c49fc8724005ac9e798a29c5daafd85186ef194"
+    },
+    {
+      "path": "reports/dual-validation/replan-results.json",
+      "bytes": 106679,
+      "sha256": "8f3f6e2ac705ebee9dd2bd94be1aa209f03d880820a57f4b90843c0de0ab6939"
+    },
+    {
+      "path": "reports/dual-validation/replan-samples.json",
+      "bytes": 2402867,
+      "sha256": "20cd7811ddd59d123a7f6e05f0b6ab6434809e247deb840922b290571e914f0b"
+    },
+    {
+      "path": "reports/dual-validation/replan-summary.json",
+      "bytes": 563,
+      "sha256": "206dff616af382364f6d6f00cae49aa23ba481651d25005c5ae00499635d4edb"
+    },
+    {
+      "path": "reports/dual-validation/results.json",
+      "bytes": 66138,
+      "sha256": "d148f2f90d0afc69fafbd62dcee5fce11764bc16e1b43762dffce2d62668f992"
+    },
+    {
+      "path": "reports/dual-validation/summary.json",
+      "bytes": 385,
+      "sha256": "c7af4422c81bf282b5bcaab3d4ae66417b80e5595b75434e222964fe3227a3ad"
+    },
+    {
+      "path": "reports/dual-validation/双机测试报告.txt",
+      "bytes": 2250,
+      "sha256": "a651f363e6453492fba965e70ec510eedd4e891de98c08e1d1712970d404cac7"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-heavy-A-accepted.json",
+      "bytes": 15975,
+      "sha256": "b875c62600205aea4e40e4070ca0403da3ada78af7ca110e2dd7036a686d6b05"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-heavy-A-results.json",
+      "bytes": 91540,
+      "sha256": "eeaf40be48292b2fbe9164f91099b52e671f120c3bf54e69bdcb974ce018b6b5"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-heavy-B-accepted.json",
+      "bytes": 16001,
+      "sha256": "4054fb730dd4511b7e3827c03cf09196195bbc51677eb22f302e025670c7360d"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-heavy-B-results.json",
+      "bytes": 86941,
+      "sha256": "df29f732ebeb032c95bbc8300980d424cd774ad8f42a98df8e9aeebdf27a1c1a"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-heavy-dual-accepted.json",
+      "bytes": 15857,
+      "sha256": "84bcc5579b732b3631dc32f90add56969e4f0c13e838a0bceaf537ccf3b7b99b"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-heavy-dual-results.json",
+      "bytes": 117022,
+      "sha256": "ae310e74d54a5e6a1628d822ee7e4802fa4ebf765ff3df92eea4410ec94c27bd"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-mixed-A-accepted.json",
+      "bytes": 7953,
+      "sha256": "54d20f94e78ccecc6d21b3d509bffb081394e72092c09dc7aee025f1804a7ca4"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-mixed-A-results.json",
+      "bytes": 58504,
+      "sha256": "f67b149d00b1090d3df93ed0d815fece4fa1944eb57dcacf48915863fead7d47"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-mixed-B-accepted.json",
+      "bytes": 7967,
+      "sha256": "0beef30bea43b01a3de13b6694b964754a7712adb85e8e82319afbe4e5a3489d"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-mixed-B-results.json",
+      "bytes": 57233,
+      "sha256": "0c2107ca171493cb1e1863a08b699e72fbeb0017bfc600392395a94d8f464005"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-mixed-dual-accepted.json",
+      "bytes": 7891,
+      "sha256": "7c69ef3d7e6d945761b3633e0407425c62dab3ad301d61388b145eccaf9128c5"
+    },
+    {
+      "path": "reports/single-dual-comparison/1-mixed-dual-results.json",
+      "bytes": 66761,
+      "sha256": "92057e21c8dc9be16cd0320ad54ffb3eaf6a69ecbc8cfa6a53072bd9bd99a220"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-heavy-A-accepted.json",
+      "bytes": 15957,
+      "sha256": "182861fbb1bf660d40764adfd5b2495f864670d20ad9442007c9f19957db29a6"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-heavy-A-results.json",
+      "bytes": 91529,
+      "sha256": "e52ee10b9e5f343d18570a0f50820b1970520acd108a846d90b5c32d47ea90e4"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-heavy-B-accepted.json",
+      "bytes": 16009,
+      "sha256": "69d15cf06c483e073247190b43bb2a748da499f09e22ddeda1f59892825a176f"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-heavy-B-results.json",
+      "bytes": 86941,
+      "sha256": "de0ce78d204d765df7d8e2d8f0f3050effd6fffe6d94229591a7e2c5ce7d5fb3"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-heavy-dual-accepted.json",
+      "bytes": 15859,
+      "sha256": "475e96a28cd79432eceb2a9533db478653158334059557853c13ca7b60a6d157"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-heavy-dual-results.json",
+      "bytes": 123839,
+      "sha256": "19249038c7c1e0dce16cbbdb390471c2ccbe7304baff339bbebb3f317bbd88a1"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-mixed-A-accepted.json",
+      "bytes": 7951,
+      "sha256": "8510d0b9fe221bf11b8fab55476033246c7cfb49bfdc5039fdb0f65457d5d27b"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-mixed-A-results.json",
+      "bytes": 58503,
+      "sha256": "e8807d16ccbb24732a4cb89a59e8637060eb4380a08dcdc7d2565d1ddaa341f7"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-mixed-B-accepted.json",
+      "bytes": 7969,
+      "sha256": "789d98a4443aab8da5350b15facab559b8935d17d2dd9fa1c8a0f7254933b6b1"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-mixed-B-results.json",
+      "bytes": 57239,
+      "sha256": "8260497e59fff1083fb336d5de6783e2887680196a7ec891fdb06fc2916dee99"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-mixed-dual-accepted.json",
+      "bytes": 7893,
+      "sha256": "e6f9d380b9ba26fa7e7b724129d4f3898bc2994d030db1a38d0af81af0d9fef3"
+    },
+    {
+      "path": "reports/single-dual-comparison/2-mixed-dual-results.json",
+      "bytes": 64493,
+      "sha256": "e2d34b0673b5c5ee441a51fbbed7a84201d8093ad786b5a7af4c7eae59709f59"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-heavy-A-accepted.json",
+      "bytes": 15973,
+      "sha256": "b097937a01368fb07a438d0cdfd8e01675c26edfb4a0a55acf1183970b84948b"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-heavy-A-results.json",
+      "bytes": 91528,
+      "sha256": "22fd671b7691f75b69e3efb85d7292b04b0cbeb156de6fc5180897507106c579"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-heavy-B-accepted.json",
+      "bytes": 15999,
+      "sha256": "d07d9a2f4aa2e44f8616e52155dc09a75f771a28bd17db046aaa342071d96bac"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-heavy-B-results.json",
+      "bytes": 86923,
+      "sha256": "54877cac52b5b52be812cc1b2f3b8072995747f849838c2f13c428a49f0a5b1a"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-heavy-dual-accepted.json",
+      "bytes": 15855,
+      "sha256": "da9ab8d8a3e8d84639fad91614e1cd570ed0ed308ff90921a3ff44a2b90babb1"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-heavy-dual-results.json",
+      "bytes": 110420,
+      "sha256": "52d7b72e132dc3d46736603a9dceace7b9061bfe21a421c0df7828da91229984"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-mixed-A-accepted.json",
+      "bytes": 7949,
+      "sha256": "a098c23f3630c5595bdd0be35f831ab63e4a9547991f367d436dac9a947638d3"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-mixed-A-results.json",
+      "bytes": 58141,
+      "sha256": "8187a11b83c5370c028fea8f81dda7519b826f7e66a99bc4ed3579ac56546f67"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-mixed-B-accepted.json",
+      "bytes": 7961,
+      "sha256": "b527145584d000bb4bf93fe061d6060c1454f0843759bd9b560a9cfa4b7eb0b6"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-mixed-B-results.json",
+      "bytes": 57233,
+      "sha256": "a64e0c68481c86ebebb1fff1dbcd71c2157723576a68d252f92433226992a5d9"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-mixed-dual-accepted.json",
+      "bytes": 7891,
+      "sha256": "896557e2f9d9b3c0315eb74a5c1004e53455179129254acab6c12acd78bf5de0"
+    },
+    {
+      "path": "reports/single-dual-comparison/3-mixed-dual-results.json",
+      "bytes": 66212,
+      "sha256": "0ea203aab879c177b065afeed8464f0905c92fc5ba28ab5451dfea379bd85c2e"
+    },
+    {
+      "path": "reports/single-dual-comparison/accepted-all.json",
+      "bytes": 214859,
+      "sha256": "76a5322e78754b81327bf332792dfb8979815ca8992b0db5ae7c21a3540e5d72"
+    },
+    {
+      "path": "reports/single-dual-comparison/after.json",
+      "bytes": 227070,
+      "sha256": "9075e3bdb4aaaa07b16e620d07dee69b915abea3813545890040aa2bc4c64bfb"
+    },
+    {
+      "path": "reports/single-dual-comparison/analysis.json",
+      "bytes": 6147,
+      "sha256": "0ee233fb7a1ed62b3f2b2af8737ee3301357a55d2b7c66cbf1961314e2185af7"
+    },
+    {
+      "path": "reports/single-dual-comparison/before.json",
+      "bytes": 78245,
+      "sha256": "c646ad75e79e9b768eae3a1a3273e02af40906203da7e226489cd1240668b40e"
+    },
+    {
+      "path": "reports/single-dual-comparison/conditions.json",
+      "bytes": 4245,
+      "sha256": "7c69f862cded84e4d4f80ffe36ad2f8a9c336b003780eafdb912165f01034ec3"
+    },
+    {
+      "path": "reports/single-dual-comparison/consistency.json",
+      "bytes": 32376,
+      "sha256": "4d0a9d0ec1fed63acd48d8efb89f4a971fc0a7ebdd63c8699a148e3863d6fcc2"
+    },
+    {
+      "path": "reports/single-dual-comparison/inputs.json",
+      "bytes": 6789,
+      "sha256": "c9884d251bc5ee0643bc498ae035b512634dec0a58d08de4e9a0d7ae9fface7f"
+    },
+    {
+      "path": "reports/single-dual-comparison/summary.json",
+      "bytes": 11111,
+      "sha256": "0548c397d7a8dee7e291dac49fd91ba453970666cb6c84529efae27a8e7f06c8"
+    },
+    {
+      "path": "reports/single-dual-comparison/trials.json",
+      "bytes": 8200,
+      "sha256": "1eee398a56900a265ee73ba94a5d579bc67cfcea783c9e91684ca84fc7fa12b4"
+    },
+    {
+      "path": "reports/single-dual-comparison/单机双机对比报告.txt",
+      "bytes": 1693,
+      "sha256": "8c44a391e0a33e671f3a5566b2335ee5f3b79381233636d413d7be3a789745e1"
+    },
+    {
       "path": "requirements.txt",
       "bytes": 177,
       "sha256": "7750cc25ebe02ce1418576d4dafe7df5367a818b9b49d09a5b2901aa19d9041b"
@@ -790,6 +1110,11 @@
       "path": "results/field_tool_checks.txt",
       "bytes": 3922,
       "sha256": "05d10c6c20d26d7dc3a4cec86bc410309bcc485b83f366bd497a0733ae7e4b3b"
+    },
+    {
+      "path": "results/integration_checks.json",
+      "bytes": 862,
+      "sha256": "cd14b4180cc8709aa6fe0f50c757f847e185a497a3bef9a1b828fe3c669a7d7a"
     },
     {
       "path": "results/interface_review.json",
@@ -947,9 +1272,29 @@
       "sha256": "52de5c9978f92d7258e958f5f1a71e5ef1560dbcf2224f7f3696ea62d7e202bc"
     },
     {
+      "path": "settings.json",
+      "bytes": 224,
+      "sha256": "8dd15f8264bee20de301edeab38eccc8a96295c5d2ad56264c873a31e3bfa60a"
+    },
+    {
+      "path": "Start-A.cmd",
+      "bytes": 98,
+      "sha256": "816f66bdb6b4515a85579b959766b5afb8fe87b5e9dcad9df6cefa81259a5efc"
+    },
+    {
+      "path": "Start-B.cmd",
+      "bytes": 98,
+      "sha256": "ef9095d1b7acdaef1b80628a94696dff70ac052df7b9952886bfe79dcfab17fe"
+    },
+    {
       "path": "start.bat",
       "bytes": 84,
       "sha256": "0e5ca929abd3af513fe95497c0602ef8e2fcbb248d24734c9a77507c6a9ecf06"
+    },
+    {
+      "path": "start.ps1",
+      "bytes": 1282,
+      "sha256": "6d6a15fb06a739d642c8d06474b5d5d30f00a18dae1930ded74e539aae73a752"
     },
     {
       "path": "START_HERE.txt",
@@ -963,23 +1308,33 @@
     },
     {
       "path": "suanlin/__init__.py",
-      "bytes": 133,
-      "sha256": "e58077d5e8d53828f6db77d8ff61e6a5a0b12ac1f1b2c665b274d18811bdba84"
+      "bytes": 135,
+      "sha256": "f25bf595775178f16f667f137229241cc7f1f6b3125b8c750d12e633349089a0"
     },
     {
       "path": "suanlin/ai_scheduler.py",
-      "bytes": 8672,
-      "sha256": "304e8ed82cb70a56973cf292b16e12e46e1deaaf92dd44c4f3a531e2fd6d8388"
+      "bytes": 16476,
+      "sha256": "3ce1a6a8a574560bd7df5819178e0caa6f2bcdcdcb9c4f52e83dc7ac03f8626a"
     },
     {
       "path": "suanlin/business.py",
-      "bytes": 6342,
-      "sha256": "7d69c741cb9d4732bd1c84836bb57bad32629b79849cfee8a32b42cd22c4f77f"
+      "bytes": 6830,
+      "sha256": "5538314ab2ba78c1275b2f3c11f8afca01a5a2e9e3c7b1970b865a13069cf9c8"
+    },
+    {
+      "path": "suanlin/execution.py",
+      "bytes": 1692,
+      "sha256": "ab037389366462d1f22ac67b31f9ab5df9340f291743f04f53931f4d3a0afbc0"
     },
     {
       "path": "suanlin/inference.py",
-      "bytes": 4240,
-      "sha256": "eaf64d8bcd51c4e784fa76609d5a9002b231cf2fe345b1caf403591efa8abf0a"
+      "bytes": 4337,
+      "sha256": "8297aed12cb893cf1e7331290707a51ee5d0684252bbf61369271b2a8cc74c23"
+    },
+    {
+      "path": "suanlin/planning.py",
+      "bytes": 3224,
+      "sha256": "0d2a28860437b2d89b375742a30ab83a6dd547e9402c772b4b4af36d6799031f"
     },
     {
       "path": "suanlin/resources.py",
@@ -988,8 +1343,8 @@
     },
     {
       "path": "suanlin/scheduler.py",
-      "bytes": 6692,
-      "sha256": "5fa1025dce4e382fb34ec0e401e88104cad24f6245fa5bf96f3df44b4bd33ee8"
+      "bytes": 7201,
+      "sha256": "c3c4f1fafdc52a4f5fc75c712bbbdbbb6ac66e6f8ec1edaed530b4e492d36948"
     },
     {
       "path": "suanlin/server.py",
@@ -998,18 +1353,18 @@
     },
     {
       "path": "suanlin/store.py",
-      "bytes": 25422,
-      "sha256": "57bfcee464b610808273b3a69be3a507d9695fd4aa52544dcfde479b19e3a614"
+      "bytes": 29608,
+      "sha256": "8d808614fe9d9fbb8a4caa2c05d49e2e6567868622b66625e863680a5c2bf7d1"
     },
     {
       "path": "suanlin/worker.py",
-      "bytes": 7728,
-      "sha256": "c0df8235d22bca447939e74ce5349210634015b8fba13d82100c23a041b9322f"
+      "bytes": 8626,
+      "sha256": "7c2afaeca655bc99a504d4051477a4349b8b7d822fe372e71059944fb0c48b25"
     },
     {
       "path": "tests/test_ai_scheduler.py",
-      "bytes": 11536,
-      "sha256": "07e4e5e7a11ea3894cc2ddeb693dab6470bdfb080208086b4d69444edad9349a"
+      "bytes": 11706,
+      "sha256": "10cd451bba731eb7307612e3aac2c145a1b199920c619e325ca720e4fd96cb33"
     },
     {
       "path": "tests/test_business.py",
@@ -1030,6 +1385,11 @@
       "path": "tests/test_performance_suite.py",
       "bytes": 1670,
       "sha256": "ca97ebf00058167d45f329803bf8fef39e8076592b89d00859cc343edb5bacdf"
+    },
+    {
+      "path": "tests/test_rolling.py",
+      "bytes": 6120,
+      "sha256": "3cd217cbbc25912e0bd8c4851c909ebf76689a79c39ec0f8ce3b1d525acfa020"
     },
     {
       "path": "tests/test_system.py",
@@ -1058,8 +1418,8 @@
     },
     {
       "path": "tools/business_suite.py",
-      "bytes": 7828,
-      "sha256": "8ef78bc18f82ff7524784d16192286d4dd3669f016e6820c9deeaf593e98fde1"
+      "bytes": 7849,
+      "sha256": "19456ab7187f227a8504650f8380f3cb45521469933ffb5881d879d3eb9c1b9e"
     },
     {
       "path": "tools/capture_demo.py",
@@ -1078,8 +1438,8 @@
     },
     {
       "path": "tools/fault_worker.py",
-      "bytes": 1591,
-      "sha256": "29777bb60eebd78150b179782549a75399c403d1162664ecdfa3caac3987df75"
+      "bytes": 1597,
+      "sha256": "65dde6b97874fe4b0fa6afe88f73b092e3012efc040a8b523a17130493d06bf5"
     },
     {
       "path": "tools/field_evidence.py",
@@ -1103,8 +1463,8 @@
     },
     {
       "path": "tools/package_submission.py",
-      "bytes": 5690,
-      "sha256": "83942e466fe444187e95572ffe0641eff2c7560824be102d916192d551d8b1d5"
+      "bytes": 6138,
+      "sha256": "b3ecbcfc0defa302dceede19a0b774ac9d53d043007a10bee620c5caea91363b"
     },
     {
       "path": "tools/performance_suite.py",
@@ -1138,8 +1498,8 @@
     },
     {
       "path": "web/app.js",
-      "bytes": 69145,
-      "sha256": "4b73bc8688c158ab00c12023448aac8b972b393bebf45e78dd357e91ff8a3a3f"
+      "bytes": 69346,
+      "sha256": "a7c22564e6c23ccadf2b51a555b41f85c7aab715e126c0b418c13be0beb4890a"
     },
     {
       "path": "web/favicon.svg",
@@ -1153,8 +1513,8 @@
     },
     {
       "path": "web/index.html",
-      "bytes": 7398,
-      "sha256": "e8da484f0fa71d9726f78a4fb3afd657d99b14fa1ccee95dbd43abf2a2c145ff"
+      "bytes": 7346,
+      "sha256": "d5dc92830c55c80f882339ea6c066e659de819c1542956f41cabae5770c10a78"
     },
     {
       "path": "web/style.css",
@@ -1186,5 +1546,6 @@
       "bytes": 632139,
       "sha256": "fb39cc8f7b70028d332c1a2a139d09a65e30432c129ab2df709739f5db873e8a"
     }
-  ]
+  ],
+  "materials_version": "2.4.1-slot-aware"
 }

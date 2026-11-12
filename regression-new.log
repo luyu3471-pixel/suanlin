@@ -1,0 +1,107 @@
+test_cancelled_task_not_rewritten_by_model (test_ai_scheduler.SchedulerTests.test_cancelled_task_not_rewritten_by_model) ... ok
+test_dispatch_rebalances_busy_node_to_idle_peer (test_ai_scheduler.SchedulerTests.test_dispatch_rebalances_busy_node_to_idle_peer) ... ok
+test_feasible_model_plan_is_preserved_without_blanket_replacement (test_ai_scheduler.SchedulerTests.test_feasible_model_plan_is_preserved_without_blanket_replacement) ... ok
+test_heavy_queue_has_bounded_time_for_multiple_model_batches (test_ai_scheduler.SchedulerTests.test_heavy_queue_has_bounded_time_for_multiple_model_batches) ... ok
+test_invalid_model_assignments_rejected (test_ai_scheduler.SchedulerTests.test_invalid_model_assignments_rejected) ... ok
+test_model_call_outside_lock_and_no_raw_event (test_ai_scheduler.SchedulerTests.test_model_call_outside_lock_and_no_raw_event) ... ok
+test_model_request_batches_stay_within_eight_tasks (test_ai_scheduler.SchedulerTests.test_model_request_batches_stay_within_eight_tasks) ... ok
+test_overdue_active_slot_does_not_appear_almost_idle (test_ai_scheduler.SchedulerTests.test_overdue_active_slot_does_not_appear_almost_idle) ... ok
+test_plan_replay_does_not_mutate_slots_or_ignore_capacity (test_ai_scheduler.SchedulerTests.test_plan_replay_does_not_mutate_slots_or_ignore_capacity) ... ok
+test_rejoin_preserves_calibration_only_for_same_capacity (test_ai_scheduler.SchedulerTests.test_rejoin_preserves_calibration_only_for_same_capacity) ... ok
+test_repeated_sample_does_not_claim_fresh_measurement (test_ai_scheduler.SchedulerTests.test_repeated_sample_does_not_claim_fresh_measurement) ... ok
+test_resources_are_bounded_and_legacy_optional (test_ai_scheduler.SchedulerTests.test_resources_are_bounded_and_legacy_optional) ... ok
+test_revoked_trust_is_rechecked (test_ai_scheduler.SchedulerTests.test_revoked_trust_is_rechecked) ... ok
+test_simulation_cannot_masquerade_as_ai (test_ai_scheduler.SchedulerTests.test_simulation_cannot_masquerade_as_ai) ... ok
+test_stale_load_does_not_penalize (test_ai_scheduler.SchedulerTests.test_stale_load_does_not_penalize) ... ok
+test_timeout_uses_rules_without_failing_task (test_ai_scheduler.SchedulerTests.test_timeout_uses_rules_without_failing_task) ... ok
+test_wait_budget_falls_back (test_ai_scheduler.SchedulerTests.test_wait_budget_falls_back) ... ok
+test_whole_batch_avoids_blocking_long_job_with_short_job (test_ai_scheduler.SchedulerTests.test_whole_batch_avoids_blocking_long_job_with_short_job) ... ok
+test_archive_does_real_compression (test_business.BusinessTests.test_archive_does_real_compression) ... ok
+test_capability_memory_and_result_validation (test_business.BusinessTests.test_capability_memory_and_result_validation) ... ok
+test_invalid_unbounded_workloads_rejected (test_business.BusinessTests.test_invalid_unbounded_workloads_rejected) ... ok
+test_log_counts_and_quantiles (test_business.BusinessTests.test_log_counts_and_quantiles) ... ok
+test_retrieval_order_and_repeatability (test_business.BusinessTests.test_retrieval_order_and_repeatability) ... ok
+test_backlog_assigns_work_to_slower_idle_node (test_capacity.CapacityTests.test_backlog_assigns_work_to_slower_idle_node) ... ok
+test_capacity_and_independent_completion (test_capacity.CapacityTests.test_capacity_and_independent_completion) ... ok
+test_hash_training_does_not_poison_text_estimate (test_capacity.CapacityTests.test_hash_training_does_not_poison_text_estimate) ... ok
+test_invalid_capacity_and_privacy (test_capacity.CapacityTests.test_invalid_capacity_and_privacy) ... ok
+test_lease_expiry_does_not_resurrect_offline_node (test_capacity.CapacityTests.test_lease_expiry_does_not_resurrect_offline_node) ... ok
+test_light_single_task_keeps_cheaper_node (test_capacity.CapacityTests.test_light_single_task_keeps_cheaper_node) ... ok
+test_long_poll_wakes_on_submission (test_capacity.CapacityTests.test_long_poll_wakes_on_submission) ... ok
+test_multi_lease_heartbeat_cancel_and_recovery (test_capacity.CapacityTests.test_multi_lease_heartbeat_cancel_and_recovery) ... ok
+test_blank_and_unknown_labels_are_not_fabricated (test_field_evidence.EvidenceTests.test_blank_and_unknown_labels_are_not_fabricated) ... ok
+������ɣ�2����׼ȷ�� 100.0%��������Դ���ظ���ȱʧ�����鿴 metrics.json�������� D:\coedx\AI+6G\suanlin-qwen-optimized\tmp\field-tool-tests\tmpnvfblijq\20261112-010306-model-evaluation-fa9b09
+test_evaluation_discloses_training_overlap_and_missing_classes (test_field_evidence.EvidenceTests.test_evaluation_discloses_training_overlap_and_missing_classes) ... ok
+test_failed_and_unfinished_tasks_remain_in_denominator (test_field_evidence.EvidenceTests.test_failed_and_unfinished_tasks_remain_in_denominator) ... ok
+test_malformed_csv_is_rejected_with_a_useful_error (test_field_evidence.EvidenceTests.test_malformed_csv_is_rejected_with_a_useful_error) ... ok
+test_run_paths_and_csv_export_do_not_overwrite_or_execute_formulas (test_field_evidence.EvidenceTests.test_run_paths_and_csv_export_do_not_overwrite_or_execute_formulas) ... ok
+test_same_host_requires_explicit_test_flag (test_field_evidence.EvidenceTests.test_same_host_requires_explicit_test_flag) ... ok
+�������ݱ�������D:\coedx\AI+6G\suanlin-qwen-optimized\tmp\field-tool-tests\tmpd9tyzvit\20261112-010307-comparison-08b2e6
+�� 1/2 �� �̶����ڵ㣺��� 2/2����ʱ�� 100.0%
+�� 1/2 �� ��ѯ���䣺��� 2/2����ʱ�� 100.0%
+�� 1/2 �� ������䣺��� 2/2����ʱ�� 100.0%
+�� 1/2 �� ���ϵ��ȣ���� 2/2����ʱ�� 100.0%
+�� 2/2 �� ��ѯ���䣺��� 2/2����ʱ�� 100.0%
+�� 2/2 �� ������䣺��� 2/2����ʱ�� 100.0%
+�� 2/2 �� ���ϵ��ȣ���� 2/2����ʱ�� 100.0%
+�� 2/2 �� �̶����ڵ㣺��� 2/2����ʱ�� 100.0%
+������ɡ����˹���ʵ�豸��������Դ����ʹ�ñ��档
+test_comparison_records_real_results_and_synthetic_provenance (test_field_evidence.HTTPFieldTests.test_comparison_records_real_results_and_synthetic_provenance) ... ok
+�������ݱ�������D:\coedx\AI+6G\suanlin-qwen-optimized\tmp\field-tool-tests\tmpg25gpqge\20261112-010315-comparison-1ba835
+�� 1/2 �� �̶����ڵ㣺��� 1/1����ʱ�� 100.0%
+�� 1/2 �� ��ѯ���䣺��� 1/1����ʱ�� 100.0%
+�� 1/2 �� ������䣺��� 1/1����ʱ�� 100.0%
+�� 1/2 �� ���ϵ��ȣ���� 1/1����ʱ�� 100.0%
+�� 2/2 �� ��ѯ���䣺��� 1/1����ʱ�� 100.0%
+�� 2/2 �� ������䣺��� 1/1����ʱ�� 100.0%
+�� 2/2 �� ���ϵ��ȣ���� 1/1����ʱ�� 100.0%
+�� 2/2 �� �̶����ڵ㣺��� 1/1����ʱ�� 100.0%
+������ɡ����˹���ʵ�豸��������Դ����ʹ�ñ��档
+test_labeled_simulated_input_is_not_called_real_field_data (test_field_evidence.HTTPFieldTests.test_labeled_simulated_input_is_not_called_real_field_data) ... ok
+�ܿع��ϲ��Լ�¼��D:\coedx\AI+6G\suanlin-qwen-optimized\tmp\field-tool-tests\tmp710njf4s\20261112-010321-process-failure-ad85d9
+Ŀ��˱���ʹ�� tools/fault_worker.py ���������յ������ᰴԤ���˳���
+�ѹ۲쵽Ŀ�����ȡ�������ڵȴ���Լ���ںͽ��棬ͨ��Լ25�롣
+�۲���������δ�γ�ָ���ָ�֤�ݣ���� result.json
+test_normal_completion_is_not_mislabeled_as_fault_recovery (test_field_evidence.HTTPFieldTests.test_normal_completion_is_not_mislabeled_as_fault_recovery) ... ok
+�ܿع��ϲ��Լ�¼��D:\coedx\AI+6G\suanlin-qwen-optimized\tmp\field-tool-tests\tmp85yw_f7s\20261112-010324-process-failure-e932e2
+Ŀ��˱���ʹ�� tools/fault_worker.py ���������յ������ᰴԤ���˳���
+�ѹ۲쵽Ŀ�����ȡ�������ڵȴ���Լ���ںͽ��棬ͨ��Լ25�롣
+�۲����������жϺ�������ָ����������
+test_process_exit_is_recovered_by_another_worker_and_settings_restored (test_field_evidence.HTTPFieldTests.test_process_exit_is_recovered_by_another_worker_and_settings_restored) ... ok
+test_inputs_reproducible_and_valid_for_server_limits (test_performance_suite.PerformanceSuiteTests.test_inputs_reproducible_and_valid_for_server_limits) ... ok
+test_metrics_retain_failures_and_measure_parallel_overlap (test_performance_suite.PerformanceSuiteTests.test_metrics_retain_failures_and_measure_parallel_overlap) ... ok
+test_atomic_commit_rolls_back_on_database_error (test_rolling.RollingTests.test_atomic_commit_rolls_back_on_database_error) ... ok
+test_blocked_prefix_does_not_hide_executable_task (test_rolling.RollingTests.test_blocked_prefix_does_not_hide_executable_task) ... ok
+test_cooperative_cancel_and_progress (test_rolling.RollingTests.test_cooperative_cancel_and_progress) ... ok
+test_execution_order_matches_model_and_replay (test_rolling.RollingTests.test_execution_order_matches_model_and_replay) ... ok
+test_expired_plan_replans_but_frozen_does_not (test_rolling.RollingTests.test_expired_plan_replans_but_frozen_does_not) ... ok
+test_heartbeat_cancellation_requires_matching_worker_lease (test_rolling.RollingTests.test_heartbeat_cancellation_requires_matching_worker_lease) ... ok
+test_new_urgent_arrival_invalidates_snapshot (test_rolling.RollingTests.test_new_urgent_arrival_invalidates_snapshot) ... ok
+test_node_credentials_not_exposed (test_rolling.RollingTests.test_node_credentials_not_exposed) ... ok
+test_process_worker_stops_running_job_on_cancel (test_rolling.RollingTests.test_process_worker_stops_running_job_on_cancel) ... ok
+test_rejoin_during_model_call_rejects_old_plan (test_rolling.RollingTests.test_rejoin_during_model_call_rejects_old_plan) ... ok
+test_schema_rejects_duplicate_refs_and_wrong_snapshot (test_rolling.RollingTests.test_schema_rejects_duplicate_refs_and_wrong_snapshot) ... ok
+test_schema_valid_response_preserves_explicit_order (test_rolling.RollingTests.test_schema_valid_response_preserves_explicit_order) ... ok
+test_http_workers_execute_with_auth_and_reject_cross_origin (test_system.IntegrationTests.test_http_workers_execute_with_auth_and_reject_cross_origin) ... C:\Users\Yuzi\AppData\Local\Quark\User Data\quark-agent\resources\runtimes\python\3.14.6\Lib\tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 401: 'Unauthorized'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+C:\Users\Yuzi\AppData\Local\Quark\User Data\quark-agent\resources\runtimes\python\3.14.6\Lib\tempfile.py:484: ResourceWarning: Implicitly cleaning up <HTTPError 403: 'Forbidden'>
+  _warnings.warn(self.warn_message, ResourceWarning)
+ok
+test_simulation_is_reproducible_and_privacy_constrained (test_system.IntegrationTests.test_simulation_is_reproducible_and_privacy_constrained) ... ok
+test_cancellation_cannot_be_overwritten (test_system.StoreTests.test_cancellation_cannot_be_overwritten) ... ok
+test_completion_persists_and_does_not_expose_lease (test_system.StoreTests.test_completion_persists_and_does_not_expose_lease) ... ok
+test_duplicate_live_id_rejected (test_system.StoreTests.test_duplicate_live_id_rejected) ... ok
+test_expired_lease_rejects_late_result (test_system.StoreTests.test_expired_lease_rejects_late_result) ... ok
+test_idle_heartbeat_does_not_renew_undelivered_result (test_system.StoreTests.test_idle_heartbeat_does_not_renew_undelivered_result) ... ok
+test_invalid_result_preserves_running_slot (test_system.StoreTests.test_invalid_result_preserves_running_slot) ... ok
+test_local_only_does_not_use_untrusted_remote (test_system.StoreTests.test_local_only_does_not_use_untrusted_remote) ... ok
+test_max_attempts_and_heartbeat_renewal (test_system.StoreTests.test_max_attempts_and_heartbeat_renewal) ... ok
+test_real_inference (test_system.StoreTests.test_real_inference) ... ok
+test_restart_recovers_running_task (test_system.StoreTests.test_restart_recovers_running_task) ... ok
+test_seeded_random_choice_not_changed_by_polls (test_system.StoreTests.test_seeded_random_choice_not_changed_by_polls) ... ok
+test_validation_and_csv_formula_escape (test_system.StoreTests.test_validation_and_csv_formula_escape) ... ok
+
+----------------------------------------------------------------------
+Ran 69 tests in 55.903s
+
+OK
