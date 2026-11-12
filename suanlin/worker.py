@@ -79,7 +79,7 @@ class Worker:
                     try:
                         if not self.session:
                             result = self.post('/api/worker/register', dict(id=self.id, name=self.name,
-                                host=socket.gethostname(), bandwidth_mbps=self.bandwidth, capacity=self.capacity, resources=self.monitor.data, workload_kinds=list(KINDS)))
+                                host=socket.gethostname(), bandwidth_mbps=self.bandwidth, capacity=self.capacity, resources=self.monitor.data, workload_kinds=list(KINDS), file_workloads=True))
                             if self.capacity > result.get('capacity', 1):
                                 raise RuntimeError('Upgrade coordinator A before enabling concurrent workers')
                             self.session = result['session']

@@ -47,7 +47,13 @@ def run_task(payload, progress=None):
         from .business import run
         return run(payload['workload'], progress)
     start = time.perf_counter()
-    predictions = [MODEL.predict(x) for x in payload["events"]]
+    events, predictions = payload["events"], []
+    for index, event in enumerate(events):
+        if progress and index % 8 == 0:
+            progress('classify',index,len(events))
+        predictions.append(MODEL.predict(event))
+    if progress:
+        progress('classify',len(events),len(events))
     classification_ms = (time.perf_counter() - start) * 1000
     # Optional bounded CPU load for scheduling demonstrations. This is measured
     # separately and is never described as neural-model inference time.

@@ -5,9 +5,16 @@ from .business import features
 
 POLICIES = {"ai": "Qwen AI 调度", "smart": "联合调度", "fixed": "固定单节点", "round_robin": "轮询分配", "random": "随机分配"}
 
+def workload_cost(task):
+    spec = task['payload']['workload']
+    if 'input' in spec:
+        return spec['kind'] + ':files', max(1, task.get('payload_bytes', 0) / 1024)
+    return spec['kind'], spec['units']
+
+
 def cost_key(task, node):
-    spec = task['payload'].get('workload')
-    return (spec['kind'] if spec else 'text') + ':' + str(node.get('capacity',1))
+    name = workload_cost(task)[0] if task['payload'].get('workload') else 'text'
+    return name + ':' + str(node.get('capacity',1))
 
 def cost_profile(task, node):
     cost = service_ms(task,node)
@@ -30,8 +37,10 @@ def service_ms(task, node):
         compute = max(1.0, node.get('ms_per_unit', 20) * units)
     if payload.get('workload'):
         spec=payload['workload']
-        defaults={'log_analysis':.02,'document_search':.4,'archive':.08}
-        compute=node.get('business_ms_per_unit',{}).get(spec['kind'], defaults[spec['kind']])*spec['units']
+        name, units = workload_cost(task)
+        defaults = ({'log_analysis':.2,'document_search':.4,'archive':1.2} if 'input' in spec
+                    else {'log_analysis':.02,'document_search':.4,'archive':.08})
+        compute = node.get('business_ms_per_unit',{}).get(name,defaults[spec['kind']]) * units
     resources = node.get('resources', {})
     if time.time() - (node.get('resources_at') or 0) < 15:
         cpu = resources.get('cpu_percent', 0)
@@ -109,16 +118,25 @@ def optimize_plan(tasks, nodes, now):
         if not improved: break
     return assignments, score
 
-def eligible(task, node):
-    if node.get('draining') or not node.get('online',True) or (task.get('privacy')=='local_only' and not node.get('trusted',False)):
-        return False
-    spec=task.get('payload',{}).get('workload')
+def node_block_reason(task, node):
+    if not node.get('online',True):
+        return 'offline'
+    if node.get('draining'):
+        return 'paused'
+    if task.get('privacy') == 'local_only' and not node.get('trusted',False):
+        return 'untrusted'
+    spec = task.get('payload',{}).get('workload')
     if spec:
-        if spec['kind'] not in node.get('workload_kinds',[]): return False
-        available=node.get('resources',{}).get('memory_available_gib')
-        if available is not None and features(spec)['estimated_memory_mib']*max(1,node.get('capacity',1)) > max(0,available-1)*1024:
-            return False
-    return True
+        if spec['kind'] not in node.get('workload_kinds',[]) or ('input' in spec and not node.get('file_workloads')):
+            return 'unsupported'
+        available = node.get('resources',{}).get('memory_available_gib')
+        if available is not None and features(spec)['estimated_memory_mib'] * max(1,node.get('capacity',1)) > max(0,available-1)*1024:
+            return 'memory'
+    return None
+
+
+def eligible(task, node):
+    return node_block_reason(task, node) is None
 
 
 def choose(task, nodes, now, policy="smart", turn=0, rng=None):

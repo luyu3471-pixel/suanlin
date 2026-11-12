@@ -113,6 +113,12 @@ class Handler(BaseHTTPRequestHandler):
                     return self.send(200, self.store.snapshot())
                 if path == "/api/tasks/export.csv":
                     return self.send(200, self.store.export_csv(), "text/csv; charset=utf-8", {"Content-Disposition": 'attachment; filename="suanlin-tasks.csv"'})
+                if path.startswith("/api/tasks/") and path.endswith("/result.zip"):
+                    task_id = path[len("/api/tasks/"):-len("/result.zip")]
+                    archive = self.store.task_archive(task_id)
+                    if archive is None:
+                        return self.send(404, {"error": "此任务没有可下载的压缩包"})
+                    return self.send(200, archive, "application/zip", {"Content-Disposition": 'attachment; filename="redacted.zip"'})
                 if path.startswith("/api/tasks/"):
                     return self.send(200, self.store.task(path.rsplit("/", 1)[-1]))
                 if path == "/api/experiments":

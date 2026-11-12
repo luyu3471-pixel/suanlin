@@ -1,4 +1,4 @@
-"""Deterministic synthetic inputs, real business algorithms, no artificial hash loops."""
+"""Business workloads for uploaded inputs and reproducible benchmarks."""
 from collections import Counter, defaultdict
 import hashlib
 import io
@@ -8,6 +8,7 @@ import random
 import re
 import time
 import zlib
+from . import practical
 
 KINDS = ('log_analysis', 'document_search', 'archive')
 LIMITS = {'log_analysis': (1000, 2000000), 'document_search': (100, 100000), 'archive': (1000, 500000)}
@@ -23,10 +24,14 @@ SEED_TEXTS = (
 )
 
 def validate(spec):
-    if not isinstance(spec, dict) or set(spec)-{'kind','units','seed'}:
-        raise ValueError('workload needs only kind, units and seed')
+    if not isinstance(spec, dict) or set(spec)-{'kind','units','seed','input'}:
+        raise ValueError('业务任务输入格式无效')
     kind=spec.get('kind'); units=spec.get('units'); seed=spec.get('seed',2030)
     if kind not in KINDS: raise ValueError('Unknown business workload')
+    if 'input' in spec:
+        source = practical.validate_input(kind, spec['input'])
+        units = len(source['files']) if kind == 'document_search' else max(1, len(source['files'][0]['text'].splitlines()))
+        return {'kind':kind,'units':units,'input':source}
     low,high=LIMITS[kind]
     if isinstance(units,bool) or not isinstance(units,int) or not low<=units<=high:
         raise ValueError(f'{kind} units must be {low}..{high}')
@@ -35,10 +40,11 @@ def validate(spec):
     return {'kind':kind,'units':units,'seed':seed}
 
 def features(spec):
-    spec=validate(spec); kind=spec['kind']; units=spec['units']
+    kind, units = spec['kind'], spec['units']
+    provided = 'input' in spec
     # Conservative budgeting, not a measured resident-set guarantee.
     return {'kind':kind,'units':units,'estimated_memory_mib':round(128+(units*.008 if kind=='document_search' else units*.0002),1),
-            'cpu_only':True,'input_source':'seeded_synthetic','streaming':kind=='archive'}
+            'cpu_only':True,'input_source':'provided_text' if provided else 'seeded_synthetic','streaming':kind=='archive'}
 
 def generate_records(spec):
     rng=random.Random(spec['seed'])
@@ -99,10 +105,23 @@ def archive(spec, progress=None):
 
 def run(spec, progress=None):
     spec=validate(spec);start=time.perf_counter()
-    summary={'log_analysis':log_analysis,'document_search':document_search,'archive':archive}[spec['kind']](spec,progress)
+    kind, artifact = spec['kind'], None
+    provided = 'input' in spec
+    if provided:
+        report = progress or (lambda stage, done, total: None)
+        if kind == 'archive':
+            summary, artifact = practical.redact(spec['input'], report)
+        else:
+            handler = practical.analyze if kind == 'log_analysis' else practical.search
+            summary = handler(spec['input'], report)
+        workload = {'kind':kind,'units':spec['units'],'input_digest':practical.input_digest(spec)}
+    else:
+        summary = {'log_analysis':log_analysis,'document_search':document_search,'archive':archive}[kind](spec,progress)
+        workload = spec
     if progress: progress('complete',spec['units'],spec['units'])
     elapsed=round((time.perf_counter()-start)*1000,3)
     digest=hashlib.sha256(json.dumps(summary,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
-    return {'predictions':[],'model':'business-algorithms-v1','workload':spec,'summary':summary,'digest':digest,
+    return {'predictions':[],'model':'business-algorithms-v1','workload':workload,'summary':summary,'digest':digest,
             'compute_ms':elapsed,'classification_ms':0,'load_ms':0,'load_loops':0,
-            'input_source':'seeded_synthetic; business algorithms actually executed'}
+            'input_source':'provided_text' if provided else 'seeded_synthetic; business algorithms actually executed',
+            **({'artifact_base64':artifact} if artifact else {})}

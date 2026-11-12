@@ -1,3 +1,4 @@
+import base64
 import csv
 import copy
 import io
@@ -10,11 +11,11 @@ import threading
 import time
 import uuid
 from pathlib import Path
-from . import __version__
+from . import __version__, practical
 from .resources import sanitize
 from .business import validate as validate_workload, KINDS
 from .scheduler import choose, estimate_ms, reserve, service_ms, text_units, POLICIES, eligible
-from .scheduler import cost_key
+from .scheduler import cost_key, node_block_reason, workload_cost
 from .planning import queue_key
 
 OFFLINE_SECONDS = 10
@@ -115,6 +116,8 @@ class Store:
             privacy = data.get("privacy", "local_only")
             if policy not in POLICIES or privacy not in ("local_only", "any"):
                 raise InputError("无效的调度策略或数据范围")
+            if workload and 'input' in workload and privacy != 'local_only':
+                raise InputError('文件任务仅分配给可信执行电脑')
             loops = number(data.get("compute_loops", 0), "负载循环", 0, 2000000)
             if not isinstance(loops, int):
                 raise InputError("负载循环应为整数")
@@ -167,6 +170,7 @@ class Store:
             kinds=data.get('workload_kinds',[])
             if not isinstance(kinds,list) or any(k not in KINDS for k in kinds): raise InputError('Invalid workload capability')
             n['workload_kinds']=sorted(set(kinds))
+            n['file_workloads'] = data.get('file_workloads') is True
             if previous and previous.get('host') == host and previous.get('capacity', 1) == capacity:
                 for key in ('business_ms_per_unit', 'text_ms_per_unit', 'hash_ms_per_unit', 'overhead_ms'):
                     if key in previous: n[key] = previous[key]
@@ -367,8 +371,18 @@ class Store:
             else:
                 if not isinstance(result, dict) or not isinstance(result.get("predictions"), list) or (not t["payload"].get("workload") and len(result["predictions"]) != len(t["payload"]["events"])):
                     raise InputError("推理结果不完整")
-                if t['payload'].get('workload') and (result.get('workload')!=t['payload']['workload'] or not isinstance(result.get('summary'),dict) or result.get('model')!='business-algorithms-v1'):
-                    raise InputError('Business result mismatch')
+                spec = t['payload'].get('workload')
+                if spec:
+                    provided = 'input' in spec
+                    expected = ({'kind':spec['kind'],'units':spec['units'],'input_digest':practical.input_digest(spec)}
+                                if provided else spec)
+                    if (result.get('workload') != expected or not isinstance(result.get('summary'),dict)
+                            or result.get('model') != 'business-algorithms-v1'):
+                        raise InputError("业务结果与任务不匹配")
+                    if provided and spec['kind'] == 'archive':
+                        self.archive_bytes(result)
+                if not (spec and 'input' in spec and spec['kind'] == 'archive'):
+                    result.pop('artifact_base64', None)
                 compute_ms = number(result.get("compute_ms"), "计算耗时", 0, 3600000)
                 stats=n.setdefault('cost_stats',{}).setdefault(cost_key(t,n),{'samples':0,'relative_error':.35})
                 stats['samples']+=1
@@ -376,9 +390,10 @@ class Store:
                 load_ms = number(result.get('load_ms', 0), '附加负载耗时', 0, 3600000)
                 classify_ms = number(result.get('classification_ms', max(0, compute_ms - load_ms)), '分类耗时', 0, 3600000)
                 if t['payload'].get('workload'):
-                    spec=t['payload']['workload']; costs=n.setdefault('business_ms_per_unit',{})
-                    measured=compute_ms/spec['units']
-                    costs[spec['kind']]=.5*costs.get(spec['kind'],measured)+.5*measured
+                    name, units = workload_cost(t)
+                    costs = n.setdefault('business_ms_per_unit',{})
+                    measured = compute_ms / units
+                    costs[name] = .5 * costs.get(name,measured) + .5 * measured
                 else:
                     n['text_ms_per_unit'] = .65 * n.get('text_ms_per_unit', .2) + .35 * classify_ms / text_units(t['payload'])
                 if t['payload'].get('compute_loops'):
@@ -432,6 +447,13 @@ class Store:
         if not detail:
             excluded.update(("payload", "result"))
         public = copy.deepcopy({k: v for k, v in t.items() if k not in excluded})
+        if detail:
+            spec = public.get('payload', {}).get('workload')
+            if spec and 'input' in spec:
+                spec['input_meta'] = practical.input_metadata(spec)
+                del spec['input']
+            if isinstance(public.get('result'),dict):
+                public['result']['download_available'] = bool(public['result'].pop('artifact_base64', None))
         for d in [public.get('scheduler_decision',{})]+public.get('plan_history',[]):
             d.pop('node_session',None)
         return public
@@ -457,7 +479,7 @@ class Store:
                 bucket = node_tasks.get(task.get('worker_id'))
                 if bucket is not None and len(bucket['recent']) < 3:
                     bucket['recent'].append(copy.deepcopy({k: task[k] for k in topology_keys if k in task}))
-            return {"server_time": now, "version": __version__, "ai_scheduler": dict(self.ai.status) if self.ai else {"enabled": False}, "nodes": nodes, "tasks": [self.public_task(t) for t in tasks[:200]],
+            return {"server_time": now, "version": __version__, "capabilities": {"file_workloads": True}, "ai_scheduler": dict(self.ai.status) if self.ai else {"enabled": False}, "nodes": nodes, "tasks": [self.public_task(t) for t in tasks[:200]],
                     "topology": {"node_tasks": node_tasks, "recent_limit": 3},
                     "counts": {s: sum(t["status"] == s for t in tasks) for s in ("queued", "running", "completed", "failed", "cancelled")},
                     "metrics": {"total": len(tasks), "completed": len(done), "deadline_rate": sum(t.get("deadline_met", False) for t in done) / len(tasks) if tasks else None,
@@ -468,12 +490,49 @@ class Store:
                     "measurement": "application_loopback" if all(n["mode"] == "same_host" for n in nodes) else "mixed_hosts",
                     "policies": POLICIES}
 
+    def dispatch_status(self, task):
+        nodes = self.candidates(time.time())
+        if task.get('fixed_worker_id') and task['policy'] == 'fixed':
+            nodes = [node for node in nodes if node['id'] == task['fixed_worker_id']]
+        reasons = [node_block_reason(task,node) for node in nodes]
+        candidates = [node for node, reason in zip(nodes,reasons) if reason is None]
+        free = sum(len(node.get('active_tasks',{})) < node.get('capacity',1) for node in candidates)
+        if candidates:
+            reason = ('busy' if not free else 'planning' if task['policy'] == 'ai' and self.ai
+                      and not task.get('scheduler_decision') else 'dispatch')
+        else:
+            reason = next((key for key in ('memory','unsupported','untrusted','paused') if key in reasons), 'offline')
+        return {'reason':reason,'eligible':len(candidates),'free':free,'online':sum(node['online'] for node in nodes)}
+
     def task(self, task_id):
         with self.lock:
             t = self.tasks.get(task_id)
             if not t:
                 raise InputError("任务不存在")
-            return self.public_task(t, True)
+            public = self.public_task(t, True)
+            if t['status'] == 'queued':
+                public['dispatch'] = self.dispatch_status(t)
+            return public
+
+    @staticmethod
+    def archive_bytes(result):
+        encoded = result.get('artifact_base64')
+        if not isinstance(encoded,str) or len(encoded) > 560 * 1024:
+            raise InputError("脱敏压缩包无效")
+        try:
+            data = base64.b64decode(encoded, validate=True)
+        except ValueError as exc:
+            raise InputError("脱敏压缩包编码无效") from exc
+        if len(data) > 420 * 1024 or not data.startswith(b'PK\x03\x04'):
+            raise InputError("脱敏压缩包无效")
+        return data
+
+    def task_archive(self, task_id):
+        with self.lock:
+            task = self.tasks.get(task_id)
+            if not task or task['status'] != 'completed' or not (task.get('result') or {}).get('artifact_base64'):
+                return None
+            return self.archive_bytes(task['result'])
 
     def export_csv(self):
         with self.lock:

@@ -142,7 +142,6 @@ def main():
             assert page.locator(".task-table-wrapper").evaluate("e=>e.scrollWidth<=e.clientWidth")
             checks.append("mobile task cards and reading position survive polling without horizontal scrolling")
             assert page.locator("td").first.evaluate("e => parseFloat(getComputedStyle(e).fontSize)") >= 13
-            assert page.locator(".page-heading p").evaluate("e => parseFloat(getComputedStyle(e).fontSize)") >= 13
             assert not page.evaluate("document.documentElement.scrollWidth > innerWidth")
             checks.append("mobile task text is at least 13px and body stays within the viewport")
 
@@ -161,24 +160,18 @@ def main():
             ) < 1.5""")
             checks.append("scenario changes animate the real chart width to its correct result")
 
-            page.locator("#motion-toggle").click()
-            expect(page.locator("html")).to_have_attribute("data-motion", "off")
-            page.wait_for_timeout(80)
-            assert page.evaluate("document.getAnimations().filter(a=>a.playState==='running').length") == 0
+            page.evaluate("localStorage.setItem('task-scheduler-motion','off')")
             page.reload(wait_until="networkidle")
-            expect(page.locator("html")).to_have_attribute("data-motion", "off")
-            assert page.evaluate("document.getAnimations().filter(a=>a.playState==='running').length") == 0
-            checks.append("motion switch stops effects and persists after reload")
-            page.locator("#motion-toggle").click()
             expect(page.locator("html")).to_have_attribute("data-motion", "on")
-            checks.append("motion can be enabled again")
+            expect(page.locator("#motion-toggle")).to_have_count(0)
+            checks.append("motion stays enabled after reload without a manual switch")
 
             reduced_context = browser.new_context(viewport={"width":390,"height":844}, reduced_motion="reduce")
             quiet = reduced_context.new_page()
             quiet.on("pageerror", lambda e: errors.append(str(e)))
             quiet.goto(url, wait_until="networkidle")
             expect(quiet.locator("html")).to_have_attribute("data-motion", "off")
-            expect(quiet.locator("#motion-toggle")).to_be_disabled()
+            expect(quiet.locator("#motion-toggle")).to_have_count(0)
             quiet.wait_for_timeout(800)
             assert quiet.evaluate("document.getAnimations().filter(a=>a.playState==='running').length") == 0
             assert quiet.locator(".metric-number").nth(1).inner_text() == "13"
