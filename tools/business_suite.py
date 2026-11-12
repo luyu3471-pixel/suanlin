@@ -53,7 +53,7 @@ def main():
     if args.profile not in data['profiles']:p.error('Profile absent; use --dataset benchmarks/business-v2.json for throughput')
     payloads=data['profiles'][args.profile]
     client=Client(args.url,args.token_file);before=client.call('/api/status')
-    if before.get('version') not in ('2.3.0-business-workloads','2.4.0-slot-aware','2.4.1-slot-aware') or not before.get('ai_scheduler',{}).get('enabled'):
+    if before.get('version') not in ('2.3.0-business-workloads','2.4.0-slot-aware','2.4.1-slot-aware','2.5.0-qwen-rolling') or not before.get('ai_scheduler',{}).get('enabled'):
         raise ValueError('Start the business-workload coordinator with Qwen scheduling enabled')
     nodes={n['id']:n for n in before['nodes']}
     if before['counts']['queued'] or before['counts']['running']:raise ValueError('Wait for current work to finish')

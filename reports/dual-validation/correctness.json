@@ -1,0 +1,53 @@
+{
+  "checks": [
+    {
+      "id": "66b874858754",
+      "worker": "local-1",
+      "kind": "log_analysis",
+      "digest_match": true
+    },
+    {
+      "id": "eceb1ae6bd24",
+      "worker": "local-1",
+      "kind": "document_search",
+      "digest_match": true
+    },
+    {
+      "id": "2bf3e2cb4ae8",
+      "worker": "local-1",
+      "kind": "log_analysis",
+      "digest_match": true
+    },
+    {
+      "id": "aa56af7706bb",
+      "worker": "local-1",
+      "kind": "document_search",
+      "digest_match": true
+    },
+    {
+      "id": "b53fa15fee1d",
+      "worker": "local-1",
+      "kind": "log_analysis",
+      "digest_match": true
+    },
+    {
+      "id": "42f05df800da",
+      "worker": "local-1",
+      "kind": "document_search",
+      "digest_match": true
+    },
+    {
+      "id": "9f69ea781694",
+      "worker": "office-b",
+      "kind": "log_analysis",
+      "digest_match": true
+    },
+    {
+      "id": "90ed4679ba05",
+      "worker": "office-b",
+      "kind": "document_search",
+      "digest_match": true
+    }
+  ],
+  "archive": "not validated: compressed bytes are discarded; cross-runtime content verification still pending"
+}

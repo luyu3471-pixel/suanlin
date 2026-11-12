@@ -1,2 +1,2 @@
 """多终端任务调度系统：面向办公巡检事件的多终端 AI 算力协同原型。"""
-__version__ = "2.4.1-slot-aware"
+__version__ = "2.5.0-qwen-rolling"

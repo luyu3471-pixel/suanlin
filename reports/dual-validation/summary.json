@@ -1,0 +1,25 @@
+{
+  "status": {
+    "completed": 12
+  },
+  "workers": {
+    "local-1": 8,
+    "office-b": 4
+  },
+  "sources": {
+    "qwen": 12
+  },
+  "reasons": {
+    "model_assignment": 12
+  },
+  "deadline_met": 12,
+  "ai": {
+    "enabled": true,
+    "model": "qwen3.5-9b",
+    "calls": 2,
+    "accepted": 12,
+    "guarded": 0,
+    "dispatch_repairs": 0,
+    "errors": 0
+  }
+}

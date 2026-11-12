@@ -23,10 +23,10 @@ def main():
     token = Path(args.token_file).read_text(encoding='utf-8-sig').strip()
     if not token:
         parser.error('令牌为空')
-    def deliberate_exit(payload):
+    def deliberate_exit(payload, *args):
         print('已领取测试任务：现在按预设退出本进程。仅用于受控进程中断验证，退出码73。', flush=True)
         os._exit(73)
-    worker_module.run_task = deliberate_exit
+    worker_module.execute = deliberate_exit
     print('故障注入模式已启动：收到第一项任务后退出自身。不会关闭其他程序、断网或关机。', flush=True)
     try:
         worker_module.Worker(args.coordinator, token, args.name, args.id).run()

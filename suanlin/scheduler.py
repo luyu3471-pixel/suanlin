@@ -5,6 +5,17 @@ from .business import features
 
 POLICIES = {"ai": "Qwen AI 调度", "smart": "联合调度", "fixed": "固定单节点", "round_robin": "轮询分配", "random": "随机分配"}
 
+def cost_key(task, node):
+    spec = task['payload'].get('workload')
+    return (spec['kind'] if spec else 'text') + ':' + str(node.get('capacity',1))
+
+def cost_profile(task, node):
+    cost = service_ms(task,node)
+    stats = node.get('cost_stats',{}).get(cost_key(task,node),{})
+    deviation = stats.get('relative_error',.35)
+    return {'service_ms':round(cost,2),'conservative_ms':round(cost*(1+2*deviation),2),
+            'samples':stats.get('samples',0),'capacity':node.get('capacity',1)}
+
 def text_units(payload):
     return max(1.0, sum(len(x) for x in payload['events']) / 32)
 

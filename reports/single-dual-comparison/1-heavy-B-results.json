@@ -1,0 +1,3506 @@
+[
+  {
+    "id": "694631af5d94",
+    "name": "single-dual-1-heavy-B-0",
+    "created_at": 1794417424.9847336,
+    "deadline_at": 1794417544.9847336,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2700
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2700
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114982592,
+        "status_counts": {
+          "200": 449962,
+          "400": 35149,
+          "500": 14889
+        },
+        "alert_terms": {
+          "冒烟": 62564,
+          "断线": 62338,
+          "告警": 62523,
+          "温度偏高": 62600,
+          "超时": 62628
+        },
+        "p95_latency_ms": 172.84,
+        "top_error_devices": [
+          [
+            "edge-279",
+            {
+              "count": 1013,
+              "errors": 129,
+              "latency": 72420.86999999998
+            }
+          ],
+          [
+            "edge-282",
+            {
+              "count": 969,
+              "errors": 126,
+              "latency": 66368.52000000002
+            }
+          ],
+          [
+            "edge-289",
+            {
+              "count": 1084,
+              "errors": 123,
+              "latency": 76414.10999999999
+            }
+          ],
+          [
+            "edge-112",
+            {
+              "count": 1039,
+              "errors": 121,
+              "latency": 74074.19000000003
+            }
+          ],
+          [
+            "edge-304",
+            {
+              "count": 1035,
+              "errors": 120,
+              "latency": 73321.04999999994
+            }
+          ],
+          [
+            "edge-235",
+            {
+              "count": 982,
+              "errors": 120,
+              "latency": 69446.55
+            }
+          ],
+          [
+            "edge-097",
+            {
+              "count": 944,
+              "errors": 120,
+              "latency": 66099.51999999996
+            }
+          ],
+          [
+            "edge-330",
+            {
+              "count": 1016,
+              "errors": 119,
+              "latency": 70846.37999999996
+            }
+          ],
+          [
+            "edge-044",
+            {
+              "count": 999,
+              "errors": 119,
+              "latency": 71703.55999999998
+            }
+          ],
+          [
+            "edge-212",
+            {
+              "count": 989,
+              "errors": 119,
+              "latency": 66354.92999999998
+            }
+          ]
+        ]
+      },
+      "digest": "30ad1fa256354d15f991d34e4f7bbe07d634d663f34ced63b4235c265dab4595",
+      "compute_ms": 12999.7,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417425.184378,
+    "predicted_ms": 31448.49897283921,
+    "revision": 1,
+    "finished_at": 1794417438.2741458,
+    "latency_ms": 13289.412,
+    "deadline_met": true
+  },
+  {
+    "id": "0ac9a1c79a3e",
+    "name": "single-dual-1-heavy-B-1",
+    "created_at": 1794417425.0340147,
+    "deadline_at": 1794417545.0340147,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2701
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2701
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114977523,
+        "status_counts": {
+          "200": 449843,
+          "400": 35240,
+          "500": 14917
+        },
+        "alert_terms": {
+          "告警": 62197,
+          "温度偏高": 62648,
+          "超时": 62739,
+          "冒烟": 62416,
+          "断线": 62481
+        },
+        "p95_latency_ms": 172.58,
+        "top_error_devices": [
+          [
+            "edge-479",
+            {
+              "count": 1030,
+              "errors": 128,
+              "latency": 72210.57000000012
+            }
+          ],
+          [
+            "edge-118",
+            {
+              "count": 1009,
+              "errors": 126,
+              "latency": 71956.6599999999
+            }
+          ],
+          [
+            "edge-168",
+            {
+              "count": 1046,
+              "errors": 125,
+              "latency": 74036.65999999997
+            }
+          ],
+          [
+            "edge-404",
+            {
+              "count": 1025,
+              "errors": 123,
+              "latency": 69806.96
+            }
+          ],
+          [
+            "edge-319",
+            {
+              "count": 993,
+              "errors": 123,
+              "latency": 65925.96000000005
+            }
+          ],
+          [
+            "edge-477",
+            {
+              "count": 976,
+              "errors": 122,
+              "latency": 69197.31000000003
+            }
+          ],
+          [
+            "edge-462",
+            {
+              "count": 1038,
+              "errors": 121,
+              "latency": 74501.2499999999
+            }
+          ],
+          [
+            "edge-081",
+            {
+              "count": 1006,
+              "errors": 121,
+              "latency": 71143.35000000003
+            }
+          ],
+          [
+            "edge-448",
+            {
+              "count": 995,
+              "errors": 121,
+              "latency": 70341.43999999993
+            }
+          ],
+          [
+            "edge-306",
+            {
+              "count": 962,
+              "errors": 120,
+              "latency": 67281.86000000003
+            }
+          ]
+        ]
+      },
+      "digest": "e5ff420472c6b491c70284c8a85457885283beebc408747a6acac1a3901537a3",
+      "compute_ms": 13488.008,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417425.4509954,
+    "predicted_ms": 31448.49897283921,
+    "revision": 1,
+    "finished_at": 1794417439.0371525,
+    "latency_ms": 14003.138,
+    "deadline_met": true
+  },
+  {
+    "id": "a001c42c8267",
+    "name": "single-dual-1-heavy-B-2",
+    "created_at": 1794417425.0839846,
+    "deadline_at": 1794417545.0839846,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2702
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2702
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114980475,
+        "status_counts": {
+          "200": 449764,
+          "400": 35221,
+          "500": 15015
+        },
+        "alert_terms": {
+          "断线": 62736,
+          "冒烟": 62527,
+          "温度偏高": 62490,
+          "超时": 62592,
+          "告警": 62508
+        },
+        "p95_latency_ms": 172.55,
+        "top_error_devices": [
+          [
+            "edge-393",
+            {
+              "count": 1066,
+              "errors": 128,
+              "latency": 74524.95999999988
+            }
+          ],
+          [
+            "edge-018",
+            {
+              "count": 1050,
+              "errors": 126,
+              "latency": 73974.63
+            }
+          ],
+          [
+            "edge-150",
+            {
+              "count": 1000,
+              "errors": 125,
+              "latency": 71210.1799999999
+            }
+          ],
+          [
+            "edge-235",
+            {
+              "count": 990,
+              "errors": 124,
+              "latency": 67745.28999999989
+            }
+          ],
+          [
+            "edge-239",
+            {
+              "count": 971,
+              "errors": 124,
+              "latency": 68885.68999999997
+            }
+          ],
+          [
+            "edge-227",
+            {
+              "count": 971,
+              "errors": 123,
+              "latency": 69563.94000000006
+            }
+          ],
+          [
+            "edge-409",
+            {
+              "count": 956,
+              "errors": 123,
+              "latency": 64958.460000000116
+            }
+          ],
+          [
+            "edge-358",
+            {
+              "count": 1019,
+              "errors": 120,
+              "latency": 72568.29000000007
+            }
+          ],
+          [
+            "edge-379",
+            {
+              "count": 990,
+              "errors": 120,
+              "latency": 69823.26999999995
+            }
+          ],
+          [
+            "edge-233",
+            {
+              "count": 1016,
+              "errors": 119,
+              "latency": 71306.13999999991
+            }
+          ]
+        ]
+      },
+      "digest": "bd9443ce7fe3e07c76987b075f20e0e1b364cdd7be54c760da869e7c90f52f23",
+      "compute_ms": 13274.689,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417425.7173023,
+    "predicted_ms": 31448.49897283921,
+    "revision": 1,
+    "finished_at": 1794417439.1488192,
+    "latency_ms": 14064.835,
+    "deadline_met": true
+  },
+  {
+    "id": "cfffa6a55858",
+    "name": "single-dual-1-heavy-B-3",
+    "created_at": 1794417425.1340346,
+    "deadline_at": 1794417545.1340346,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2703
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2703
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114975879,
+        "status_counts": {
+          "200": 449923,
+          "400": 34966,
+          "500": 15111
+        },
+        "alert_terms": {
+          "超时": 62428,
+          "冒烟": 62386,
+          "告警": 62726,
+          "断线": 62811,
+          "温度偏高": 62124
+        },
+        "p95_latency_ms": 172.47,
+        "top_error_devices": [
+          [
+            "edge-494",
+            {
+              "count": 988,
+              "errors": 130,
+              "latency": 68803.67000000011
+            }
+          ],
+          [
+            "edge-053",
+            {
+              "count": 950,
+              "errors": 130,
+              "latency": 67606.12000000001
+            }
+          ],
+          [
+            "edge-312",
+            {
+              "count": 1069,
+              "errors": 129,
+              "latency": 74647.30999999985
+            }
+          ],
+          [
+            "edge-456",
+            {
+              "count": 1020,
+              "errors": 128,
+              "latency": 69764.23000000004
+            }
+          ],
+          [
+            "edge-336",
+            {
+              "count": 937,
+              "errors": 125,
+              "latency": 64711.58
+            }
+          ],
+          [
+            "edge-405",
+            {
+              "count": 1009,
+              "errors": 124,
+              "latency": 72697.05000000005
+            }
+          ],
+          [
+            "edge-483",
+            {
+              "count": 1078,
+              "errors": 123,
+              "latency": 71602.69999999995
+            }
+          ],
+          [
+            "edge-279",
+            {
+              "count": 1006,
+              "errors": 121,
+              "latency": 71577.03999999998
+            }
+          ],
+          [
+            "edge-087",
+            {
+              "count": 1001,
+              "errors": 121,
+              "latency": 72234.37000000014
+            }
+          ],
+          [
+            "edge-355",
+            {
+              "count": 994,
+              "errors": 121,
+              "latency": 69390.02999999993
+            }
+          ]
+        ]
+      },
+      "digest": "ef35d68b6926e170cc92c2b91782beb791c98388386d8b81dec7c3c7b47b0b13",
+      "compute_ms": 12959.446,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417426.017659,
+    "predicted_ms": 31448.49897283921,
+    "revision": 1,
+    "finished_at": 1794417439.2614377,
+    "latency_ms": 14127.403,
+    "deadline_met": true
+  },
+  {
+    "id": "6610220e7e4b",
+    "name": "single-dual-1-heavy-B-4",
+    "created_at": 1794417425.2508788,
+    "deadline_at": 1794417545.2508788,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2704
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2704
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114979139,
+        "status_counts": {
+          "200": 449844,
+          "400": 34957,
+          "500": 15199
+        },
+        "alert_terms": {
+          "超时": 62575,
+          "冒烟": 62382,
+          "温度偏高": 62454,
+          "告警": 62388,
+          "断线": 62475
+        },
+        "p95_latency_ms": 173.54,
+        "top_error_devices": [
+          [
+            "edge-443",
+            {
+              "count": 920,
+              "errors": 126,
+              "latency": 66932.26000000004
+            }
+          ],
+          [
+            "edge-473",
+            {
+              "count": 977,
+              "errors": 125,
+              "latency": 67626.03999999998
+            }
+          ],
+          [
+            "edge-433",
+            {
+              "count": 1039,
+              "errors": 124,
+              "latency": 70771.28000000009
+            }
+          ],
+          [
+            "edge-090",
+            {
+              "count": 978,
+              "errors": 123,
+              "latency": 70537.81999999992
+            }
+          ],
+          [
+            "edge-472",
+            {
+              "count": 967,
+              "errors": 122,
+              "latency": 69868.80999999998
+            }
+          ],
+          [
+            "edge-452",
+            {
+              "count": 961,
+              "errors": 121,
+              "latency": 67580.18999999989
+            }
+          ],
+          [
+            "edge-300",
+            {
+              "count": 1018,
+              "errors": 120,
+              "latency": 72206.98000000003
+            }
+          ],
+          [
+            "edge-467",
+            {
+              "count": 987,
+              "errors": 120,
+              "latency": 66521.16000000003
+            }
+          ],
+          [
+            "edge-301",
+            {
+              "count": 988,
+              "errors": 119,
+              "latency": 68678.80999999998
+            }
+          ],
+          [
+            "edge-031",
+            {
+              "count": 986,
+              "errors": 119,
+              "latency": 67745.35999999996
+            }
+          ]
+        ]
+      },
+      "digest": "ec9e68338ae71a1e3256d369c5b2c633a29742ce1496e9d15a0c2eb9745b64e6",
+      "compute_ms": 12298.522,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417438.393337,
+    "predicted_ms": 23264.561917505405,
+    "revision": 1,
+    "finished_at": 1794417450.809368,
+    "latency_ms": 25558.489,
+    "deadline_met": true
+  },
+  {
+    "id": "175271403ef4",
+    "name": "single-dual-1-heavy-B-5",
+    "created_at": 1794417425.3008149,
+    "deadline_at": 1794417545.3008149,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2705
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2705
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114980290,
+        "status_counts": {
+          "400": 35212,
+          "200": 449786,
+          "500": 15002
+        },
+        "alert_terms": {
+          "温度偏高": 62466,
+          "超时": 62583,
+          "断线": 62234,
+          "告警": 62571,
+          "冒烟": 62539
+        },
+        "p95_latency_ms": 172.86,
+        "top_error_devices": [
+          [
+            "edge-413",
+            {
+              "count": 1033,
+              "errors": 126,
+              "latency": 70500.74000000002
+            }
+          ],
+          [
+            "edge-197",
+            {
+              "count": 1015,
+              "errors": 124,
+              "latency": 72741.31999999998
+            }
+          ],
+          [
+            "edge-285",
+            {
+              "count": 1007,
+              "errors": 123,
+              "latency": 69801.71000000006
+            }
+          ],
+          [
+            "edge-301",
+            {
+              "count": 980,
+              "errors": 123,
+              "latency": 68949.40000000007
+            }
+          ],
+          [
+            "edge-405",
+            {
+              "count": 983,
+              "errors": 122,
+              "latency": 66885.26999999997
+            }
+          ],
+          [
+            "edge-062",
+            {
+              "count": 974,
+              "errors": 122,
+              "latency": 64450.08000000003
+            }
+          ],
+          [
+            "edge-179",
+            {
+              "count": 1047,
+              "errors": 121,
+              "latency": 71135.21999999991
+            }
+          ],
+          [
+            "edge-336",
+            {
+              "count": 1041,
+              "errors": 121,
+              "latency": 73119.96000000004
+            }
+          ],
+          [
+            "edge-048",
+            {
+              "count": 978,
+              "errors": 121,
+              "latency": 68984.5500000001
+            }
+          ],
+          [
+            "edge-363",
+            {
+              "count": 989,
+              "errors": 119,
+              "latency": 68747.50000000003
+            }
+          ]
+        ]
+      },
+      "digest": "1c04333193d5a4912b555a4cc47f13f00b7241ac62c991d8e811880ff080e674",
+      "compute_ms": 12820.494,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417439.374069,
+    "predicted_ms": 16291.574373337317,
+    "revision": 1,
+    "finished_at": 1794417452.3056726,
+    "latency_ms": 27004.858,
+    "deadline_met": true
+  },
+  {
+    "id": "8a696d320881",
+    "name": "single-dual-1-heavy-B-6",
+    "created_at": 1794417425.3508968,
+    "deadline_at": 1794417545.3508968,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2706
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2706
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114981918,
+        "status_counts": {
+          "200": 450093,
+          "400": 34888,
+          "500": 15019
+        },
+        "alert_terms": {
+          "超时": 62896,
+          "温度偏高": 62666,
+          "告警": 62640,
+          "断线": 62623,
+          "冒烟": 62465
+        },
+        "p95_latency_ms": 172.74,
+        "top_error_devices": [
+          [
+            "edge-326",
+            {
+              "count": 1065,
+              "errors": 134,
+              "latency": 73054.97
+            }
+          ],
+          [
+            "edge-264",
+            {
+              "count": 1015,
+              "errors": 128,
+              "latency": 71570.17
+            }
+          ],
+          [
+            "edge-460",
+            {
+              "count": 1018,
+              "errors": 126,
+              "latency": 70128.12000000007
+            }
+          ],
+          [
+            "edge-303",
+            {
+              "count": 980,
+              "errors": 126,
+              "latency": 66673.55999999995
+            }
+          ],
+          [
+            "edge-165",
+            {
+              "count": 1049,
+              "errors": 123,
+              "latency": 74685.38999999985
+            }
+          ],
+          [
+            "edge-103",
+            {
+              "count": 998,
+              "errors": 122,
+              "latency": 68983.73999999985
+            }
+          ],
+          [
+            "edge-014",
+            {
+              "count": 1056,
+              "errors": 121,
+              "latency": 75070.14999999998
+            }
+          ],
+          [
+            "edge-169",
+            {
+              "count": 1001,
+              "errors": 120,
+              "latency": 70214.45999999992
+            }
+          ],
+          [
+            "edge-134",
+            {
+              "count": 991,
+              "errors": 119,
+              "latency": 69998.7
+            }
+          ],
+          [
+            "edge-505",
+            {
+              "count": 977,
+              "errors": 119,
+              "latency": 70842.08000000019
+            }
+          ]
+        ]
+      },
+      "digest": "12acd250e8f7db8ed12246f1bc22fad6ddc8d46971dfe1fe91c07c95b176a643",
+      "compute_ms": 12013.964,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417439.4620657,
+    "predicted_ms": 16291.574373337317,
+    "revision": 1,
+    "finished_at": 1794417451.5886893,
+    "latency_ms": 26237.792,
+    "deadline_met": true
+  },
+  {
+    "id": "8f3fe7df0e20",
+    "name": "single-dual-1-heavy-B-7",
+    "created_at": 1794417425.4009051,
+    "deadline_at": 1794417545.4009051,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2707
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2707
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114985856,
+        "status_counts": {
+          "200": 449589,
+          "500": 15093,
+          "400": 35318
+        },
+        "alert_terms": {
+          "断线": 62259,
+          "冒烟": 62557,
+          "温度偏高": 62681,
+          "超时": 62551,
+          "告警": 62839
+        },
+        "p95_latency_ms": 172.87,
+        "top_error_devices": [
+          [
+            "edge-017",
+            {
+              "count": 987,
+              "errors": 138,
+              "latency": 67642.91999999995
+            }
+          ],
+          [
+            "edge-230",
+            {
+              "count": 1014,
+              "errors": 137,
+              "latency": 73078.32000000015
+            }
+          ],
+          [
+            "edge-135",
+            {
+              "count": 981,
+              "errors": 127,
+              "latency": 66856.16999999993
+            }
+          ],
+          [
+            "edge-190",
+            {
+              "count": 978,
+              "errors": 127,
+              "latency": 70325.43999999999
+            }
+          ],
+          [
+            "edge-011",
+            {
+              "count": 1000,
+              "errors": 124,
+              "latency": 72433.22999999995
+            }
+          ],
+          [
+            "edge-080",
+            {
+              "count": 967,
+              "errors": 124,
+              "latency": 67597.45999999999
+            }
+          ],
+          [
+            "edge-438",
+            {
+              "count": 1018,
+              "errors": 123,
+              "latency": 69902.68000000007
+            }
+          ],
+          [
+            "edge-047",
+            {
+              "count": 1009,
+              "errors": 123,
+              "latency": 69638.55000000005
+            }
+          ],
+          [
+            "edge-201",
+            {
+              "count": 989,
+              "errors": 121,
+              "latency": 67185.91999999995
+            }
+          ],
+          [
+            "edge-224",
+            {
+              "count": 1007,
+              "errors": 120,
+              "latency": 70585.35999999994
+            }
+          ]
+        ]
+      },
+      "digest": "80e9c3a8823c11a68febe054fed14badeed324c7ec738c0830f17865f7c0cf7c",
+      "compute_ms": 12666.429,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417439.5508401,
+    "predicted_ms": 16291.574373337317,
+    "revision": 1,
+    "finished_at": 1794417452.443058,
+    "latency_ms": 27042.153,
+    "deadline_met": true
+  },
+  {
+    "id": "a932eed29329",
+    "name": "single-dual-1-heavy-B-8",
+    "created_at": 1794417425.5261145,
+    "deadline_at": 1794417545.5261145,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2708
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2708
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114975645,
+        "status_counts": {
+          "200": 449823,
+          "400": 35285,
+          "500": 14892
+        },
+        "alert_terms": {
+          "断线": 62504,
+          "告警": 62654,
+          "冒烟": 62203,
+          "超时": 62483,
+          "温度偏高": 62115
+        },
+        "p95_latency_ms": 173.15,
+        "top_error_devices": [
+          [
+            "edge-103",
+            {
+              "count": 1006,
+              "errors": 130,
+              "latency": 72530.98999999992
+            }
+          ],
+          [
+            "edge-085",
+            {
+              "count": 996,
+              "errors": 126,
+              "latency": 69529.34999999992
+            }
+          ],
+          [
+            "edge-021",
+            {
+              "count": 1018,
+              "errors": 125,
+              "latency": 72238.75999999992
+            }
+          ],
+          [
+            "edge-442",
+            {
+              "count": 963,
+              "errors": 125,
+              "latency": 67143.19
+            }
+          ],
+          [
+            "edge-333",
+            {
+              "count": 921,
+              "errors": 122,
+              "latency": 64957.82999999993
+            }
+          ],
+          [
+            "edge-230",
+            {
+              "count": 1037,
+              "errors": 120,
+              "latency": 71744.21999999999
+            }
+          ],
+          [
+            "edge-150",
+            {
+              "count": 1025,
+              "errors": 120,
+              "latency": 68611.87000000002
+            }
+          ],
+          [
+            "edge-064",
+            {
+              "count": 1013,
+              "errors": 120,
+              "latency": 70455.39000000001
+            }
+          ],
+          [
+            "edge-448",
+            {
+              "count": 983,
+              "errors": 120,
+              "latency": 72203.37000000008
+            }
+          ],
+          [
+            "edge-111",
+            {
+              "count": 1010,
+              "errors": 119,
+              "latency": 67874.02000000002
+            }
+          ]
+        ]
+      },
+      "digest": "278ab005a154b185a8ae57e9461ac9cc3c988afb6658e7bd2eaffb476c791314",
+      "compute_ms": 12097.506,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417450.9504757,
+    "predicted_ms": 15288.385486869753,
+    "revision": 1,
+    "finished_at": 1794417463.1470854,
+    "latency_ms": 37620.971,
+    "deadline_met": true
+  },
+  {
+    "id": "6e32d6060fcd",
+    "name": "single-dual-1-heavy-B-9",
+    "created_at": 1794417425.575672,
+    "deadline_at": 1794417545.575672,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2709
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2709
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114980894,
+        "status_counts": {
+          "200": 450237,
+          "400": 34921,
+          "500": 14842
+        },
+        "alert_terms": {
+          "断线": 62292,
+          "温度偏高": 62319,
+          "冒烟": 62612,
+          "超时": 62337,
+          "告警": 62804
+        },
+        "p95_latency_ms": 172.51,
+        "top_error_devices": [
+          [
+            "edge-360",
+            {
+              "count": 984,
+              "errors": 128,
+              "latency": 68454.14000000003
+            }
+          ],
+          [
+            "edge-195",
+            {
+              "count": 1017,
+              "errors": 125,
+              "latency": 68297.19999999987
+            }
+          ],
+          [
+            "edge-511",
+            {
+              "count": 1086,
+              "errors": 122,
+              "latency": 75296.85000000005
+            }
+          ],
+          [
+            "edge-082",
+            {
+              "count": 981,
+              "errors": 121,
+              "latency": 72150.58000000005
+            }
+          ],
+          [
+            "edge-058",
+            {
+              "count": 1049,
+              "errors": 120,
+              "latency": 72718.72000000002
+            }
+          ],
+          [
+            "edge-157",
+            {
+              "count": 918,
+              "errors": 120,
+              "latency": 60638.840000000084
+            }
+          ],
+          [
+            "edge-201",
+            {
+              "count": 1041,
+              "errors": 119,
+              "latency": 72669.16
+            }
+          ],
+          [
+            "edge-168",
+            {
+              "count": 1014,
+              "errors": 119,
+              "latency": 67629.75000000001
+            }
+          ],
+          [
+            "edge-306",
+            {
+              "count": 1008,
+              "errors": 119,
+              "latency": 71715.40999999997
+            }
+          ],
+          [
+            "edge-247",
+            {
+              "count": 1007,
+              "errors": 119,
+              "latency": 69457.1100000001
+            }
+          ]
+        ]
+      },
+      "digest": "df51666c5ec4cf4154f46772456f8c7652c60388236f6f6e0cb65da49fcf069f",
+      "compute_ms": 12102.598,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417451.7612119,
+    "predicted_ms": 14617.206170620762,
+    "revision": 1,
+    "finished_at": 1794417463.9587426,
+    "latency_ms": 38383.071,
+    "deadline_met": true
+  },
+  {
+    "id": "f7eb2e08e8b9",
+    "name": "single-dual-1-heavy-B-10",
+    "created_at": 1794417425.621588,
+    "deadline_at": 1794417545.621588,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2710
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2710
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114977676,
+        "status_counts": {
+          "200": 449762,
+          "400": 35154,
+          "500": 15084
+        },
+        "alert_terms": {
+          "断线": 62538,
+          "冒烟": 62512,
+          "告警": 62492,
+          "超时": 62445,
+          "温度偏高": 62605
+        },
+        "p95_latency_ms": 172.65,
+        "top_error_devices": [
+          [
+            "edge-303",
+            {
+              "count": 1014,
+              "errors": 127,
+              "latency": 69994.88999999998
+            }
+          ],
+          [
+            "edge-400",
+            {
+              "count": 983,
+              "errors": 127,
+              "latency": 69718.84000000007
+            }
+          ],
+          [
+            "edge-179",
+            {
+              "count": 977,
+              "errors": 126,
+              "latency": 68950.08000000002
+            }
+          ],
+          [
+            "edge-052",
+            {
+              "count": 981,
+              "errors": 125,
+              "latency": 70565.53000000001
+            }
+          ],
+          [
+            "edge-365",
+            {
+              "count": 957,
+              "errors": 125,
+              "latency": 67453.44000000002
+            }
+          ],
+          [
+            "edge-286",
+            {
+              "count": 1011,
+              "errors": 123,
+              "latency": 70154.06000000013
+            }
+          ],
+          [
+            "edge-014",
+            {
+              "count": 1038,
+              "errors": 122,
+              "latency": 72396.16000000009
+            }
+          ],
+          [
+            "edge-160",
+            {
+              "count": 1021,
+              "errors": 122,
+              "latency": 70568.82000000002
+            }
+          ],
+          [
+            "edge-212",
+            {
+              "count": 998,
+              "errors": 122,
+              "latency": 68740.63000000002
+            }
+          ],
+          [
+            "edge-450",
+            {
+              "count": 1074,
+              "errors": 121,
+              "latency": 70244.68000000007
+            }
+          ]
+        ]
+      },
+      "digest": "4d94904a5286ee0f2ff13c0ac73058917152160c6feaf1c27cf715417356e6e8",
+      "compute_ms": 12067.158,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417452.6231964,
+    "predicted_ms": 14753.599402536844,
+    "revision": 1,
+    "finished_at": 1794417464.797219,
+    "latency_ms": 39175.631,
+    "deadline_met": true
+  },
+  {
+    "id": "50df25afb2c1",
+    "name": "single-dual-1-heavy-B-11",
+    "created_at": 1794417425.6671925,
+    "deadline_at": 1794417545.6671925,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2711
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2711
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114983523,
+        "status_counts": {
+          "200": 450439,
+          "400": 34642,
+          "500": 14919
+        },
+        "alert_terms": {
+          "温度偏高": 62499,
+          "超时": 62354,
+          "断线": 62213,
+          "告警": 62554,
+          "冒烟": 62961
+        },
+        "p95_latency_ms": 172.62,
+        "top_error_devices": [
+          [
+            "edge-511",
+            {
+              "count": 1024,
+              "errors": 131,
+              "latency": 71669.45999999998
+            }
+          ],
+          [
+            "edge-372",
+            {
+              "count": 989,
+              "errors": 124,
+              "latency": 70463.57999999986
+            }
+          ],
+          [
+            "edge-355",
+            {
+              "count": 1058,
+              "errors": 122,
+              "latency": 75008.35000000015
+            }
+          ],
+          [
+            "edge-287",
+            {
+              "count": 1055,
+              "errors": 121,
+              "latency": 71722.95000000007
+            }
+          ],
+          [
+            "edge-168",
+            {
+              "count": 1018,
+              "errors": 121,
+              "latency": 69359.41999999998
+            }
+          ],
+          [
+            "edge-499",
+            {
+              "count": 994,
+              "errors": 120,
+              "latency": 73707.23999999998
+            }
+          ],
+          [
+            "edge-196",
+            {
+              "count": 978,
+              "errors": 120,
+              "latency": 69083.43999999987
+            }
+          ],
+          [
+            "edge-411",
+            {
+              "count": 1021,
+              "errors": 119,
+              "latency": 72486.92
+            }
+          ],
+          [
+            "edge-055",
+            {
+              "count": 1001,
+              "errors": 118,
+              "latency": 65055.79999999989
+            }
+          ],
+          [
+            "edge-317",
+            {
+              "count": 986,
+              "errors": 118,
+              "latency": 68102.01000000001
+            }
+          ]
+        ]
+      },
+      "digest": "cf569971bd6227c7b1a623febf6dda1ca600446d98a16b1a841bc2d3c18f018e",
+      "compute_ms": 11996.036,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417452.7267337,
+    "predicted_ms": 14753.599402536844,
+    "revision": 1,
+    "finished_at": 1794417464.950903,
+    "latency_ms": 39283.71,
+    "deadline_met": true
+  },
+  {
+    "id": "2eb2292346b6",
+    "name": "single-dual-1-heavy-B-12",
+    "created_at": 1794417425.7931242,
+    "deadline_at": 1794417545.7931242,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2712
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2712
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114980147,
+        "status_counts": {
+          "200": 450192,
+          "400": 34872,
+          "500": 14936
+        },
+        "alert_terms": {
+          "断线": 62310,
+          "温度偏高": 62655,
+          "超时": 62535,
+          "告警": 62442,
+          "冒烟": 62569
+        },
+        "p95_latency_ms": 173.07,
+        "top_error_devices": [
+          [
+            "edge-164",
+            {
+              "count": 975,
+              "errors": 131,
+              "latency": 70960.10999999999
+            }
+          ],
+          [
+            "edge-361",
+            {
+              "count": 1084,
+              "errors": 124,
+              "latency": 78621.84999999996
+            }
+          ],
+          [
+            "edge-419",
+            {
+              "count": 976,
+              "errors": 124,
+              "latency": 65045.87000000005
+            }
+          ],
+          [
+            "edge-284",
+            {
+              "count": 1002,
+              "errors": 123,
+              "latency": 69106.99999999996
+            }
+          ],
+          [
+            "edge-396",
+            {
+              "count": 977,
+              "errors": 123,
+              "latency": 68587.29000000002
+            }
+          ],
+          [
+            "edge-475",
+            {
+              "count": 1014,
+              "errors": 122,
+              "latency": 70389.65000000002
+            }
+          ],
+          [
+            "edge-044",
+            {
+              "count": 1006,
+              "errors": 121,
+              "latency": 73189.45000000003
+            }
+          ],
+          [
+            "edge-069",
+            {
+              "count": 1044,
+              "errors": 120,
+              "latency": 71852.62000000004
+            }
+          ],
+          [
+            "edge-156",
+            {
+              "count": 978,
+              "errors": 120,
+              "latency": 65037.670000000035
+            }
+          ],
+          [
+            "edge-244",
+            {
+              "count": 966,
+              "errors": 120,
+              "latency": 67983.99
+            }
+          ]
+        ]
+      },
+      "digest": "14cef02725e74a66cb8d2de125c152dfb945deac560b85e67124162475fef0df",
+      "compute_ms": 12869.995,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417463.3225253,
+    "predicted_ms": 14392.716637576857,
+    "revision": 1,
+    "finished_at": 1794417476.3180242,
+    "latency_ms": 50524.9,
+    "deadline_met": true
+  },
+  {
+    "id": "fca0413e8151",
+    "name": "single-dual-1-heavy-B-13",
+    "created_at": 1794417425.8426197,
+    "deadline_at": 1794417545.8426197,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2713
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2713
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114979969,
+        "status_counts": {
+          "200": 450070,
+          "500": 14766,
+          "400": 35164
+        },
+        "alert_terms": {
+          "冒烟": 62903,
+          "断线": 62708,
+          "告警": 62525,
+          "温度偏高": 62303,
+          "超时": 62621
+        },
+        "p95_latency_ms": 172.68,
+        "top_error_devices": [
+          [
+            "edge-404",
+            {
+              "count": 1033,
+              "errors": 129,
+              "latency": 70321.43999999994
+            }
+          ],
+          [
+            "edge-039",
+            {
+              "count": 1050,
+              "errors": 127,
+              "latency": 71996.84999999996
+            }
+          ],
+          [
+            "edge-374",
+            {
+              "count": 961,
+              "errors": 125,
+              "latency": 69463.13000000008
+            }
+          ],
+          [
+            "edge-026",
+            {
+              "count": 1016,
+              "errors": 120,
+              "latency": 74170.43000000005
+            }
+          ],
+          [
+            "edge-237",
+            {
+              "count": 1006,
+              "errors": 119,
+              "latency": 74268.62999999987
+            }
+          ],
+          [
+            "edge-271",
+            {
+              "count": 1004,
+              "errors": 119,
+              "latency": 67532.81000000001
+            }
+          ],
+          [
+            "edge-376",
+            {
+              "count": 989,
+              "errors": 119,
+              "latency": 72214.72999999991
+            }
+          ],
+          [
+            "edge-294",
+            {
+              "count": 1052,
+              "errors": 118,
+              "latency": 71522.59000000004
+            }
+          ],
+          [
+            "edge-063",
+            {
+              "count": 1031,
+              "errors": 118,
+              "latency": 72487.54999999987
+            }
+          ],
+          [
+            "edge-432",
+            {
+              "count": 1021,
+              "errors": 118,
+              "latency": 71065.29000000005
+            }
+          ]
+        ]
+      },
+      "digest": "99415e735968aaf42f9211149f886ff67ed65ab4e174aa93f8e129b6a940b1bc",
+      "compute_ms": 12672.328,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417464.1311002,
+    "predicted_ms": 14222.274869067209,
+    "revision": 1,
+    "finished_at": 1794417476.9173434,
+    "latency_ms": 51074.724,
+    "deadline_met": true
+  },
+  {
+    "id": "afe09bf7c9b2",
+    "name": "single-dual-1-heavy-B-14",
+    "created_at": 1794417425.922109,
+    "deadline_at": 1794417545.922109,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2714
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2714
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114987699,
+        "status_counts": {
+          "200": 450387,
+          "400": 34721,
+          "500": 14892
+        },
+        "alert_terms": {
+          "冒烟": 62481,
+          "温度偏高": 63088,
+          "告警": 62697,
+          "断线": 62466,
+          "超时": 62256
+        },
+        "p95_latency_ms": 172.69,
+        "top_error_devices": [
+          [
+            "edge-262",
+            {
+              "count": 1013,
+              "errors": 148,
+              "latency": 71065.4699999999
+            }
+          ],
+          [
+            "edge-068",
+            {
+              "count": 1001,
+              "errors": 124,
+              "latency": 71413.53999999992
+            }
+          ],
+          [
+            "edge-346",
+            {
+              "count": 987,
+              "errors": 124,
+              "latency": 68766.75999999997
+            }
+          ],
+          [
+            "edge-193",
+            {
+              "count": 1003,
+              "errors": 123,
+              "latency": 67696.03999999996
+            }
+          ],
+          [
+            "edge-333",
+            {
+              "count": 974,
+              "errors": 123,
+              "latency": 67797.73999999996
+            }
+          ],
+          [
+            "edge-292",
+            {
+              "count": 971,
+              "errors": 120,
+              "latency": 68045.48999999993
+            }
+          ],
+          [
+            "edge-116",
+            {
+              "count": 988,
+              "errors": 119,
+              "latency": 67175.28
+            }
+          ],
+          [
+            "edge-149",
+            {
+              "count": 957,
+              "errors": 118,
+              "latency": 63554.789999999986
+            }
+          ],
+          [
+            "edge-242",
+            {
+              "count": 1037,
+              "errors": 117,
+              "latency": 74347.33999999995
+            }
+          ],
+          [
+            "edge-330",
+            {
+              "count": 982,
+              "errors": 117,
+              "latency": 67336.73999999996
+            }
+          ]
+        ]
+      },
+      "digest": "00fe9fad62aebefd9c975443a5f2059ea9fa0088dd7caf12408d76b6b8d66657",
+      "compute_ms": 13039.993,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417465.0722573,
+    "predicted_ms": 14045.572989641361,
+    "revision": 1,
+    "finished_at": 1794417478.3549328,
+    "latency_ms": 52432.824,
+    "deadline_met": true
+  },
+  {
+    "id": "96106fdddd50",
+    "name": "single-dual-1-heavy-B-15",
+    "created_at": 1794417425.967317,
+    "deadline_at": 1794417545.967317,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2715
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2715
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114978327,
+        "status_counts": {
+          "200": 449815,
+          "400": 34993,
+          "500": 15192
+        },
+        "alert_terms": {
+          "断线": 62705,
+          "冒烟": 62746,
+          "告警": 62535,
+          "超时": 62539,
+          "温度偏高": 62313
+        },
+        "p95_latency_ms": 173.01,
+        "top_error_devices": [
+          [
+            "edge-300",
+            {
+              "count": 1025,
+              "errors": 140,
+              "latency": 70886.99000000003
+            }
+          ],
+          [
+            "edge-222",
+            {
+              "count": 1064,
+              "errors": 133,
+              "latency": 77142.18999999997
+            }
+          ],
+          [
+            "edge-414",
+            {
+              "count": 1040,
+              "errors": 126,
+              "latency": 72965.87999999996
+            }
+          ],
+          [
+            "edge-232",
+            {
+              "count": 1026,
+              "errors": 125,
+              "latency": 70710.56000000007
+            }
+          ],
+          [
+            "edge-096",
+            {
+              "count": 1085,
+              "errors": 124,
+              "latency": 76815.16000000002
+            }
+          ],
+          [
+            "edge-471",
+            {
+              "count": 1001,
+              "errors": 121,
+              "latency": 69896.63999999994
+            }
+          ],
+          [
+            "edge-470",
+            {
+              "count": 998,
+              "errors": 121,
+              "latency": 68547.14000000009
+            }
+          ],
+          [
+            "edge-479",
+            {
+              "count": 1041,
+              "errors": 120,
+              "latency": 73551.75
+            }
+          ],
+          [
+            "edge-492",
+            {
+              "count": 987,
+              "errors": 120,
+              "latency": 68448.54000000004
+            }
+          ],
+          [
+            "edge-237",
+            {
+              "count": 976,
+              "errors": 119,
+              "latency": 68033.33999999994
+            }
+          ]
+        ]
+      },
+      "digest": "b0c50c8d1392ea4f802964a5187f1515d2222459d97c00bb04025cde8f5929ab",
+      "compute_ms": 12896.102,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417465.156176,
+    "predicted_ms": 14045.572989641361,
+    "revision": 1,
+    "finished_at": 1794417478.1614091,
+    "latency_ms": 52194.092,
+    "deadline_met": true
+  },
+  {
+    "id": "e2bdb311314c",
+    "name": "single-dual-1-heavy-B-16",
+    "created_at": 1794417426.092833,
+    "deadline_at": 1794417546.092833,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2716
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2716
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114983421,
+        "status_counts": {
+          "200": 449933,
+          "400": 35050,
+          "500": 15017
+        },
+        "alert_terms": {
+          "断线": 62146,
+          "超时": 62358,
+          "冒烟": 62444,
+          "告警": 62500,
+          "温度偏高": 62511
+        },
+        "p95_latency_ms": 173.04,
+        "top_error_devices": [
+          [
+            "edge-415",
+            {
+              "count": 1003,
+              "errors": 126,
+              "latency": 72638.75999999997
+            }
+          ],
+          [
+            "edge-374",
+            {
+              "count": 980,
+              "errors": 126,
+              "latency": 65894.40000000004
+            }
+          ],
+          [
+            "edge-283",
+            {
+              "count": 1040,
+              "errors": 125,
+              "latency": 70924.04999999999
+            }
+          ],
+          [
+            "edge-108",
+            {
+              "count": 1039,
+              "errors": 124,
+              "latency": 73078.52999999998
+            }
+          ],
+          [
+            "edge-242",
+            {
+              "count": 988,
+              "errors": 124,
+              "latency": 67113.85
+            }
+          ],
+          [
+            "edge-497",
+            {
+              "count": 1017,
+              "errors": 122,
+              "latency": 69839.06999999995
+            }
+          ],
+          [
+            "edge-261",
+            {
+              "count": 1009,
+              "errors": 121,
+              "latency": 69018.63000000002
+            }
+          ],
+          [
+            "edge-427",
+            {
+              "count": 995,
+              "errors": 121,
+              "latency": 71719.39000000006
+            }
+          ],
+          [
+            "edge-235",
+            {
+              "count": 949,
+              "errors": 121,
+              "latency": 66841.87999999996
+            }
+          ],
+          [
+            "edge-315",
+            {
+              "count": 1013,
+              "errors": 120,
+              "latency": 73143.50000000001
+            }
+          ]
+        ]
+      },
+      "digest": "d1d186b0441a3ac756a69bbb2234403063f7ca341ce9d8445e6e1af606f6ffdd",
+      "compute_ms": 14770.657,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417476.4431798,
+    "predicted_ms": 14795.577549881971,
+    "revision": 1,
+    "finished_at": 1794417491.3130486,
+    "latency_ms": 65220.216,
+    "deadline_met": true
+  },
+  {
+    "id": "ac68d428277b",
+    "name": "single-dual-1-heavy-B-17",
+    "created_at": 1794417426.142405,
+    "deadline_at": 1794417546.142405,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2717
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2717
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114972854,
+        "status_counts": {
+          "200": 450170,
+          "400": 34915,
+          "500": 14915
+        },
+        "alert_terms": {
+          "断线": 62568,
+          "告警": 62381,
+          "冒烟": 62276,
+          "超时": 62723,
+          "温度偏高": 62221
+        },
+        "p95_latency_ms": 172.13,
+        "top_error_devices": [
+          [
+            "edge-416",
+            {
+              "count": 965,
+              "errors": 125,
+              "latency": 67499.76999999995
+            }
+          ],
+          [
+            "edge-265",
+            {
+              "count": 1046,
+              "errors": 123,
+              "latency": 71352.14999999998
+            }
+          ],
+          [
+            "edge-062",
+            {
+              "count": 1014,
+              "errors": 123,
+              "latency": 68729.5899999999
+            }
+          ],
+          [
+            "edge-423",
+            {
+              "count": 1001,
+              "errors": 123,
+              "latency": 71851.91999999997
+            }
+          ],
+          [
+            "edge-299",
+            {
+              "count": 941,
+              "errors": 123,
+              "latency": 64035.20999999995
+            }
+          ],
+          [
+            "edge-441",
+            {
+              "count": 1023,
+              "errors": 122,
+              "latency": 70286.83000000012
+            }
+          ],
+          [
+            "edge-195",
+            {
+              "count": 1030,
+              "errors": 121,
+              "latency": 72292.53999999998
+            }
+          ],
+          [
+            "edge-231",
+            {
+              "count": 1018,
+              "errors": 121,
+              "latency": 69905.18999999996
+            }
+          ],
+          [
+            "edge-333",
+            {
+              "count": 1012,
+              "errors": 121,
+              "latency": 70690.61000000015
+            }
+          ],
+          [
+            "edge-269",
+            {
+              "count": 996,
+              "errors": 121,
+              "latency": 69625.41999999993
+            }
+          ]
+        ]
+      },
+      "digest": "763196f4adfcf54a86b8e39a73cea804746da3c0de4609df3ec08902bd6189d2",
+      "compute_ms": 14445.366,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417477.0336738,
+    "predicted_ms": 14910.067321315079,
+    "revision": 1,
+    "finished_at": 1794417491.5919485,
+    "latency_ms": 65449.543,
+    "deadline_met": true
+  },
+  {
+    "id": "d14d9ed3fa6e",
+    "name": "single-dual-1-heavy-B-18",
+    "created_at": 1794417426.1923444,
+    "deadline_at": 1794417546.1923444,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2718
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2718
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114977056,
+        "status_counts": {
+          "200": 450029,
+          "400": 34864,
+          "500": 15107
+        },
+        "alert_terms": {
+          "断线": 62654,
+          "告警": 62575,
+          "温度偏高": 62300,
+          "冒烟": 62421,
+          "超时": 62371
+        },
+        "p95_latency_ms": 173.13,
+        "top_error_devices": [
+          [
+            "edge-363",
+            {
+              "count": 1027,
+              "errors": 128,
+              "latency": 70497.56999999999
+            }
+          ],
+          [
+            "edge-385",
+            {
+              "count": 1000,
+              "errors": 125,
+              "latency": 69147.91000000002
+            }
+          ],
+          [
+            "edge-361",
+            {
+              "count": 1017,
+              "errors": 123,
+              "latency": 71470.42000000001
+            }
+          ],
+          [
+            "edge-352",
+            {
+              "count": 1000,
+              "errors": 123,
+              "latency": 72045.06
+            }
+          ],
+          [
+            "edge-166",
+            {
+              "count": 1018,
+              "errors": 121,
+              "latency": 71997.37000000002
+            }
+          ],
+          [
+            "edge-464",
+            {
+              "count": 1004,
+              "errors": 121,
+              "latency": 70098.66999999998
+            }
+          ],
+          [
+            "edge-393",
+            {
+              "count": 1050,
+              "errors": 119,
+              "latency": 76924.03999999992
+            }
+          ],
+          [
+            "edge-502",
+            {
+              "count": 1043,
+              "errors": 119,
+              "latency": 74329.53000000001
+            }
+          ],
+          [
+            "edge-402",
+            {
+              "count": 1025,
+              "errors": 119,
+              "latency": 69343.64000000003
+            }
+          ],
+          [
+            "edge-421",
+            {
+              "count": 1008,
+              "errors": 119,
+              "latency": 69809.96999999987
+            }
+          ]
+        ]
+      },
+      "digest": "edb2686e176a0e0881e0542d08322f8cf2cda29a4b5a53a203a7b254e949ef80",
+      "compute_ms": 17101.028,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417478.2625804,
+    "predicted_ms": 14892.753871215535,
+    "revision": 1,
+    "finished_at": 1794417495.459596,
+    "latency_ms": 69267.251,
+    "deadline_met": true
+  },
+  {
+    "id": "3cda1b3b0831",
+    "name": "single-dual-1-heavy-B-19",
+    "created_at": 1794417426.2425897,
+    "deadline_at": 1794417546.2425897,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2719
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2719
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114979016,
+        "status_counts": {
+          "200": 450219,
+          "400": 34832,
+          "500": 14949
+        },
+        "alert_terms": {
+          "断线": 62587,
+          "温度偏高": 62228,
+          "冒烟": 62341,
+          "告警": 62755,
+          "超时": 62719
+        },
+        "p95_latency_ms": 172.42,
+        "top_error_devices": [
+          [
+            "edge-180",
+            {
+              "count": 1027,
+              "errors": 132,
+              "latency": 70886.05000000009
+            }
+          ],
+          [
+            "edge-131",
+            {
+              "count": 1041,
+              "errors": 127,
+              "latency": 74275.77000000003
+            }
+          ],
+          [
+            "edge-280",
+            {
+              "count": 967,
+              "errors": 124,
+              "latency": 65848.38000000003
+            }
+          ],
+          [
+            "edge-144",
+            {
+              "count": 996,
+              "errors": 122,
+              "latency": 70037.6999999999
+            }
+          ],
+          [
+            "edge-377",
+            {
+              "count": 978,
+              "errors": 121,
+              "latency": 72086.98000000005
+            }
+          ],
+          [
+            "edge-011",
+            {
+              "count": 963,
+              "errors": 120,
+              "latency": 66486.97000000004
+            }
+          ],
+          [
+            "edge-003",
+            {
+              "count": 1042,
+              "errors": 119,
+              "latency": 71427.48999999996
+            }
+          ],
+          [
+            "edge-470",
+            {
+              "count": 1014,
+              "errors": 119,
+              "latency": 72072.6800000001
+            }
+          ],
+          [
+            "edge-376",
+            {
+              "count": 1005,
+              "errors": 119,
+              "latency": 70980.91999999997
+            }
+          ],
+          [
+            "edge-503",
+            {
+              "count": 986,
+              "errors": 119,
+              "latency": 68591.29000000004
+            }
+          ]
+        ]
+      },
+      "digest": "d0a5af37f1c70b0bbae12091315c82743233b5edfdfcbaeeb2ad626d14b5fa27",
+      "compute_ms": 17838.668,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417478.483782,
+    "predicted_ms": 15068.44866407381,
+    "revision": 1,
+    "finished_at": 1794417496.4294508,
+    "latency_ms": 70186.861,
+    "deadline_met": true
+  },
+  {
+    "id": "ef3178267e7b",
+    "name": "single-dual-1-heavy-B-20",
+    "created_at": 1794417426.2924807,
+    "deadline_at": 1794417546.2924807,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2720
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2720
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114974878,
+        "status_counts": {
+          "200": 450146,
+          "500": 15093,
+          "400": 34761
+        },
+        "alert_terms": {
+          "超时": 62788,
+          "温度偏高": 62467,
+          "断线": 62722,
+          "告警": 62115,
+          "冒烟": 62262
+        },
+        "p95_latency_ms": 172.51,
+        "top_error_devices": [
+          [
+            "edge-304",
+            {
+              "count": 1048,
+              "errors": 127,
+              "latency": 73270.05000000013
+            }
+          ],
+          [
+            "edge-063",
+            {
+              "count": 1024,
+              "errors": 127,
+              "latency": 70442.75999999998
+            }
+          ],
+          [
+            "edge-440",
+            {
+              "count": 972,
+              "errors": 127,
+              "latency": 65675.1099999999
+            }
+          ],
+          [
+            "edge-236",
+            {
+              "count": 935,
+              "errors": 122,
+              "latency": 65880.22999999994
+            }
+          ],
+          [
+            "edge-378",
+            {
+              "count": 1059,
+              "errors": 121,
+              "latency": 74392.96999999994
+            }
+          ],
+          [
+            "edge-019",
+            {
+              "count": 996,
+              "errors": 121,
+              "latency": 68313.85999999993
+            }
+          ],
+          [
+            "edge-503",
+            {
+              "count": 994,
+              "errors": 121,
+              "latency": 65755.50999999997
+            }
+          ],
+          [
+            "edge-016",
+            {
+              "count": 965,
+              "errors": 121,
+              "latency": 68643.55999999995
+            }
+          ],
+          [
+            "edge-248",
+            {
+              "count": 1015,
+              "errors": 120,
+              "latency": 72334.87999999987
+            }
+          ],
+          [
+            "edge-308",
+            {
+              "count": 995,
+              "errors": 120,
+              "latency": 70784.02000000003
+            }
+          ]
+        ]
+      },
+      "digest": "5130f9d835adf707335f92213d9d496958d33a43328504679c835ffc42b62d6c",
+      "compute_ms": 25888.758,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417491.4352484,
+    "predicted_ms": 16065.871728570593,
+    "revision": 1,
+    "finished_at": 1794417517.4775639,
+    "latency_ms": 91185.083,
+    "deadline_met": true
+  },
+  {
+    "id": "9aca99af5f0a",
+    "name": "single-dual-1-heavy-B-21",
+    "created_at": 1794417426.343061,
+    "deadline_at": 1794417546.343061,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2721
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2721
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114982629,
+        "status_counts": {
+          "200": 450139,
+          "500": 14766,
+          "400": 35095
+        },
+        "alert_terms": {
+          "温度偏高": 62512,
+          "超时": 62536,
+          "告警": 62519,
+          "断线": 62330,
+          "冒烟": 62295
+        },
+        "p95_latency_ms": 172.76,
+        "top_error_devices": [
+          [
+            "edge-382",
+            {
+              "count": 994,
+              "errors": 131,
+              "latency": 70113.26999999989
+            }
+          ],
+          [
+            "edge-136",
+            {
+              "count": 1020,
+              "errors": 128,
+              "latency": 71179.88999999988
+            }
+          ],
+          [
+            "edge-381",
+            {
+              "count": 959,
+              "errors": 123,
+              "latency": 65987.88000000002
+            }
+          ],
+          [
+            "edge-482",
+            {
+              "count": 972,
+              "errors": 122,
+              "latency": 64260.54000000006
+            }
+          ],
+          [
+            "edge-075",
+            {
+              "count": 997,
+              "errors": 121,
+              "latency": 69137.90000000001
+            }
+          ],
+          [
+            "edge-489",
+            {
+              "count": 1023,
+              "errors": 120,
+              "latency": 72358.47999999998
+            }
+          ],
+          [
+            "edge-455",
+            {
+              "count": 1009,
+              "errors": 120,
+              "latency": 70009.62999999999
+            }
+          ],
+          [
+            "edge-299",
+            {
+              "count": 958,
+              "errors": 120,
+              "latency": 66263.93000000001
+            }
+          ],
+          [
+            "edge-213",
+            {
+              "count": 1001,
+              "errors": 119,
+              "latency": 71194.26000000017
+            }
+          ],
+          [
+            "edge-030",
+            {
+              "count": 967,
+              "errors": 119,
+              "latency": 67902.97000000004
+            }
+          ]
+        ]
+      },
+      "digest": "acde8aedd3306b9c314d98ea0a00181dafc8e54d262df0045cd9f84ae40e81ff",
+      "compute_ms": 25314.774,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417491.7054865,
+    "predicted_ms": 16420.319001785163,
+    "revision": 1,
+    "finished_at": 1794417517.1349485,
+    "latency_ms": 90791.888,
+    "deadline_met": true
+  },
+  {
+    "id": "2a2c08dfcd25",
+    "name": "single-dual-1-heavy-B-22",
+    "created_at": 1794417426.3926077,
+    "deadline_at": 1794417546.3926077,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2722
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2722
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114977596,
+        "status_counts": {
+          "200": 450157,
+          "500": 15031,
+          "400": 34812
+        },
+        "alert_terms": {
+          "告警": 61987,
+          "冒烟": 62319,
+          "温度偏高": 62660,
+          "超时": 62253,
+          "断线": 62735
+        },
+        "p95_latency_ms": 172.41,
+        "top_error_devices": [
+          [
+            "edge-333",
+            {
+              "count": 979,
+              "errors": 129,
+              "latency": 66422.19000000009
+            }
+          ],
+          [
+            "edge-139",
+            {
+              "count": 988,
+              "errors": 125,
+              "latency": 70466.05999999998
+            }
+          ],
+          [
+            "edge-148",
+            {
+              "count": 1000,
+              "errors": 123,
+              "latency": 68132.94000000003
+            }
+          ],
+          [
+            "edge-023",
+            {
+              "count": 972,
+              "errors": 121,
+              "latency": 68906.92
+            }
+          ],
+          [
+            "edge-467",
+            {
+              "count": 990,
+              "errors": 120,
+              "latency": 68261.06000000006
+            }
+          ],
+          [
+            "edge-021",
+            {
+              "count": 951,
+              "errors": 120,
+              "latency": 65086.94999999995
+            }
+          ],
+          [
+            "edge-027",
+            {
+              "count": 921,
+              "errors": 120,
+              "latency": 64859.53
+            }
+          ],
+          [
+            "edge-494",
+            {
+              "count": 1029,
+              "errors": 119,
+              "latency": 70759.01000000005
+            }
+          ],
+          [
+            "edge-036",
+            {
+              "count": 998,
+              "errors": 119,
+              "latency": 69893.34000000003
+            }
+          ],
+          [
+            "edge-273",
+            {
+              "count": 982,
+              "errors": 119,
+              "latency": 66963.92000000001
+            }
+          ]
+        ]
+      },
+      "digest": "e5c3872bd7808796877dd0f4e8d795a8c9be2deeb68f724be96cedfaf7689257",
+      "compute_ms": 25615.299,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417495.5708766,
+    "predicted_ms": 18116.32323852509,
+    "revision": 1,
+    "finished_at": 1794417521.330219,
+    "latency_ms": 94937.611,
+    "deadline_met": true
+  },
+  {
+    "id": "e3f5d8e31162",
+    "name": "single-dual-1-heavy-B-23",
+    "created_at": 1794417426.4427848,
+    "deadline_at": 1794417546.4427848,
+    "deadline_ms": 120000,
+    "policy": "fixed",
+    "privacy": "local_only",
+    "payload": {
+      "events": [
+        "业务处理：log_analysis"
+      ],
+      "compute_loops": 0,
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2723
+      }
+    },
+    "payload_bytes": 132,
+    "status": "completed",
+    "attempts": 1,
+    "worker_id": "office-b",
+    "result": {
+      "predictions": [],
+      "model": "business-algorithms-v1",
+      "workload": {
+        "kind": "log_analysis",
+        "units": 500000,
+        "seed": 2723
+      },
+      "summary": {
+        "records": 500000,
+        "input_bytes": 114988262,
+        "status_counts": {
+          "200": 450160,
+          "500": 14912,
+          "400": 34928
+        },
+        "alert_terms": {
+          "冒烟": 63039,
+          "温度偏高": 62642,
+          "告警": 62442,
+          "超时": 62470,
+          "断线": 62482
+        },
+        "p95_latency_ms": 172.43,
+        "top_error_devices": [
+          [
+            "edge-149",
+            {
+              "count": 1063,
+              "errors": 129,
+              "latency": 74300.42000000001
+            }
+          ],
+          [
+            "edge-101",
+            {
+              "count": 1027,
+              "errors": 121,
+              "latency": 72484.54999999994
+            }
+          ],
+          [
+            "edge-088",
+            {
+              "count": 988,
+              "errors": 121,
+              "latency": 70133.75999999995
+            }
+          ],
+          [
+            "edge-053",
+            {
+              "count": 1004,
+              "errors": 120,
+              "latency": 68365.62999999998
+            }
+          ],
+          [
+            "edge-343",
+            {
+              "count": 984,
+              "errors": 120,
+              "latency": 69898.81999999996
+            }
+          ],
+          [
+            "edge-103",
+            {
+              "count": 1023,
+              "errors": 119,
+              "latency": 70277.1199999999
+            }
+          ],
+          [
+            "edge-357",
+            {
+              "count": 977,
+              "errors": 118,
+              "latency": 68522.26999999992
+            }
+          ],
+          [
+            "edge-094",
+            {
+              "count": 965,
+              "errors": 118,
+              "latency": 68686.84
+            }
+          ],
+          [
+            "edge-430",
+            {
+              "count": 1050,
+              "errors": 117,
+              "latency": 72511.69999999995
+            }
+          ],
+          [
+            "edge-351",
+            {
+              "count": 1028,
+              "errors": 117,
+              "latency": 70802.81999999996
+            }
+          ]
+        ]
+      },
+      "digest": "4af7a26895a2e89092d2d6ab0df4315c4738c0654bcfa726d14ebd255e779279",
+      "compute_ms": 25475.565,
+      "classification_ms": 0,
+      "load_ms": 0,
+      "load_loops": 0,
+      "input_source": "seeded_synthetic; business algorithms actually executed"
+    },
+    "error": null,
+    "fixed_worker_id": "office-b",
+    "started_at": 1794417496.578709,
+    "predicted_ms": 19392.580881828733,
+    "revision": 1,
+    "finished_at": 1794417522.2010007,
+    "latency_ms": 95758.216,
+    "deadline_met": true
+  }
+]

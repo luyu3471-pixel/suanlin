@@ -1,0 +1,143 @@
+{
+  "coordinator_version": "2.5.0-qwen-rolling",
+  "rounds": 3,
+  "submission_concurrency": 4,
+  "deadline_ms": 120000,
+  "nodes": [
+    {
+      "id": "office-b",
+      "name": "Office-B",
+      "host": "柚夏",
+      "peer": "192.168.5.40",
+      "last_seen": 1794417305.78488,
+      "busy_task": null,
+      "capacity": 4,
+      "active_tasks": {},
+      "busy_until": 0,
+      "ms_per_unit": 6402.644959394917,
+      "rtt_ms": 35.495070132247356,
+      "bandwidth_mbps": 100,
+      "trusted": true,
+      "draining": false,
+      "completed": 24,
+      "mode": "remote_host",
+      "workload_kinds": [
+        "archive",
+        "document_search",
+        "log_analysis"
+      ],
+      "business_ms_per_unit": {
+        "archive": 0.018579199999999997,
+        "log_analysis": 0.01278355667718506,
+        "document_search": 0.099568
+      },
+      "overhead_ms": 521.5087703804907,
+      "resources": {
+        "cpu_name": "AMD Ryzen 7 H 255 w/ Radeon 780M Graphics",
+        "os": "Windows 11",
+        "architecture": "AMD64",
+        "logical_cores": 16,
+        "physical_cores": 8,
+        "memory_total_gib": 31.31,
+        "memory_available_gib": 14.42,
+        "disk_free_gib": 134.4,
+        "cpu_percent": 29.6
+      },
+      "resources_at": 1794417304.0313625,
+      "resource_sequence": 1487,
+      "cost_stats": {
+        "archive:4": {
+          "samples": 2,
+          "relative_error": 0.33940056867648705
+        },
+        "document_search:4": {
+          "samples": 1,
+          "relative_error": 0.3371841857598679
+        },
+        "log_analysis:4": {
+          "samples": 17,
+          "relative_error": 0.1770552963263204
+        }
+      },
+      "online": true
+    },
+    {
+      "id": "local-1",
+      "name": "本机执行节点 1",
+      "host": "DESKTOP-2MHR2M3",
+      "peer": "127.0.0.1",
+      "last_seen": 1794417305.738092,
+      "busy_task": null,
+      "capacity": 4,
+      "active_tasks": {},
+      "busy_until": 0,
+      "ms_per_unit": 13756.76162040406,
+      "rtt_ms": 10.964660968833321,
+      "bandwidth_mbps": 100,
+      "trusted": true,
+      "draining": false,
+      "completed": 24,
+      "mode": "same_host",
+      "workload_kinds": [
+        "archive",
+        "document_search",
+        "log_analysis"
+      ],
+      "business_ms_per_unit": {
+        "document_search": 0.136776875,
+        "archive": 0.02428655625,
+        "log_analysis": 0.02835086367871094
+      },
+      "overhead_ms": 120.54852488564921,
+      "resources": {
+        "cpu_name": "AMD Ryzen Threadripper 2920X 12-Core Processor ",
+        "os": "Windows 11",
+        "architecture": "AMD64",
+        "logical_cores": 24,
+        "physical_cores": 12,
+        "memory_total_gib": 31.87,
+        "memory_available_gib": 14.69,
+        "disk_free_gib": 1433.83,
+        "cpu_percent": 1.7,
+        "gpus": [
+          {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total_mib": 22528.0,
+            "memory_used_mib": 4703.0,
+            "utilization_percent": 4.0
+          },
+          {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total_mib": 22528.0,
+            "memory_used_mib": 4703.0,
+            "utilization_percent": 4.0
+          }
+        ]
+      },
+      "resources_at": 1794417305.200207,
+      "resource_sequence": 162,
+      "cost_stats": {
+        "archive:4": {
+          "samples": 2,
+          "relative_error": 0.3816257523571397
+        },
+        "document_search:4": {
+          "samples": 3,
+          "relative_error": 0.3361197249664384
+        },
+        "log_analysis:4": {
+          "samples": 11,
+          "relative_error": 0.14015496139556377
+        }
+      },
+      "online": true
+    }
+  ],
+  "model_loaded_during_all_trials": true,
+  "single_mode": "fixed target node, no scheduling-model invocation for these tasks",
+  "dual_mode": "Qwen scheduling including any guards and fallbacks",
+  "fault_injection": false,
+  "background_load": "uncontrolled",
+  "cost_calibration": "continues online; order rotates each round",
+  "worker_B_version": "existing deployment, source hash not verified"
+}

@@ -1,0 +1,259 @@
+{
+  "groups": [
+    {
+      "case": "mixed",
+      "policy": "A",
+      "rounds": 3,
+      "mean_span_s": 6.59886622428894,
+      "min_span_s": 6.367103576660156,
+      "max_span_s": 6.831648826599121,
+      "throughput_s": 1.8184942067518663,
+      "mean_latency_s": 3.1146505,
+      "p95_latency_s": 5.843112,
+      "mean_wait_s": 1.6910065081384447,
+      "completed": 36,
+      "submitted": 36,
+      "deadline_met": 36,
+      "ai_sources": {},
+      "workers": {
+        "local-1": 36
+      }
+    },
+    {
+      "case": "mixed",
+      "policy": "B",
+      "rounds": 3,
+      "mean_span_s": 12.697272380193075,
+      "min_span_s": 12.146759271621704,
+      "max_span_s": 13.232338905334473,
+      "throughput_s": 0.945084868677719,
+      "mean_latency_s": 6.548880805555555,
+      "p95_latency_s": 12.131765,
+      "mean_wait_s": 3.3735486798816257,
+      "completed": 36,
+      "submitted": 36,
+      "deadline_met": 36,
+      "ai_sources": {},
+      "workers": {
+        "office-b": 36
+      }
+    },
+    {
+      "case": "mixed",
+      "policy": "dual",
+      "rounds": 3,
+      "mean_span_s": 12.851081291834513,
+      "min_span_s": 10.848747253417969,
+      "max_span_s": 14.538743495941162,
+      "throughput_s": 0.933773565623985,
+      "mean_latency_s": 8.4525685,
+      "p95_latency_s": 12.680729999999999,
+      "mean_wait_s": 6.363403240839641,
+      "completed": 36,
+      "submitted": 36,
+      "deadline_met": 36,
+      "ai_sources": {
+        "qwen": 24,
+        "rules_fallback": 12
+      },
+      "workers": {
+        "local-1": 22,
+        "office-b": 14
+      }
+    },
+    {
+      "case": "heavy",
+      "policy": "A",
+      "rounds": 3,
+      "mean_span_s": 86.04673020044963,
+      "min_span_s": 85.41781854629517,
+      "max_span_s": 86.61878633499146,
+      "throughput_s": 0.278918210419977,
+      "mean_latency_s": 48.72488463888889,
+      "p95_latency_s": 83.94996,
+      "mean_wait_s": 34.83918477098147,
+      "completed": 72,
+      "submitted": 72,
+      "deadline_met": 72,
+      "ai_sources": {},
+      "workers": {
+        "local-1": 72
+      }
+    },
+    {
+      "case": "heavy",
+      "policy": "B",
+      "rounds": 3,
+      "mean_span_s": 91.87306650479634,
+      "min_span_s": 82.56015110015869,
+      "max_span_s": 97.21626710891724,
+      "throughput_s": 0.2612299873407083,
+      "mean_latency_s": 53.860606555555556,
+      "p95_latency_s": 94.233481,
+      "mean_wait_s": 39.058448208702934,
+      "completed": 72,
+      "submitted": 72,
+      "deadline_met": 72,
+      "ai_sources": {},
+      "workers": {
+        "office-b": 72
+      }
+    },
+    {
+      "case": "heavy",
+      "policy": "dual",
+      "rounds": 3,
+      "mean_span_s": 59.081258376439415,
+      "min_span_s": 47.51417922973633,
+      "max_span_s": 69.1804518699646,
+      "throughput_s": 0.40622018994725384,
+      "mean_latency_s": 38.309564333333334,
+      "p95_latency_s": 66.74404700000001,
+      "mean_wait_s": 22.75899683766895,
+      "completed": 72,
+      "submitted": 72,
+      "deadline_met": 72,
+      "ai_sources": {
+        "qwen": 48,
+        "rules_fallback": 24
+      },
+      "workers": {
+        "local-1": 40,
+        "office-b": 32
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "case": "mixed",
+      "against": "A",
+      "time_reduction_percent": -94.7468073308196,
+      "throughput_gain_percent": -48.651276305583615
+    },
+    {
+      "case": "mixed",
+      "against": "B",
+      "time_reduction_percent": -1.211353958834258,
+      "throughput_gain_percent": -1.1968557987347639
+    },
+    {
+      "case": "heavy",
+      "against": "A",
+      "time_reduction_percent": 31.33817143451351,
+      "throughput_gain_percent": 45.64132952652813
+    },
+    {
+      "case": "heavy",
+      "against": "B",
+      "time_reduction_percent": 35.69251509270673,
+      "throughput_gain_percent": 55.502893860896066
+    }
+  ],
+  "submitted": 324,
+  "completed": 324,
+  "deadline_met": 324,
+  "consistency_mismatches": [
+    {
+      "trial": "1-mixed-B",
+      "index": 2,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "1-mixed-B",
+      "index": 5,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "1-mixed-B",
+      "index": 8,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "1-mixed-B",
+      "index": 11,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "1-mixed-dual",
+      "index": 8,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "2-mixed-B",
+      "index": 2,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "2-mixed-B",
+      "index": 5,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "2-mixed-B",
+      "index": 8,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "2-mixed-B",
+      "index": 11,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "2-mixed-dual",
+      "index": 2,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "2-mixed-dual",
+      "index": 5,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "3-mixed-dual",
+      "index": 8,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "3-mixed-dual",
+      "index": 11,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "3-mixed-B",
+      "index": 2,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "3-mixed-B",
+      "index": 5,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "3-mixed-B",
+      "index": 8,
+      "kind": "archive",
+      "matches_first": false
+    },
+    {
+      "trial": "3-mixed-B",
+      "index": 11,
+      "kind": "archive",
+      "matches_first": false
+    }
+  ]
+}

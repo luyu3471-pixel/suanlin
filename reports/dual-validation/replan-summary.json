@@ -1,0 +1,31 @@
+{
+  "statuses": {
+    "completed": 24
+  },
+  "workers": {
+    "office-b": 16,
+    "local-1": 8
+  },
+  "sources": {
+    "rules_fallback": 7,
+    "qwen": 17
+  },
+  "reasons": {
+    "ValueError": 3,
+    "model_assignment": 17,
+    "decision_wait_budget": 4
+  },
+  "deadline_met": 24,
+  "pause_injected": true,
+  "reassignment_observed": true,
+  "ai": {
+    "enabled": true,
+    "model": "qwen3.5-9b",
+    "calls": 10,
+    "accepted": 34,
+    "guarded": 0,
+    "dispatch_repairs": 0,
+    "errors": 1,
+    "last_error": "ValueError"
+  }
+}

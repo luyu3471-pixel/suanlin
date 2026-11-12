@@ -1,0 +1,10 @@
+{
+  "python_syntax": "passed",
+  "A_configuration_check": "passed",
+  "B_configuration_check": "passed",
+  "PowerShell_launcher_check": "passed",
+  "core_matches_live_tested_source": true,
+  "credentials_included": false,
+  "model_weights_included": false,
+  "standalone_executable": false
+}
