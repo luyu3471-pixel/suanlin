@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": [
+    "Original hero scan, particles and signal animation retained; full-width topology; first-use example still runs",
+    "Live CPU, memory and slot meters; hardware definitions remain accessible; pause/resume works",
+    "Interactive proportional cost diagram, logarithmic slider, presets, validation and disclosure; no backend side effects",
+    "Three-step deployment diagram keeps commands and links available and reacts to selection",
+    "Packet animation follows an actual running task; real heartbeat progress and direct result entry remain usable",
+    "Five routes fit desktop/tablet/mobile; expanded technical content fits; reduced motion remains available"
+  ],
+  "errors": [],
+  "source": "Fresh browser regression against an isolated local coordinator and two real same-host worker processes; not a new physical-device or 6G benchmark."
+}

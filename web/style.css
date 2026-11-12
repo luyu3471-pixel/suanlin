@@ -2799,3 +2799,173 @@ html[data-motion-paused="true"] .business-topology .network-lines .topology-link
  .offload-totals dd { font-size:20px; }
  .decision-evidence dl { grid-template-columns:1fr; gap:12px; }
 }
+
+/* Focus the operating surface on diagrams; definitions stay one click away. */
+body { background:#f4f6f9; }
+main { background:transparent; }
+.metrics { gap:14px; }
+.metric, .metric.highlight, .metric[data-tone] { background:#fff; border-color:#dfe5ee; box-shadow:none; color:#354665; }
+.metric::after, .metric.highlight::after { display:none; }
+.metric .metric-top, .metric .metric-foot, .metric .metric-foot b { color:#526079; }
+.metric .metric-value, .metric .metric-number { color:#283f68; }
+.metric .metric-icon { background:#f1f5fc; color:#4168aa; border-color:#dce5f3; }
+.metric .metric-foot { border-top:1px solid #edf0f5; padding-top:10px; }
+.metric .metric-foot b { font-weight:400; }
+.metric .metric-foot span:empty { display:none; }
+.button.primary { background:#365fd0; box-shadow:0 3px 9px #1e34591a; }
+.button.primary:hover { background:#2c50b4; }
+.hero-copy h2 { font-size:32px; }
+.business-topology { margin-bottom:22px; overflow:hidden; }
+.topology-body { display:grid; grid-template-columns:minmax(0,1.65fr) minmax(300px,1fr); margin-top:16px; border-top:1px solid #e2e7f0; }
+.topology-map-area { min-width:0; display:flex; flex-direction:column; }
+.business-topology .topology { height:440px; margin:0; flex:1; min-height:380px; }
+.business-topology .network { max-width:none; }
+.business-topology .network-node { transform:translate(-50%,-22px); max-width:28%; width:140px; }
+.business-topology .network-node.center { transform:translate(-50%,-31px); width:130px; }
+.business-topology .network-node.center .node-orb { margin-bottom:12px; }
+.business-topology .network-node strong, .business-topology .network-node small, .topology-node-task { background:#f9fbfe; }
+.business-topology .network-node .topology-result-link { background:#f9fbfe; }
+.topology-inspector { min-width:0; border-left:1px solid #e2e7f0; background:#fbfcfe; padding-bottom:16px; }
+.topology-inspector .topology-selection { gap:8px; }
+.topology-inspector .topology-selection h3 { font-size:16px; }
+.topology-inspector .topology-selection p { font-size:12px; }
+.topology-inspector .topology-task-panel h4 { margin-top:20px; }
+.topology-inspector .topology-node-picker { padding-top:18px; }
+.topology-inspector .topology-node-picker label { font-size:12px; }
+.topology-inspector .topology-task-list { max-height:220px; }
+.topology-inspector .topology-task-title { flex-direction:column; align-items:flex-start; gap:0; }
+.topology-inspector .topology-results { max-height:245px; overflow:auto; }
+.topology-inspector .topology-results li { align-items:flex-start; }
+.topology-inspector .topology-results .row-button { font-size:12px; padding:7px 9px; }
+.topology-inspector .topology-results small { font-size:11px; }
+.topology-workflow { padding-bottom:12px; }
+.topology-legend { margin-top:auto; min-height:48px; }
+.business-topology .topology-notes { border-top:1px solid #e2e7f0; margin:0; padding:0 23px; }
+.network-lines .topology-stream { stroke-width:2.8; stroke-linecap:round; stroke-dasharray:2 98; opacity:0; }
+html[data-motion="on"] .business-topology .network-lines .topology-stream { animation:none; }
+html[data-motion="on"] .business-topology .network-lines .topology-stream[data-flow="is-running"] { opacity:1; stroke:#b87822; animation:taskPacket 2.5s linear infinite; animation-play-state:var(--fx-topology-play,paused); }
+html[data-motion="on"] .business-topology .network-lines .topology-stream[data-flow="is-returning"] { opacity:1; stroke:#2f7d65; animation:taskPacket 1.8s linear 4 reverse; animation-play-state:var(--fx-topology-play,paused); }
+@keyframes taskPacket { from { stroke-dashoffset:0; } to { stroke-dashoffset:-100; } }
+.visual-notes, .scope-notes, .node-specs { color:#526079; }
+.visual-notes > summary, .scope-notes > summary, .node-specs > summary { cursor:pointer; min-height:44px; padding:12px 0; line-height:1.7; font-size:13px; color:#526079; }
+.visual-notes > summary:hover, .scope-notes > summary:hover, .node-specs > summary:hover { color:#3154af; }
+.visual-notes p, .scope-notes p, .node-specs > p { font-size:13px; line-height:1.9; max-width:75ch; margin:0 0 14px; color:#526079; }
+.scope-notes { border-top:1px solid #dfe5ee; margin:24px 0 8px; }
+.scope-notes summary svg { width:14px; height:14px; margin:0 6px -2px 3px; }
+.scope-notes summary { font-size:12px; }
+.compact-panel-title { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.compact-strategy { background:#fff; border-color:#dfe5ee; }
+.compact-strategy h3 { margin:0; font-size:17px; }
+.compact-strategy .visual-notes { border-top:1px solid #e2e7f0; }
+.compact-strategy .visual-notes p { font-size:12px; }
+.compact-strategy .visual-notes a { font-size:13px; }
+.policy-flow { list-style:none; padding:22px 0; margin:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+.policy-flow li { position:relative; text-align:center; font-size:12px; color:#435a80; line-height:1.7; }
+.policy-flow li:not(:last-child)::after { content:''; position:absolute; top:12px; left:calc(50% + 18px); width:calc(100% - 26px); height:1px; background:#c9d7ed; }
+.policy-flow svg { display:block; width:24px; height:24px; margin:0 auto 10px; color:#426ab2; }
+.secondary-panel { background:#fff; border-color:#dfe5ee; }
+.secondary-panel .event-item > span { display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; font-size:12px; }
+.resource-node .node-header { margin-bottom:18px; align-items:flex-start; }
+.resource-node .node-header > div { flex:1; min-width:0; }
+.resource-node h3 { font-size:18px; }
+.resource-node .node-header > .badge { flex-shrink:0; margin:0; }
+.node-quick-stats { display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap; font-size:12px; color:#526079; padding-bottom:18px; border-bottom:1px solid #e4e9f1; }
+.node-quick-stats span { display:inline-flex; align-items:center; gap:6px; }
+.node-quick-stats b { color:#354665; font-weight:500; }
+.node-quick-stats svg { width:14px; height:14px; }
+.resource-meter { margin-top:21px; }
+.resource-meter > div:first-child { display:flex; align-items:center; justify-content:space-between; font-size:13px; color:#526079; gap:10px; }
+.resource-meter b { font-weight:500; color:#354665; font-variant-numeric:tabular-nums; }
+.resource-track { background:#eaf0f8; height:8px; border-radius:5px; overflow:hidden; margin-top:10px; }
+.resource-track > span { display:block; width:100%; height:100%; background:#4e78c4; transform-origin:left; }
+html[data-motion="on"] .resource-track > span { transition:transform .4s cubic-bezier(.16,1,.3,1); }
+.resource-meter.is-high .resource-track > span { background:#b5853c; }
+.resource-meter.is-stale .resource-track { opacity:.5; }
+.resource-age { font-size:12px; color:#845015; margin:12px 0 0; }
+.node-specs { border-top:1px solid #e4e9f1; margin-top:22px; }
+.node-specs .node-details { margin-top:0; }
+.node-specs .node-details b { max-width:65%; }
+.node-specs .node-details div { align-items:flex-start; }
+.node-specs .node-details div > span { flex-shrink:0; }
+.node-specs .node-details b { overflow-wrap:anywhere; }
+.resource-node .node-buttons { margin-top:12px; }
+.offload-controls { min-width:0; }
+.offload-controls > .offload-inputs { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.bandwidth-range { width:100%; margin:22px 0 4px; accent-color:#416bb9; min-height:32px; padding:0; box-shadow:none; border:0; background:transparent; cursor:ew-resize; }
+.range-endpoints { display:flex; justify-content:space-between; font-size:11px; color:#526079; margin-bottom:12px; }
+.offload-panel .visual-notes { border-top:1px solid #e0e6f0; margin-top:18px; }
+.offload-panel .offload-controls .visual-notes { margin-top:6px; }
+.offload-panel .offload-controls .visual-notes .offload-inputs { padding-bottom:8px; }
+.offload-result { background:#f8fafe; border-color:#dfe6f1; }
+.offload-timeline { margin:26px 0 20px; }
+.duration-row { margin:0 0 22px; }
+.duration-row:last-child { margin-bottom:0; }
+.duration-label { display:flex; justify-content:space-between; gap:12px; margin-bottom:10px; color:#354665; font-size:14px; }
+.duration-label b { font-weight:500; }
+.duration-label span { font-variant-numeric:tabular-nums; }
+.duration-track { height:18px; background:#e9eef6; border-radius:4px; overflow:hidden; }
+.duration-fill { height:100%; width:100%; display:flex; transform-origin:left; }
+html[data-motion="on"] .duration-fill { transition:transform .22s cubic-bezier(.16,1,.3,1); }
+.duration-fill > span { display:block; height:100%; }
+.duration-compute { background:#4d78c7; }
+.duration-network { background:#bc8c45; }
+.duration-queue { background:#8d9bad; }
+.duration-legend { display:flex; flex-wrap:wrap; gap:14px; font-size:12px; color:#526079; }
+.duration-legend span::before { content:''; width:9px; height:9px; margin-right:5px; border-radius:2px; display:inline-block; }
+.duration-legend .compute::before { background:#4d78c7; }
+.duration-legend .network::before { background:#bc8c45; }
+.duration-legend .queue::before { background:#8d9bad; }
+.experiment-details { padding:0 24px 18px; margin-bottom:20px; }
+.experiment-details > summary { padding:20px 0 4px; min-height:50px; cursor:pointer; color:#354665; font-size:15px; font-weight:500; }
+.experiment-details:not([open]) { padding-bottom:14px; }
+.experiment-details .panel-head { padding:10px 0; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
+.deployment-panel { padding:28px; }
+.deployment-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:40px; }
+.deployment-scene { display:grid; grid-template-columns:1fr .5fr 1fr; align-items:center; min-height:190px; padding:12px 0; }
+.deployment-device { text-align:center; color:#526079; }
+.deployment-device > svg { display:block; width:46px; height:46px; color:#7c92b6; margin:0 auto 16px; }
+.deployment-device.is-active > svg { color:#365fb2; }
+.deployment-device b { display:block; font-size:15px; color:#354665; font-weight:500; }
+.deployment-device small { display:block; font-size:12px; line-height:1.8; margin-top:6px; }
+.deployment-bridge { height:1px; background:#cdd8ea; position:relative; align-self:start; margin-top:34px; overflow:hidden; }
+.deployment-bridge span { position:absolute; width:16px; height:1px; background:#416bb9; display:none; }
+html[data-motion="on"] .deployment-bridge.is-active span { display:block; animation:deploymentConnect 1.1s ease-in-out 2; }
+@keyframes deploymentConnect { from { transform:translateX(-16px); } to { transform:translateX(180px); } }
+.deployment-caption { font-size:12px; color:#526079; margin:0 0 18px; text-align:center; }
+.deployment-tabs { display:flex; flex-wrap:wrap; gap:8px; }
+.deployment-tabs button { background:transparent; border:1px solid #dce3f0; border-radius:8px; padding:9px 12px; color:#526079; font-size:12px; min-height:44px; }
+.deployment-tabs button.active { background:#eef3fc; border-color:#93abd8; color:#3154af; }
+.deployment-tabs button > span { margin-right:6px; font-variant-numeric:tabular-nums; }
+.deployment-instruction h2 { font-size:22px; color:#283954; margin:6px 0 16px; }
+.deployment-instruction p { font-size:14px; color:#526079; line-height:1.9; max-width:50ch; }
+.deployment-instruction pre { white-space:pre-wrap; overflow-wrap:anywhere; }
+.guide-reference { margin-top:28px; }
+.guide-reference > h2 { font-size:18px; color:#354665; margin:0 0 12px; }
+.guide-reference > details { border-top:1px solid #dce3ed; }
+.guide-reference .network-roadmap { margin-top:12px; }
+@media(max-width:1050px) {
+ .topology-body { grid-template-columns:minmax(0,1.3fr) minmax(260px,1fr); }
+ .business-topology .network-node { min-width:85px; width:110px; max-width:29%; }
+ .offload-controls > .offload-inputs { grid-template-columns:1fr 1fr; }
+ .deployment-layout { grid-template-columns:1fr; gap:22px; }
+}
+@media(max-width:700px) {
+ .hero-copy h2 { font-size:27px; }
+ .topology-body { grid-template-columns:1fr; }
+ .business-topology .topology { min-height:350px; height:350px; flex:none; }
+ .topology-inspector { border-left:0; border-top:1px solid #e2e7f0; }
+ .business-topology .network-node { min-width:75px; width:100px; max-width:28%; }
+ .business-topology .network-node.center { width:115px; }
+ .topology-inspector .topology-task-list, .topology-inspector .topology-results { max-height:none; }
+ .business-topology .topology-notes { padding:0 17px; }
+ .resource-node .node-header { flex-wrap:wrap; }
+ .resource-node .node-header > .badge { margin-left:0; }
+ .node-quick-stats { flex-direction:column; gap:10px; }
+ .offload-controls > .offload-inputs { grid-template-columns:1fr 1fr; }
+ .duration-label { font-size:13px; }
+ .deployment-panel { padding:22px 18px; }
+ .deployment-scene { min-height:170px; }
+ .deployment-tabs button { flex:1 1 30%; padding:8px 6px; }
+ .deployment-instruction h2 { font-size:20px; }
+}

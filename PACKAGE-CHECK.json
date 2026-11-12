@@ -11,5 +11,6 @@
   "credentials_included": false,
   "model_weights_included": false,
   "standalone_executable": false,
-  "topology_browser_checks": "results/topology_checks.json"
+  "topology_browser_checks": "results/topology_checks.json",
+  "visual_browser_checks": "results/visual_refine_checks.json"
 }

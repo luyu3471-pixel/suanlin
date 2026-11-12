@@ -212,6 +212,11 @@
       "sha256": "17f5741b9df2d78c2eac4c5e1ef84a9756ab3535ced625e0efe98c1b1fcc13dd"
     },
     {
+      "path": "docs/界面精简与动态呈现.md",
+      "bytes": 3105,
+      "sha256": "d21457e1889c5dff1e2c25f96f74e4aea1dc4e6169c12822eea29b36144f729a"
+    },
+    {
       "path": "docs/答辩讲稿与问答.md",
       "bytes": 6953,
       "sha256": "5e8d060d9cdb2baa42a12f019fe3fb79a3f0854fe8ee7ac52ce8d4e78ebb76f2"
@@ -258,8 +263,8 @@
     },
     {
       "path": "PACKAGE-CHECK.json",
-      "bytes": 655,
-      "sha256": "7898ddb8c458679c52bf84976e64cdafba5215dac79b8befa0989f12eb1fc6de"
+      "bytes": 720,
+      "sha256": "e7fc20bd976d90e6289084be71c893ede854360e3d96f420258cdb418b788ff8"
     },
     {
       "path": "package_launcher.py",
@@ -1277,6 +1282,11 @@
       "sha256": "90a348f10eb52c2d5be2917404dc270a8d84bbfa46300a14c127197dd55af1b7"
     },
     {
+      "path": "results/visual_refine_checks.json",
+      "bytes": 900,
+      "sha256": "92c373d23b8cb7647dafb81346455464ab5b3b545fda874cca15ef62210aa7a5"
+    },
+    {
       "path": "results/workflow_review.json",
       "bytes": 1437,
       "sha256": "52de5c9978f92d7258e958f5f1a71e5ef1560dbcf2224f7f3696ea62d7e202bc"
@@ -1513,8 +1523,8 @@
     },
     {
       "path": "web/app.js",
-      "bytes": 76674,
-      "sha256": "5b6ecc751962da2cdfeb1eee92f1e79d7bf575d7af122ea93fb7ecd4f8e94add"
+      "bytes": 79259,
+      "sha256": "2405b8f356600e333e5513a1d8af194552324e24a1cd2965138f0b215c9e04a3"
     },
     {
       "path": "web/favicon.svg",
@@ -1528,13 +1538,13 @@
     },
     {
       "path": "web/index.html",
-      "bytes": 7019,
-      "sha256": "4a79be72c865f267d8790b0a8f164b8701bde68f896344e3e8e03a5b5b397a15"
+      "bytes": 6883,
+      "sha256": "2f965fb0698c2acb71d20cf28bd37415602e8fdcbaf1976f396196238e9e8193"
     },
     {
       "path": "web/style.css",
-      "bytes": 89389,
-      "sha256": "82c4aa14f2decb7bab566cc009bf58286d4304865173dd33b89564dc412d9777"
+      "bytes": 102480,
+      "sha256": "da6bf6de0857e698da4564fd8d769c2c30e2c087964ee8d6eaff304b33d41343"
     },
     {
       "path": "业务重任务说明.txt",
